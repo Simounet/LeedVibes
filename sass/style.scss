@@ -1,0 +1,17 @@
+@import "compass/css3";
+/* RESET */
+li {
+    list-style: none;
+}
+
+/* GENERAL STYLE */
+body {
+    display: flex;
+}
+aside {
+    flex: 1 0 0;
+    background-color: #A7A7A7;
+}
+section {
+    flex: 4 0 0;
+}

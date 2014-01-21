@@ -1,0 +1,22 @@
+/* RESET */
+/* line 3, ../sass/style.scss */
+li {
+  list-style: none;
+}
+
+/* GENERAL STYLE */
+/* line 8, ../sass/style.scss */
+body {
+  display: flex;
+}
+
+/* line 11, ../sass/style.scss */
+aside {
+  flex: 1 0 0;
+  background-color: #A7A7A7;
+}
+
+/* line 15, ../sass/style.scss */
+section {
+  flex: 4 0 0;
+}
