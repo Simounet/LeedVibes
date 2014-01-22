@@ -8,7 +8,6 @@
 </head>
 <body>
     {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
-        <!-- aside>ul>(li>a[href=#]{All feed})+(li>button.js-toggle{&#9662;}+a[href=#]{Dossier$}+ul.js-toggle-item>li*4>a[href=#]{Site$})*5 -->
         {function="Plugin::callHook("menu_pre_folder_menu", array(&$myUser))"}
         <aside>
             <ul>
@@ -44,7 +43,6 @@
         </aside>
         {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
         
-        <!-- section>ul>(li{Actu$}>article{Blablabla...})*20 -->
         <section>
             <ul>
                 <li>Actu1
