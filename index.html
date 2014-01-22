@@ -44,75 +44,14 @@
         {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
         
         <section>
-            <ul>
-                <li>Actu1
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu2
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu3
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu4
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu5
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu6
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu7
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu8
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu9
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu10
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu11
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu12
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu13
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu14
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu15
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu16
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu17
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu18
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu19
-                    <article>Blablabla...</article>
-                </li>
-                <li>Actu20
-                    <article>Blablabla...</article>
-                </li>
-            </ul>
+            {include="article"}
         </section>
         <script src="js/jquery-1.10.2.min.js"></script>
         <script src="js/script.js"></script>
     {else}
         <section>
-                <h3>{function="_t('YOU_MUST_BE_LOGGED')"}</h3>
-                <p>{function="_t('IF_ADMIN_THEN_CONFIG')"}</p>
+            <h3>{function="_t('YOU_MUST_BE_LOGGED')"}</h3>
+            <p>{function="_t('IF_ADMIN_THEN_CONFIG')"}</p>
         </section>
     {/if}
 </body>
