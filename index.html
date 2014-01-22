@@ -7,129 +7,115 @@
     <link rel="stylesheet" href="css/style.css" media="all">
 </head>
 <body>
-    <!-- aside>ul>(li>a[href=#]{All feed})+(li>button.js-toggle{&#9662;}+a[href=#]{Dossier$}+ul.js-toggle-item>li*4>a[href=#]{Site$})*5 -->
-    <aside>
-        <ul>
-            <li><a href="#">All feed</a></li>
-            <li>
-                <button class="js-toggle">&#9662;</button>
-                <a href="#">Dossier1</a>
-                <ul class="js-toggle-item">
-                    <li><a href="#">Site1</a></li>
-                    <li><a href="#">Site2</a></li>
-                    <li><a href="#">Site3</a></li>
-                    <li><a href="#">Site4</a></li>
-                </ul>
-            </li>
-            <li>
-                <button class="js-toggle">&#9662;</button>
-                <a href="#">Dossier2</a>
-                <ul class="js-toggle-item">
-                    <li><a href="#">Site1</a></li>
-                    <li><a href="#">Site2</a></li>
-                    <li><a href="#">Site3</a></li>
-                    <li><a href="#">Site4</a></li>
-                </ul>
-            </li>
-            <li>
-                <button class="js-toggle">&#9662;</button>
-                <a href="#">Dossier3</a>
-                <ul class="js-toggle-item">
-                    <li><a href="#">Site1</a></li>
-                    <li><a href="#">Site2</a></li>
-                    <li><a href="#">Site3</a></li>
-                    <li><a href="#">Site4</a></li>
-                </ul>
-            </li>
-            <li>
-                <button class="js-toggle">&#9662;</button>
-                <a href="#">Dossier4</a>
-                <ul class="js-toggle-item">
-                    <li><a href="#">Site1</a></li>
-                    <li><a href="#">Site2</a></li>
-                    <li><a href="#">Site3</a></li>
-                    <li><a href="#">Site4</a></li>
-                </ul>
-            </li>
-            <li>
-                <button class="js-toggle">&#9662;</button>
-                <a href="#">Dossier5</a>
-                <ul class="js-toggle-item">
-                    <li><a href="#">Site1</a></li>
-                    <li><a href="#">Site2</a></li>
-                    <li><a href="#">Site3</a></li>
-                    <li><a href="#">Site4</a></li>
-                </ul>
-            </li>
-        </ul>
-    </aside>
-    
-    <!-- section>ul>(li{Actu$}>article{Blablabla...})*20 -->
-    <section>
-        <ul>
-            <li>Actu1
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu2
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu3
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu4
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu5
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu6
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu7
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu8
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu9
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu10
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu11
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu12
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu13
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu14
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu15
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu16
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu17
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu18
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu19
-                <article>Blablabla...</article>
-            </li>
-            <li>Actu20
-                <article>Blablabla...</article>
-            </li>
-        </ul>
-    </section>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/script.js"></script>
+    {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
+        <!-- aside>ul>(li>a[href=#]{All feed})+(li>button.js-toggle{&#9662;}+a[href=#]{Dossier$}+ul.js-toggle-item>li*4>a[href=#]{Site$})*5 -->
+        {function="Plugin::callHook("menu_pre_folder_menu", array(&$myUser))"}
+        <aside>
+            <ul>
+                <li><a href="./">All feed</a></li>
+                {loop="folders"}
+                    {$feeds=""}
+                    {if="isset($allFeedsPerFolder[$value->getId()])"}
+                        {$feeds=$allFeedsPerFolder[$value->getId()]}
+                    {/if}
+                    {if="isset($allEvents[$value->getId()])"}
+                        {$unreadEventsForFolder=$allEvents[$value->getId()]}
+                    {/if}
+                    <li>
+                        <button class="js-toggle">&#9662;</button>
+                        {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
+                        <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}">{$value->getName()}</a>
+                        {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
+                        <ul class="js-toggle-item">
+                            {if="count($feeds)!=0"}
+                                {loop="feeds"}
+                                    <li>
+                                        {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
+                                        <a href="index.php?action=selectedFeed&amp;feed={$value2['id']}" title="{$value2['url']}">{function="Functions::truncate($value2['name'],37)"}</a>
+                                        {function="Plugin::callHook("menu_post_feed_link", array(&$value))"}
+                                    </li>
+                                {/loop}
+                            {/if}
+                        </ul>
+                    </li>
+                    {$unreadEventsForFolder=0}
+                {/loop}
+            </ul>
+        </aside>
+        {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
+        
+        <!-- section>ul>(li{Actu$}>article{Blablabla...})*20 -->
+        <section>
+            <ul>
+                <li>Actu1
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu2
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu3
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu4
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu5
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu6
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu7
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu8
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu9
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu10
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu11
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu12
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu13
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu14
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu15
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu16
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu17
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu18
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu19
+                    <article>Blablabla...</article>
+                </li>
+                <li>Actu20
+                    <article>Blablabla...</article>
+                </li>
+            </ul>
+        </section>
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/script.js"></script>
+    {else}
+        <section>
+                <h3>{function="_t('YOU_MUST_BE_LOGGED')"}</h3>
+                <p>{function="_t('IF_ADMIN_THEN_CONFIG')"}</p>
+        </section>
+    {/if}
 </body>
 </html>
