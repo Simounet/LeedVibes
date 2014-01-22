@@ -23,14 +23,14 @@
                     <li>
                         <button class="js-toggle">&#9662;</button>
                         {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
-                        <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}">{$value->getName()}</a>
+                        <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}">{function="htmlentities($value->getName())"}</a>
                         {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
                         <ul class="js-toggle-item">
                             {if="count($feeds)!=0"}
                                 {loop="feeds"}
                                     <li>
                                         {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
-                                        <a href="index.php?action=selectedFeed&amp;feed={$value2['id']}" title="{$value2['url']}">{function="Functions::truncate($value2['name'],37)"}</a>
+                                        <a href="index.php?action=selectedFeed&amp;feed={$value2['id']}" title="{function="htmlentities($value2['url'])"}">{function="htmlentities(Functions::truncate($value2['name'],37))"}</a>
                                         {function="Plugin::callHook("menu_post_feed_link", array(&$value))"}
                                     </li>
                                 {/loop}
