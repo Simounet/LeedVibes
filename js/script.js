@@ -1,14 +1,12 @@
+var buttonContent = { closed: '\u25B8', opened: '\u25BE' };
 $('document').ready(function(){
-    $('.js-toggle-item').hide();
-    $(".js-toggle").html( '\u25B8' );
-
-    $(".js-toggle").click( function() {
+    $(".js-toggle-button").click( function() {
         toggleFolder( $(this) );
     } );
 });
 
-function toggleFolder( e ) {
-    feedBloc = $(e).siblings('.js-toggle-item');
+function toggleFolder( button ) {
+    feedBloc = $(button).siblings('.js-toggle-item');
 
     open = 0;
     if( feedBloc.css('display') == 'none' ) {
@@ -16,5 +14,10 @@ function toggleFolder( e ) {
     }
 
     feedBloc.slideToggle(200);
-    $(e).html((!open ? '\u25B8' : '\u25BE'));
+    $(button).html((!open ? buttonContent.closed : buttonContent.opened ));
+    
+    $.ajax({
+        url: "./action.php?action=changeFolderState",
+        data:{ id: feedBloc.data('folder-id'), isopen: open }
+    });
 }
