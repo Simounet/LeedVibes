@@ -6,7 +6,7 @@ $('document').ready(function(){
 });
 
 function toggleFolder( button ) {
-    feedBloc = $(button).siblings('.js-toggle-item');
+    feedBloc = $('.js-toggle-item[data-folder-id="' + button.data("folder-id") + '"]');
 
     open = 0;
     if( feedBloc.css('display') == 'none' ) {
