@@ -1,5 +1,18 @@
 @import "compass/css3";
 /* RESET */
+body {
+    font-size: 16px;
+    background-color: #A7A7A7;
+}
+h1 {
+    margin: 0;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    padding: 0;
+}
 li {
     list-style: none;
 }
@@ -8,14 +21,37 @@ li {
 body {
     display: flex;
 }
-aside {
+.sidebar {
     flex: 1 0 0;
-    background-color: #A7A7A7;
 }
-section {
+.wrapper {
     flex: 4 0 0;
+    padding: 1em;
+    background-color: #FFF;
 }
 
 .hidden {
     display: none;
+}
+
+/* SIDEBAR */
+.folder__item,
+.feed_all a {
+    margin: 0 1.2em;
+}
+.feed__item  a {
+    margin: 0 3.5em;
+}
+
+/* ARTICLE */
+.article__title {
+    font-size: 1em;
+}
+
+.article__content {
+    display: none;
+    a:hover,
+    a:active {
+        text-decoration: underline;
+    }
 }

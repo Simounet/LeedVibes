@@ -2,10 +2,10 @@
     {$plainDescription=strip_tags($value->getDescription())}
         <article>
             {function="Plugin::callHook("event_pre_title", array(&$value))"}
-            <h1><a href="{$value->getLink()}" target="_blank" title="{$plainDescription}">{$value->getTitle()}</a></h1>
+            <h1 class="article__title"><a href="{$value->getLink()}" target="_blank" title="{$plainDescription}">{$value->getTitle()}</a></h1>
             {function="Plugin::callHook("event_post_title", array(&$value))"}
             {function="Plugin::callHook("event_pre_content", array(&$value))"}
-            <p>{$value->getContent()}</p>
+            <div class="article__content">{$value->getContent()}</div>
             {function="Plugin::callHook("event_post_content", array(&$value))"}
         </article>
     {$hightlighted=$hightlighted+1}

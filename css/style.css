@@ -1,27 +1,77 @@
 /* RESET */
 /* line 3, ../sass/style.scss */
+body {
+  font-size: 16px;
+  background-color: #A7A7A7;
+}
+
+/* line 7, ../sass/style.scss */
+h1 {
+  margin: 0;
+}
+
+/* line 10, ../sass/style.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 13, ../sass/style.scss */
+ul {
+  padding: 0;
+}
+
+/* line 16, ../sass/style.scss */
 li {
   list-style: none;
 }
 
 /* GENERAL STYLE */
-/* line 8, ../sass/style.scss */
+/* line 21, ../sass/style.scss */
 body {
   display: flex;
 }
 
-/* line 11, ../sass/style.scss */
-aside {
+/* line 24, ../sass/style.scss */
+.sidebar {
   flex: 1 0 0;
-  background-color: #A7A7A7;
 }
 
-/* line 15, ../sass/style.scss */
-section {
+/* line 27, ../sass/style.scss */
+.wrapper {
   flex: 4 0 0;
+  padding: 1em;
+  background-color: #FFF;
 }
 
-/* line 19, ../sass/style.scss */
+/* line 33, ../sass/style.scss */
 .hidden {
   display: none;
+}
+
+/* SIDEBAR */
+/* line 39, ../sass/style.scss */
+.folder__item,
+.feed_all a {
+  margin: 0 1.2em;
+}
+
+/* line 42, ../sass/style.scss */
+.feed__item a {
+  margin: 0 3.5em;
+}
+
+/* ARTICLE */
+/* line 47, ../sass/style.scss */
+.article__title {
+  font-size: 1em;
+}
+
+/* line 51, ../sass/style.scss */
+.article__content {
+  display: none;
+}
+/* line 54, ../sass/style.scss */
+.article__content a:hover,
+.article__content a:active {
+  text-decoration: underline;
 }
