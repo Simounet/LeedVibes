@@ -2,7 +2,12 @@ var buttonContent = { closed: '\u25B8', opened: '\u25BE' };
 $('document').ready(function(){
     $(".js-toggle-button").click( function() {
         toggleFolder( $(this) );
-    } );
+    });
+    
+    $(".article__title").click( function( event ) {
+        event.preventDefault();
+        $(this).siblings('.article__content').toggle();
+    });
 });
 
 function toggleFolder( button ) {
