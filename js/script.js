@@ -4,9 +4,13 @@ $('document').ready(function(){
         toggleFolder( $(this) );
     });
     
-    $(".article__title").click( function( event ) {
+    $(".js-article__title").click( function( event ) {
         event.preventDefault();
-        $(this).siblings('.article__content').toggle();
+        if( $(this).hasClass('js-website') ) {
+            toggleWebsite( $(this).siblings('.js-article__content') );
+        }
+        
+        $(this).siblings('.js-article__content').toggle();
     });
 });
 
@@ -25,4 +29,12 @@ function toggleFolder( button ) {
         url: "./action.php?action=changeFolderState",
         data:{ id: feedBloc.data('folder-id'), isopen: open }
     });
+}
+
+function toggleWebsite( element ) {
+    if( element.not(':has(iframe)').length ) {
+        jQuery('<iframe frameborder="0" src="' + element.data('article-url') + '" style="width: 100%; height: 100%;" />').appendTo( element );
+    } else {
+        element.children('iframe').remove();
+    }
 }

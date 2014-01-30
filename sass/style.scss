@@ -50,8 +50,15 @@ body {
 
 .article__content {
     display: none;
+    height: 50em;
+    
     a:hover,
     a:active {
         text-decoration: underline;
+    }
+    
+    iframe {
+        width: 100%;
+        height: 692px;
     }
 }

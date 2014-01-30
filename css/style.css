@@ -69,9 +69,15 @@ body {
 /* line 51, ../sass/style.scss */
 .article__content {
   display: none;
+  height: 50em;
 }
-/* line 54, ../sass/style.scss */
+/* line 56, ../sass/style.scss */
 .article__content a:hover,
 .article__content a:active {
   text-decoration: underline;
+}
+/* line 60, ../sass/style.scss */
+.article__content iframe {
+  width: 100%;
+  height: 692px;
 }
