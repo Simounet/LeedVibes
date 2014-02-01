@@ -1,8 +1,30 @@
 @import "compass/css3";
+// VARS
+$sidebar-color-bg: #424242;
+$sidebar-color-bg-darken: darken( $sidebar-color-bg, 7% );
+$sidebar-color-alt: #686868;
+$sidebar-button-color: #515151;
+
+%text-color-light {
+    color: #FFF;
+}
+%text-color-dark {
+    color: #000;
+}
+%sidebar-padding-side {
+    padding: 0 1.2em;
+}
+%sidebar-button {
+    padding: 0 0.1em;
+    @extend %text-color-light;
+    background-color: $sidebar-button-color;
+    border: 0.3em solid $sidebar-color-alt;
+}
+
 /* RESET */
 body {
     font-size: 16px;
-    background-color: #A7A7A7;
+    background-color: $sidebar-color-bg;
 }
 h1 {
     margin: 0;
@@ -21,9 +43,7 @@ li {
 body {
     display: flex;
 }
-.sidebar {
-    flex: 1 0 0;
-}
+
 .wrapper {
     flex: 4 0 0;
     padding: 1em;
@@ -35,12 +55,53 @@ body {
 }
 
 /* SIDEBAR */
+.sidebar {
+    flex: 1 0 0;
+    font-size: 0.8em;
+    white-space: nowrap;
+    
+    [class$="__item"] {
+        overflow: hidden;
+        padding-bottom: 0.3em;
+        padding-top: 0.3em;
+        text-overflow: ellipsis;
+        
+        &,
+        a {
+            @extend %text-color-light;
+        }
+        
+        &:hover,
+        &:active {
+            background-color: $sidebar-color-bg-darken;
+        }
+    }
+    
+    button {
+        @extend %sidebar-button;
+    }
+}
+
+.toggle-button {
+    @extend %text-color-dark;
+}
+
+.folder {
+    border-bottom: 0.2em solid $sidebar-color-alt;
+}
+.folder__item a {
+    margin: 0 0.3em;
+}
 .folder__item,
-.feed_all a {
-    margin: 0 1.2em;
+.feed-all__item a {
+    @extend %sidebar-padding-side;
+    font-weight: bold;
+}
+.feed {
+    box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.5);
 }
 .feed__item  a {
-    margin: 0 3.5em;
+    margin: 0 3em;
 }
 
 /* ARTICLE */
@@ -61,4 +122,39 @@ body {
         width: 100%;
         height: 692px;
     }
+}
+
+/* USER SETTINGS */
+.settings {
+    margin: 1.2em 0;
+    @extend %sidebar-padding-side;
+    color: #CACACA;
+    text-align: center;
+    white-space: normal;
+    
+    a {
+        margin: 0 0.5em;
+        padding: 0.2em;
+        @extend %sidebar-button;
+        
+        &:hover,
+        &:active {
+            background-color: $sidebar-color-bg-darken;
+        }
+    }
+}
+.settings__fields {
+    padding: 20%;
+
+    input {
+        display: block;
+        margin: 0 auto;
+        min-width: 7em;
+        width: 95%;
+        color: $sidebar-color-bg-darken;
+    }
+}
+.settings__username {
+    @extend %text-color-light;
+    font-weight: bold;
 }

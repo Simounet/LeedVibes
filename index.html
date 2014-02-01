@@ -10,21 +10,24 @@
     {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
         {function="Plugin::callHook("menu_pre_folder_menu", array(&$myUser))"}
         <aside class="sidebar">
-            {if="!$myUser"}
-                <form action="action.php?action=login" method="POST">
-                    <input type="text" name="login" placeholder="{function="_t('LOGIN')"}"/>
-                    <input type="password" name="password" placeholder="{function="_t('PASSWORD')"}"/>
-                    <input type="submit" value="__Ok__">
-                    <label class="rememberMe">
-                        <input type="checkbox" name="rememberMe">
-                        <span>{function="_t('REMEMBER_ME')"}</span>
-                    </label>
-                </form>
-            {else}
-                <span>{function="_t('IDENTIFIED_WITH',array('<span>'.$myUser->getLogin().'</span>'))"} </span><button onclick="window.location='action.php?action=logout'">{function="_t('DISCONNECT')"}</button>
-            {/if}
+            <div class="settings">
+                {if="!$myUser"}
+            	    <form action="action.php?action=login" class="settings__fields" method="POST">
+            	        <input type="text" name="login" tabindex="1" placeholder="{function="_t('LOGIN')"}"/>
+            	        <input type="password" name="password" tabindex="2" placeholder="{function="_t('PASSWORD')"}"/>
+            	        <input type="submit" value="__Ok__" tabindex="4" />
+            	        <label class="rememberMe">
+            	            <input type="checkbox" tabindex="3" name="rememberMe" />
+            	            <span>{function="_t('REMEMBER_ME')"}</span>
+            	        </label>
+            	    </form>
+            	{else}
+            	    {function="_t('IDENTIFIED_WITH',array('<span class="settings__username">'.$myUser->getLogin().'</span>'))"}
+            	    <a href="action.php?action=logout">{function="_t('DISCONNECT')"}</a>
+            	{/if}
+            </div>
             <ul>
-                <li class="feed_all"><a href="./">All feed</a></li>
+                <li><div class="feed-all__item"><a href="./">All feed</a></div></li>
                 {loop="folders"}
                     {$feeds=""}
                     {if="isset($allFeedsPerFolder[$value->getId()])"}
@@ -33,19 +36,19 @@
                     {if="isset($allEvents[$value->getId()])"}
                         {$unreadEventsForFolder=$allEvents[$value->getId()]}
                     {/if}
-                    <li>
-                        <span class="folder__item">
-                            <button class="js-toggle-button" data-folder-id="{$value->getId()}">{if="!$value->getIsopen()"}&#9656;{else}&#9662;{/if}</button>
+                    <li class="folder">
+                        <div class="folder__item">
+                            <button class="toggle-button js-toggle-button" data-folder-id="{$value->getId()}">{if="!$value->getIsopen()"}&#9656;{else}&#9662;{/if}</button>
                             {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
                             <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}">{function="htmlentities($value->getName())"}</a>
                             {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
-                        </span>
-                        <ul class="js-toggle-item{if="!$value->getIsopen()"} hidden{/if}" data-folder-id="{$value->getId()}">
+                        </div>
+                        <ul class="feed js-toggle-item{if="!$value->getIsopen()"} hidden{/if}" data-folder-id="{$value->getId()}">
                             {if="count($feeds)!=0"}
                                 {loop="feeds"}
                                     <li class="feed__item">
                                         {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
-                                        <a href="index.php?action=selectedFeed&amp;feed={$value2['id']}" title="{function="htmlentities($value2['url'])"}">{function="htmlentities(Functions::truncate($value2['name'],37))"}</a>
+                                        <a href="index.php?action=selectedFeed&amp;feed={$value2['id']}" title="{function="htmlentities($value2['url'])"}">{function="htmlentities($value2['name'])"}</a>
                                         {function="Plugin::callHook("menu_post_feed_link", array(&$value))"}
                                     </li>
                                 {/loop}
