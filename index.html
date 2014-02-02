@@ -42,20 +42,26 @@
                     {if="isset($allEvents[$value->getId()])"}
                         {$unreadEventsForFolder=$allEvents[$value->getId()]}
                     {/if}
-                    <li class="folder">
+                    <li class="folder js-folder" data-id="{$value->getId()}">
                         <div class="folder__item">
-                            <button class="toggle-button js-toggle-button" data-folder-id="{$value->getId()}">{if="!$value->getIsopen()"}&#9656;{else}&#9662;{/if}</button>
+                            <button class="toggle-button js-toggle-button">{if="!$value->getIsopen()"}&#9656;{else}&#9662;{/if}</button>
                             {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
                             <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}">{function="htmlentities($value->getName())"}</a>
+                            {if="$unreadEventsForFolder > 0"}
+                                <button class="js-mark-as-read" title="{function="_t('MARK_AS_READ_FOLDER_ITEMS',array($unreadEventsForFolder))"}">{$unreadEventsForFolder}</button>
+                            {/if}
                             {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
                         </div>
-                        <ul class="feed js-toggle-item{if="!$value->getIsopen()"} hidden{/if}" data-folder-id="{$value->getId()}">
+                        <ul class="feed js-toggle-item{if="!$value->getIsopen()"} hidden{/if}">
                             {if="count($feeds)!=0"}
                                 {loop="feeds"}
-                                    <li class="feed__item">
+                                    <li class="feed__item js-feed__item" data-id="{$value2['id']}">
                                         {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
                                         <a href="index.php?action=selectedFeed&amp;feed={$value2['id']}" title="{function="htmlentities($value2['url'])"}">{function="htmlentities($value2['name'])"}</a>
-                                        {function="Plugin::callHook("menu_post_feed_link", array(&$value))"}
+                                        {if="$unread[$value2['id']] > 0"}
+                                            <button class="js-mark-as-read" title="{function="_t('MARK_AS_READ')"}">{$unread[$value2['id']]}</button>
+                                        {/if}
+                                {function="Plugin::callHook("menu_post_feed_link", array(&$value))"}
                                     </li>
                                 {/loop}
                             {/if}
@@ -75,6 +81,9 @@
             {include="article"}
         </section>
     {/if}
+    <script>
+        var  i18n = {$i18n_js};
+    </script>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/script.js"></script>
 </body>
