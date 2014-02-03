@@ -44,7 +44,7 @@
                     {/if}
                     <li class="folder js-folder" data-id="{$value->getId()}">
                         <div class="folder__item">
-                            <button class="toggle-button js-toggle-button">{if="!$value->getIsopen()"}&#9656;{else}&#9662;{/if}</button>
+                            <button class="js-toggle-button">{if="!$value->getIsopen()"}&#9656;{else}&#9662;{/if}</button>
                             {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
                             <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}">{function="htmlentities($value->getName())"}</a>
                             {if="$unreadEventsForFolder > 0"}

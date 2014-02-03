@@ -44,7 +44,9 @@ function toggleFolder( button ) {
         open = 1;
     }
 
-    feedBloc.slideToggle(200);
+    feedBloc.slideToggle(200, function() {
+        $(this).toggleClass('hidden');
+    });
     $(button).html((!open ? buttonContent.closed : buttonContent.opened ));
     
     $.ajax({

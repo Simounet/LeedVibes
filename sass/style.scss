@@ -5,22 +5,6 @@ $sidebar-color-bg-darken: darken( $sidebar-color-bg, 7% );
 $sidebar-color-alt: #686868;
 $sidebar-button-color: #515151;
 
-%text-color-light {
-    color: #FFF;
-}
-%text-color-dark {
-    color: #000;
-}
-%sidebar-padding-side {
-    padding: 0 1.2em;
-}
-%sidebar-button {
-    padding: 0 0.1em;
-    @extend %text-color-light;
-    background-color: $sidebar-button-color;
-    border: 0.3em solid $sidebar-color-alt;
-}
-
 /* RESET */
 body {
     font-size: 16px;
@@ -54,6 +38,22 @@ body {
     display: none;
 }
 
+%text-color-light {
+    color: #FFF;
+}
+%text-color-dark {
+    color: #000;
+}
+%sidebar-padding-side {
+    padding: 0 1.2em;
+}
+%sidebar-button {
+    padding: 0 0.1em;
+    @extend %text-color-light;
+    background-color: $sidebar-button-color;
+    border: 0.3em solid $sidebar-color-alt;
+}
+
 /* SIDEBAR */
 .sidebar {
     flex: 1 0 0;
@@ -80,10 +80,11 @@ body {
     button {
         @extend %sidebar-button;
     }
-}
+    
+    .settings__fields {
+        padding: 20%;
+    }
 
-.toggle-button {
-    @extend %text-color-dark;
 }
 
 .folder {
@@ -126,7 +127,7 @@ body {
 
 /* USER SETTINGS */
 .settings {
-    margin: 1.2em 0;
+    margin: 1.2em auto;
     @extend %sidebar-padding-side;
     color: #CACACA;
     text-align: center;
@@ -143,16 +144,12 @@ body {
         }
     }
 }
-.settings__fields {
-    padding: 20%;
-
-    input {
-        display: block;
-        margin: 0 auto;
-        min-width: 7em;
-        width: 95%;
-        color: $sidebar-color-bg-darken;
-    }
+.settings__fields input {
+    display: block;
+    margin: 0 auto;
+    min-width: 7em;
+    width: 95%;
+    color: $sidebar-color-bg-darken;
 }
 .settings__username {
     @extend %text-color-light;
