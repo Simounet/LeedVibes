@@ -37,6 +37,13 @@ body {
 .hidden {
     display: none;
 }
+.selected a {
+    @extend %text-color-light;
+    
+    &:before {
+        content: "> ";
+    }
+}
 
 %text-color-light {
     color: #FFF;

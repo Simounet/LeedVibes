@@ -33,7 +33,7 @@
         </div>
         {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
             <ul>
-                <li><div class="feed-all__item"><a href="./">All feed</a></div></li>
+                <li><div class="feed-all__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}"><a href="./">All feed</a></div></li>
                 {loop="folders"}
                     {$feeds=""}
                     {if="isset($allFeedsPerFolder[$value->getId()])"}
@@ -43,7 +43,7 @@
                         {$unreadEventsForFolder=$allEvents[$value->getId()]}
                     {/if}
                     <li class="folder js-folder" data-id="{$value->getId()}">
-                        <div class="folder__item">
+                        <div class="folder__item{if="isset($currentFolder) && ($value->getId() == $currentFolder->getId())"} selected{/if}">
                             <button class="js-toggle-button">{if="!$value->getIsopen()"}&#9656;{else}&#9662;{/if}</button>
                             {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
                             <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}">{function="htmlentities($value->getName())"}</a>
@@ -55,7 +55,7 @@
                         <ul class="feed js-toggle-item{if="!$value->getIsopen()"} hidden{/if}">
                             {if="count($feeds)!=0"}
                                 {loop="feeds"}
-                                    <li class="feed__item js-feed__item" data-id="{$value2['id']}">
+                                    <li class="feed__item js-feed__item{if="isset($currentFeed) && ($value2['id'] == $currentFeed->getId())"} selected{/if}" data-id="{$value2['id']}">
                                         {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
                                         <a href="index.php?action=selectedFeed&amp;feed={$value2['id']}" title="{function="htmlentities($value2['url'])"}">{function="htmlentities($value2['name'])"}</a>
                                         {if="$unread[$value2['id']] > 0"}
