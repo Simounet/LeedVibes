@@ -67,96 +67,117 @@ body {
   border: 0.3em solid #686868;
 }
 
+/* line 63, ../sass/style.scss */
+.folder__item a, .feed__item a {
+  display: inline-block;
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
 /* SIDEBAR */
-/* line 65, ../sass/style.scss */
+/* line 72, ../sass/style.scss */
 .sidebar {
   flex: 1 0 0;
   font-size: 0.8em;
   white-space: nowrap;
 }
-/* line 70, ../sass/style.scss */
+/* line 77, ../sass/style.scss */
 .sidebar [class$="__item"] {
-  overflow: hidden;
+  position: relative;
   padding-bottom: 0.3em;
   padding-top: 0.3em;
-  text-overflow: ellipsis;
 }
-/* line 82, ../sass/style.scss */
+/* line 88, ../sass/style.scss */
 .sidebar [class$="__item"]:hover, .sidebar [class$="__item"]:active {
   background-color: #303030;
 }
-/* line 91, ../sass/style.scss */
+/* line 97, ../sass/style.scss */
 .sidebar .settings__fields {
   padding: 20%;
 }
 
-/* line 97, ../sass/style.scss */
+/* line 103, ../sass/style.scss */
 .folder {
-  border-bottom: 0.2em solid #686868;
+  border-bottom: 0.2em solid #484848;
 }
 
-/* line 100, ../sass/style.scss */
+/* line 106, ../sass/style.scss */
 .folder__item a {
   margin: 0 0.3em;
 }
 
-/* line 104, ../sass/style.scss */
+/* line 110, ../sass/style.scss */
+.folder__button {
+  width: 1.5em;
+}
+
+/* line 114, ../sass/style.scss */
 .folder__item,
 .feed-all__item a {
   font-weight: bold;
 }
 
-/* line 108, ../sass/style.scss */
+/* line 118, ../sass/style.scss */
 .feed {
   box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.5);
 }
 
-/* line 111, ../sass/style.scss */
+/* line 121, ../sass/style.scss */
 .feed__item a {
-  margin: 0 3em;
+  margin: 0 0 0 1.4em;
+}
+
+/* line 126, ../sass/style.scss */
+.mark-as-read {
+  position: absolute;
+  right: 0.5em;
+  font-size: 0.8em;
 }
 
 /* ARTICLE */
-/* line 116, ../sass/style.scss */
+/* line 133, ../sass/style.scss */
 .article__title {
   font-size: 1em;
 }
 
-/* line 120, ../sass/style.scss */
+/* line 137, ../sass/style.scss */
 .article__content {
   display: none;
   height: 50em;
 }
-/* line 125, ../sass/style.scss */
+/* line 142, ../sass/style.scss */
 .article__content a:hover,
 .article__content a:active {
   text-decoration: underline;
 }
-/* line 129, ../sass/style.scss */
+/* line 146, ../sass/style.scss */
 .article__content iframe {
   width: 100%;
   height: 692px;
 }
 
 /* USER SETTINGS */
-/* line 136, ../sass/style.scss */
+/* line 153, ../sass/style.scss */
 .settings {
-  margin: 1.2em auto;
+  margin: 1em auto;
   color: #CACACA;
   text-align: center;
+  line-height: 1.6em;
   white-space: normal;
 }
-/* line 143, ../sass/style.scss */
+/* line 161, ../sass/style.scss */
 .settings a {
   margin: 0 0.5em;
   padding: 0.2em;
 }
-/* line 149, ../sass/style.scss */
+/* line 167, ../sass/style.scss */
 .settings a:hover, .settings a:active {
   background-color: #303030;
 }
 
-/* line 154, ../sass/style.scss */
+/* line 172, ../sass/style.scss */
 .settings__fields input {
   display: block;
   margin: 0 auto;
@@ -165,7 +186,7 @@ body {
   color: #303030;
 }
 
-/* line 161, ../sass/style.scss */
+/* line 179, ../sass/style.scss */
 .settings__username {
   font-weight: bold;
 }

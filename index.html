@@ -44,11 +44,11 @@
                     {/if}
                     <li class="folder js-folder" data-id="{$value->getId()}">
                         <div class="folder__item{if="isset($currentFolder) && ($value->getId() == $currentFolder->getId())"} selected{/if}">
-                            <button class="js-toggle-button">{if="!$value->getIsopen()"}&#9656;{else}&#9662;{/if}</button>
+                            <button class="folder__button js-toggle-button">{if="!$value->getIsopen()"}&#9656;{else}&#9662;{/if}</button>
                             {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
                             <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}">{function="htmlentities($value->getName())"}</a>
                             {if="$unreadEventsForFolder > 0"}
-                                <button class="js-mark-as-read" title="{function="_t('MARK_AS_READ_FOLDER_ITEMS',array($unreadEventsForFolder))"}">{$unreadEventsForFolder}</button>
+                                <button class="mark-as-read js-mark-as-read" title="{function="_t('MARK_AS_READ_FOLDER_ITEMS',array($unreadEventsForFolder))"}">{$unreadEventsForFolder}</button>
                             {/if}
                             {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
                         </div>
@@ -59,7 +59,7 @@
                                         {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
                                         <a href="index.php?action=selectedFeed&amp;feed={$value2['id']}" title="{function="htmlentities($value2['url'])"}">{function="htmlentities($value2['name'])"}</a>
                                         {if="$unread[$value2['id']] > 0"}
-                                            <button class="js-mark-as-read" title="{function="_t('MARK_AS_READ')"}">{$unread[$value2['id']]}</button>
+                                            <button class="mark-as-read js-mark-as-read" title="{function="_t('MARK_AS_READ')"}">{$unread[$value2['id']]}</button>
                                         {/if}
                                 {function="Plugin::callHook("menu_post_feed_link", array(&$value))"}
                                     </li>

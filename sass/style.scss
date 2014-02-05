@@ -60,6 +60,13 @@ body {
     background-color: $sidebar-button-color;
     border: 0.3em solid $sidebar-color-alt;
 }
+%overflow-sidebar {
+    display: inline-block;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
 
 /* SIDEBAR */
 .sidebar {
@@ -68,10 +75,9 @@ body {
     white-space: nowrap;
     
     [class$="__item"] {
-        overflow: hidden;
+        position: relative;
         padding-bottom: 0.3em;
         padding-top: 0.3em;
-        text-overflow: ellipsis;
         
         &,
         a {
@@ -95,10 +101,14 @@ body {
 }
 
 .folder {
-    border-bottom: 0.2em solid $sidebar-color-alt;
+    border-bottom: 0.2em solid #484848;
 }
 .folder__item a {
     margin: 0 0.3em;
+    @extend %overflow-sidebar;
+}
+.folder__button {
+    width: 1.5em;
 }
 .folder__item,
 .feed-all__item a {
@@ -108,8 +118,15 @@ body {
 .feed {
     box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.5);
 }
-.feed__item  a {
-    margin: 0 3em;
+.feed__item a {
+    margin: 0 0 0 1.4em;
+    @extend %overflow-sidebar;
+}
+
+.mark-as-read {
+    position: absolute;
+    right: 0.5em;
+    font-size: 0.8em;
 }
 
 /* ARTICLE */
@@ -134,10 +151,11 @@ body {
 
 /* USER SETTINGS */
 .settings {
-    margin: 1.2em auto;
+    margin: 1em auto;
     @extend %sidebar-padding-side;
     color: #CACACA;
     text-align: center;
+    line-height: 1.6em;
     white-space: normal;
     
     a {
