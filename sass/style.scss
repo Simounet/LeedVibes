@@ -74,7 +74,7 @@ body {
     font-size: 0.8em;
     white-space: nowrap;
     
-    [class$="__item"] {
+    [class*="__item"] {
         position: relative;
         padding-bottom: 0.3em;
         padding-top: 0.3em;

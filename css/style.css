@@ -49,8 +49,8 @@ body {
 }
 
 /* line 48, ../sass/style.scss */
-.selected a, .sidebar button, .settings a, .sidebar [class$="__item"],
-.sidebar [class$="__item"] a, .settings__username {
+.selected a, .sidebar button, .settings a, .sidebar [class*="__item"],
+.sidebar [class*="__item"] a, .settings__username {
   color: #FFF;
 }
 
@@ -84,13 +84,13 @@ body {
   white-space: nowrap;
 }
 /* line 77, ../sass/style.scss */
-.sidebar [class$="__item"] {
+.sidebar [class*="__item"] {
   position: relative;
   padding-bottom: 0.3em;
   padding-top: 0.3em;
 }
 /* line 88, ../sass/style.scss */
-.sidebar [class$="__item"]:hover, .sidebar [class$="__item"]:active {
+.sidebar [class*="__item"]:hover, .sidebar [class*="__item"]:active {
   background-color: #303030;
 }
 /* line 97, ../sass/style.scss */
