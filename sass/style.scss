@@ -3,7 +3,7 @@
 $sidebar-color-bg: #424242;
 $sidebar-color-bg-darken: darken( $sidebar-color-bg, 7% );
 $sidebar-color-alt: #686868;
-$sidebar-button-color: #515151;
+$feed-entry-color: $sidebar-color-bg;
 
 /* RESET */
 body {
@@ -30,7 +30,7 @@ body {
 
 .wrapper {
     flex: 4 0 0;
-    padding: 1em;
+    margin: 0.5em 0; 
     background-color: #FFF;
 }
 
@@ -39,6 +39,7 @@ body {
 }
 .selected a {
     @extend %text-color-light;
+    font-weight: bold;
     
     &:before {
         content: "> ";
@@ -57,7 +58,7 @@ body {
 %sidebar-button {
     padding: 0 0.1em;
     @extend %text-color-light;
-    background-color: $sidebar-button-color;
+    background-color: $sidebar-color-bg;
     border: 0.3em solid $sidebar-color-alt;
 }
 %overflow-sidebar {
@@ -66,6 +67,17 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     vertical-align: middle;
+}
+
+/* FEED */
+.feed__entry {
+    position: relative;
+    padding: 0.5em;
+    border-bottom: 0.1em solid #D9D9D9;
+
+    a {
+        color: $feed-entry-color;
+    }
 }
 
 /* SIDEBAR */
@@ -113,7 +125,6 @@ body {
 .folder__item,
 .feed-all__item a {
     @extend %sidebar-padding-side;
-    font-weight: bold;
 }
 .feed {
     box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.5);
@@ -130,13 +141,49 @@ body {
 }
 
 /* ARTICLE */
+.article__header {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+}
 .article__title {
+    display: inline;
     font-size: 1em;
 }
+.article__description {
+    display: inline-block;
+    margin-left: 0.4em;
+    color: #888;
 
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 58px;
+        $support-for-original-webkit-gradients : false;
+        @include background-image(linear-gradient(to left, white 22px, rgba(255, 255, 255, 0) 100%));
+    }
+}
+.article__read-unread {
+    position: absolute;
+    width: 1.2em;
+    top: 0;
+    right: 0;
+    color: white;
+    background-color: grey;
+    border: none;
+    cursor: pointer;
+}
 .article__content {
     display: none;
+    margin: 0 auto;
+    width: 42.8125em; // font: 16px / width: 685px (http://www.pearsonified.com/typography/)
     height: 50em;
+    line-height: 1.625em; // font: 16px / line-height: 26px (http://www.pearsonified.com/typography/) 
     
     a:hover,
     a:active {

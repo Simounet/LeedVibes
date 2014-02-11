@@ -14,7 +14,7 @@ $('document').ready(function(){
         toggleFolder( $(this) );
     });
     
-    $(".js-article__title").click( function( event ) {
+    $(".js-article__header").click( function( event ) {
         event.preventDefault();
         if( $(this).hasClass('js-website') ) {
             toggleWebsite( $(this).siblings('.js-article__content') );
