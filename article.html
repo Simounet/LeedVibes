@@ -3,9 +3,10 @@
         <article>
             {function="Plugin::callHook("event_pre_title", array(&$value))"}
             <h1 class="article__title js-article__title js-website"><a href="{$value->getLink()}" target="_blank" title="{$plainDescription}">{$value->getTitle()}</a></h1>
+            {$website=0}
             {function="Plugin::callHook("event_post_title", array(&$value))"}
             {function="Plugin::callHook("event_pre_content", array(&$value))"}
-            <div class="article__content js-article__content" data-article-url="http://www.simounet.net/script-greasemonkey-pour-retrouver-la-fonction-marquer-comme-lu-et-masquer-de-netvibes/"><!--{$value->getContent()}--></div>
+            <div class="article__content js-article__content" data-article-url="http://www.simounet.net/script-greasemonkey-pour-retrouver-la-fonction-marquer-comme-lu-et-masquer-de-netvibes/">{if="$website == 0"}{$value->getContent()}{/if}</div>
             {function="Plugin::callHook("event_post_content", array(&$value))"}
         </article>
     {$hightlighted=$hightlighted+1}
