@@ -10,6 +10,8 @@ function _t(key,args){
 }
 
 $('document').ready(function(){
+    addEventsButtonLuNonLus();
+    
     $(".js-toggle-button").click( function() {
         toggleFolder( $(this) );
     });
@@ -61,4 +63,132 @@ function toggleWebsite( element ) {
     } else {
         element.children('iframe').remove();
     }
+}
+
+/* FROM marigolds/js/script.js */
+/* Fonctions de séléctions */
+/* Cette fonction sera utilisé pour le scroll infinie, afin d'ajouter les évènements necessaires */
+function addEventsButtonLuNonLus(){
+    var handler = function(event){
+        var target = event.target;
+        var id = $(this).data('id');
+        if($(target).hasClass('js-read-unread')){
+            buttonAction(target,id);
+        }else{
+            targetThisEvent(this);
+        }
+    }
+    // on vire tous les évènements afin de ne pas avoir des doublons d'évènements
+    $('section article').unbind('click');
+    // on bind proprement les click sur chaque section
+    $('section article').bind('click', handler);
+}
+
+function buttonAction(target,id){
+    // Check unreadEvent
+    if($('#pageTop').html()){
+        var from=true;
+    }else{
+        var from='';
+    }
+    readThis(target,id,from);
+}
+
+function readThis(element,id,from,callback){
+    var activeScreen = $('#pageTop').html();
+    var parent = $(element).parent().parent();
+    var nextEvent = $('#'+id).next();
+    //sur les éléments non lus
+    if(!parent.hasClass('eventRead')){
+        $.ajax({
+            url: "./action.php?action=readContent",
+            data:{id:id},
+            success:function(msg){
+                if(msg.status == 'noconnect') {
+                    alert(msg.texte)
+                } else {
+                    if( console && console.log && msg!="" ) console.log(msg);
+                    switch (activeScreen){
+                        case '':
+                            // cas de la page d'accueil
+                            parent.addClass('eventRead');
+                            parent.fadeOut(200,function(){
+                                if(callback){
+                                    callback();
+                                }else{
+                                    targetThisEvent(nextEvent,true);
+                                }
+                                // on simule un scroll si tous les events sont cachés
+                                if($('article section:last').attr('style')=='display: none;') {
+                                    $(window).scrollTop($(document).height());
+                                }
+                            });
+                            // on compte combien d'article ont été lus afin de les soustraires de la requête pour le scroll infini
+                            $(window).data('nblus', $(window).data('nblus')+1);
+                            // on diminue le nombre d'article en haut de page
+                            $('#nbarticle').html(parseInt($('#nbarticle').html()) - 1)
+                        break;
+                        case 'selectedFolder':
+                        case 'selectedFeedNonLu':
+                            parent.addClass('eventRead');
+                            if(callback){
+                                callback();
+                            }else{
+                                targetThisEvent(nextEvent,true);
+                            }
+                            // on compte combien d'article ont été lus afin de les soustraires de la requête pour le scroll infini
+                            $(window).data('nblus', $(window).data('nblus')+1);
+                        break;
+                        default:
+                            // autres cas : favoris, selectedFeed ...
+                            parent.addClass('eventRead');
+                            if(callback){
+                                callback();
+                            }else{
+                                targetThisEvent(nextEvent,true);
+                            }
+                        break;
+                    }
+                }
+            }
+        });
+    }else{  // sur les éléments lus
+            // si ce n'est pas un clic sur le titre de l'event
+        if(from!='title'){
+            $.ajax({
+                    url: "./action.php?action=unreadContent",
+                    data:{id:id},
+                    success:function(msg){
+                        if(msg.status == 'noconnect') {
+                            alert(msg.texte)
+                        } else {
+                            if( console && console.log && msg!="" ) console.log(msg);
+                            parent.removeClass('eventRead');
+                            // on compte combien d'article ont été remis à non lus
+                            if ((activeScreen=='') || (activeScreen=='selectedFolder')|| (activeScreen=='selectedFeedNonLu'))
+                                $(window).data('nblus', $(window).data('nblus')-1);
+                            if(callback){
+                                callback();
+                            }
+                        }
+                    }
+            });
+        }
+    }
+
+}
+
+function targetThisEvent(event,focusOn){
+    target = $(event);
+    if(target.prop("tagName")=='SECTION'){
+        $('.eventSelected').removeClass('eventSelected');
+        target.addClass('eventSelected');
+        var id = target.attr('id');
+        if(id && focusOn)window.location = '#'+id;
+    }
+    if(target.prop("tagName")=='DIV'){
+        $('.eventSelected').removeClass('eventSelected');
+        target.addClass('eventSelected');
+    }
+    // on débloque les touches le plus tard possible afin de passer derrière l'appel ajax
 }

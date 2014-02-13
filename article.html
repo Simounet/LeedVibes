@@ -6,7 +6,7 @@
             <header class="article__header js-article__header">
                 <h1 class="article__title js-article__title{if="$website == 1"} js-website{/if}"><a href="{$value->getLink()}" target="_blank" title="{$plainDescription}">{$value->getTitle()}</a></h1>
                 <span class="article__description">{function="Functions::truncate(strip_tags($value->getDescription()),300)"}</span>
-                <button class="article__read-unread">X</button>
+                <button class="article__read-unread js-read-unread">X</button>
             </header>
             {function="Plugin::callHook("event_post_title", array(&$value))"}
             {function="Plugin::callHook("event_pre_content", array(&$value))"}
