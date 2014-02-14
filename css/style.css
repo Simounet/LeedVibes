@@ -185,6 +185,7 @@ body {
 /* line 171, ../sass/style.scss */
 .article__read-unread {
   position: absolute;
+  margin: 0.5em;
   width: 1.2em;
   top: 0;
   right: 0;
@@ -194,7 +195,7 @@ body {
   cursor: pointer;
 }
 
-/* line 181, ../sass/style.scss */
+/* line 182, ../sass/style.scss */
 .article__content {
   display: none;
   margin: 0 auto;
@@ -202,19 +203,19 @@ body {
   height: 50em;
   line-height: 1.625em;
 }
-/* line 189, ../sass/style.scss */
+/* line 190, ../sass/style.scss */
 .article__content a:hover,
 .article__content a:active {
   text-decoration: underline;
 }
-/* line 193, ../sass/style.scss */
+/* line 194, ../sass/style.scss */
 .article__content iframe {
   width: 100%;
   height: 692px;
 }
 
 /* USER SETTINGS */
-/* line 200, ../sass/style.scss */
+/* line 201, ../sass/style.scss */
 .settings {
   margin: 1em auto;
   color: #CACACA;
@@ -222,17 +223,17 @@ body {
   line-height: 1.6em;
   white-space: normal;
 }
-/* line 208, ../sass/style.scss */
+/* line 209, ../sass/style.scss */
 .settings a {
   margin: 0 0.5em;
   padding: 0.2em;
 }
-/* line 214, ../sass/style.scss */
+/* line 215, ../sass/style.scss */
 .settings a:hover, .settings a:active {
   background-color: #303030;
 }
 
-/* line 219, ../sass/style.scss */
+/* line 220, ../sass/style.scss */
 .settings__fields input {
   display: block;
   margin: 0 auto;
@@ -241,7 +242,7 @@ body {
   color: #303030;
 }
 
-/* line 226, ../sass/style.scss */
+/* line 227, ../sass/style.scss */
 .settings__username {
   font-weight: bold;
 }

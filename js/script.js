@@ -95,11 +95,10 @@ function buttonAction(target,id){
 }
 
 function readThis(element,id,from,callback){
-    var activeScreen = $('#pageTop').html();
-    var parent = $(element).parent().parent();
+    var entry = $(element).parents('.feed__entry');
     var nextEvent = $('#'+id).next();
     //sur les éléments non lus
-    if(!parent.hasClass('eventRead')){
+    if(!entry.hasClass('eventRead')){
         $.ajax({
             url: "./action.php?action=readContent",
             data:{id:id},
@@ -107,48 +106,22 @@ function readThis(element,id,from,callback){
                 if(msg.status == 'noconnect') {
                     alert(msg.texte)
                 } else {
-                    if( console && console.log && msg!="" ) console.log(msg);
-                    switch (activeScreen){
-                        case '':
-                            // cas de la page d'accueil
-                            parent.addClass('eventRead');
-                            parent.fadeOut(200,function(){
-                                if(callback){
-                                    callback();
-                                }else{
-                                    targetThisEvent(nextEvent,true);
-                                }
-                                // on simule un scroll si tous les events sont cachés
-                                if($('article section:last').attr('style')=='display: none;') {
-                                    $(window).scrollTop($(document).height());
-                                }
-                            });
-                            // on compte combien d'article ont été lus afin de les soustraires de la requête pour le scroll infini
-                            $(window).data('nblus', $(window).data('nblus')+1);
-                            // on diminue le nombre d'article en haut de page
-                            $('#nbarticle').html(parseInt($('#nbarticle').html()) - 1)
-                        break;
-                        case 'selectedFolder':
-                        case 'selectedFeedNonLu':
-                            parent.addClass('eventRead');
-                            if(callback){
-                                callback();
-                            }else{
-                                targetThisEvent(nextEvent,true);
-                            }
-                            // on compte combien d'article ont été lus afin de les soustraires de la requête pour le scroll infini
-                            $(window).data('nblus', $(window).data('nblus')+1);
-                        break;
-                        default:
-                            // autres cas : favoris, selectedFeed ...
-                            parent.addClass('eventRead');
-                            if(callback){
-                                callback();
-                            }else{
-                                targetThisEvent(nextEvent,true);
-                            }
-                        break;
-                    }
+                    entry.addClass('eventRead');
+                    entry.fadeOut(200,function(){
+                        if(callback){
+                            callback();
+                        }else{
+                            targetThisEvent(nextEvent,true);
+                        }
+                        // on simule un scroll si tous les events sont cachés
+                        if($('article section:last').attr('style')=='display: none;') {
+                            $(window).scrollTop($(document).height());
+                        }
+                    });
+                    // on compte combien d'article ont été lus afin de les soustraires de la requête pour le scroll infini
+                    $(window).data('nblus', $(window).data('nblus')+1);
+                    // on diminue le nombre d'article en haut de page
+                    $('#nbarticle').html(parseInt($('#nbarticle').html()) - 1)
                 }
             }
         });
@@ -163,7 +136,7 @@ function readThis(element,id,from,callback){
                             alert(msg.texte)
                         } else {
                             if( console && console.log && msg!="" ) console.log(msg);
-                            parent.removeClass('eventRead');
+                            entry.removeClass('eventRead');
                             // on compte combien d'article ont été remis à non lus
                             if ((activeScreen=='') || (activeScreen=='selectedFolder')|| (activeScreen=='selectedFeedNonLu'))
                                 $(window).data('nblus', $(window).data('nblus')-1);
