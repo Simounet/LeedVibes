@@ -7,7 +7,10 @@
                 <h1 class="article__title js-article__title{if="$website == 1"} js-website{/if}"><a href="{$value->getLink()}" target="_blank" title="{$plainDescription}">{$value->getTitle()}</a></h1>
                 <span class="article__description">{function="Functions::truncate(strip_tags($value->getDescription()),300)"}</span>
             </header>
-            <button class="article__read-unread js-read-unread">X</button>
+            <div class="article__read-unread article__read-unread--checkbox js-read-unread--checkbox">
+                <input type="checkbox" id="event{$value->getId()}" />
+                <label class="js-read-unread" for="event{$value->getId()}"></label>
+            </div>
             {function="Plugin::callHook("event_post_title", array(&$value))"}
             {function="Plugin::callHook("event_pre_content", array(&$value))"}
             <div class="article__content js-article__content" data-article-url="http://www.simounet.net/script-greasemonkey-pour-retrouver-la-fonction-marquer-comme-lu-et-masquer-de-netvibes/">{if="$website == 0"}{$value->getContent()}{/if}</div>

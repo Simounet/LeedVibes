@@ -49,14 +49,16 @@ function toggleItem( e, special, existingEntryFocused ) {
         if(  existingEntryFocusedContent.length && ( content[0] != existingEntryFocusedContent[0] ) ) {
             toggleWebsite( existingEntryFocusedContent );
             existingEntryFocused
-                .hide();
+                .hide()
+                .find('[type="checkbox"]').prop("checked", function(i,val) { return !val; });
         }
         toggleWebsite( content );
     } else {
         if(  existingEntryFocusedContent.length && ( content[0] != existingEntryFocusedContent[0] ) ) {
             existingEntryFocusedContent.toggle();
             existingEntryFocused
-                .hide();
+                .hide()
+                .find('[type="checkbox"]').prop("checked", function(i,val) { return !val; });
         }
         content.toggle();
     }
