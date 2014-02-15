@@ -34,18 +34,23 @@ $('document').ready(function(){
 });
 
 function toggleEvent( e ) {
-    var existingEntryFocused = $('.js-feed__entry.js-focus');
-    if( e.hasClass('js-website') ) {
-        if( existingEntryFocused )
-            toggleWebsite( existingEntryFocused.find('.js-article__content') );
-        toggleWebsite( e.siblings('.js-article__content') );
+    var existingEntryFocused = $('.js-feed__entry.js-focus'),
+        websiteView = e.hasClass('js-website');
+
+    toggleItem( e.siblings('.js-article__content'), websiteView, existingEntryFocused.find('.js-article__content') );
+    toggleFocus( e.parents('.js-feed__entry'), existingEntryFocused);
+}
+
+function toggleItem( e, special, existingEntryFocused ) {
+    if( special ) {
+        if(  existingEntryFocused.length && ( e[0] != existingEntryFocused[0] ) )
+            toggleWebsite( existingEntryFocused );
+        toggleWebsite( e );
     } else {
-        if( existingEntryFocused )
-            existingEntryFocused.find('.js-article__content').toggle();
-        e.siblings('.js-article__content').toggle();
+        if(  existingEntryFocused.length && ( e[0] != existingEntryFocused[0] ) )
+            existingEntryFocused.toggle();
+        e.toggle();
     }
-    
-    toggleFocus(e.parents('.js-feed__entry'), existingEntryFocused);
 }
 
 function toggleFolder( button ) {
@@ -69,11 +74,14 @@ function toggleFolder( button ) {
 }
 
 function toggleFocus( entry, existingEntryFocused ) {
-    if( existingEntryFocused.length )
+    // If we are not clicking on the already focused element
+    // And there is and existing focused element
+    // Then remove focus class
+    if( ( entry[0] != existingEntryFocused[0]) && existingEntryFocused.length ) {
         existingEntryFocused.removeClass('js-focus');
-        
-    entry
-        .addClass('js-focus');
+    }
+
+    entry.toggleClass('js-focus');
 }
 
 function toggleWebsite( element ) {
