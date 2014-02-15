@@ -1,6 +1,6 @@
 {loop="$events"}
     {$plainDescription=strip_tags($value->getDescription())}
-        <article class="feed__entry" data-id="{$value->getId()}">
+        <article class="feed__entry js-feed__entry" data-id="{$value->getId()}">
             {function="Plugin::callHook("event_pre_title", array(&$value))"}
             {$website=0}
             <header class="article__header js-article__header">

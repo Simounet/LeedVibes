@@ -18,11 +18,7 @@ $('document').ready(function(){
     
     $(".js-article__header").click( function( event ) {
         event.preventDefault();
-        if( $(this).hasClass('js-website') ) {
-            toggleWebsite( $(this).siblings('.js-article__content') );
-        }
-        
-        $(this).siblings('.js-article__content').toggle();
+        toggleEvent( $(this) );
     });
 
     $(".js-mark-as-read").click( function() {
@@ -36,6 +32,21 @@ $('document').ready(function(){
         }
     });
 });
+
+function toggleEvent( e ) {
+    var existingEntryFocused = $('.js-feed__entry.js-focus');
+    if( e.hasClass('js-website') ) {
+        if( existingEntryFocused )
+            toggleWebsite( existingEntryFocused.find('.js-article__content') );
+        toggleWebsite( e.siblings('.js-article__content') );
+    } else {
+        if( existingEntryFocused )
+            existingEntryFocused.find('.js-article__content').toggle();
+        e.siblings('.js-article__content').toggle();
+    }
+    
+    toggleFocus(e.parents('.js-feed__entry'), existingEntryFocused);
+}
 
 function toggleFolder( button ) {
     folderBloc = button.parents('.js-folder');
@@ -55,6 +66,14 @@ function toggleFolder( button ) {
         url: "./action.php?action=changeFolderState",
         data:{ id: folderBloc.data('id'), isopen: open }
     });
+}
+
+function toggleFocus( entry, existingEntryFocused ) {
+    if( existingEntryFocused.length )
+        existingEntryFocused.removeClass('js-focus');
+        
+    entry
+        .addClass('js-focus');
 }
 
 function toggleWebsite( element ) {
