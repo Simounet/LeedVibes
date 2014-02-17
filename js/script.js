@@ -118,6 +118,27 @@ function readOrUnread( e ) {
     }
 }
 
+function countersHandler( feedID, operation ) {
+    var counterHandler = function( counter ) {
+        var i = parseInt(counter.html());
+        if( operation == '+' || operation == 'plus' ) {
+            i++;
+        } else {
+            i--;
+        }
+
+        return i;
+    }
+
+    var feed = $('.js-feed__item[data-id="'+feedID+'"]');
+
+    var feedCounter = feed.find('.js-feed-counter');
+    feedCounter.html( counterHandler( feedCounter ) );
+
+    var folderCounter = feed.parents('.js-folder').find('.js-folder-counter');
+    folderCounter.html( counterHandler( folderCounter ) );
+}
+
 /* FROM marigolds/js/script.js */
 /* Fonctions de séléctions */
 /* Cette fonction sera utilisé pour le scroll infinie, afin d'ajouter les évènements necessaires */
@@ -131,7 +152,7 @@ function addEventsButtonLuNonLus(){
         }
     }
     
-    $('.js-read-unread').bind('click', handler);
+    $( '.wrapper' ).on( 'click', '.js-read-unread', handler );
 }
 
 function buttonAction(target,id){
@@ -173,7 +194,9 @@ function readThis(element,id,from,callback){
                     // on compte combien d'article ont été lus afin de les soustraires de la requête pour le scroll infini
                     $(window).data('nblus', $(window).data('nblus')+1);
                     // on diminue le nombre d'article en haut de page
-                    $('#nbarticle').html(parseInt($('#nbarticle').html()) - 1)
+                    $('#nbarticle').html(parseInt($('#nbarticle').html()) - 1);
+                    // Decrement feed number
+                    countersHandler( entry.data('feed-id') );
                 }
             }
         });
@@ -189,15 +212,14 @@ function readThis(element,id,from,callback){
                         } else {
                             if( console && console.log && msg!="" ) console.log(msg);
                             entry.removeClass('js-event--read');
-                            // on compte combien d'article ont été remis à non lus
-                            if ((activeScreen=='') || (activeScreen=='selectedFolder')|| (activeScreen=='selectedFeedNonLu'))
-                                $(window).data('nblus', $(window).data('nblus')-1);
                             if(callback){
                                 callback();
                             }
                         }
                     }
             });
+            // Increment feed number
+            countersHandler( entry.data('feed-id'), '+' );
         }
     }
 

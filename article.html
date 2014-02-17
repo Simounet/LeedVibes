@@ -1,7 +1,7 @@
 {loop="$events"}
 
     {$plainDescription=strip_tags($value->getDescription())}
-        <article class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} feed__entry--read{/if}" data-id="{$value->getId()}">
+        <article class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} feed__entry--read{/if}" data-id="{$value->getId()}" data-feed-id="{$value->getFeed()}">
             {function="Plugin::callHook("event_pre_title", array(&$value))"}
             {$website=0}
             <header class="article__header js-article__header">
