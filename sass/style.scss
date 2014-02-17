@@ -80,6 +80,10 @@ body {
     }
 }
 
+.feed__entry--read {
+    color: #BBB;
+}
+
 /* SIDEBAR */
 .sidebar {
     flex: 1 0 0;
@@ -150,11 +154,18 @@ body {
 .article__title {
     display: inline;
     font-size: 1em;
+
+    .feed__entry--read & a {
+        @extend .feed__entry--read;
+    }
 }
 .article__description {
     display: inline-block;
     margin-left: 0.4em;
     color: #888;
+    .feed__entry--read & {
+        @extend .feed__entry--read;
+    }
 
     &:after {
         content: "";
