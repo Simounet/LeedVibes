@@ -37,12 +37,13 @@ function toggleEvent( e ) {
     var existingEntryFocused = $('.js-feed__entry.js-focus'),
         websiteView = e.hasClass('js-website');
 
-    toggleFocus( e.parents('.js-feed__entry'), existingEntryFocused);
-    toggleItem( e, websiteView, existingEntryFocused );
+    var eventContainer = e.parents('.js-feed__entry');
+    toggleFocus( eventContainer, existingEntryFocused);
+    toggleItem( eventContainer, websiteView, existingEntryFocused );
 }
 
 function toggleItem( e, special, existingEntryFocused ) {
-    var content = e.siblings('.js-article__content'),
+    var content = e.find('.js-article__content'),
         existingEntryFocusedContent = existingEntryFocused.find('.js-article__content');
 
     if( special ) {
@@ -63,7 +64,9 @@ function toggleItem( e, special, existingEntryFocused ) {
         content.toggle();
     }
 
-    readOrUnread( e );
+    if( ! e.find('[type="checkbox"]').prop("checked") ) {
+        readOrUnread( e );
+    }
 }
 
 function toggleFolder( button ) {
@@ -105,16 +108,17 @@ function toggleWebsite( element ) {
     }
 }
 
-function readOrUnread( e ) {
-    var entry = e.parents('.js-feed__entry');
-    if( entry.find('.js-article__content:visible').length )
+function readOrUnread( entry ) {
+    if( entry.find('.js-article__content:visible').length ) {
         entry.find('[type="checkbox"]').prop('checked', true);
+    }
     if( entry.hasClass('js-event--read') ) {
         entry.hide();
     }
 
     if( entry.hasClass('js-focus') ) {
-        readThis( e, entry.data('id') );
+        // @FIX: children here but parent on readThis function
+        readThis( entry.children(), entry.data('id') );
     }
 }
 
@@ -166,7 +170,7 @@ function buttonAction(target,id){
 }
 
 function readThis(element,id,from,callback){
-    var entry = $(element).parents('.feed__entry');
+    var entry = $(element).parents('.js-feed__entry');
     var nextEvent = $('#'+id).next();
     //sur les éléments non lus
     if(!entry.hasClass('js-event--read')){

@@ -1,7 +1,7 @@
 {loop="$events"}
 
     {$plainDescription=strip_tags($value->getDescription())}
-        <article class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} feed__entry--read{/if}" data-id="{$value->getId()}" data-feed-id="{$value->getFeed()}">
+        <article class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} js-event--read{/if}" data-id="{$value->getId()}" data-feed-id="{$value->getFeed()}">
             {function="Plugin::callHook("event_pre_title", array(&$value))"}
             {$website=0}
             <header class="article__header js-article__header">
@@ -9,7 +9,7 @@
                 <span class="article__description">{function="Functions::truncate(strip_tags($value->getDescription()),300)"}</span>
             </header>
             <div class="article__read-unread article__read-unread--checkbox js-read-unread--checkbox">
-                <input type="checkbox" id="event{$value->getId()}" />
+                <input type="checkbox" id="event{$value->getId()}"{if="$value->getUnread() == 0"} checked="checked"{/if}/>
                 <label class="js-read-unread" for="event{$value->getId()}"></label>
             </div>
             {function="Plugin::callHook("event_post_title", array(&$value))"}

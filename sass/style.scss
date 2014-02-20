@@ -80,7 +80,7 @@ body {
     }
 }
 
-.feed__entry--read {
+.feed__event--read {
     color: #BBB;
 }
 
@@ -155,16 +155,16 @@ body {
     display: inline;
     font-size: 1em;
 
-    .feed__entry--read & a {
-        @extend .feed__entry--read;
+    [class$="event--read"] & a {
+        @extend .feed__event--read;
     }
 }
 .article__description {
     display: inline-block;
     margin-left: 0.4em;
     color: #888;
-    .feed__entry--read & {
-        @extend .feed__entry--read;
+    [class$="event--read"] & {
+        @extend .feed__event--read;
     }
 
     &:after {
