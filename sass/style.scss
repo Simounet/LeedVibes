@@ -257,10 +257,18 @@ $checkbox-size: 24px;
     a:active {
         text-decoration: underline;
     }
-    
+
     iframe {
         width: 100%;
         height: 692px;
+    }
+}
+.article__content__infos {
+    margin: 1em 0;
+
+    a {
+        font-size: 0.9em;
+        line-height: 1.2em;
     }
 }
 

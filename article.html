@@ -5,7 +5,7 @@
             {function="Plugin::callHook("event_pre_title", array(&$value))"}
             {$website=0}
             <header class="article__header js-article__header">
-                <h1 class="article__title js-article__title{if="$website == 1"} js-website{/if}"><a href="{$value->getLink()}" target="_blank" title="{$plainDescription}">{$value->getTitle()}</a></h1>
+                <h1 class="article__title js-article__title{if="$website == 1"} js-website{/if}"><a href="{$value->getLink()}" target="_blank">{$value->getTitle()}</a></h1>
                 <span class="article__description">{function="Functions::truncate(strip_tags($value->getDescription()),300)"}</span>
             </header>
             <div class="article__read-unread article__read-unread--checkbox js-read-unread--checkbox">
@@ -14,8 +14,14 @@
             </div>
             {function="Plugin::callHook("event_post_title", array(&$value))"}
             {function="Plugin::callHook("event_pre_content", array(&$value))"}
-            <div class="article__content js-article__content" data-article-url="http://www.simounet.net/script-greasemonkey-pour-retrouver-la-fonction-marquer-comme-lu-et-masquer-de-netvibes/">{if="$website == 0"}{$value->getContent()}{/if}</div>
+            <div class="article__content js-article__content" data-article-url="http://www.simounet.net/script-greasemonkey-pour-retrouver-la-fonction-marquer-comme-lu-et-masquer-de-netvibes/">
+                {if="$website == 0"}
+                    <header class="article__content__infos">
+                        <h1><a href="{$value->getLink()}">{$value->getTitle()}</a></h1>
+                    </header>
+                    {$value->getContent()}
+                {/if}
+            </div>
             {function="Plugin::callHook("event_post_content", array(&$value))"}
         </article>
-    {$hightlighted=$hightlighted+1}
 {/loop}

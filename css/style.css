@@ -298,8 +298,18 @@ body {
   height: 692px;
 }
 
+/* line 266, ../sass/style.scss */
+.article__content__infos {
+  margin: 1em 0;
+}
+/* line 269, ../sass/style.scss */
+.article__content__infos a {
+  font-size: 0.9em;
+  line-height: 1.2em;
+}
+
 /* USER SETTINGS */
-/* line 268, ../sass/style.scss */
+/* line 276, ../sass/style.scss */
 .settings {
   margin: 1em auto;
   color: #CACACA;
@@ -307,17 +317,17 @@ body {
   line-height: 1.6em;
   white-space: normal;
 }
-/* line 276, ../sass/style.scss */
+/* line 284, ../sass/style.scss */
 .settings a {
   margin: 0 0.5em;
   padding: 0.2em;
 }
-/* line 282, ../sass/style.scss */
+/* line 290, ../sass/style.scss */
 .settings a:hover, .settings a:active {
   background-color: #303030;
 }
 
-/* line 287, ../sass/style.scss */
+/* line 295, ../sass/style.scss */
 .settings__fields input {
   display: block;
   margin: 0 auto;
@@ -326,7 +336,7 @@ body {
   color: #303030;
 }
 
-/* line 294, ../sass/style.scss */
+/* line 302, ../sass/style.scss */
 .settings__username {
   font-weight: bold;
 }
