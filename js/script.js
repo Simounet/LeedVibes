@@ -31,6 +31,21 @@ $('document').ready(function(){
                 window.location='action.php?action=readFolder&folder=' + button.parents('.js-folder').data('id');
         }
     });
+
+    $(window).data('ajaxready', true);
+    $('.wrapper').append('<div id="loader" class="infinite-scroll hidden">'+_t('LOADING')+'</div>');
+    $(window).data('page', 1);
+    $(window).data('nblus', 0);
+
+    var load = false;
+    var offset = $('.wrapper:last').offset(); 
+
+    $(window).scroll(function(){
+        if((offset.top-$(window).height() <= $(window).scrollTop()) 
+        && load==false) {
+            scrollInfini();
+        }
+    });
 });
 
 function toggleEvent( e ) {
@@ -242,4 +257,107 @@ function targetThisEvent(event,focusOn){
         target.addClass('eventSelected');
     }
     // on débloque les touches le plus tard possible afin de passer derrière l'appel ajax
+}
+
+function scrollInfini() {
+    var deviceAgent = navigator.userAgent.toLowerCase();
+    var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
+
+    if($('.wrapper').length) {
+        // On teste si ajaxready vaut false, auquel cas on stoppe la fonction
+        if ($(window).data('ajaxready') == false) return;
+
+        if(($(window).scrollTop() + $(window).height()) + 50 >= $(document).height()
+           || agentID && ($(window).scrollTop() + $(window).height()) + 150 > $(document).height())
+        {
+            // CONFIGS
+            var loader = $('.wrapper #loader'),
+                loaderFadeTime = 500,
+                loaderDelayTime = 2000;
+            // lorsqu'on commence un traitement, on met ajaxready à false
+            $(window).data('ajaxready', false);
+
+            //j'affiche mon loader pour indiquer le chargement
+            if( loader.hasClass('hidden') ) {
+                loader
+                    .fadeIn(loaderFadeTime)
+                    .removeClass('hidden');
+            } else {
+                loader.fadeIn(loaderFadeTime);
+            }
+
+            // récupération des variables passées en Get
+            var action = getUrlVars()['action'];
+            var folder = getUrlVars()['folder'];
+            var feed = getUrlVars()['feed'];
+            var order = ( getUrlVars()['order'] != '' ) ? '&order=' + getUrlVars()['order'] : '';
+
+            $.ajax({
+                url: './article.php',
+                type: 'post',
+                data: 'scroll='+$(window).data('page')+'&nblus='+$(window).data('nblus')+'&action='+action+'&folder='+folder+'&feed='+feed+order,
+
+                //Succès de la requête
+                success: function(data) {
+                    if (data.replace(/^\s+/g,'').replace(/\s+$/g,'') != '')
+                    {    // on les insère juste avant le loader
+                        loader.before(data);
+                        //on supprime de la page le script pour ne pas intéragir avec les next & prev
+                        //$('article .scriptaddbutton').remove();
+                        //si l'élement courant est caché, selectionner le premier élément du scroll
+                        //ou si le div loader est sélectionné (quand 0 article restant suite au raccourcis M)
+                        //if (($('article section.eventSelected').attr('style')=='display: none;')
+                        //    || ($('article div.eventSelected').attr('id')=='loader'))
+                        //{
+                        //    targetThisEvent($('article section.scroll:first'), true);
+                        //}
+                        // on les affiche avec un fadeIn
+                        $('.wrapper article.scroll').fadeIn(600);
+                        // on supprime le tag de classe pour le prochain scroll
+                        $('.wrapper article.scroll').removeClass('scroll');
+                        $(window).data('ajaxready', true);
+                        $(window).data('page', $(window).data('page')+1);
+                        $(window).data('enCoursScroll',0);
+                        // appel récursif tant qu'un scroll n'est pas detecté.
+                        if ($(window).scrollTop()==0) scrollInfini();
+                        loader
+                            .delay(loaderDelayTime)
+                            .fadeOut(loaderFadeTime);
+                    } else {
+                        loader
+                            .fadeOut(loaderFadeTime);
+                        $('.wrapper')
+                            .append('<div class="infinite-scroll--end js-infinite-scroll--end">'+_t('LEEDVIBES_NO_MORE_EVENT')+'</div>');
+                    }
+                 },
+                complete: function(){
+                    // le chargement est terminé, on fait disparaitre notre loader
+                    loader
+                        .delay(loaderDelayTime)
+                        .fadeOut(loaderFadeTime);
+                }
+            });
+        }
+    }
+};
+
+// permet de récupérer les variables passée en get dans l'URL et des les parser
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        if (hash[1]){
+            rehash = hash[1].split('#');
+            vars[hash[0]] = rehash[0];
+        } else {
+            vars[hash[0]] = '';
+        }
+
+
+    }
+    return vars;
 }
