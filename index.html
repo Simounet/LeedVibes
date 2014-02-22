@@ -33,7 +33,7 @@
         </div>
         {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
             <ul>
-                <li><div class="feed-all__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}"><a href="./">All feed</a></div></li>
+                <li class="folder"><div class="feed-all__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}"><a href="./">All feeds</a></div></li>
                 {loop="folders"}
                     {$feeds=""}
                     {if="isset($allFeedsPerFolder[$value->getId()])"}
