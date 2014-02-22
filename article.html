@@ -1,11 +1,11 @@
 {loop="$events"}
 
     {$plainDescription=strip_tags($value->getDescription())}
-        <article class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} js-event--read{/if}" data-id="{$value->getId()}" data-feed-id="{$value->getFeed()}">
+    {$website=0}
+        <article class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} js-event--read{/if}{if="$website == 1"} article__content--website js-website{/if}" data-id="{$value->getId()}" data-feed-id="{$value->getFeed()}">
             {function="Plugin::callHook("event_pre_title", array(&$value))"}
-            {$website=0}
             <header class="article__header js-article__header">
-                <h1 class="article__title js-article__title{if="$website == 1"} js-website{/if}"><a href="{$value->getLink()}" target="_blank">{$value->getTitle()}</a></h1>
+                <h1 class="article__title js-article__title"><a href="{$value->getLink()}" target="_blank">{$value->getTitle()}</a></h1>
                 <span class="article__description">{function="Functions::truncate(strip_tags($value->getDescription()),300)"}</span>
             </header>
             <div class="article__read-unread article__read-unread--checkbox js-read-unread--checkbox">
@@ -14,7 +14,7 @@
             </div>
             {function="Plugin::callHook("event_post_title", array(&$value))"}
             {function="Plugin::callHook("event_pre_content", array(&$value))"}
-            <div class="article__content js-article__content" data-article-url="http://www.simounet.net/script-greasemonkey-pour-retrouver-la-fonction-marquer-comme-lu-et-masquer-de-netvibes/">
+            <div class="article__content js-article__content" data-article-url="{$value->getLink()}">
                 {if="$website == 0"}
                     <header class="article__content__infos">
                         <h1><a href="{$value->getLink()}">{$value->getTitle()}</a></h1>

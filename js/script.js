@@ -50,10 +50,10 @@ $('document').ready(function(){
 });
 
 function toggleEvent( e ) {
-    var existingEntryFocused = $('.js-feed__entry.js-focus'),
-        websiteView = e.hasClass('js-website');
+    var existingEntryFocused = $('.js-feed__entry.js-focus');
 
-    var eventContainer = e.parents('.js-feed__entry');
+    var eventContainer = e.parents('.js-feed__entry'),
+        websiteView = eventContainer.hasClass('js-website');
     toggleFocus( eventContainer, existingEntryFocused);
     toggleItem( eventContainer, websiteView, existingEntryFocused );
 }
@@ -77,8 +77,8 @@ function toggleItem( e, special, existingEntryFocused ) {
                 .hide()
                 .find('[type="checkbox"]').prop("checked", function(i,val) { return !val; });
         }
-        content.toggle();
     }
+    content.toggle();
 
     if( ! e.find('[type="checkbox"]').prop("checked") ) {
         readOrUnread( e );

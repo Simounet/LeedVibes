@@ -307,7 +307,7 @@ body {
 /* line 270, ../sass/style.scss */
 .article__content {
   display: none;
-  margin: 0 auto;
+  margin: 1em auto 0;
   width: 42.8125em;
   line-height: 1.625em;
 }
@@ -323,23 +323,27 @@ body {
   text-decoration: underline;
 }
 /* line 285, ../sass/style.scss */
-.article__content iframe {
-  width: 100%;
+.article__content--website .article__content {
+  width: auto;
   height: 692px;
 }
+/* line 289, ../sass/style.scss */
+.article__content--website .article__content iframe {
+  width: 100%;
+}
 
-/* line 290, ../sass/style.scss */
+/* line 294, ../sass/style.scss */
 .article__content__infos {
   margin: 1em 0;
 }
-/* line 293, ../sass/style.scss */
+/* line 297, ../sass/style.scss */
 .article__content__infos a {
   font-size: 0.9em;
   line-height: 1.2em;
 }
 
 /* USER SETTINGS */
-/* line 300, ../sass/style.scss */
+/* line 304, ../sass/style.scss */
 .settings {
   margin: 1em auto;
   color: #CACACA;
@@ -347,17 +351,17 @@ body {
   line-height: 1.6em;
   white-space: normal;
 }
-/* line 308, ../sass/style.scss */
+/* line 312, ../sass/style.scss */
 .settings a {
   margin: 0 0.5em;
   padding: 0.2em;
 }
-/* line 314, ../sass/style.scss */
+/* line 318, ../sass/style.scss */
 .settings a:hover, .settings a:active {
   background-color: #303030;
 }
 
-/* line 319, ../sass/style.scss */
+/* line 323, ../sass/style.scss */
 .settings__fields input {
   display: block;
   margin: 0 auto;
@@ -366,14 +370,14 @@ body {
   color: #303030;
 }
 
-/* line 326, ../sass/style.scss */
+/* line 330, ../sass/style.scss */
 .settings__username {
   font-weight: bold;
 }
 
 /* MEDIA QUERIES */
 @media (max-width: 650px) {
-  /* line 333, ../sass/style.scss */
+  /* line 337, ../sass/style.scss */
   td {
     display: block;
   }
