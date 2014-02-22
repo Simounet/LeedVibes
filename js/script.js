@@ -16,12 +16,13 @@ $('document').ready(function(){
         toggleFolder( $(this) );
     });
     
-    $(".js-article__header").click( function( event ) {
+    // @TODO: regroup listeners on click
+    $( '.wrapper' ).on( 'click', '.js-article__header', function( event ) {
         event.preventDefault();
         toggleEvent( $(this) );
     });
 
-    $(".js-mark-as-read").click( function() {
+    $( '.wrapper' ).on( 'click', '.js-mark-as-read', function() {
         button = $(this);
         if( button.parents('.js-feed__item').length ) {
             if(confirm(_t('CONFIRM_MARK_FEED_AS_READ')))
