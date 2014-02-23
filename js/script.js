@@ -110,10 +110,10 @@ function toggleFocus( entry, existingEntryFocused ) {
     // And there is and existing focused element
     // Then remove focus class
     if( ( entry[0] != existingEntryFocused[0]) && existingEntryFocused.length ) {
-        existingEntryFocused.removeClass('js-focus');
+        existingEntryFocused.removeClass('js-focus feed__entry--focus');
     }
 
-    entry.toggleClass('js-focus');
+    entry.toggleClass('js-focus feed__entry--focus');
 }
 
 function toggleWebsite( element ) {

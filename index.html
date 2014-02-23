@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="css/normalize.css" media="all">
     <link rel="stylesheet" href="css/style.css" media="all">
     <meta name="viewport" content="width=device-width">
+    {function="Plugin::callLink()"}
+    {function="Plugin::callCss()"}
 </head>
 <body>
     {function="Plugin::callHook("menu_pre_folder_menu", array(&$myUser))"}
@@ -88,5 +90,6 @@
     </script>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/script.js"></script>
+    {function="Plugin::callJs()"}
 </body>
 </html>

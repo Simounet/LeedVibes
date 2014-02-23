@@ -299,6 +299,12 @@ $checkbox-size: 24px;
         line-height: 1.2em;
     }
 }
+// [todo] - Do a better style
+.article__content__switch-view {
+    position: absolute;
+    right: 3em;
+    top: 0.4em;
+}
 
 /* USER SETTINGS */
 .settings {

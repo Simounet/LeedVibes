@@ -312,38 +312,45 @@ body {
   line-height: 1.625em;
 }
 @media (max-width: 650px) {
-  /* line 270, ../sass/style.scss */
+  /* line 274, ../sass/style.scss */
   .article__content {
     width: auto;
   }
 }
-/* line 281, ../sass/style.scss */
+/* line 285, ../sass/style.scss */
 .article__content a:hover,
 .article__content a:active {
   text-decoration: underline;
 }
-/* line 285, ../sass/style.scss */
+/* line 289, ../sass/style.scss */
 .article__content--website .article__content {
   width: auto;
   height: 692px;
 }
-/* line 289, ../sass/style.scss */
+/* line 293, ../sass/style.scss */
 .article__content--website .article__content iframe {
   width: 100%;
 }
 
-/* line 294, ../sass/style.scss */
+/* line 298, ../sass/style.scss */
 .article__content__infos {
   margin: 1em 0;
 }
-/* line 297, ../sass/style.scss */
+/* line 301, ../sass/style.scss */
 .article__content__infos a {
   font-size: 0.9em;
   line-height: 1.2em;
 }
 
+/* line 307, ../sass/style.scss */
+.article__content__switch-view {
+  position: absolute;
+  right: 3em;
+  top: 0.4em;
+}
+
 /* USER SETTINGS */
-/* line 304, ../sass/style.scss */
+/* line 314, ../sass/style.scss */
 .settings {
   margin: 1em auto;
   color: #CACACA;

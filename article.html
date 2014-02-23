@@ -1,8 +1,9 @@
 {loop="$events"}
 
     {$plainDescription=strip_tags($value->getDescription())}
-    {$website=0}
-        <article class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} js-event--read{/if}{if="$website == 1"} article__content--website js-website{/if}" data-id="{$value->getId()}" data-feed-id="{$value->getFeed()}">
+        {function="Plugin::callHook("event_pre_section", array(&$value))"}
+        {* [fix] - undefined $value->view if LeedRSSOrSiteView plugin is not installed *}
+        <article class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} js-event--read{/if}{if="$value->view == 1"} article__content--website js-website{/if}" data-id="{$value->getId()}" data-feed-id="{$value->getFeed()}">
             {function="Plugin::callHook("event_pre_title", array(&$value))"}
             <header class="article__header js-article__header">
                 <h1 class="article__title js-article__title"><a href="{$value->getLink()}" target="_blank">{$value->getTitle()}</a></h1>
@@ -15,7 +16,8 @@
             {function="Plugin::callHook("event_post_title", array(&$value))"}
             {function="Plugin::callHook("event_pre_content", array(&$value))"}
             <div class="article__content js-article__content" data-article-url="{$value->getLink()}">
-                {if="$website == 0"}
+                <button class="article__content__switch-view js-switch-view" data-view="{$value->view}">{if="$value->view == 0"}{function="_t('RSS_VIEW')"}{else}{function="_t('RSS_VIEW')"}{/if}</button>
+                {if="$value->view == 0"}
                     <header class="article__content__infos">
                         <h1><a href="{$value->getLink()}">{$value->getTitle()}</a></h1>
                     </header>
@@ -24,4 +26,5 @@
             </div>
             {function="Plugin::callHook("event_post_content", array(&$value))"}
         </article>
+        {function="Plugin::callHook("event_post_section", array(&$value))"}
 {/loop}
