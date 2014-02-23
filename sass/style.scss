@@ -305,9 +305,14 @@ $checkbox-size: 24px;
 }
 // [todo] - Do a better style
 .article__content__switch-view {
+    display: none;
     position: absolute;
     right: 3em;
     top: 0.4em;
+
+    .feed__entry--focus & {
+        display: inherit;
+    }
 }
 
 /* USER SETTINGS */

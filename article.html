@@ -13,16 +13,17 @@
                 <input type="checkbox" id="event{$value->getId()}"{if="$value->getUnread() == 0"} checked="checked"{/if}/>
                 <label class="js-read-unread" for="event{$value->getId()}"></label>
             </div>
+            {* [todo] - Add a condition to button shows up if LeedRSSOrSiteView plugin is on *}
+            <button class="article__content__switch-view js-switch-view" data-view="{$value->view}">{if="$value->view == 0"}{function="_t('RSS_VIEW')"}{else}{function="_t('RSS_VIEW')"}{/if}</button>
             {function="Plugin::callHook("event_post_title", array(&$value))"}
             {function="Plugin::callHook("event_pre_content", array(&$value))"}
             <div class="article__content js-article__content" data-article-url="{$value->getLink()}">
-                <button class="article__content__switch-view js-switch-view" data-view="{$value->view}">{if="$value->view == 0"}{function="_t('RSS_VIEW')"}{else}{function="_t('RSS_VIEW')"}{/if}</button>
-                {if="$value->view == 0"}
+                <div class="article__content--rss js-article__content--rss">
                     <header class="article__content__infos">
                         <h1><a href="{$value->getLink()}">{$value->getTitle()}</a></h1>
                     </header>
                     {$value->getContent()}
-                {/if}
+                </div>
             </div>
             {function="Plugin::callHook("event_post_content", array(&$value))"}
         </article>
