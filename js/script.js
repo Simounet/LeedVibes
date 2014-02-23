@@ -116,14 +116,6 @@ function toggleFocus( entry, existingEntryFocused ) {
     entry.toggleClass('js-focus feed__entry--focus');
 }
 
-function toggleWebsite( element ) {
-    if( element.not(':has(iframe)').length ) {
-        jQuery('<iframe frameborder="0" src="' + element.data('article-url') + '" style="width: 100%; height: 100%;" />').appendTo( element );
-    } else {
-        element.children('iframe').remove();
-    }
-}
-
 function readOrUnread( entry ) {
     if( entry.find('.js-article__content:visible').length ) {
         entry.find('[type="checkbox"]').prop('checked', true);
