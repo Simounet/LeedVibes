@@ -201,6 +201,10 @@ body {
     [class$="event--read"] & {
         @extend .feed__event--read;
     }
+    
+    .feed__entry--focus & {
+        display: none;
+    }
 
     &:after {
         content: "";
