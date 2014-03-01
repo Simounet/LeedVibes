@@ -14,7 +14,7 @@
                 <label class="js-read-unread" for="event{$value->getId()}"></label>
             </div>
             {* [todo] - Add a condition to button shows up if LeedRSSOrSiteView plugin is on *}
-            <button class="article__content__switch-view js-switch-view" data-view="{$value->view}">{if="$value->view == 0"}{function="_t('RSS_VIEW')"}{else}{function="_t('RSS_VIEW')"}{/if}</button>
+            <button class="article__content__switch-view js-switch-view" data-view="{$value->view}">{if="$value->view == 0"}{function="_t('SITE_VIEW')"}{else}{function="_t('RSS_VIEW')"}{/if}</button>
             {function="Plugin::callHook("event_post_title", array(&$value))"}
             {function="Plugin::callHook("event_pre_content", array(&$value))"}
             <div class="article__content js-article__content" data-article-url="{$value->getLink()}">
