@@ -62,27 +62,48 @@ function toggleItem( e, special, existingEntryFocused ) {
     var content = e.find('.js-article__content'),
         existingEntryFocusedContent = existingEntryFocused.find('.js-article__content');
 
+    var readOrUnreadAtToggle = function () {
+        if( ! e.find('[type="checkbox"]').prop("checked") ) {
+            readOrUnread( e );
+        }
+    }
+
+    function handler( customToggle ) {
+        if(  existingEntryFocusedContent.length && ( content[0] != existingEntryFocusedContent[0] ) ) {
+            customToggle();
+            if( existingEntryFocused.hasClass('js-event--read') ) {
+                existingEntryFocused.hide();
+            }
+
+        }
+    }
+
     if( special ) {
-        if(  existingEntryFocusedContent.length && ( content[0] != existingEntryFocusedContent[0] ) ) {
-            toggleWebsite( existingEntryFocusedContent );
-            existingEntryFocused
-                .hide()
-                .find('[type="checkbox"]').prop("checked", function(i,val) { return !val; });
-        }
-        toggleWebsite( content );
+        handler( function() { toggleWebsite( existingEntryFocusedContent ) } );
+        toggleWebsite( content, readOrUnreadAtToggle );
     } else {
-        if(  existingEntryFocusedContent.length && ( content[0] != existingEntryFocusedContent[0] ) ) {
-            existingEntryFocusedContent.toggle();
-            existingEntryFocused
-                .hide()
-                .find('[type="checkbox"]').prop("checked", function(i,val) { return !val; });
-        }
+        handler( function() { existingEntryFocusedContent.toggle() } );
+        toggleContent( e.data('id'), content, readOrUnreadAtToggle );
     }
     content.toggle();
+}
 
-    if( ! e.find('[type="checkbox"]').prop("checked") ) {
-        readOrUnread( e );
+function toggleContent( eventId, el, callback ) {
+    if( el.children().length == 0 ) {
+        $.ajax({
+            url: "./templates/leedvibes/article_content.php",
+            data:{ id: eventId },
+        })
+            .done(function( data ) {
+                el.append( data );
+                if( typeof( callback ) == 'function' )
+                    callback();
+            })
+            .fail(function() {
+                alert( "error" );
+            });
     }
+
 }
 
 function toggleFolder( button ) {
@@ -117,9 +138,6 @@ function toggleFocus( entry, existingEntryFocused ) {
 }
 
 function readOrUnread( entry ) {
-    if( entry.find('.js-article__content:visible').length ) {
-        entry.find('[type="checkbox"]').prop('checked', true);
-    }
     if( entry.hasClass('js-event--read') ) {
         entry.hide();
     }
@@ -189,6 +207,7 @@ function readThis(element,id,from,callback){
                 if(msg.status == 'noconnect') {
                     alert(msg.texte)
                 } else {
+                    entry.find('[type="checkbox"]').prop('checked', true);
                     entry.addClass('js-event--read');
                     if( ( entry.find('.js-article__content').css('display') == 'none' ) && $(element).hasClass('js-read-unread') ) {
                         entry.hide(0,function(){
@@ -223,6 +242,7 @@ function readThis(element,id,from,callback){
                             alert(msg.texte)
                         } else {
                             if( console && console.log && msg!="" ) console.log(msg);
+                            entry.find('[type="checkbox"]').prop('checked', false);
                             entry.removeClass('js-event--read');
                             if(callback){
                                 callback();
