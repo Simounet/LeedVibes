@@ -177,6 +177,10 @@ body {
     margin: 0 0 0 1.4em;
     @extend %overflow-sidebar;
 }
+.feed__item img, %img-vertical-align {
+    margin-right: 0.3em;
+    vertical-align: middle;
+}
 
 .mark-as-read {
     position: absolute;
@@ -190,6 +194,10 @@ body {
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
+
+    img {
+        @extend %img-vertical-align;
+    }
 }
 .article__title {
     display: inline;

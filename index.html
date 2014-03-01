@@ -61,7 +61,7 @@
                                 {loop="feeds"}
                                     <li class="feed__item js-feed__item{if="isset($currentFeed) && ($value2['id'] == $currentFeed->getId())"} selected{/if}" data-id="{$value2['id']}">
                                         {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
-                                        <a href="index.php?action=selectedFeed&amp;feed={$value2['id']}&amp;order=unread" title="{function="htmlentities($value2['url'])"}">{function="htmlentities($value2['name'])"}</a>
+                                        <a href="index.php?action=selectedFeed&amp;feed={$value2['id']}&amp;order=unread" title="{function="htmlentities($value2['url'])"}">{if="isset($value2['favicon'])"}{$value2['favicon']}{/if} {function="htmlentities($value2['name'])"}</a>
                                         {if="isset($unread[$value2['id']]) && $unread[$value2['id']] > 0"}
                                             <button class="mark-as-read js-mark-as-read js-feed-counter" title="{function="_t('MARK_AS_READ')"}">{$unread[$value2['id']]}</button>
                                         {/if}
