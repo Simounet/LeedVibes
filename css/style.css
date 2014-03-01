@@ -1,76 +1,76 @@
 /* RESET */
-/* line 10, ../sass/style.scss */
+/* line 11, ../sass/style.scss */
 body {
   font-size: 16px;
   background-color: #424242;
 }
 
-/* line 14, ../sass/style.scss */
+/* line 15, ../sass/style.scss */
 h1 {
   margin: 0;
 }
 
-/* line 17, ../sass/style.scss */
+/* line 18, ../sass/style.scss */
 a {
   text-decoration: none;
 }
 
-/* line 20, ../sass/style.scss */
+/* line 21, ../sass/style.scss */
 ul {
   padding: 0;
 }
 
-/* line 23, ../sass/style.scss */
+/* line 24, ../sass/style.scss */
 li {
   list-style: none;
 }
 
-/* line 26, ../sass/style.scss */
+/* line 27, ../sass/style.scss */
 img {
   max-width: 100%;
   height: auto;
 }
 
 /* GENERAL STYLE */
-/* line 32, ../sass/style.scss */
+/* line 33, ../sass/style.scss */
 body {
   display: flex;
 }
 @media (max-width: 650px) {
-  /* line 32, ../sass/style.scss */
+  /* line 33, ../sass/style.scss */
   body {
     display: block;
   }
 }
 
-/* line 40, ../sass/style.scss */
+/* line 41, ../sass/style.scss */
 .wrapper {
   flex: 4 0 0;
   margin: 0.5em 0;
   background-color: #FFF;
 }
 @media (max-width: 650px) {
-  /* line 40, ../sass/style.scss */
+  /* line 41, ../sass/style.scss */
   .wrapper {
     margin-bottom: 0px;
   }
 }
 
-/* line 53, ../sass/style.scss */
+/* line 54, ../sass/style.scss */
 .hidden {
   display: none;
 }
 
-/* line 56, ../sass/style.scss */
+/* line 57, ../sass/style.scss */
 .selected a {
   font-weight: bold;
 }
-/* line 60, ../sass/style.scss */
+/* line 61, ../sass/style.scss */
 .selected a:before {
   content: "> ";
 }
 
-/* line 65, ../sass/style.scss */
+/* line 66, ../sass/style.scss */
 .infinite-scroll, .infinite-scroll--end {
   position: fixed;
   left: 20%;
@@ -80,38 +80,38 @@ body {
   background-color: rgba(66, 66, 66, 0.9);
 }
 @media (max-width: 650px) {
-  /* line 65, ../sass/style.scss */
+  /* line 66, ../sass/style.scss */
   .infinite-scroll, .infinite-scroll--end {
     left: 0;
   }
 }
 
-/* line 78, ../sass/style.scss */
+/* line 79, ../sass/style.scss */
 .infinite-scroll--end {
   position: static;
   background-color: #424242;
 }
 
-/* line 84, ../sass/style.scss */
+/* line 85, ../sass/style.scss */
 .selected a, .infinite-scroll, .infinite-scroll--end, .sidebar button, .settings a, .sidebar [class*="__item"],
 .sidebar [class*="__item"] a, .settings__username {
   color: #FFF;
 }
 
-/* line 90, ../sass/style.scss */
+/* line 91, ../sass/style.scss */
 .folder__item,
 .feed-all__item a, .settings {
   padding: 0 1.2em;
 }
 
-/* line 93, ../sass/style.scss */
+/* line 94, ../sass/style.scss */
 .sidebar button, .settings a {
   padding: 0 0.1em;
   background-color: #424242;
   border: 0.3em solid #686868;
 }
 
-/* line 99, ../sass/style.scss */
+/* line 100, ../sass/style.scss */
 .folder__item a, .feed__item a {
   display: inline-block;
   width: 80%;
@@ -121,70 +121,74 @@ body {
 }
 
 /* FEED */
-/* line 108, ../sass/style.scss */
+/* line 109, ../sass/style.scss */
 .feed__entry {
   position: relative;
   padding: 0.5em;
   border-bottom: 0.1em solid #D9D9D9;
 }
-/* line 113, ../sass/style.scss */
+/* line 114, ../sass/style.scss */
+.feed__entry:not(.feed__entry--focus):hover {
+  background-color: #dddddd;
+}
+/* line 118, ../sass/style.scss */
 .feed__entry a {
   color: #424242;
 }
 
-/* line 118, ../sass/style.scss */
+/* line 123, ../sass/style.scss */
 .feed__event--read, [class$="event--read"] .article__title a, [class$="event--read"] .article__description {
   color: #BBB;
 }
 
 /* SIDEBAR */
-/* line 123, ../sass/style.scss */
+/* line 128, ../sass/style.scss */
 .sidebar {
   flex: 1 0 0;
   font-size: 0.8em;
   white-space: nowrap;
 }
-/* line 128, ../sass/style.scss */
+/* line 133, ../sass/style.scss */
 .sidebar [class*="__item"] {
   position: relative;
   padding-bottom: 0.3em;
   padding-top: 0.3em;
 }
-/* line 139, ../sass/style.scss */
+/* line 144, ../sass/style.scss */
 .sidebar [class*="__item"]:hover, .sidebar [class*="__item"]:active {
   background-color: #303030;
 }
-/* line 148, ../sass/style.scss */
+/* line 153, ../sass/style.scss */
 .sidebar .settings__fields {
   padding: 20%;
 }
 
-/* line 154, ../sass/style.scss */
+/* line 159, ../sass/style.scss */
 .folder {
   border-bottom: 0.2em solid #484848;
 }
 
-/* line 157, ../sass/style.scss */
+/* line 162, ../sass/style.scss */
 .folder__item a {
   margin: 0 0.3em;
 }
 
-/* line 161, ../sass/style.scss */
+/* line 166, ../sass/style.scss */
 .folder__button {
   width: 1.5em;
 }
 
-/* line 168, ../sass/style.scss */
+/* line 173, ../sass/style.scss */
 .feed {
   box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.5);
 }
 
-/* line 171, ../sass/style.scss */
+/* line 176, ../sass/style.scss */
 .feed__item a {
   margin: 0 0 0 1.4em;
 }
 
-/* line 176, ../sass/style.scss */
+/* line 181, ../sass/style.scss */
 .mark-as-read {
   position: absolute;
   right: 0.5em;
@@ -192,7 +196,7 @@ body {
 }
 
 /* ARTICLE */
-/* line 183, ../sass/style.scss */
+/* line 188, ../sass/style.scss */
 .article__header {
   position: relative;
   overflow: hidden;
@@ -200,23 +204,23 @@ body {
   cursor: pointer;
 }
 
-/* line 189, ../sass/style.scss */
+/* line 194, ../sass/style.scss */
 .article__title {
   display: inline;
   font-size: 1em;
 }
 
-/* line 197, ../sass/style.scss */
+/* line 202, ../sass/style.scss */
 .article__description {
   display: inline-block;
   margin-left: 0.4em;
   color: #888;
 }
-/* line 205, ../sass/style.scss */
+/* line 210, ../sass/style.scss */
 .feed__entry--focus .article__description {
   display: none;
 }
-/* line 209, ../sass/style.scss */
+/* line 214, ../sass/style.scss */
 .article__description:after {
   content: "";
   display: block;
@@ -230,8 +234,15 @@ body {
   background-image: -o-linear-gradient(to left, #ffffff 22px, rgba(255, 255, 255, 0) 100%);
   background-image: linear-gradient(to left, #ffffff 22px, rgba(255, 255, 255, 0) 100%);
 }
+/* line 225, ../sass/style.scss */
+.feed__entry:hover .article__description:after {
+  background-image: -webkit-linear-gradient(to left, #dddddd 22px, rgba(221, 221, 221, 0) 100%);
+  background-image: -moz-linear-gradient(to left, #dddddd 22px, rgba(221, 221, 221, 0) 100%);
+  background-image: -o-linear-gradient(to left, #dddddd 22px, rgba(221, 221, 221, 0) 100%);
+  background-image: linear-gradient(to left, #dddddd 22px, rgba(221, 221, 221, 0) 100%);
+}
 
-/* line 221, ../sass/style.scss */
+/* line 230, ../sass/style.scss */
 .article__read-unread {
   position: absolute;
   margin: 0.4em;
@@ -244,7 +255,7 @@ body {
   cursor: pointer;
 }
 
-/* line 234, ../sass/style.scss */
+/* line 243, ../sass/style.scss */
 .article__read-unread--checkbox {
   width: 24px;
   height: 24px;
@@ -257,7 +268,7 @@ body {
   -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
 }
-/* line 240, ../sass/style.scss */
+/* line 249, ../sass/style.scss */
 .article__read-unread--checkbox label {
   width: 16px;
   height: 16px;
@@ -273,7 +284,7 @@ body {
   -moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
   box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
 }
-/* line 249, ../sass/style.scss */
+/* line 258, ../sass/style.scss */
 .article__read-unread--checkbox label:after {
   content: '';
   width: 8px;
@@ -293,22 +304,22 @@ body {
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-/* line 263, ../sass/style.scss */
+/* line 272, ../sass/style.scss */
 .article__read-unread--checkbox label:hover::after {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
   opacity: 0.3;
 }
-/* line 267, ../sass/style.scss */
+/* line 276, ../sass/style.scss */
 .article__read-unread--checkbox input[type=checkbox] {
   visibility: hidden;
 }
-/* line 269, ../sass/style.scss */
+/* line 278, ../sass/style.scss */
 .article__read-unread--checkbox input[type=checkbox]:checked + label:after {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
 
-/* line 274, ../sass/style.scss */
+/* line 283, ../sass/style.scss */
 .article__content {
   display: none;
   margin: 1em auto 0;
@@ -316,50 +327,50 @@ body {
   line-height: 1.625em;
 }
 @media (max-width: 650px) {
-  /* line 274, ../sass/style.scss */
+  /* line 283, ../sass/style.scss */
   .article__content {
     width: auto;
   }
 }
-/* line 285, ../sass/style.scss */
+/* line 294, ../sass/style.scss */
 .article__content a:hover,
 .article__content a:active {
   text-decoration: underline;
 }
-/* line 289, ../sass/style.scss */
+/* line 298, ../sass/style.scss */
 .article__content--website .article__content {
   width: auto;
   height: 692px;
 }
-/* line 293, ../sass/style.scss */
+/* line 302, ../sass/style.scss */
 .article__content--website .article__content iframe {
   width: 100%;
 }
 
-/* line 298, ../sass/style.scss */
+/* line 307, ../sass/style.scss */
 .article__content__infos {
   margin: 1em 0;
 }
-/* line 301, ../sass/style.scss */
+/* line 310, ../sass/style.scss */
 .article__content__infos a {
   font-size: 0.9em;
   line-height: 1.2em;
 }
 
-/* line 307, ../sass/style.scss */
+/* line 316, ../sass/style.scss */
 .article__content__switch-view {
   display: none;
   position: absolute;
   right: 3em;
   top: 0.4em;
 }
-/* line 313, ../sass/style.scss */
+/* line 322, ../sass/style.scss */
 .feed__entry--focus .article__content__switch-view {
   display: inherit;
 }
 
 /* USER SETTINGS */
-/* line 319, ../sass/style.scss */
+/* line 328, ../sass/style.scss */
 .settings {
   margin: 1em auto;
   color: #CACACA;
@@ -367,17 +378,17 @@ body {
   line-height: 1.6em;
   white-space: normal;
 }
-/* line 327, ../sass/style.scss */
+/* line 336, ../sass/style.scss */
 .settings a {
   margin: 0 0.5em;
   padding: 0.2em;
 }
-/* line 333, ../sass/style.scss */
+/* line 342, ../sass/style.scss */
 .settings a:hover, .settings a:active {
   background-color: #303030;
 }
 
-/* line 338, ../sass/style.scss */
+/* line 347, ../sass/style.scss */
 .settings__fields input {
   display: block;
   margin: 0 auto;
@@ -386,14 +397,14 @@ body {
   color: #303030;
 }
 
-/* line 345, ../sass/style.scss */
+/* line 354, ../sass/style.scss */
 .settings__username {
   font-weight: bold;
 }
 
 /* MEDIA QUERIES */
 @media (max-width: 650px) {
-  /* line 352, ../sass/style.scss */
+  /* line 361, ../sass/style.scss */
   td {
     display: block;
   }

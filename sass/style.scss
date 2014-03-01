@@ -5,6 +5,7 @@ $sidebar-color-bg-darken: darken( $sidebar-color-bg, 7% );
 $sidebar-color-alt: #686868;
 $feed-entry-color: $sidebar-color-bg;
 $breakpoint: "max-width: 650px";
+$feed-bgc-used: #DDD;
 
 /* RESET */
 body {
@@ -109,6 +110,10 @@ body {
     position: relative;
     padding: 0.5em;
     border-bottom: 0.1em solid #D9D9D9;
+
+    &:not(.feed__entry--focus):hover {
+        background-color: $feed-bgc-used;
+    }
 
     a {
         color: $feed-entry-color;
@@ -216,6 +221,10 @@ body {
         width: 58px;
         $support-for-original-webkit-gradients : false;
         @include background-image(linear-gradient(to left, white 22px, rgba(255, 255, 255, 0) 100%));
+
+        .feed__entry:hover & {
+            @include background-image(linear-gradient(to left, $feed-bgc-used 22px, rgba($feed-bgc-used, 0) 100%));
+        }
     }
 }
 .article__read-unread {
