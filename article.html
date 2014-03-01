@@ -8,6 +8,9 @@
             <header class="article__header js-article__header">
                 <h1 class="article__title js-article__title"><a href="{$value->getLink()}" target="_blank">{$value->getTitle()}</a></h1>
                 <span class="article__description">{function="Functions::truncate(strip_tags($value->getDescription()),300)"}</span>
+                {if="$articleDisplayDate"}
+                    <span class="article__date">{$value->dateFormatted}</span>
+                {/if}
             </header>
             <div class="article__read-unread article__read-unread--checkbox js-read-unread--checkbox">
                 <input type="checkbox" id="event{$value->getId()}"{if="$value->getUnread() == 0"} checked="checked"{/if}/>

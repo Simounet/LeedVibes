@@ -218,14 +218,20 @@ body {
         right: 0;
         top: 0;
         bottom: 0;
-        width: 58px;
+        width: 16em;
         $support-for-original-webkit-gradients : false;
-        @include background-image(linear-gradient(to left, white 22px, rgba(255, 255, 255, 0) 100%));
+        @include background-image(linear-gradient(to left, white 6em, rgba(255, 255, 255, 0) 100%));
 
         .feed__entry:hover & {
-            @include background-image(linear-gradient(to left, $feed-bgc-used 22px, rgba($feed-bgc-used, 0) 100%));
+            @include background-image(linear-gradient(to left, $feed-bgc-used 6em, rgba($feed-bgc-used, 0) 100%));
         }
     }
+}
+.article__date {
+    position: absolute;
+    right: 2em;
+    color: $feed-entry-color;
+    font-size: 0.9em;
 }
 .article__read-unread {
     position: absolute;
