@@ -3,5 +3,6 @@
   "LEEDVIBES_MN": "min",
   "LEEDVIBES_IN_THE_FUTURE": "Dans le futur",
   "LEEDVIBES_READ_ALL_CONFIRM": "Marquer toutes les entrées comme lues ?",
-  "LEEDVIBES_NOTHING_TO_READ": "Oh non, votre liste de lecture est vide !"
+  "LEEDVIBES_NOTHING_TO_READ": "Oh non, votre liste de lecture est vide !",
+  "LEEDVIBES_MARK_ALL_AS_READ": "Marquer tous les flux comme lus."
 }

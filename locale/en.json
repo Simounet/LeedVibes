@@ -3,5 +3,6 @@
   "LEEDVIBES_MN": "mn",
   "LEEDVIBES_IN_THE_FUTURE": "In the future",
   "LEEDVIBES_READ_ALL_CONFIRM": "Mark all events as read?",
-  "LEEDVIBES_NOTHING_TO_READ": "Oh no, your reading list is empty!"
+  "LEEDVIBES_NOTHING_TO_READ": "Oh no, your reading list is empty!",
+  "LEEDVIBES_MARK_ALL_AS_READ": "Mark all feeds as read."
 }

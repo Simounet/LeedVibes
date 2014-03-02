@@ -39,7 +39,7 @@
                 <li class="folder">
                     <div class="feed-all__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}">
                         <a href="./">All feeds</a>
-                        <button class="mark-as-read js-mark-as-read js-folder-counter" title="{function="_t('MARK_AS_READ_FOLDER_ITEMS',array($unreadEventsForFolder))"}">{$unread['total']}</button>
+                        <button class="mark-as-read js-mark-as-read js-folder-counter" title="{function="_t('LEEDVIBES_MARK_ALL_AS_READ')"}">{$unread['total']}</button>
                     </div>
                 </li>
                 <!-- [todo] -  Remove order=unread on feeds' links, use the settings instead -->
@@ -87,7 +87,13 @@
     
     {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
         <section class="wrapper">
-            {include="article"}
+            {if="count($events) > 0"}
+                {include="article"}
+            {else}
+                <div class="infinite-scroll--end">
+                    {function="_t('LEEDVIBES_NOTHING_TO_READ')"}
+                </div>
+            {/if}
         </section>
     {/if}
     <script>
