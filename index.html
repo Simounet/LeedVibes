@@ -36,7 +36,12 @@
         </div>
         {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
             <ul>
-                <li class="folder"><div class="feed-all__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}"><a href="./">All feeds</a></div></li>
+                <li class="folder">
+                    <div class="feed-all__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}">
+                        <a href="./">All feeds</a>
+                        <button class="mark-as-read js-mark-as-read js-folder-counter" title="{function="_t('MARK_AS_READ_FOLDER_ITEMS',array($unreadEventsForFolder))"}">{$unread['total']}</button>
+                    </div>
+                </li>
                 <!-- [todo] -  Remove order=unread on feeds' links, use the settings instead -->
                 {loop="folders"}
                     {$feeds=""}
@@ -47,7 +52,7 @@
                         {$unreadEventsForFolder=$allEvents[$value->getId()]}
                     {/if}
                     <li class="folder js-folder" data-id="{$value->getId()}">
-                        <div class="folder__item{if="isset($currentFolder) && ($value->getId() == $currentFolder->getId())"} selected{/if}">
+                        <div class="folder__item js-folder__item{if="isset($currentFolder) && ($value->getId() == $currentFolder->getId())"} selected{/if}">
                             <button class="folder__button js-toggle-button">{if="!$value->getIsopen()"}&#9656;{else}&#9662;{/if}</button>
                             {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
                             <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}">{function="htmlentities($value->getName())"}</a>

@@ -1,5 +1,7 @@
 {
   "LEEDVIBES_NO_MORE_EVENT": "The last item has already been shown.",
   "LEEDVIBES_MN": "mn",
-  "LEEDVIBES_IN_THE_FUTURE": "In the future"
+  "LEEDVIBES_IN_THE_FUTURE": "In the future",
+  "LEEDVIBES_READ_ALL_CONFIRM": "Mark all events as read?",
+  "LEEDVIBES_NOTHING_TO_READ": "Oh no, your reading list is empty!"
 }

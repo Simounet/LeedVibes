@@ -16,20 +16,23 @@ $('document').ready(function(){
         toggleFolder( $(this) );
     });
     
-    // @TODO: regroup listeners on click
+    // [facto] - regroup listeners on click
     $( '.wrapper' ).on( 'click', '.js-article__header', function( event ) {
         event.preventDefault();
         toggleEvent( $(this) );
     });
 
-    $( '.wrapper' ).on( 'click', '.js-mark-as-read', function() {
+    $( '.sidebar' ).on( 'click', '.js-mark-as-read', function() {
         button = $(this);
         if( button.parents('.js-feed__item').length ) {
             if(confirm(_t('CONFIRM_MARK_FEED_AS_READ')))
                 window.location='action.php?action=readAll&feed=' + button.parents('.js-feed__item').data('id');
-        } else {
+        } else if( button.parents('.js-folder__item').length ) {
             if(confirm(_t('READ_ALL_FOLDER_CONFIRM')))
                 window.location='action.php?action=readFolder&folder=' + button.parents('.js-folder').data('id');
+        } else {
+            if(confirm(_t('LEEDVIBES_READ_ALL_CONFIRM')))
+                window.location='action.php?action=readAll';
         }
     });
 
@@ -143,7 +146,7 @@ function readOrUnread( entry ) {
     }
 
     if( entry.hasClass('js-focus') ) {
-        // @FIX: children here but parent on readThis function
+        // [facto] - children used here but parent needed on readThis function
         readThis( entry.children(), entry.data('id') );
     }
 }
