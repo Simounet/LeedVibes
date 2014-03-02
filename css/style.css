@@ -209,24 +209,54 @@ body {
   white-space: nowrap;
   cursor: pointer;
 }
+/* line 198, ../sass/style.scss */
+.feed__entry--focus .article__header {
+  padding-bottom: 0.6em;
+}
+@media (max-width: 650px) {
+  /* line 192, ../sass/style.scss */
+  .article__header {
+    white-space: inherit;
+  }
+}
+@media (max-width: 650px) {
+  /* line 206, ../sass/style.scss */
+  .article__header img {
+    margin-top: 0.15em;
+    vertical-align: top;
+  }
+}
 
-/* line 202, ../sass/style.scss */
+/* line 215, ../sass/style.scss */
 .article__title {
   display: inline;
   font-size: 1em;
 }
+@media (max-width: 650px) {
+  /* line 215, ../sass/style.scss */
+  .article__title {
+    display: inline-block;
+    width: 75%;
+  }
+}
 
-/* line 210, ../sass/style.scss */
+/* line 228, ../sass/style.scss */
 .article__description {
   display: inline-block;
   margin-left: 0.4em;
   color: #888;
 }
-/* line 218, ../sass/style.scss */
+@media (max-width: 650px) {
+  /* line 228, ../sass/style.scss */
+  .article__description {
+    display: none;
+  }
+}
+/* line 240, ../sass/style.scss */
 .feed__entry--focus .article__description {
   display: none;
 }
-/* line 222, ../sass/style.scss */
+/* line 244, ../sass/style.scss */
 .article__description:after {
   content: "";
   display: block;
@@ -240,15 +270,27 @@ body {
   background-image: -o-linear-gradient(to left, #ffffff 6em, rgba(255, 255, 255, 0) 100%);
   background-image: linear-gradient(to left, #ffffff 6em, rgba(255, 255, 255, 0) 100%);
 }
-/* line 233, ../sass/style.scss */
+/* line 255, ../sass/style.scss */
 .feed__entry:hover .article__description:after {
   background-image: -webkit-linear-gradient(to left, #dddddd 6em, rgba(221, 221, 221, 0) 100%);
   background-image: -moz-linear-gradient(to left, #dddddd 6em, rgba(221, 221, 221, 0) 100%);
   background-image: -o-linear-gradient(to left, #dddddd 6em, rgba(221, 221, 221, 0) 100%);
   background-image: linear-gradient(to left, #dddddd 6em, rgba(221, 221, 221, 0) 100%);
 }
+@media (max-width: 650px) {
+  /* line 255, ../sass/style.scss */
+  .feed__entry:hover .article__description:after {
+    background: none;
+  }
+}
+@media (max-width: 650px) {
+  /* line 244, ../sass/style.scss */
+  .article__description:after {
+    background: none;
+  }
+}
 
-/* line 238, ../sass/style.scss */
+/* line 269, ../sass/style.scss */
 .article__date {
   position: absolute;
   right: 2em;
@@ -256,7 +298,7 @@ body {
   font-size: 0.9em;
 }
 
-/* line 244, ../sass/style.scss */
+/* line 275, ../sass/style.scss */
 .article__read-unread {
   position: absolute;
   margin: 0.4em;
@@ -269,7 +311,7 @@ body {
   cursor: pointer;
 }
 
-/* line 257, ../sass/style.scss */
+/* line 288, ../sass/style.scss */
 .article__read-unread--checkbox {
   width: 24px;
   height: 24px;
@@ -282,7 +324,7 @@ body {
   -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
 }
-/* line 263, ../sass/style.scss */
+/* line 294, ../sass/style.scss */
 .article__read-unread--checkbox label {
   width: 16px;
   height: 16px;
@@ -298,7 +340,7 @@ body {
   -moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
   box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
 }
-/* line 272, ../sass/style.scss */
+/* line 303, ../sass/style.scss */
 .article__read-unread--checkbox label:after {
   content: '';
   width: 8px;
@@ -318,107 +360,133 @@ body {
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-/* line 286, ../sass/style.scss */
+/* line 317, ../sass/style.scss */
 .article__read-unread--checkbox label:hover::after {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
   opacity: 0.3;
 }
-/* line 290, ../sass/style.scss */
+/* line 321, ../sass/style.scss */
 .article__read-unread--checkbox input[type=checkbox] {
   visibility: hidden;
 }
-/* line 292, ../sass/style.scss */
+/* line 323, ../sass/style.scss */
 .article__read-unread--checkbox input[type=checkbox]:checked + label:after {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
 
-/* line 297, ../sass/style.scss */
+/* line 328, ../sass/style.scss */
 .article__content {
   display: none;
-  margin: 1em auto 0;
+  margin: 0 auto;
   width: 42.8125em;
   line-height: 1.625em;
 }
 @media (max-width: 650px) {
-  /* line 297, ../sass/style.scss */
+  /* line 328, ../sass/style.scss */
   .article__content {
     width: auto;
   }
 }
-/* line 308, ../sass/style.scss */
+/* line 339, ../sass/style.scss */
 .article__content a:hover,
 .article__content a:active {
   text-decoration: underline;
 }
-/* line 312, ../sass/style.scss */
+/* line 343, ../sass/style.scss */
 .article__content--website .article__content {
   width: auto;
   height: 692px;
 }
-/* line 316, ../sass/style.scss */
+/* line 347, ../sass/style.scss */
 .article__content--website .article__content iframe {
   width: 100%;
 }
 
-/* line 321, ../sass/style.scss */
+/* line 352, ../sass/style.scss */
 .article__content__infos {
   margin: 1em 0;
 }
-/* line 324, ../sass/style.scss */
+/* line 355, ../sass/style.scss */
 .article__content__infos a {
   font-size: 0.9em;
   line-height: 1.2em;
 }
 
-/* line 330, ../sass/style.scss */
+/* line 361, ../sass/style.scss */
 .article__content__switch-view {
   display: none;
   position: absolute;
   right: 8em;
   top: 0.4em;
 }
-/* line 336, ../sass/style.scss */
+@media (max-width: 650px) {
+  /* line 361, ../sass/style.scss */
+  .article__content__switch-view {
+    top: 2.4em;
+    right: 0.2em;
+  }
+}
+/* line 372, ../sass/style.scss */
 .feed__entry--focus .article__content__switch-view {
   display: inherit;
 }
 
 /* USER SETTINGS */
-/* line 342, ../sass/style.scss */
+/* line 378, ../sass/style.scss */
 .settings {
   margin: 1em auto;
   color: #CACACA;
   text-align: center;
-  line-height: 1.6em;
   white-space: normal;
 }
-/* line 350, ../sass/style.scss */
+/* line 385, ../sass/style.scss */
 .settings a {
   margin: 0 0.5em;
   padding: 0.2em;
+  line-height: 2.6em;
 }
-/* line 356, ../sass/style.scss */
+/* line 392, ../sass/style.scss */
 .settings a:hover, .settings a:active {
   background-color: #303030;
 }
 
-/* line 361, ../sass/style.scss */
-.settings__fields input {
-  display: block;
-  margin: 0 auto;
+/* line 399, ../sass/style.scss */
+.settings__fields input[type='text'],
+.settings__fields input[type='password'] {
   min-width: 7em;
   width: 95%;
+}
+
+/* line 405, ../sass/style.scss */
+.settings__fields input[type='text'],
+.settings__fields input[type='password'],
+.settings__fields input[type='submit'] {
+  display: block;
+  margin: 0.4em auto;
+  padding: 0.5em;
   color: #303030;
 }
 
-/* line 368, ../sass/style.scss */
+/* line 411, ../sass/style.scss */
 .settings__username {
   font-weight: bold;
 }
 
+/* line 415, ../sass/style.scss */
+.settings__go-to-events {
+  display: none;
+}
+@media (max-width: 650px) {
+  /* line 415, ../sass/style.scss */
+  .settings__go-to-events {
+    display: inline;
+  }
+}
+
 /* MEDIA QUERIES */
 @media (max-width: 650px) {
-  /* line 375, ../sass/style.scss */
+  /* line 425, ../sass/style.scss */
   td {
     display: block;
   }

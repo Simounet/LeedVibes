@@ -195,13 +195,31 @@ body {
     white-space: nowrap;
     cursor: pointer;
 
+    .feed__entry--focus & {
+        padding-bottom: 0.6em;
+    }
+
+    @media($breakpoint) {
+        white-space: inherit;
+    }
+
     img {
         @extend %img-vertical-align;
+
+        @media($breakpoint) {
+            margin-top: 0.15em;
+            vertical-align: top;
+        }
     }
 }
 .article__title {
     display: inline;
     font-size: 1em;
+
+    @media($breakpoint) {
+        display: inline-block;
+        width: 75%;
+    }
 
     [class$="event--read"] & a {
         @extend .feed__event--read;
@@ -213,6 +231,10 @@ body {
     color: #888;
     [class$="event--read"] & {
         @extend .feed__event--read;
+    }
+
+    @media($breakpoint) {
+        display: none;
     }
     
     .feed__entry--focus & {
@@ -232,6 +254,15 @@ body {
 
         .feed__entry:hover & {
             @include background-image(linear-gradient(to left, $feed-bgc-used 6em, rgba($feed-bgc-used, 0) 100%));
+
+            @media($breakpoint) {
+                background: none;
+            }
+
+        }
+
+        @media($breakpoint) {
+            background: none;
         }
     }
 }
@@ -296,7 +327,7 @@ $checkbox-size: 24px;
 }
 .article__content {
     display: none;
-    margin: 1em auto 0;
+    margin: 0 auto;
     width: 42.8125em; // font: 16px / width: 685px (http://www.pearsonified.com/typography/)
     line-height: 1.625em; // font: 16px / line-height: 26px (http://www.pearsonified.com/typography/) 
 
@@ -333,6 +364,11 @@ $checkbox-size: 24px;
     right: 8em;
     top: 0.4em;
 
+    @media($breakpoint) {
+        top: 2.4em;
+        right: 0.2em;
+    }
+
     .feed__entry--focus & {
         display: inherit;
     }
@@ -344,12 +380,12 @@ $checkbox-size: 24px;
     @extend %sidebar-padding-side;
     color: #CACACA;
     text-align: center;
-    line-height: 1.6em;
     white-space: normal;
     
     a {
         margin: 0 0.5em;
         padding: 0.2em;
+        line-height: 2.6em;
         @extend %sidebar-button;
         
         &:hover,
@@ -358,16 +394,30 @@ $checkbox-size: 24px;
         }
     }
 }
-.settings__fields input {
-    display: block;
-    margin: 0 auto;
+
+.settings__fields input[type='text'],
+.settings__fields input[type='password'] {
     min-width: 7em;
     width: 95%;
+}
+.settings__fields input[type='text'],
+.settings__fields input[type='password'],
+.settings__fields input[type='submit'] {
+    display: block;
+    margin: 0.4em auto;
+    padding: 0.5em;
     color: $sidebar-color-bg-darken;
 }
 .settings__username {
     @extend %text-color-light;
     font-weight: bold;
+}
+.settings__go-to-events {
+    display: none;
+
+    @media($breakpoint) {
+        display: inline;
+    }
 }
 
 /* MEDIA QUERIES */
