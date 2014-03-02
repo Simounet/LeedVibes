@@ -375,7 +375,7 @@ body {
 .article__content__switch-view {
   display: none;
   position: absolute;
-  right: 3em;
+  right: 8em;
   top: 0.4em;
 }
 /* line 336, ../sass/style.scss */
