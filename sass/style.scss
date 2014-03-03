@@ -211,6 +211,18 @@ body {
             vertical-align: top;
         }
     }
+
+    .article__feed-title {
+        display: inline-block;
+        width: 10%;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+
+        @media($breakpoint) {
+            display: none;
+        }
+    }
 }
 .article__title {
     display: inline;

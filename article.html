@@ -6,7 +6,10 @@
         <article class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} js-event--read{/if}{if="$value->view == 1"} article__content--website js-website{/if}" data-id="{$value->getId()}" data-feed-id="{$value->getFeed()}">
             {function="Plugin::callHook("event_pre_title", array(&$value))"}
             <header class="article__header js-article__header">
-                {if="isset($value->favicon) && $action != 'selectedFeed'"}{$value->favicon}{/if}
+                {if="$action != 'selectedFeed'"}
+                    {if="isset($value->favicon)"}{$value->favicon}{/if}
+                    <span class="article__feed-title">{$value->feedName}</span>
+                {/if}
                 <h1 class="article__title js-article__title"><a href="{$value->getLink()}" target="_blank">{$value->getTitle()}</a></h1>
                 <span class="article__description">{function="Functions::truncate(strip_tags($value->getDescription()),300)"}</span>
                 {if="$articleDisplayDate"}

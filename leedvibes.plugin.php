@@ -13,6 +13,10 @@ include( __DIR__ . '/classes/Utils.php' );
 function leedvibes( &$event ) {
     $utils = new Utils();
     $event->dateFormatted = $utils->formatDate( $event->getPubdate() );
+
+    $feed = new Feed();
+    $usedFeed = $feed->getById($event->getFeed());
+    $event->feedName = $usedFeed->getName();
 }
 
 Plugin::addHook("event_pre_title", "leedvibes");
