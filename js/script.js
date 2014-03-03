@@ -94,7 +94,7 @@ function toggleItem( e, special, existingEntryFocused ) {
 function toggleContent( eventId, el, callback ) {
     if( el.children().length == 0 ) {
         $.ajax({
-            url: "./templates/leedvibes/article_content.php",
+            url: "./plugins/leedvibes/article_content.php",
             data:{ id: eventId },
         })
             .done(function( data ) {

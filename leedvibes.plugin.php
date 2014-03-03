@@ -19,6 +19,11 @@ function leedvibes( &$event ) {
     $event->feedName = $usedFeed->getName();
 }
 
+function setLeedvibesTemplate() {
+    raintpl::configure("tpl_dir", 'plugins/leedvibes/' );
+}
+
 Plugin::addHook("event_pre_title", "leedvibes");
+Plugin::addHook("index_pre_treatment", "setLeedvibesTemplate");
 
 ?>
