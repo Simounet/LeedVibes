@@ -1,4 +1,5 @@
-var buttonContent = { closed: '\u25B8', opened: '\u25BE' };
+var buttonContent = { closed: '\u25B8', opened: '\u25BE' },
+    scrollInfiniLimit = '';
 function _t(key,args){
     value = i18n[key];
     if(args!=null){
@@ -40,6 +41,8 @@ $('document').ready(function(){
     $('.wrapper').append('<div id="loader" class="infinite-scroll hidden">'+_t('LOADING')+'</div>');
     $(window).data('page', 1);
     $(window).data('nblus', 0);
+
+    setScrollInfiniLimit();
 
     var load = false;
     var offset = $('.wrapper:last').offset(); 
@@ -172,6 +175,11 @@ function countersHandler( feedID, operation ) {
     folderCounter.html( counterHandler( folderCounter ) );
 }
 
+function setScrollInfiniLimit() {
+    // Catch the 5th event from the bottom
+    scrollInfiniLimit = $('.js-feed__entry').slice(-5, -4);
+}
+
 /* FROM marigolds/js/script.js */
 /* Fonctions de séléctions */
 /* Cette fonction sera utilisé pour le scroll infinie, afin d'ajouter les évènements necessaires */
@@ -231,6 +239,9 @@ function readThis(element,id,from,callback){
                     $('#nbarticle').html(parseInt($('#nbarticle').html()) - 1);
                     // Decrement feed number
                     countersHandler( entry.data('feed-id') );
+                    if(scrollInfiniLimit.offset().top < ($(window).scrollTop() + $(window).height()) ) {
+                        scrollInfini( true );
+                    }
                 }
             }
         });
@@ -275,7 +286,7 @@ function targetThisEvent(event,focusOn){
     // on débloque les touches le plus tard possible afin de passer derrière l'appel ajax
 }
 
-function scrollInfini() {
+function scrollInfini(go) {
     var deviceAgent = navigator.userAgent.toLowerCase();
     var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
 
@@ -283,8 +294,9 @@ function scrollInfini() {
         // On teste si ajaxready vaut false, auquel cas on stoppe la fonction
         if ($(window).data('ajaxready') == false) return;
 
-        if(($(window).scrollTop() + $(window).height()) + 50 >= $(document).height()
-           || agentID && ($(window).scrollTop() + $(window).height()) + 150 > $(document).height())
+        if( go 
+           || (($(window).scrollTop() + $(window).height()) + 50 >= $(document).height()
+           || agentID && ($(window).scrollTop() + $(window).height()) + 150 > $(document).height()))
         {
             // CONFIGS
             var loader = $('.wrapper #loader'),
@@ -351,6 +363,7 @@ function scrollInfini() {
                     loader
                         .delay(loaderDelayTime)
                         .fadeOut(loaderFadeTime);
+                    setScrollInfiniLimit();
                 }
             });
         }
