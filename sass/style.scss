@@ -8,6 +8,7 @@ $breakpoint: "max-width: 650px";
 $feed-bgc-used: #DDD;
 
 @import "normalize";
+@import "vendor/flex";
 
 /* RESET */
 body {
@@ -33,7 +34,7 @@ img {
 
 /* GENERAL STYLE */
 body {
-    display: flex;
+    @include flexbox;
 
     @media($breakpoint) {
         display: block;
@@ -41,7 +42,7 @@ body {
 }
 
 .wrapper {
-    flex: 4 0 0;
+    @include flex(4 0 0);
     margin: 0.5em 0; 
     background-color: #FFF;
 
@@ -128,7 +129,7 @@ body {
 
 /* SIDEBAR */
 .sidebar {
-    flex: 1 0 0;
+    @include flex(1 0 0);
     font-size: 0.8em;
     white-space: nowrap;
     
@@ -339,6 +340,9 @@ $checkbox-size: 24px;
     }
   }
 }
+.article__read-unread--label-content {
+    display: none;
+}
 .article__content {
     display: none;
     margin: 0 auto;
@@ -439,4 +443,28 @@ $checkbox-size: 24px;
     td {
         display: block;
     }
+}
+
+/* IE9- */
+.no-flexboxlegacy body {
+    display: block;
+}
+
+.no-flexboxlegacy .wrapper {
+    margin-left: 20%;
+}
+
+.no-flexboxlegacy .sidebar {
+    float: left;
+    width: 20%;
+}
+.no-boxshadow .article__read-unread--label-content {
+    display: inline;
+    padding: 3px;
+    color: #222;
+    border: 1px solid #222;
+}
+/* IE7 */
+.no-flexboxlegacy.no-boxsizing .sidebar {
+    width: 19%;
 }

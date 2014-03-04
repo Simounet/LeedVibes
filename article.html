@@ -18,7 +18,7 @@
             </header>
             <div class="article__read-unread article__read-unread--checkbox js-read-unread--checkbox">
                 <input type="checkbox" id="event{$value->getId()}"{if="$value->getUnread() == 0"} checked="checked"{/if}/>
-                <label class="js-read-unread" for="event{$value->getId()}"></label>
+                <label class="js-read-unread" for="event{$value->getId()}">{* [IE] - This span is IE specific *}<span class="article__read-unread--label-content js-read-unread">X</span></label>
             </div>
             {* [todo] - Add a condition to button shows up if LeedRSSOrSiteView plugin is on *}
             <button class="article__content__switch-view js-switch-view" data-view="{$value->view}">{if="$value->view == 0"}{function="_t('SITE_VIEW')"}{else}{function="_t('RSS_VIEW')"}{/if}</button>
