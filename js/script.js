@@ -110,6 +110,8 @@ function toggleContent( eventId, el, callback ) {
             .fail(function() {
                 alert( "error" );
             });
+    } else {
+        el.empty();
     }
 
 }
