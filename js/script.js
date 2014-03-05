@@ -75,7 +75,8 @@ function toggleItem( e, special, existingEntryFocused ) {
     }
 
     function handler( customToggle ) {
-        if(  existingEntryFocusedContent.length && ( content[0] != existingEntryFocusedContent[0] ) ) {
+        // [fix] - If click on event title after clicked unread
+        if( existingEntryFocusedContent.length && ( content[0] != existingEntryFocusedContent[0] ) ) {
             customToggle();
             if( existingEntryFocused.hasClass('js-event--read') ) {
                 existingEntryFocused.hide();
@@ -91,6 +92,7 @@ function toggleItem( e, special, existingEntryFocused ) {
         handler( function() { existingEntryFocusedContent.toggle() } );
         toggleContent( e.data('id'), content, readOrUnreadAtToggle );
     }
+
     content.toggle();
 }
 
