@@ -67,21 +67,12 @@ body {
 }
 
 .infinite-scroll {
-    position: fixed;
-    left: 20%;
-    right: 0;
-    top: 0;
     padding: 1em 0.5em;
     @extend %text-color-light;
     background-color: rgba($sidebar-color-bg, 0.9);
-
-    @media($breakpoint) {
-        left: 0;
-    }
 }
 .infinite-scroll--end {
-    position: static;
-     background-color: $sidebar-color-bg;
+    background-color: $sidebar-color-bg;
     @extend .infinite-scroll;
 }
 
