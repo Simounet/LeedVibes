@@ -211,15 +211,8 @@ function readThis(element,id,from,callback){
     var nextEvent = $('#'+id).next();
     //sur les éléments non lus
     if(!entry.hasClass('js-event--read')){
-        $.ajax({
-            url: "./action.php?action=readContent",
-            data:{id:id},
-            success:function(msg){
-                if(msg.status == 'noconnect') {
-                    alert(msg.texte)
-                } else {
-                    entry.find('[type="checkbox"]').prop('checked', true);
-                    entry.addClass('js-event--read');
+        entry.find('[type="checkbox"]').prop('checked', true);
+        entry.addClass('js-event--read');
                     if( ( entry.find('.js-article__content').css('display') == 'none' ) && $(element).hasClass('js-read-unread') ) {
                         entry.hide(0,function(){
                             if(callback){
@@ -233,6 +226,13 @@ function readThis(element,id,from,callback){
                             }
                         });
                     }
+        $.ajax({
+            url: "./action.php?action=readContent",
+            data:{id:id},
+            success:function(msg){
+                if(msg.status == 'noconnect') {
+                    alert(msg.texte)
+                } else {
                     // on compte combien d'article ont été lus afin de les soustraires de la requête pour le scroll infini
                     $(window).data('nblus', $(window).data('nblus')+1);
                     // on diminue le nombre d'article en haut de page
