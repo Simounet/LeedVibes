@@ -159,6 +159,12 @@ function readOrUnread( entry ) {
 }
 
 function countersHandler( feedID, operation ) {
+    var feed = $('.js-feed__item[data-id="'+feedID+'"]'),
+        elements = [ feed.find('.js-feed-counter'),
+                     feed.parents('.js-folder').find('.js-folder-counter'),
+                     $('.js-total-counter')
+                    ];
+
     var counterHandler = function( counter ) {
         var i = parseInt(counter.html());
         if( operation == '+' || operation == 'plus' ) {
@@ -170,13 +176,11 @@ function countersHandler( feedID, operation ) {
         return i;
     }
 
-    var feed = $('.js-feed__item[data-id="'+feedID+'"]');
+    for (i = 0; i < elements.length; ++i) {
+        var element = elements[i];
+        element.html( counterHandler( element ) );
+    }
 
-    var feedCounter = feed.find('.js-feed-counter');
-    feedCounter.html( counterHandler( feedCounter ) );
-
-    var folderCounter = feed.parents('.js-folder').find('.js-folder-counter');
-    folderCounter.html( counterHandler( folderCounter ) );
 }
 
 function setScrollInfiniLimit() {
@@ -216,6 +220,8 @@ function readThis(element,id,from,callback){
     //sur les éléments non lus
     if(!entry.hasClass('js-event--read')){
         entry.find('[type="checkbox"]').prop('checked', true);
+        // Decrement feed number
+        countersHandler( entry.data('feed-id') );
         entry.addClass('js-event--read');
                     if( ( entry.find('.js-article__content').css('display') == 'none' ) && $(element).hasClass('js-read-unread') ) {
                         entry.hide(0,function(){
@@ -241,8 +247,6 @@ function readThis(element,id,from,callback){
                     $(window).data('nblus', $(window).data('nblus')+1);
                     // on diminue le nombre d'article en haut de page
                     $('#nbarticle').html(parseInt($('#nbarticle').html()) - 1);
-                    // Decrement feed number
-                    countersHandler( entry.data('feed-id') );
                     if(scrollInfiniLimit.offset().top < ($(window).scrollTop() + $(window).height()) ) {
                         scrollInfini( true );
                     }
