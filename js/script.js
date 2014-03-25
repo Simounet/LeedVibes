@@ -1,5 +1,6 @@
 var buttonContent = { closed: '\u25B8', opened: '\u25BE' },
-    scrollInfiniLimit = '';
+    scrollInfiniLimit = '',
+    eventObj;
 function _t(key,args){
     value = i18n[key];
     if(args!=null){
@@ -10,32 +11,30 @@ function _t(key,args){
     return value;
 }
 
-$('document').ready(function(){
-    addEventsButtonLuNonLus();
-    
-    $(".js-toggle-button").click( function() {
-        toggleFolder( $(this) );
-    });
-    
-    // [facto] - regroup listeners on click
-    $( '.wrapper' ).on( 'click', '.js-article__header', function( event ) {
+$(function() {
+
+    $( '.wrapper' ).on( 'click', '.js-feed__entry', function( event ) { 
         event.preventDefault();
-        toggleEvent( $(this) );
+        eventObj = new EventObject( event );
     });
 
-    $( '.sidebar' ).on( 'click', '.js-mark-as-read', function() {
-        button = $(this);
-        if( button.parents('.js-feed__item').length ) {
-            if(confirm(_t('CONFIRM_MARK_FEED_AS_READ')))
-                window.location='action.php?action=readAll&feed=' + button.parents('.js-feed__item').data('id');
-        } else if( button.parents('.js-folder__item').length ) {
-            if(confirm(_t('READ_ALL_FOLDER_CONFIRM')))
-                window.location='action.php?action=readFolder&folder=' + button.parents('.js-folder').data('id');
-        } else {
-            if(confirm(_t('LEEDVIBES_READ_ALL_CONFIRM')))
-                window.location='action.php?action=readAll';
-        }
-    });
+    //$(".js-toggle-button").click( function() {
+    //    toggleFolder( $(this) );
+    //});
+
+    //$( '.sidebar' ).on( 'click', '.js-mark-as-read', function() {
+    //    button = $(this);
+    //    if( button.parents('.js-feed__item').length ) {
+    //        if(confirm(_t('CONFIRM_MARK_FEED_AS_READ')))
+    //            window.location='action.php?action=readAll&feed=' + button.parents('.js-feed__item').data('id');
+    //    } else if( button.parents('.js-folder__item').length ) {
+    //        if(confirm(_t('READ_ALL_FOLDER_CONFIRM')))
+    //            window.location='action.php?action=readFolder&folder=' + button.parents('.js-folder').data('id');
+    //    } else {
+    //        if(confirm(_t('LEEDVIBES_READ_ALL_CONFIRM')))
+    //            window.location='action.php?action=readAll';
+    //    }
+    //});
 
     $(window).data('ajaxready', true);
     $('.wrapper').append('<div id="loader" class="infinite-scroll hidden">'+_t('LOADING')+'</div>');
@@ -55,65 +54,119 @@ $('document').ready(function(){
     });
 });
 
-function toggleEvent( e ) {
-    var existingEntryFocused = $('.js-feed__entry.js-focus');
+function EventObject( event ) { 
+    this.entry   = $(event.currentTarget);
+    this.target  = $(event.target);
+    this.content = this.entry.find( this.contentClass );
+    this.targetClass = '.' + this.target.attr('class');
 
-    var eventContainer = e.parents('.js-feed__entry'),
-        websiteView = eventContainer.hasClass('js-website');
-    toggleFocus( eventContainer, existingEntryFocused);
-    toggleItem( eventContainer, websiteView, existingEntryFocused );
-}
-
-function toggleItem( e, special, existingEntryFocused ) {
-    var content = e.find('.js-article__content'),
-        existingEntryFocusedContent = existingEntryFocused.find('.js-article__content');
-
-    var readOrUnreadAtToggle = function () {
-        if( ! e.find('[type="checkbox"]').prop("checked") ) {
-            readOrUnread( e );
-        }
+    if( this.targetClass == this.buttonClass ) {
+        this.readUnreadButtonAction();
     }
 
-    function handler( customToggle ) {
-        // [fix] - If click on event title after clicked unread
-        if( existingEntryFocusedContent.length && ( content[0] != existingEntryFocusedContent[0] ) ) {
-            customToggle();
-            if( existingEntryFocused.hasClass('js-event--read') ) {
-                existingEntryFocused.hide();
+    if( this.target.parents( this.headerClass ).length ) {
+        this.toggleEvent();
+    }
+}
+
+EventObject.prototype = {
+    headerClass:  '.js-article__header',
+    contentClass: '.js-article__content',
+    buttonClass:  '.js-read-unread',
+    
+    existingEntryFocused: $('.js-feed__entry.js-focus'),
+
+    getContent: function() {
+        return this.entry.find( contentClass );
+    },
+
+    readUnreadButtonAction: function(){
+        var id = this.entry.data('id');
+
+        if( this.target.hasClass('js-read-unread') ){
+            readThis( this.target, id );
+        }
+    },
+
+    toggleEvent: function() {
+        var websiteView = this.entry.hasClass('js-website'); // [todo] - move this var to LeedRSSOrSiteView plugin
+
+        this.toggleFocus();
+        this.toggleItem( websiteView );
+    },
+
+    toggleFocus: function() {
+        // If we are not clicking on the already focused element
+        // And there is and existing focused element
+        // Then remove focus class
+        if( ( this.entry[0] != this.existingEntryFocused[0] ) && this.existingEntryFocused.length ) {
+            this.existingEntryFocused.removeClass('js-focus feed__entry--focus');
+        }
+
+        this.entry.toggleClass('js-focus feed__entry--focus');
+    },
+
+    toggleItem: function( special ) {
+        var existingEntryFocusedContent = this.existingEntryFocused.find('.js-article__content');
+
+        var readOrUnreadAtToggle = function ( entry ) {
+            // [todo] - See if it is possible to get entry from object scope
+            if( ! entry.find('[type="checkbox"]').prop("checked") ) {
+                // [todo] - See if it is possible to get entry from object scope
+                if( entry.hasClass('js-event--read') ) {
+                    entry.hide();
+                }
+
+                if( entry.hasClass('js-focus') ) {
+                    // [facto] - children used here but parent needed on readThis function
+                    readThis( entry.children(), entry.data('id') );
+                }
             }
-
         }
-    }
 
-    if( special ) {
-        handler( function() { toggleWebsite( existingEntryFocusedContent ) } );
-        toggleWebsite( content, readOrUnreadAtToggle );
-    } else {
-        handler( function() { existingEntryFocusedContent.toggle() } );
-        toggleContent( e.data('id'), content, readOrUnreadAtToggle );
-    }
+        function handler( customToggle ) {
+            // [fix] - If click on event title after clicked unread
+            if( existingEntryFocusedContent.length && ( this.content[0] != existingEntryFocusedContent[0] ) ) {
+                customToggle();
+                if( eventObj.existingEntryFocused.hasClass('js-event--read') ) {
+                    eventObj.existingEntryFocused.hide();
+                }
 
-    content.toggle();
-}
+            }
+        }
 
-function toggleContent( eventId, el, callback ) {
-    if( el.children().length == 0 ) {
-        $.ajax({
-            url: "./plugins/leedvibes/article_content.php",
-            data:{ id: eventId },
-        })
-            .done(function( data ) {
-                el.append( data );
-                if( typeof( callback ) == 'function' )
-                    callback();
+        if( special ) {
+            handler( function() { toggleWebsite( existingEntryFocusedContent ) } );
+            toggleWebsite( this.content, readOrUnreadAtToggle( this.entry ) );
+        } else {
+            handler( function() { existingEntryFocusedContent.toggle() } );
+            this.toggleContent( readOrUnreadAtToggle( this.entry ) );
+        }
+
+        this.content.toggle();
+    },
+
+    toggleContent: function( callback ) {
+        eventId = this.entry.data('id');
+        if( this.content.children().length == 0 ) {
+            $.ajax({
+                url: "./plugins/leedvibes/article_content.php",
+                data:{ id: eventId },
+                context: this
             })
-            .fail(function() {
-                alert( "error" );
-            });
-    } else {
-        el.empty();
-    }
+                .done(function( data ) {
+                    this.content.append( data );
+                    if( typeof( callback ) == 'function' )
+                        callback();
+                })
+                .fail(function() {
+                    alert( "error" );
+                });
+        } else {
+            this.content.empty();
+        }
 
+    }
 }
 
 function toggleFolder( button ) {
@@ -134,28 +187,6 @@ function toggleFolder( button ) {
         url: "./action.php?action=changeFolderState",
         data:{ id: folderBloc.data('id'), isopen: open }
     });
-}
-
-function toggleFocus( entry, existingEntryFocused ) {
-    // If we are not clicking on the already focused element
-    // And there is and existing focused element
-    // Then remove focus class
-    if( ( entry[0] != existingEntryFocused[0]) && existingEntryFocused.length ) {
-        existingEntryFocused.removeClass('js-focus feed__entry--focus');
-    }
-
-    entry.toggleClass('js-focus feed__entry--focus');
-}
-
-function readOrUnread( entry ) {
-    if( entry.hasClass('js-event--read') ) {
-        entry.hide();
-    }
-
-    if( entry.hasClass('js-focus') ) {
-        // [facto] - children used here but parent needed on readThis function
-        readThis( entry.children(), entry.data('id') );
-    }
 }
 
 function countersHandler( feedID, operation ) {
@@ -188,33 +219,9 @@ function setScrollInfiniLimit() {
     scrollInfiniLimit = $('.js-feed__entry').slice(-5, -4);
 }
 
+
 /* FROM marigolds/js/script.js */
-/* Fonctions de séléctions */
-/* Cette fonction sera utilisé pour le scroll infinie, afin d'ajouter les évènements necessaires */
-function addEventsButtonLuNonLus(){
-    var handler = function(event){
-        var target = event.target,
-            id = $(this).parents('.js-feed__entry').data('id');
-
-        if($(target).hasClass('js-read-unread')){
-            buttonAction(target, id);
-        }
-    }
-    
-    $( '.wrapper' ).on( 'click', '.js-read-unread', handler );
-}
-
-function buttonAction(target,id){
-    // Check unreadEvent
-    if($('#pageTop').html()){
-        var from=true;
-    }else{
-        var from='';
-    }
-    readThis(target,id,from);
-}
-
-function readThis(element,id,from,callback){
+function readThis(element,id,callback){
     var entry = $(element).parents('.js-feed__entry');
     var nextEvent = $('#'+id).next();
     //sur les éléments non lus
@@ -254,27 +261,24 @@ function readThis(element,id,from,callback){
             }
         });
     }else{  // sur les éléments lus
-            // si ce n'est pas un clic sur le titre de l'event
-        if(from!='title'){
-            $.ajax({
-                    url: "./action.php?action=unreadContent",
-                    data:{id:id},
-                    success:function(msg){
-                        if(msg.status == 'noconnect') {
-                            alert(msg.texte)
-                        } else {
-                            if( console && console.log && msg!="" ) console.log(msg);
-                            entry.find('[type="checkbox"]').prop('checked', false);
-                            entry.removeClass('js-event--read');
-                            if(callback){
-                                callback();
-                            }
+        $.ajax({
+                url: "./action.php?action=unreadContent",
+                data:{id:id},
+                success:function(msg){
+                    if(msg.status == 'noconnect') {
+                        alert(msg.texte)
+                    } else {
+                        if( console && console.log && msg!="" ) console.log(msg);
+                        entry.find('[type="checkbox"]').prop('checked', false);
+                        entry.removeClass('js-event--read');
+                        if(callback){
+                            callback();
                         }
                     }
-            });
-            // Increment feed number
-            countersHandler( entry.data('feed-id'), '+' );
-        }
+                }
+        });
+        // Increment feed number
+        countersHandler( entry.data('feed-id'), '+' );
     }
 
 }
