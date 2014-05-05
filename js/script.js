@@ -36,22 +36,23 @@ $(function() {
     //    }
     //});
 
-    $(window).data('ajaxready', true);
     $('.wrapper').append('<div id="loader" class="infinite-scroll hidden">'+_t('LOADING')+'</div>');
-    $(window).data('page', 1);
-    $(window).data('nblus', 0);
 
     setScrollInfiniLimit();
 
     var load = false;
     var offset = $('.wrapper:last').offset(); 
 
-    $(window).scroll(function(){
-        if((offset.top-$(window).height() <= $(window).scrollTop()) 
-        && load==false) {
-            scrollInfini();
-        }
-    });
+    $(window)
+        .data('ajaxready', true)
+        .data('page', 1)
+        .data('nblus', 0)
+        .scroll(function(){
+            if((offset.top-$(window).height() <= $(window).scrollTop()) 
+            && load==false) {
+                scrollInfini();
+            }
+        });
 });
 
 function EventObject( event ) { 
