@@ -18,23 +18,23 @@ $(function() {
         eventObj = new EventObject( event );
     });
 
-    //$(".js-toggle-button").click( function() {
-    //    toggleFolder( $(this) );
-    //});
+    $(".js-toggle-button").click( function() {
+        toggleFolder( $(this) );
+    });
 
-    //$( '.sidebar' ).on( 'click', '.js-mark-as-read', function() {
-    //    button = $(this);
-    //    if( button.parents('.js-feed__item').length ) {
-    //        if(confirm(_t('CONFIRM_MARK_FEED_AS_READ')))
-    //            window.location='action.php?action=readAll&feed=' + button.parents('.js-feed__item').data('id');
-    //    } else if( button.parents('.js-folder__item').length ) {
-    //        if(confirm(_t('READ_ALL_FOLDER_CONFIRM')))
-    //            window.location='action.php?action=readFolder&folder=' + button.parents('.js-folder').data('id');
-    //    } else {
-    //        if(confirm(_t('LEEDVIBES_READ_ALL_CONFIRM')))
-    //            window.location='action.php?action=readAll';
-    //    }
-    //});
+    $( '.sidebar' ).on( 'click', '.js-mark-as-read', function() {
+        button = $(this);
+        if( button.parents('.js-feed__item').length ) {
+            if(confirm(_t('CONFIRM_MARK_FEED_AS_READ')))
+                window.location='action.php?action=readAll&feed=' + button.parents('.js-feed__item').data('id');
+        } else if( button.parents('.js-folder__item').length ) {
+            if(confirm(_t('READ_ALL_FOLDER_CONFIRM')))
+                window.location='action.php?action=readFolder&folder=' + button.parents('.js-folder').data('id');
+        } else {
+            if(confirm(_t('LEEDVIBES_READ_ALL_CONFIRM')))
+                window.location='action.php?action=readAll';
+        }
+    });
 
     $('.wrapper').append('<div id="loader" class="infinite-scroll hidden">'+_t('LOADING')+'</div>');
 
@@ -60,6 +60,10 @@ function EventObject( event ) {
     this.target  = $(event.target);
     this.content = this.entry.find( this.contentClass );
     this.targetClass = '.' + this.target.attr('class');
+    
+    this.existingEntryFocused = $('.js-feed__entry.js-focus');
+    this.isExistingEntryFocused = this.existingEntryFocused.length;
+    this.currentEntryIsPrevious = ( this.entry[0] == this.existingEntryFocused[0] );
 
     if( this.targetClass == this.buttonClass ) {
         this.readUnreadButtonAction();
@@ -74,8 +78,6 @@ EventObject.prototype = {
     headerClass:  '.js-article__header',
     contentClass: '.js-article__content',
     buttonClass:  '.js-read-unread',
-    
-    existingEntryFocused: $('.js-feed__entry.js-focus'),
 
     getContent: function() {
         return this.entry.find( contentClass );
@@ -100,7 +102,7 @@ EventObject.prototype = {
         // If we are not clicking on the already focused element
         // And there is and existing focused element
         // Then remove focus class
-        if( ( this.entry[0] != this.existingEntryFocused[0] ) && this.existingEntryFocused.length ) {
+        if( ! this.currentEntryIsPrevious && this.isExistingEntryFocused ) {
             this.existingEntryFocused.removeClass('js-focus feed__entry--focus');
         }
 
@@ -113,7 +115,6 @@ EventObject.prototype = {
         var readOrUnreadAtToggle = function ( entry ) {
             // [todo] - See if it is possible to get entry from object scope
             if( ! entry.find('[type="checkbox"]').prop("checked") ) {
-                // [todo] - See if it is possible to get entry from object scope
                 if( entry.hasClass('js-event--read') ) {
                     entry.hide();
                 }
@@ -140,8 +141,10 @@ EventObject.prototype = {
             handler( function() { toggleWebsite( existingEntryFocusedContent ) } );
             toggleWebsite( this.content, readOrUnreadAtToggle( this.entry ) );
         } else {
-            handler( function() { existingEntryFocusedContent.toggle() } );
             this.toggleContent( readOrUnreadAtToggle( this.entry ) );
+        }
+        if( ! this.currentEntryIsPrevious && this.isExistingEntryFocused ) {
+            handler( function() { existingEntryFocusedContent.toggle() } );
         }
 
         this.content.toggle();
@@ -231,19 +234,19 @@ function readThis(element,id,callback){
         // Decrement feed number
         countersHandler( entry.data('feed-id') );
         entry.addClass('js-event--read');
-                    if( ( entry.find('.js-article__content').css('display') == 'none' ) && $(element).hasClass('js-read-unread') ) {
-                        entry.hide(0,function(){
-                            if(callback){
-                                callback();
-                            }else{
-                                targetThisEvent(nextEvent,true);
-                            }
-                            // on simule un scroll si tous les events sont cachés
-                            if($('article section:last').attr('style')=='display: none;') {
-                                $(window).scrollTop($(document).height());
-                            }
-                        });
-                    }
+        if( ( entry.find('.js-article__content').css('display') == 'none' ) && $(element).hasClass('js-read-unread') ) {
+            entry.hide(0,function(){
+                if(callback){
+                    callback();
+                }else{
+                    targetThisEvent(nextEvent,true);
+                }
+                // on simule un scroll si tous les events sont cachés
+                if($('article section:last').attr('style')=='display: none;') {
+                    $(window).scrollTop($(document).height());
+                }
+            });
+        }
         $.ajax({
             url: "./action.php?action=readContent",
             data:{id:id},
