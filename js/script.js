@@ -406,3 +406,14 @@ function getUrlVars()
     }
     return vars;
 }
+
+//synchronisation manuelle lancée depuis le boutton du menu
+function synchronize(code){
+    if(code!=''){
+        $('#articles').prepend('<section>'+
+        '<iframe class="importFrame" src="action.php?action=synchronize&format=html&code='+code+'" name="idFrameSynchro" id="idFrameSynchro" width="100%" height="300" ></iframe>'+
+        '</section>');
+    }else{
+        alert(_t('YOU_MUST_BE_CONNECTED_FEED'));
+    }
+}

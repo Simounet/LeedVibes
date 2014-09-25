@@ -39,6 +39,7 @@
                 {function="_t('IDENTIFIED_WITH',array('<span class="settings__username">'.$myUser->getLogin().'</span>'))"}
                 <a href="action.php?action=logout">{function="_t('DISCONNECT')"}</a>
                 <a href="settings.php">{function="_t('MANAGE')"}</a>
+                <button class="synchronyzeButton" title="{function="_t('LAUNCH_SYNCHRONISATION')"}" onclick="synchronize('{if="$myUser"}{$synchronisationCode}{/if}');">R</button>
                 {* [todo] - Find a better sign to go to the events *}
                 <a href="#articles" class="settings__go-to-events">V</a>
             {/if}
