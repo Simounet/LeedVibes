@@ -5,7 +5,7 @@
 /**
  * Correct `block` display not defined in IE 8/9.
  */
-/* line 22, ../sass/_normalize.scss */
+/* line 11, ../sass/_normalize.scss */
 article,
 aside,
 details,
@@ -24,7 +24,7 @@ summary {
 /**
  * Correct `inline-block` display not defined in IE 8/9.
  */
-/* line 33, ../sass/_normalize.scss */
+/* line 30, ../sass/_normalize.scss */
 audio,
 canvas,
 progress,
@@ -46,7 +46,7 @@ audio:not([controls]) {
  * Address `[hidden]` styling not present in IE 8/9.
  * Hide the `template` element in IE, Safari, and Firefox < 22.
  */
-/* line 53, ../sass/_normalize.scss */
+/* line 52, ../sass/_normalize.scss */
 [hidden],
 template {
   display: none;
@@ -92,7 +92,7 @@ a {
 /**
  * Improve readability when focused and also mouse hovered in all browsers.
  */
-/* line 98, ../sass/_normalize.scss */
+/* line 97, ../sass/_normalize.scss */
 a:active,
 a:hover {
   outline: 0;
@@ -122,7 +122,7 @@ abbr[title] {
 /**
  * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
  */
-/* line 129, ../sass/_normalize.scss */
+/* line 128, ../sass/_normalize.scss */
 b,
 strong {
   font-weight: bold;
@@ -158,7 +158,7 @@ mark {
 /**
  * Correct font family set oddly in Safari 5 and Chrome.
  */
-/* line 167, ../sass/_normalize.scss */
+/* line 164, ../sass/_normalize.scss */
 code,
 kbd,
 pre,
@@ -194,7 +194,7 @@ small {
 /**
  * Prevent `sub` and `sup` affecting `line-height` in all browsers.
  */
-/* line 201, ../sass/_normalize.scss */
+/* line 200, ../sass/_normalize.scss */
 sub,
 sup {
   font-size: 75%;
@@ -280,7 +280,7 @@ legend {
  * 2. Correct font properties not being inherited in all browsers.
  * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
  */
-/* line 285, ../sass/_normalize.scss */
+/* line 281, ../sass/_normalize.scss */
 button,
 input,
 optgroup,
@@ -307,7 +307,7 @@ optgroup {
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
  * the UA stylesheet.
  */
-/* line 306, ../sass/_normalize.scss */
+/* line 305, ../sass/_normalize.scss */
 button,
 input {
   line-height: normal;
@@ -319,7 +319,7 @@ input {
  * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
  * Correct `select` style inheritance in Firefox 4+ and Opera.
  */
-/* line 318, ../sass/_normalize.scss */
+/* line 317, ../sass/_normalize.scss */
 button,
 select {
   text-transform: none;
@@ -332,7 +332,7 @@ select {
  * 3. Improve usability and consistency of cursor style between image-type
  *    `input` and others.
  */
-/* line 333, ../sass/_normalize.scss */
+/* line 330, ../sass/_normalize.scss */
 button,
 html input[type="button"],
 input[type="reset"],
@@ -346,7 +346,7 @@ input[type="submit"] {
 /**
  * Re-set default cursor for disabled elements.
  */
-/* line 343, ../sass/_normalize.scss */
+/* line 342, ../sass/_normalize.scss */
 button[disabled],
 html input[disabled] {
   cursor: default;
@@ -356,7 +356,7 @@ html input[disabled] {
  * 1. Address box sizing set to `content-box` in IE 8/9/10.
  * 2. Remove excess padding in IE 8/9/10.
  */
-/* line 353, ../sass/_normalize.scss */
+/* line 352, ../sass/_normalize.scss */
 input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
@@ -384,7 +384,7 @@ input[type="search"] {
  * Remove inner padding and search cancel button in Safari 5 and Chrome
  * on OS X.
  */
-/* line 377, ../sass/_normalize.scss */
+/* line 376, ../sass/_normalize.scss */
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
@@ -393,7 +393,7 @@ input[type="search"]::-webkit-search-decoration {
 /**
  * Remove inner padding and border in Firefox 4+.
  */
-/* line 386, ../sass/_normalize.scss */
+/* line 385, ../sass/_normalize.scss */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
@@ -424,7 +424,7 @@ table {
   border-spacing: 0;
 }
 
-/* line 415, ../sass/_normalize.scss */
+/* line 414, ../sass/_normalize.scss */
 td,
 th {
   padding: 0;
@@ -467,11 +467,10 @@ img {
 /* line 36, ../sass/style.scss */
 body {
   display: -webkit-box;
-  display: -moz-box;
   display: -webkit-flex;
   display: -moz-flex;
-  display: flex;
   display: -ms-flexbox;
+  display: flex;
 }
 @media (max-width: 650px) {
   /* line 36, ../sass/style.scss */
@@ -482,9 +481,9 @@ body {
 
 /* line 44, ../sass/style.scss */
 .wrapper {
-  -webkit-box-flex: 4 0 0;
-  -moz-box-flex: 4 0 0;
+  -webkit-box-flex: 4;
   -webkit-flex: 4 0 0;
+  -moz-box-flex: 4;
   -moz-flex: 4 0 0;
   -ms-flex: 4 0 0;
   flex: 4 0 0;
@@ -560,7 +559,7 @@ body {
 }
 /* line 108, ../sass/style.scss */
 .feed__entry:not(.feed__entry--focus):hover {
-  background-color: #dddddd;
+  background-color: #DDD;
 }
 /* line 112, ../sass/style.scss */
 .feed__entry a {
@@ -575,9 +574,9 @@ body {
 /* SIDEBAR */
 /* line 122, ../sass/style.scss */
 .sidebar {
-  -webkit-box-flex: 1 0 0;
-  -moz-box-flex: 1 0 0;
+  -webkit-box-flex: 1;
   -webkit-flex: 1 0 0;
+  -moz-box-flex: 1;
   -moz-flex: 1 0 0;
   -ms-flex: 1 0 0;
   flex: 1 0 0;
@@ -590,7 +589,7 @@ body {
   padding-bottom: 0.3em;
   padding-top: 0.3em;
 }
-/* line 138, ../sass/style.scss */
+/* line 137, ../sass/style.scss */
 .sidebar [class*="__item"]:hover, .sidebar [class*="__item"]:active {
   background-color: #303030;
 }
@@ -715,16 +714,20 @@ body {
   top: 0;
   bottom: 0;
   width: 16em;
-  background-image: -webkit-linear-gradient(to left, #ffffff 6em, rgba(255, 255, 255, 0) 100%);
-  background-image: -moz-linear-gradient(to left, #ffffff 6em, rgba(255, 255, 255, 0) 100%);
-  background-image: -o-linear-gradient(to left, #ffffff 6em, rgba(255, 255, 255, 0) 100%);
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjEuMCIgeTE9IjAuNSIgeDI9IjAuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSI2ZW0iIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(6em, #ffffff), color-stop(100%, rgba(255, 255, 255, 0)));
+  background-image: -moz-linear-gradient(right, #ffffff 6em, rgba(255, 255, 255, 0) 100%);
+  background-image: -webkit-linear-gradient(right, #ffffff 6em, rgba(255, 255, 255, 0) 100%);
   background-image: linear-gradient(to left, #ffffff 6em, rgba(255, 255, 255, 0) 100%);
 }
 /* line 261, ../sass/style.scss */
 .feed__entry:hover .article__description:after {
-  background-image: -webkit-linear-gradient(to left, #dddddd 6em, rgba(221, 221, 221, 0) 100%);
-  background-image: -moz-linear-gradient(to left, #dddddd 6em, rgba(221, 221, 221, 0) 100%);
-  background-image: -o-linear-gradient(to left, #dddddd 6em, rgba(221, 221, 221, 0) 100%);
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjEuMCIgeTE9IjAuNSIgeDI9IjAuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSI2ZW0iIHN0b3AtY29sb3I9IiNkZGRkZGQiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkZGRkZGQiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(6em, #dddddd), color-stop(100%, rgba(221, 221, 221, 0)));
+  background-image: -moz-linear-gradient(right, #dddddd 6em, rgba(221, 221, 221, 0) 100%);
+  background-image: -webkit-linear-gradient(right, #dddddd 6em, rgba(221, 221, 221, 0) 100%);
   background-image: linear-gradient(to left, #dddddd 6em, rgba(221, 221, 221, 0) 100%);
 }
 @media (max-width: 650px) {
@@ -766,15 +769,16 @@ body {
   width: 24px;
   height: 24px;
   background: #fcfff4;
-  background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZjZmZmNCIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZGZlNWQ3Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjYjNiZWFkIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fcfff4), color-stop(40%, #dfe5d7), color-stop(100%, #b3bead));
   background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-  background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-  -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+  background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
   -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
 }
-/* line 309, ../sass/style.scss */
+/* line 300, ../sass/style.scss */
 .article__read-unread--checkbox label {
   width: 16px;
   height: 16px;
@@ -782,15 +786,16 @@ body {
   position: absolute;
   left: 4px;
   top: 4px;
-  background: -webkit-linear-gradient(top, #222222 0%, #45484d 100%);
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzIyMjIyMiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzQ1NDg0ZCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #222222), color-stop(100%, #45484d));
   background: -moz-linear-gradient(top, #222222 0%, #45484d 100%);
-  background: -o-linear-gradient(top, #222222 0%, #45484d 100%);
-  background: linear-gradient(top, #222222 0%, #45484d 100%);
-  -webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
+  background: -webkit-linear-gradient(top, #222222 0%, #45484d 100%);
+  background: linear-gradient(to bottom, #222222 0%, #45484d 100%);
   -moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
+  -webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
   box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
 }
-/* line 318, ../sass/style.scss */
+/* line 309, ../sass/style.scss */
 .article__read-unread--checkbox label:after {
   content: '';
   width: 8px;
@@ -804,33 +809,32 @@ body {
   background: transparent;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
-  -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-/* line 332, ../sass/style.scss */
+/* line 323, ../sass/style.scss */
 .article__read-unread--checkbox label:hover::after {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
   opacity: 0.3;
 }
-/* line 336, ../sass/style.scss */
+/* line 327, ../sass/style.scss */
 .article__read-unread--checkbox input[type=checkbox] {
   visibility: hidden;
 }
-/* line 338, ../sass/style.scss */
+/* line 329, ../sass/style.scss */
 .article__read-unread--checkbox input[type=checkbox]:checked + label:after {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
 
-/* line 343, ../sass/style.scss */
+/* line 334, ../sass/style.scss */
 .article__read-unread--label-content {
   display: none;
 }
 
-/* line 346, ../sass/style.scss */
+/* line 337, ../sass/style.scss */
 .article__content {
   display: none;
   margin: 0 auto;
@@ -838,37 +842,37 @@ body {
   line-height: 1.625em;
 }
 @media (max-width: 650px) {
-  /* line 346, ../sass/style.scss */
+  /* line 337, ../sass/style.scss */
   .article__content {
     width: auto;
   }
 }
-/* line 357, ../sass/style.scss */
+/* line 347, ../sass/style.scss */
 .article__content a:hover,
 .article__content a:active {
   text-decoration: underline;
 }
-/* line 361, ../sass/style.scss */
+/* line 352, ../sass/style.scss */
 .article__content--website .article__content {
   width: auto;
   height: 692px;
 }
-/* line 365, ../sass/style.scss */
+/* line 356, ../sass/style.scss */
 .article__content--website .article__content iframe {
   width: 100%;
 }
 
-/* line 370, ../sass/style.scss */
+/* line 361, ../sass/style.scss */
 .article__content__infos {
   margin: 1em 0;
 }
-/* line 373, ../sass/style.scss */
+/* line 364, ../sass/style.scss */
 .article__content__infos a {
   font-size: 0.9em;
   line-height: 1.2em;
 }
 
-/* line 379, ../sass/style.scss */
+/* line 370, ../sass/style.scss */
 .article__content__switch-view {
   display: none;
   position: absolute;
@@ -876,44 +880,44 @@ body {
   top: 0.4em;
 }
 @media (max-width: 650px) {
-  /* line 379, ../sass/style.scss */
+  /* line 370, ../sass/style.scss */
   .article__content__switch-view {
     top: 2.4em;
     right: 0.2em;
   }
 }
-/* line 390, ../sass/style.scss */
+/* line 381, ../sass/style.scss */
 .feed__entry--focus .article__content__switch-view {
   display: inherit;
 }
 
 /* USER SETTINGS */
-/* line 396, ../sass/style.scss */
+/* line 387, ../sass/style.scss */
 .settings {
   margin: 1em auto;
   color: #CACACA;
   text-align: center;
   white-space: normal;
 }
-/* line 403, ../sass/style.scss */
+/* line 394, ../sass/style.scss */
 .settings a {
   margin: 0 0.5em;
   padding: 0.2em;
   line-height: 2.6em;
 }
-/* line 410, ../sass/style.scss */
+/* line 400, ../sass/style.scss */
 .settings a:hover, .settings a:active {
   background-color: #303030;
 }
 
-/* line 417, ../sass/style.scss */
+/* line 407, ../sass/style.scss */
 .settings__fields input[type='text'],
 .settings__fields input[type='password'] {
   min-width: 7em;
   width: 95%;
 }
 
-/* line 423, ../sass/style.scss */
+/* line 412, ../sass/style.scss */
 .settings__fields input[type='text'],
 .settings__fields input[type='password'],
 .settings__fields input[type='submit'] {
@@ -923,17 +927,17 @@ body {
   color: #303030;
 }
 
-/* line 429, ../sass/style.scss */
+/* line 420, ../sass/style.scss */
 .settings__username {
   font-weight: bold;
 }
 
-/* line 433, ../sass/style.scss */
+/* line 424, ../sass/style.scss */
 .settings__go-to-events {
   display: none;
 }
 @media (max-width: 650px) {
-  /* line 433, ../sass/style.scss */
+  /* line 424, ../sass/style.scss */
   .settings__go-to-events {
     display: inline;
   }
@@ -941,29 +945,29 @@ body {
 
 /* MEDIA QUERIES */
 @media (max-width: 650px) {
-  /* line 443, ../sass/style.scss */
+  /* line 434, ../sass/style.scss */
   td {
     display: block;
   }
 }
 /* IE9- */
-/* line 449, ../sass/style.scss */
+/* line 440, ../sass/style.scss */
 .no-flexboxlegacy body {
   display: block;
 }
 
-/* line 453, ../sass/style.scss */
+/* line 444, ../sass/style.scss */
 .no-flexboxlegacy .wrapper {
   margin-left: 20%;
 }
 
-/* line 457, ../sass/style.scss */
+/* line 448, ../sass/style.scss */
 .no-flexboxlegacy .sidebar {
   float: left;
   width: 20%;
 }
 
-/* line 461, ../sass/style.scss */
+/* line 452, ../sass/style.scss */
 .no-boxshadow .article__read-unread--label-content {
   display: inline;
   padding: 3px;
@@ -972,7 +976,7 @@ body {
 }
 
 /* IE7 */
-/* line 468, ../sass/style.scss */
+/* line 459, ../sass/style.scss */
 .no-flexboxlegacy.no-boxsizing .sidebar {
   width: 19%;
 }
