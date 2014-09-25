@@ -114,7 +114,7 @@ body {
     }
 }
 
-.feed__event--read {
+%feed-event-read {
     color: #BBB;
 }
 
@@ -227,16 +227,16 @@ body {
         width: 75%;
     }
 
-    [class$="event--read"] & a {
-        @extend .feed__event--read;
+    [class~="event--read"] & a {
+        @extend %feed-event-read;
     }
 }
 .article__description {
     display: inline-block;
     margin-left: 0.4em;
     color: #888;
-    [class$="event--read"] & {
-        @extend .feed__event--read;
+    [class~="event--read"] & {
+        @extend %feed-event-read;
     }
 
     @media($breakpoint) {

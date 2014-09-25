@@ -567,7 +567,7 @@ body {
 }
 
 /* line 117, ../sass/style.scss */
-.feed__event--read, [class$="event--read"] .article__title a, [class$="event--read"] .article__description {
+[class~="event--read"] .article__title a, [class~="event--read"] .article__description {
   color: #BBB;
 }
 

@@ -233,7 +233,7 @@ function readThis(element,id,callback){
         entry.find('[type="checkbox"]').prop('checked', true);
         // Decrement feed number
         countersHandler( entry.data('feed-id') );
-        entry.addClass('js-event--read');
+        entry.addClass('event--read js-event--read');
         if( ( entry.find('.js-article__content').css('display') == 'none' ) && $(element).hasClass('js-read-unread') ) {
             entry.hide(0,function(){
                 if(callback){
