@@ -110,7 +110,9 @@ EventObject.prototype = {
     },
 
     toggleItem: function( special ) {
-        var existingEntryFocusedContent = this.existingEntryFocused.find('.js-article__content');
+        // [facto] - Find a better way to get existingEntryFocused inside the handler function
+        var existingEntryFocused = this.existingEntryFocused,
+            existingEntryFocusedContent = existingEntryFocused.find('.js-article__content');
 
         var readOrUnreadAtToggle = function ( entry ) {
             // [todo] - See if it is possible to get entry from object scope
@@ -126,12 +128,14 @@ EventObject.prototype = {
             }
         }
 
+        // [facto] - Remove this handler function to make the code more explicit
         function handler( customToggle ) {
             // [fix] - If click on event title after clicked unread
             if( existingEntryFocusedContent.length && ( this.content[0] != existingEntryFocusedContent[0] ) ) {
                 customToggle();
-                if( eventObj.existingEntryFocused.hasClass('js-event--read') ) {
-                    eventObj.existingEntryFocused.hide();
+
+                if( existingEntryFocused.length ) {
+                    existingEntryFocusedContent.parents('.js-event--read').hide();
                 }
 
             }
@@ -143,9 +147,8 @@ EventObject.prototype = {
         } else {
             this.toggleContent( readOrUnreadAtToggle( this.entry ) );
         }
-        if( ! this.currentEntryIsPrevious && this.isExistingEntryFocused ) {
-            handler( function() { existingEntryFocusedContent.toggle() } );
-        }
+
+        handler( function() { existingEntryFocusedContent.toggle() } );
 
         this.content.toggle();
     },
