@@ -1,5 +1,4 @@
-var buttonContent = { closed: '\u25B8', opened: '\u25BE' },
-    scrollInfiniLimit = '',
+var scrollInfiniLimit = '',
     eventObj;
 function _t(key,args){
     value = i18n[key];
@@ -188,7 +187,7 @@ function toggleFolder( button ) {
     feedBloc.slideToggle(200, function() {
         $(this).toggleClass('hidden');
     });
-    $(button).html((!open ? buttonContent.closed : buttonContent.opened ));
+    $(button).toggleClass('folder-closed');
     
     $.ajax({
         url: "./action.php?action=changeFolderState",

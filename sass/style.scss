@@ -31,6 +31,9 @@ img {
     max-width: 100%;
     height: auto;
 }
+img[src$=".svg"] {
+  vertical-align: middle;
+}
 
 /* GENERAL STYLE */
 body {
@@ -160,6 +163,11 @@ body {
 .folder__button {
     width: 1.5em;
 }
+
+.folder-closed img {
+    @include transform(rotate(270deg));
+}
+
 .folder__item,
 .feed-all__item a {
     @extend %sidebar-padding-side;
@@ -386,6 +394,7 @@ $checkbox-size: 24px;
 /* USER SETTINGS */
 .settings {
     margin: 1em auto;
+    padding: 0 1em;
     @extend %sidebar-padding-side;
     color: #CACACA;
     text-align: center;
