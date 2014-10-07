@@ -124,6 +124,7 @@ EventObject.prototype = {
                     // [facto] - children used here but parent needed on readThis function
                     readThis( entry.children(), entry.data('id') );
                 }
+                $(window).scrollTop( entry.offset().top );
             }
         }
 
