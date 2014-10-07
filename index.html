@@ -42,8 +42,9 @@
                 <button class="synchronyzeButton" title="{function="_t('LAUNCH_SYNCHRONISATION')"}" onclick="synchronize('{if="$myUser"}{$synchronisationCode}{/if}');">
                     <img alt="Reload" src="images/reload.svg" />
                 </button>
-                {* [todo] - Find a better sign to go to the events *}
-                <a href="#articles" class="settings__go-to-events">V</a>
+                <a href="#articles" class="settings__go-to-events">
+                    <img src="images/content.svg" alt="Go to the content">
+                </a>
             {/if}
         </div>
         {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
