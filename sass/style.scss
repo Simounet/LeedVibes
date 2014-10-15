@@ -157,6 +157,16 @@ body {
 
 }
 
+.feeds-list-toggle.is-toggled:before {
+    display: inline-block;
+    margin-right: 2px;
+    width: 15px;
+    height: 15px;
+    content: '';
+    background-image: url( '../images/close.svg' );
+    vertical-align: middle;
+}
+
 #feeds-list {
     @media($breakpoint) {
         display: none;

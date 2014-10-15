@@ -21,6 +21,12 @@ $(function() {
         toggleFolder( $(this) );
     });
 
+    $(".js-toggle-target").click( function() {
+        var button = $(this);
+        $( button.data( 'target' ) ).slideToggle( 200 );
+        button.toggleClass( 'is-toggled' );
+    });
+
     $( '.sidebar' ).on( 'click', '.js-mark-as-read', function() {
         button = $(this);
         if( button.parents('.js-feed__item').length ) {
