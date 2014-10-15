@@ -153,6 +153,16 @@ body {
 
 }
 
+#feeds-list {
+    @media($breakpoint) {
+        display: none;
+    }
+
+    &:target {
+        display: block;
+    }
+}
+
 .folder {
     border-bottom: 0.2em solid #484848;
 }
@@ -426,22 +436,19 @@ $checkbox-size: 24px;
     padding: 0.5em;
     color: $sidebar-color-bg-darken;
 }
-.settings__username {
-    @extend %text-color-light;
-    font-weight: bold;
-}
-.settings__go-to-events {
-    display: none;
-
-    @media($breakpoint) {
-        display: inline;
-    }
-}
 
 /* MEDIA QUERIES */
 @media($breakpoint) {
     td {
         display: block;
+    }
+}
+
+.mobile-only {
+    display: none;
+
+    @media($breakpoint) {
+        display: inline;
     }
 }
 

@@ -36,19 +36,22 @@
                     </label>
                 </form>
             {else}
-                {function="_t('IDENTIFIED_WITH',array('<span class="settings__username">'.$myUser->getLogin().'</span>'))"}
-                <a href="action.php?action=logout" title="{function="_t('DISCONNECT')"}"><img src="images/logout.svg" alt=""></a>
+                <a href="action.php?action=logout" title="{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})"><img src="images/logout.svg" alt=""></a>
                 <a href="settings.php" title="{function="_t('MANAGE')"}"><img src="images/settings.svg" alt=""></a>
                 <button class="synchronyzeButton" title="{function="_t('LAUNCH_SYNCHRONISATION')"}" onclick="synchronize('{if="$myUser"}{$synchronisationCode}{/if}');">
                     <img alt="Reload" src="images/reload.svg" />
                 </button>
-                <a href="#articles" class="settings__go-to-events">
-                    <img src="images/content.svg" alt="Go to the content">
-                </a>
+                <span class="mobile-only">
+                    <a href="#articles">
+                        <img src="images/content.svg" alt="Go to the content">
+                    </a>
+                    <a href="#feeds-list">Open</a>
+                    <a href="#">Close</a>
+                </span>
             {/if}
         </div>
         {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
-            <ul>
+            <ul id="feeds-list">
                 <li class="folder">
                     <div class="feed-all__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}">
                         <a href="./">All feeds</a>
