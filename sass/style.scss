@@ -17,6 +17,10 @@ body {
 }
 h1 {
     margin: 0;
+
+    @media( $breakpoint ) {
+        font-size: 1.3em;
+    }
 }
 a {
     text-decoration: none;
@@ -369,7 +373,6 @@ $checkbox-size: 24px;
 
     .article__content--website & {
         width: auto;
-        height: 692px;
 
         iframe {
             width: 100%;
