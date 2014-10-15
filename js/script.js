@@ -124,6 +124,7 @@ EventObject.prototype = {
                     // [facto] - children used here but parent needed on readThis function
                     readThis( entry.children(), entry.data('id') );
                 }
+
                 $(window).scrollTop( entry.offset().top );
             }
         }
@@ -145,10 +146,9 @@ EventObject.prototype = {
             handler( function() { toggleWebsite( existingEntryFocusedContent ) } );
             toggleWebsite( this.content, readOrUnreadAtToggle( this.entry ) );
         } else {
+            handler( function() { existingEntryFocusedContent.toggle() } );
             this.toggleContent( readOrUnreadAtToggle( this.entry ) );
         }
-
-        handler( function() { existingEntryFocusedContent.toggle() } );
 
         this.content.toggle();
     },
