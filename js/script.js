@@ -283,7 +283,7 @@ function readThis(element,id,callback){
                     } else {
                         if( console && console.log && msg!="" ) console.log(msg);
                         entry.find('[type="checkbox"]').prop('checked', false);
-                        entry.removeClass('js-event--read');
+                        entry.removeClass('event--read js-event--read');
                         if(callback){
                             callback();
                         }
