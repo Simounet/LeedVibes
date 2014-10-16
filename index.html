@@ -36,16 +36,20 @@
                     </label>
                 </form>
             {else}
-                <a href="action.php?action=logout" title="{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})"><img src="images/logout.svg" alt=""></a>
-                <a href="settings.php" title="{function="_t('MANAGE')"}"><img src="images/settings.svg" alt=""></a>
-                <button class="synchronyzeButton" title="{function="_t('LAUNCH_SYNCHRONISATION')"}" onclick="synchronize('{if="$myUser"}{$synchronisationCode}{/if}');">
-                    <img alt="Reload" src="images/reload.svg" />
-                </button>
+                <a href="action.php?action=logout" class="settings-item" title="{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})"><img src="images/logout.svg" alt=""></a>
+                <a href="settings.php" class="settings-item" title="{function="_t('MANAGE')"}"><img src="images/settings.svg" alt=""></a>
+                <span class="settings-item">
+                    <button class="synchronyzeButton" class="settings-item" title="{function="_t('LAUNCH_SYNCHRONISATION')"}" onclick="synchronize('{if="$myUser"}{$synchronisationCode}{/if}');">
+                        <img alt="Reload" src="images/reload.svg" />
+                    </button>
+                </span>
                 <span class="mobile-only">
-                    <a href="#articles">
+                    <a href="#articles" class="settings-item">
                         <img src="images/content.svg" alt="Go to the content">
                     </a>
-                    <button class="feeds-list-toggle js-toggle-target" data-target="#feeds-list">Menu</button>
+                    <span class="settings-item">
+                        <button class="feeds-list-toggle js-toggle-target" data-target="#feeds-list">Menu</button>
+                    </span>
                 </span>
             {/if}
         </div>
