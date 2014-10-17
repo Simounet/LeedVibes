@@ -3,7 +3,7 @@
     {$plainDescription=strip_tags($value->getDescription())}
         {function="Plugin::callHook("event_pre_section", array(&$value))"}
         {* [fix] - undefined $value->view if LeedRSSOrSiteView plugin is not installed *}
-        <article class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} js-event--read{/if}{if="$value->view == 1"} article__content--website js-website{/if}" data-id="{$value->getId()}" data-feed-id="{$value->getFeed()}">
+        <article class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} event--read js-event--read{/if}{if="$value->view == 1"} article__content--website js-website{/if}" data-id="{$value->getId()}" data-feed-id="{$value->getFeed()}">
             {function="Plugin::callHook("event_pre_title", array(&$value))"}
             <header class="article__header js-article__header">
                 {if="$action != 'selectedFeed'"}
