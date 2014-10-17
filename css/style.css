@@ -918,6 +918,7 @@ body {
   position: absolute;
   right: 8em;
   top: 0.4em;
+  z-index: 20;
 }
 @media (max-width: 650px) {
   /* line 417, ../sass/style.scss */
@@ -926,13 +927,13 @@ body {
     right: 0.2em;
   }
 }
-/* line 428, ../sass/style.scss */
+/* line 429, ../sass/style.scss */
 .feed__entry--focus .article__content__switch-view {
   display: inherit;
 }
 
 /* USER SETTINGS */
-/* line 434, ../sass/style.scss */
+/* line 435, ../sass/style.scss */
 .settings {
   margin: 1em auto;
   padding: 0 1em;
@@ -941,7 +942,7 @@ body {
   white-space: normal;
 }
 
-/* line 443, ../sass/style.scss */
+/* line 444, ../sass/style.scss */
 .settings-item {
   padding: 0.5em 1.5em;
   vertical-align: middle;
@@ -953,19 +954,19 @@ body {
   -webkit-transition-delay: 0s;
   transition: border 0.2s ease-in-out 0s;
 }
-/* line 450, ../sass/style.scss */
+/* line 451, ../sass/style.scss */
 .settings-item:hover, .settings-item:active, .settings-item:focus {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* line 457, ../sass/style.scss */
+/* line 458, ../sass/style.scss */
 .settings__fields input[type='text'],
 .settings__fields input[type='password'] {
   min-width: 7em;
   width: 35%;
 }
 
-/* line 462, ../sass/style.scss */
+/* line 463, ../sass/style.scss */
 .settings__fields input[type='text'],
 .settings__fields input[type='password'],
 .settings__fields input[type='submit'] {
@@ -977,40 +978,40 @@ body {
 
 /* MEDIA QUERIES */
 @media (max-width: 650px) {
-  /* line 473, ../sass/style.scss */
+  /* line 474, ../sass/style.scss */
   td {
     display: block;
   }
 }
-/* line 478, ../sass/style.scss */
+/* line 479, ../sass/style.scss */
 .mobile-only {
   display: none;
 }
 @media (max-width: 650px) {
-  /* line 478, ../sass/style.scss */
+  /* line 479, ../sass/style.scss */
   .mobile-only {
     display: inline;
   }
 }
 
 /* IE9- */
-/* line 487, ../sass/style.scss */
+/* line 488, ../sass/style.scss */
 .no-flexboxlegacy body {
   display: block;
 }
 
-/* line 491, ../sass/style.scss */
+/* line 492, ../sass/style.scss */
 .no-flexboxlegacy .wrapper {
   margin-left: 20%;
 }
 
-/* line 495, ../sass/style.scss */
+/* line 496, ../sass/style.scss */
 .no-flexboxlegacy .sidebar {
   float: left;
   width: 20%;
 }
 
-/* line 499, ../sass/style.scss */
+/* line 500, ../sass/style.scss */
 .no-boxshadow .article__read-unread--label-content {
   display: inline;
   padding: 3px;
@@ -1019,7 +1020,7 @@ body {
 }
 
 /* IE7 */
-/* line 506, ../sass/style.scss */
+/* line 507, ../sass/style.scss */
 .no-flexboxlegacy.no-boxsizing .sidebar {
   width: 19%;
 }

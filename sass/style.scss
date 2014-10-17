@@ -419,6 +419,7 @@ $checkbox-size: 24px;
     position: absolute;
     right: 8em;
     top: 0.4em;
+    z-index: 20;
 
     @media($breakpoint) {
         top: 2.4em;
