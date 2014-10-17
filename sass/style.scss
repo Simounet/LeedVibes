@@ -89,7 +89,6 @@ body {
     padding: 0 0.8em;
 }
 %sidebar-button {
-    padding: 0 0.1em;
     @extend %text-color-light;
     background-color: inherit;
     border: none;
@@ -107,6 +106,10 @@ body {
     position: relative;
     padding: 0.5em;
     border-bottom: 0.1em solid #D9D9D9;
+
+    @media($breakpoint) {
+        min-height: 40px;
+    }
 
     &:not(.feed__entry--focus):hover {
         background-color: $feed-bgc-used;
@@ -160,6 +163,12 @@ $border-color-active: rgba(255, 255, 255, 0.2);
         padding: 20%;
     }
 
+}
+
+.sidebar-item {
+    @media($breakpoint) {
+        padding: 12px 0;
+    }
 }
 
 .feeds-list-toggle.is-toggled:before {
