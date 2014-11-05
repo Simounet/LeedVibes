@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LeedVibes</title>
+    <title>{$delimiter=' · '}{if="isset($currentFeed)"}{$currentFeed->getName()}{$delimiter}{/if}{if="isset($currentFolder)"}{$currentFolder->getName()}{$delimiter}{/if}LeedVibes</title>
     <link rel="stylesheet" href="css/style.css" media="all">
     <meta name="viewport" content="width=device-width">
     {function="Plugin::callLink()"}
