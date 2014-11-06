@@ -327,6 +327,25 @@ $border-color-active: rgba(255, 255, 255, 0.2);
     color: $feed-entry-color;
     font-size: 0.9em;
 }
+
+$opacity-low: 0.3;
+.article-favorite {
+    position: absolute;
+    padding: 0.6em;
+    top: 0;
+    right: 1.4em;
+    @include opacity( $opacity-low );
+
+    @media( $breakpoint ) {
+        padding: 0.6em 0.8em 8em;
+    }
+
+    &:hover,
+    &--favorited {
+        @include opacity( 1 );
+    }
+}
+
 .article__read-unread {
     position: absolute;
     margin: 0.4em;
@@ -363,7 +382,7 @@ $checkbox-size: 24px;
           border-top: none;
           border-right: none;
           background: transparent;
-          @include opacity( 0.3 );
+          @include opacity( $opacity-low );
           @include transform( rotate(-45deg) );
       }
       &:hover::after {

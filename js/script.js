@@ -67,6 +67,11 @@ function EventObject( event ) {
     this.entry   = $(event.currentTarget);
     this.content = this.entry.find( '.' + this.contentClass );
 
+    if( this.targetClasses.contains( this.favoriteClass ) ) {
+        this.favorite( this.entry );
+        return;
+    }
+
     // Read button handling
     if( this.targetClasses.contains( this.readButtonClass ) ) {
         this.readUnreadButtonAction();
@@ -91,6 +96,7 @@ EventObject.prototype = {
     headerClass:  'js-article__header',
     contentClass: 'js-article__content',
     readButtonClass:  'js-read-unread',
+    favoriteClass: 'js-favorite',
 
     readUnreadButtonAction: function(){
         var id = this.entry.data('id');
@@ -176,6 +182,29 @@ EventObject.prototype = {
         if( this.content.not( ':visible' ).length ) {
             this.entry.addClass( 'hidden' );
         }
+    },
+
+    favorite: function() {
+        var favImage = this.target,
+            favAction = ( this.entry.data( 'favorite' ) == 1 ) ? 'remove' : 'add',
+            favText = ( this.entry.data( 'favorite' ) != 1 ) ? 'UNFAVORIZE' : 'FAVORIZE';
+
+        favImage.toggleClass('article-favorite--favorited');
+        this.entry.data( 'favorite', ! this.entry.data( 'favorite' ) );
+        $.ajax({
+            url: "./action.php?action=" + favAction + "Favorite",
+            data:{id: this.entry.data( 'id' )},
+            success:function(msg){
+                if(msg.status == 'noconnect') {
+                    alert(msg.texte)
+                } else {
+                    if( console && console.log && msg!="" ) console.log(msg);
+                    favImage
+                        .prop( 'alt', _t( favText ) )
+                        .prop( 'title', _t( favText ) );
+                }
+            }
+        });
     }
 }
 

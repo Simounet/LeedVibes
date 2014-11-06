@@ -3,7 +3,12 @@
     {$plainDescription=strip_tags($value->getDescription())}
         {function="Plugin::callHook("event_pre_section", array(&$value))"}
         {* [fix] - undefined $value->view if LeedRSSOrSiteView plugin is not installed *}
-        <article class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} event--read js-event--read{/if}{if="$value->view == 1"} article__content--website js-website{/if}" data-id="{$value->getId()}" data-feed-id="{$value->getFeed()}">
+        <article
+            class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} event--read js-event--read{/if}{if="$value->view == 1"} article__content--website js-website{/if}"
+            data-id="{$value->getId()}"
+            data-feed-id="{$value->getFeed()}"
+            data-favorite="{$value->getFavorite()}"
+        >
             {function="Plugin::callHook("event_pre_title", array(&$value))"}
             <header class="article__header js-article__header">
                 {if="$action != 'selectedFeed'"}
@@ -15,6 +20,12 @@
                 {if="$articleDisplayDate"}
                     <span class="article__date">{$value->dateFormatted}</span>
                 {/if}
+                <img
+                    src="plugins/leedvibes/images/favorite.svg"
+                    class="article-favorite js-favorite{if="$value->getFavorite()==1"} article-favorite--favorited{/if}"
+                    alt="{if="$value->getFavorite()==0"}{function="_t('FAVORIZE')"}{else}{function="_t('UNFAVORIZE')"}{/if}"
+                    title="{if="$value->getFavorite()==0"}{function="_t('FAVORIZE')"}{else}{function="_t('UNFAVORIZE')"}{/if}"
+                />
             </header>
             <div class="article__read-unread article__read-unread--checkbox js-read-unread--checkbox">
                 <input type="checkbox" id="event{$value->getId()}"{if="$value->getUnread() == 0"} checked="checked"{/if}/>
