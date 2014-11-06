@@ -61,32 +61,36 @@ $(function() {
 });
 
 function EventObject( event ) { 
-    this.entry   = $(event.currentTarget);
     this.target  = $(event.target);
-    this.content = this.entry.find( this.contentClass );
-    this.targetClass = '.' + this.target.attr('class');
-    
+    this.targetClasses = ( typeof( this.target.attr('class') ) != 'undefined' ) ? this.target.attr('class') : '';
+
+    this.entry   = $(event.currentTarget);
+    this.content = this.entry.find( '.' + this.contentClass );
+
+    // Read button handling
+    if( this.targetClasses.contains( this.readButtonClass ) ) {
+        this.readUnreadButtonAction();
+        this.hideEntryIfNotUnfolded();
+    }
+
     this.existingEntryFocused = $('.js-feed__entry.js-focus');
     this.isExistingEntryFocused = this.existingEntryFocused.length;
     this.currentEntryIsPrevious = ( this.entry[0] == this.existingEntryFocused[0] );
 
-    if( this.targetClass == this.buttonClass ) {
-        this.readUnreadButtonAction();
-    }
+    this.existingEntryFocusedContent = this.currentEntryIsPrevious ?
+        false
+        :
+        this.existingEntryFocused.find( '.' + this.contentClass );
 
-    if( this.target.parents( this.headerClass ).length ) {
+    if( this.target.parents( '.' + this.headerClass ).length ) {
         this.toggleEvent();
     }
 }
 
 EventObject.prototype = {
-    headerClass:  '.js-article__header',
-    contentClass: '.js-article__content',
-    buttonClass:  '.js-read-unread',
-
-    getContent: function() {
-        return this.entry.find( contentClass );
-    },
+    headerClass:  'js-article__header',
+    contentClass: 'js-article__content',
+    readButtonClass:  'js-read-unread',
 
     readUnreadButtonAction: function(){
         var id = this.entry.data('id');
@@ -99,11 +103,11 @@ EventObject.prototype = {
     toggleEvent: function() {
         var websiteView = this.entry.hasClass('js-website'); // [todo] - move this var to LeedRSSOrSiteView plugin
 
-        this.toggleFocus();
+        this.toggleHeaderFocus();
         this.toggleItem( websiteView );
     },
 
-    toggleFocus: function() {
+    toggleHeaderFocus: function() {
         // If we are not clicking on the already focused element
         // And there is and existing focused element
         // Then remove focus class
@@ -115,48 +119,35 @@ EventObject.prototype = {
     },
 
     toggleItem: function( special ) {
-        // [facto] - Find a better way to get existingEntryFocused inside the handler function
-        var existingEntryFocused = this.existingEntryFocused,
-            existingEntryFocusedContent = existingEntryFocused.find('.js-article__content');
+        var entry = this.entry,
+            target = this.target;
 
-        var readOrUnreadAtToggle = function ( entry ) {
-            // [todo] - See if it is possible to get entry from object scope
-            if( ! entry.find('[type="checkbox"]').prop("checked") ) {
-                if( entry.hasClass('js-event--read') ) {
-                    entry.hide();
-                }
-
-                if( entry.hasClass('js-focus') ) {
-                    // [facto] - children used here but parent needed on readThis function
-                    readThis( entry.children(), entry.data('id') );
-                }
-
-                $(window).scrollTop( entry.offset().top );
+        var readOrUnreadAtToggle = function () {
+            if( ! entry.hasClass( 'js-event--read' ) && entry.hasClass('js-focus') ) {
+                readThis( target, entry.data('id') );
             }
         }
 
-        // [facto] - Remove this handler function to make the code more explicit
-        function handler( customToggle ) {
-            // [fix] - If click on event title after clicked unread
-            if( existingEntryFocusedContent.length && ( this.content[0] != existingEntryFocusedContent[0] ) ) {
-                customToggle();
-
-                if( existingEntryFocused.length ) {
-                    existingEntryFocusedContent.parents('.js-event--read').hide();
-                }
-
-            }
-        }
-
+        // Content handling
         if( special ) {
-            handler( function() { toggleWebsite( existingEntryFocusedContent ) } );
-            toggleWebsite( this.content, readOrUnreadAtToggle( this.entry ) );
+            toggleWebsite( this.content, readOrUnreadAtToggle() );
         } else {
-            handler( function() { existingEntryFocusedContent.toggle() } );
-            this.toggleContent( readOrUnreadAtToggle( this.entry ) );
+            this.toggleContent( readOrUnreadAtToggle() );
         }
 
-        this.content.toggle();
+        // Hide the previous entry
+        if( this.existingEntryFocusedContent.length ) {
+            if( special ) {
+                toggleWebsite( this.existingEntryFocusedContent );
+            }
+            this.existingEntryFocused.addClass( 'hidden' );
+            this.existingEntryFocusedContent.removeClass( 'article__content--is-opened' );
+        }
+
+        // Toggle current entry
+        this.content.toggleClass( 'article__content--is-opened' );
+
+        $(window).scrollTop( this.entry.offset().top );
     },
 
     toggleContent: function( callback ) {
@@ -179,6 +170,12 @@ EventObject.prototype = {
             this.content.empty();
         }
 
+    },
+
+    hideEntryIfNotUnfolded: function() {
+        if( this.content.not( ':visible' ).length ) {
+            this.entry.addClass( 'hidden' );
+        }
     }
 }
 
@@ -235,6 +232,7 @@ function setScrollInfiniLimit() {
 
 /* FROM marigolds/js/script.js */
 function readThis(element,id,callback){
+    // [facto] - get entry directly
     var entry = $(element).parents('.js-feed__entry');
     var nextEvent = $('#'+id).next();
     //sur les éléments non lus
@@ -244,17 +242,22 @@ function readThis(element,id,callback){
         countersHandler( entry.data('feed-id') );
         entry.addClass('event--read js-event--read');
         if( ( entry.find('.js-article__content').css('display') == 'none' ) && $(element).hasClass('js-read-unread') ) {
-            entry.hide(0,function(){
-                if(callback){
-                    callback();
-                }else{
-                    targetThisEvent(nextEvent,true);
-                }
-                // on simule un scroll si tous les events sont cachés
-                if($('article section:last').attr('style')=='display: none;') {
-                    $(window).scrollTop($(document).height());
-                }
-            });
+            // If the article is not visible
+            // We pressed the read button as first action
+            // So we doesn't need to toggle the content opened class
+            if( entry.find( '.js-article__content' ).is( ':visible' ) ) {
+                entry.toggleClass( 'article__content--is-opened',function(){
+                    if(callback){
+                        callback();
+                    }else{
+                        targetThisEvent(nextEvent,true);
+                    }
+                    // on simule un scroll si tous les events sont cachés
+                    if($('article section:last').attr('style')=='display: none;') {
+                        $(window).scrollTop($(document).height());
+                    }
+                });
+            }
         }
         $.ajax({
             url: "./action.php?action=readContent",

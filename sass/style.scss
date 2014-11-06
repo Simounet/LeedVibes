@@ -405,6 +405,11 @@ $checkbox-size: 24px;
         }
     }
 }
+
+.article__content--is-opened {
+    display: block;
+}
+
 .article__content__infos {
     margin: 1em 0;
 
