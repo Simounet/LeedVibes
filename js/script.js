@@ -74,8 +74,8 @@ function EventObject( event ) {
 
     // Read button handling
     if( this.targetClasses.contains( this.readButtonClass ) ) {
-        this.readUnreadButtonAction();
         this.hideEntryIfNotUnfolded();
+        this.readUnreadButtonAction();
     }
 
     this.existingEntryFocused = $('.js-feed__entry.js-focus');
@@ -179,7 +179,10 @@ EventObject.prototype = {
     },
 
     hideEntryIfNotUnfolded: function() {
-        if( this.content.not( ':visible' ).length ) {
+        if(
+            ! this.target.siblings( '[type="checkbox"]' ).prop( 'checked' )
+           && this.content.not( ':visible' ).length
+        ) {
             this.entry.addClass( 'hidden' );
         }
     },
