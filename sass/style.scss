@@ -102,9 +102,10 @@ body {
 }
 
 /* FEED */
+$entry-space: 0.5em;
 .feed__entry {
     position: relative;
-    padding: 0.5em;
+    padding: 0 $entry-space;
     border-bottom: 0.1em solid #D9D9D9;
 
     @media($breakpoint) {
@@ -232,6 +233,7 @@ $border-color-active: rgba(255, 255, 255, 0.2);
 /* ARTICLE */
 .article__header {
     position: relative;
+    padding: $entry-space 0;
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
@@ -403,7 +405,7 @@ $checkbox-size: 24px;
 }
 .article__content {
     display: none;
-    margin: 0 auto;
+    margin: 0 auto 1em;
     width: 42.8125em; // font: 16px / width: 685px (http://www.pearsonified.com/typography/)
     line-height: 1.625em; // font: 16px / line-height: 26px (http://www.pearsonified.com/typography/) 
 
