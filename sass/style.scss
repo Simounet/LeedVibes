@@ -275,7 +275,7 @@ $border-color-active: rgba(255, 255, 255, 0.2);
 
     @media($breakpoint) {
         display: inline-block;
-        width: 75%;
+        width: 68%;
     }
 
     [class~="event--read"] & a {
@@ -325,7 +325,7 @@ $border-color-active: rgba(255, 255, 255, 0.2);
 }
 .article__date {
     position: absolute;
-    right: 2em;
+    right: 5em;
     color: $feed-entry-color;
     font-size: 0.9em;
 }
@@ -350,29 +350,24 @@ $opacity-low: 0.3;
 
 .article__read-unread {
     position: absolute;
-    margin: 0.4em;
-    width: 1.2em;
+    width: 2em;
     top: 0;
     right: 0;
     color: white;
-    background-color: grey;
     border: none;
     cursor: pointer;
 }
 // Thanks to: http://codepen.io/Twikito/pen/vhyKz
-$checkbox-size: 24px;
+$checkbox-size: 22px;
 .article__read-unread--checkbox {
-  width: $checkbox-size;
-  height: $checkbox-size;
-  background: none;
 
   label {
-      width: $checkbox-size - 8;
-      height: $checkbox-size - 8;
+      width: $checkbox-size;
+      height: $checkbox-size;
       cursor: pointer;
       position: absolute;
-      left: 4px;
-      top: 4px;
+      left: 0;
+      top: 9px;
       &:after {
           content: '';
           width: 8px;
@@ -387,11 +382,17 @@ $checkbox-size: 24px;
           @include opacity( $opacity-low );
           @include transform( rotate(-45deg) );
       }
-      &:hover::after {
-          @include opacity( 1 );
+
+      @media($breakpoint) {
+          height: 60px;
+          top: 12px;
       }
   }
+  &:hover label:after {
+      @include opacity( 1 );
+  }
   input[type=checkbox] {
+      width: $checkbox-size;
       visibility: hidden;
 
       &:checked + label:after {
