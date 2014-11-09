@@ -3,7 +3,7 @@
 @name LeedVibes
 @author Simounet <contact@simounet.net>
 @link http://www.simounet.net
-@licence WTFPL
+@licence MIT
 @version 1.0.0
 @description A Leed interface close to the old good Netvibes
 */
