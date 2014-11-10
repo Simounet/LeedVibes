@@ -482,6 +482,10 @@ $checkbox-size: 22px;
     }
 }
 
+.synchronize {
+    padding: 0;
+}
+
 .settings__fields input[type='text'],
 .settings__fields input[type='password'] {
     min-width: 7em;
