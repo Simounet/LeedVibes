@@ -67,13 +67,13 @@ function EventObject( event ) {
     this.entry   = $(event.currentTarget);
     this.content = this.entry.find( '.' + this.contentClass );
 
-    if( this.targetClasses.contains( this.favoriteClass ) ) {
+    if( this.targetClasses.indexOf( this.favoriteClass ) != -1 ) {
         this.favorite( this.entry );
         return;
     }
 
     // Read button handling
-    if( this.targetClasses.contains( this.readButtonClass ) ) {
+    if( this.targetClasses.indexOf( this.readButtonClass ) != -1 ) {
         this.hideEntryIfNotUnfolded();
         this.readUnreadButtonAction();
     }
