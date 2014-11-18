@@ -88,7 +88,7 @@ body {
 %sidebar-padding-side {
     padding: 0 0.8em;
 }
-%sidebar-button {
+%button-unstyled {
     @extend %text-color-light;
     background-color: inherit;
     border: none;
@@ -157,7 +157,7 @@ $border-color-active: rgba(255, 255, 255, 0.2);
     }
     
     button {
-        @extend %sidebar-button;
+        @extend %button-unstyled;
     }
     
     .settings__fields {
@@ -337,6 +337,7 @@ $opacity-low: 0.3;
     top: 0;
     right: 1.4em;
     @include opacity( $opacity-low );
+    @extend %button-unstyled;
 
     @media( $breakpoint ) {
         padding: 0.6em 0.8em 8em;
@@ -498,6 +499,10 @@ $checkbox-size: 22px;
     margin: 0.4em auto;
     padding: 0.5em;
     color: $sidebar-color-bg-darken;
+}
+
+.favorite-inverted {
+    fill: white;
 }
 
 /* MEDIA QUERIES */

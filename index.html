@@ -43,7 +43,11 @@
                         <img alt="Reload" src="images/reload.svg" />
                     </button>
                 </span>
-                <a href="index.php?action=favorites" class="settings-item" title="{function="_t('FAVORITES')"}"><img src="images/favorite-settings.svg" alt="{function="_t('FAVORITES')"}"></a>
+                <a href="index.php?action=favorites" class="settings-item" title="{function="_t('FAVORITES')"}">
+                    <svg width="15" height="15" class="favorite-inverted">
+                        <use xlink:href="#svg-favorite" />
+                    </svg>
+                </a>
                 <span class="mobile-only settings-item">
                     <button class="feeds-list-toggle js-toggle-target" data-target="#feeds-list">Menu</button>
                 </span>
@@ -101,6 +105,9 @@
     {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
     
     {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
+        <div class="svg-list hidden">
+            {include="favorite"}
+        </div>
         <section id="articles" class="wrapper">
             {if="count($events) > 0"}
                 {include="article"}

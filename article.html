@@ -20,12 +20,17 @@
                 {if="$articleDisplayDate"}
                     <span class="article__date">{$value->dateFormatted}</span>
                 {/if}
-                <img
-                    src="plugins/leedvibes/images/favorite.svg"
+                <button
                     class="article-favorite js-favorite{if="$value->getFavorite()==1"} article-favorite--favorited{/if}"
-                    alt="{if="$value->getFavorite()==0"}{function="_t('FAVORIZE')"}{else}{function="_t('UNFAVORIZE')"}{/if}"
-                    title="{if="$value->getFavorite()==0"}{function="_t('FAVORIZE')"}{else}{function="_t('UNFAVORIZE')"}{/if}"
-                />
+                        title="{if="$value->getFavorite()==0"}{function="_t('FAVORIZE')"}{else}{function="_t('UNFAVORIZE')"}{/if}"
+                >
+                    <svg
+                        width="15"
+                        height="15"
+                    >
+                        <use xlink:href="#svg-favorite" />
+                    </svg>
+                </button>
             </header>
             <div class="article__read-unread article__read-unread--checkbox js-read-unread--checkbox">
                 <input type="checkbox" id="event{$value->getId()}"{if="$value->getUnread() == 0"} checked="checked"{/if}/>
