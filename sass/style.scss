@@ -1,5 +1,6 @@
 @import "compass/css3";
 // VARS
+$font-size-base: 13px;
 $sidebar-color-bg: #424242;
 $sidebar-color-bg-darken: darken( $sidebar-color-bg, 7% );
 $sidebar-color-alt: #686868;
@@ -10,9 +11,12 @@ $feed-bgc-used: #DDD;
 @import "normalize";
 @import "vendor/flex";
 
+/* MIXINS */
+@import "partials/mixins/_helpers.scss";
+
 /* RESET */
 body {
-    font-size: 13px;
+    font-size: $font-size-base;
     background-color: $sidebar-color-bg;
 }
 h1 {
@@ -117,12 +121,17 @@ $entry-space: 0.5em;
     }
 }
 
+.feed__entry--last {
+    border-bottom-color: #000;
+}
+
 %feed-event-read {
     color: #BBB;
 }
 
 /* SIDEBAR */
-$border-base: 5px solid transparent;
+$border-base-width: em( 5px );
+$border-base: $border-base-width solid transparent;
 $border-color-active: rgba(255, 255, 255, 0.2);
 
 .sidebar {
@@ -150,10 +159,6 @@ $border-color-active: rgba(255, 255, 255, 0.2);
             border-color: $border-color-active;
         }
 
-    }
-    
-    button {
-        @extend %button-unstyled;
     }
     
     .settings__fields {
@@ -191,6 +196,11 @@ $border-color-active: rgba(255, 255, 255, 0.2);
 .folder {
     border-bottom: 0.2em solid #484848;
 }
+
+.folder button {
+    @extend %button-unstyled;
+}
+
 .folder__item a {
     margin: 0 0.3em;
     @extend %overflow-sidebar;
@@ -477,10 +487,9 @@ $checkbox-size: 22px;
     white-space: normal;
 }
 
+$settings-padding-top-bottom: 0.5em;
 .settings-item {
-    padding: 0.5em 1.5em;
-    vertical-align: middle;
-    line-height: 2.6em;
+    padding: $settings-padding-top-bottom 1.5em;
     border-bottom: $border-base;
     @include transition(border 0.2s ease-in-out 0s);
 
@@ -491,8 +500,12 @@ $checkbox-size: 22px;
     }
 }
 
-.synchronize {
-    padding: 0;
+button.settings-item {
+    height: $settings-padding-top-bottom*2+$border-base-width+em( 16px ); // padding-top + padding-bottom + border-bottom + height
+    border-top-width: 0;
+    border-right-width: 0;
+    border-left-width: 0;
+    background-color: transparent;
 }
 
 .settings__fields input[type='text'],
@@ -511,6 +524,13 @@ $checkbox-size: 22px;
 
 .favorite-inverted {
     fill: white;
+}
+
+.animation-spin {
+    @include animation( spin 4s linear infinite );
+}
+@include keyframes( spin ) {
+    100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); }
 }
 
 /* MEDIA QUERIES */

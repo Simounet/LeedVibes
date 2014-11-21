@@ -38,19 +38,15 @@
             {else}
                 <a href="action.php?action=logout" class="settings-item" title="{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})"><img src="images/logout.svg" alt=""></a>
                 <a href="settings.php" class="settings-item" title="{function="_t('MANAGE')"}"><img src="images/settings.svg" alt=""></a>
-                <span class="settings-item">
-                    <button class="synchronize" title="{function="_t('LAUNCH_SYNCHRONISATION')"}" onclick="synchronize('{if="$myUser"}{$synchronisationCode}{/if}');">
-                        <img alt="Reload" src="images/reload.svg" />
-                    </button>
-                </span>
+                <button class="settings-item" title="{function="_t('LAUNCH_SYNCHRONISATION')"}" onclick="synchronize('{if="$myUser"}{$synchronisationCode}{/if}');">
+                    <img alt="Reload" src="images/reload.svg" />
+                </button>
                 <a href="index.php?action=favorites" class="settings-item" title="{function="_t('FAVORITES')"}">
                     <svg width="15" height="15" class="favorite-inverted">
                         <use xlink:href="#svg-favorite" />
                     </svg>
                 </a>
-                <span class="mobile-only settings-item">
-                    <button class="feeds-list-toggle js-toggle-target" data-target="#feeds-list">Menu</button>
-                </span>
+                <button class="mobile-only settings-item feeds-list-toggle js-toggle-target" data-target="#feeds-list">Menu</button>
             {/if}
         </div>
         {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
