@@ -67,8 +67,11 @@ function EventObject( event ) {
     this.entry   = $(event.currentTarget);
     this.content = this.entry.find( '.' + this.contentClass );
 
-    if( this.targetClasses.indexOf( this.favoriteClass ) != -1 ) {
-        this.favorite( this.entry );
+    // Work around for SVGs click handling
+    var favoriteTarget = this.target.parents( '.' + this.favoriteClass )
+    var isFavoriteAction = favoriteTarget.length;
+    if( isFavoriteAction ) {
+        this.favorite( favoriteTarget );
         return;
     }
 
@@ -191,8 +194,8 @@ EventObject.prototype = {
         }
     },
 
-    favorite: function() {
-        var favImage = this.target,
+    favorite: function( favoriteTarget ) {
+        var favImage = favoriteTarget,
             favAction = ( this.entry.data( 'favorite' ) == 1 ) ? 'remove' : 'add',
             favText = ( this.entry.data( 'favorite' ) != 1 ) ? 'UNFAVORIZE' : 'FAVORIZE';
 
