@@ -18,7 +18,7 @@
                 <h1 class="article__title js-article__title"><a href="{$value->getLink()}" target="_blank">{$value->getTitle()}</a></h1>
                 <span class="article__description">{function="Functions::truncate(strip_tags($value->getDescription()),300)"}</span>
                 {if="$articleDisplayDate"}
-                    <span class="article__date">{$value->dateFormatted}</span>
+                    <span class="article__date" title="{$value->dateTitle}">{$value->dateValue}</span>
                 {/if}
                 <button
                     class="article-favorite js-favorite{if="$value->getFavorite()==1"} article-favorite--favorited{/if}"

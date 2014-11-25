@@ -12,7 +12,9 @@ include( __DIR__ . '/classes/Utils.php' );
 
 function leedvibes( &$event ) {
     $utils = new Utils();
-    $event->dateFormatted = $utils->formatDate( $event->getPubdate() );
+    $date = $utils->formatDate( $event->getPubdate() );
+    $event->dateValue = $date['value'];
+    $event->dateTitle = $date['title'];
 
     $feed = new Feed();
     $usedFeed = $feed->getById($event->getFeed());

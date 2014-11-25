@@ -11,16 +11,19 @@ class Utils {
         $current_year = date('yyyy', $timestamp) == date('yyyy') ? true : false;
 
         if( $timestamp > $now ) {
-            $date = _t('LEEDVIBES_IN_THE_FUTURE');
+            $date_tmp = _t('LEEDVIBES_IN_THE_FUTURE');
         } elseif( $less_than_one_hour ) {
-            $date = $diff . ' ' . _t('LEEDVIBES_MN');
+            $date_tmp = $diff . ' ' . _t('LEEDVIBES_MN');
         } elseif( $less_than_one_day ) {
-            $date = date('G:i', $timestamp);
+            $date_tmp = date('G:i', $timestamp);
         } elseif( $current_year ) {
-            $date = date('j M', $timestamp);
+            $date_tmp = date('j M', $timestamp);
         } else {
-            $date = date('j M Y', $timestamp);
+            $date_tmp = date('j M Y', $timestamp);
         }
+
+        $date['value'] = $date_tmp;
+        $date['title'] = date('H:i Y-m-d', $timestamp);
 
         return $date;
     }
