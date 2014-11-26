@@ -366,20 +366,13 @@ function scrollInfini(go) {
            || agentID && ($(window).scrollTop() + $(window).height()) + 150 > $(document).height()))
         {
             // CONFIGS
-            var loader = $('.wrapper #loader'),
-                loaderFadeTime = 500,
-                loaderDelayTime = 2000;
+            var loading = $('#infinite-scroll-loading'),
+                loadingFadeTime = 500,
+                loadingDelayTime = 2000;
             // lorsqu'on commence un traitement, on met ajaxready à false
             $(window).data('ajaxready', false);
 
-            //j'affiche mon loader pour indiquer le chargement
-            if( loader.hasClass('hidden') ) {
-                loader
-                    .fadeIn(loaderFadeTime)
-                    .removeClass('hidden');
-            } else {
-                loader.fadeIn(loaderFadeTime);
-            }
+            showOrHide( loading, 'show' );
 
             // récupération des variables passées en Get
             var action = getUrlVars()['action'];
@@ -392,17 +385,16 @@ function scrollInfini(go) {
                 type: 'post',
                 data: 'scroll='+$(window).data('page')+'&nblus='+$(window).data('nblus')+'&action='+action+'&folder='+folder+'&feed='+feed+order,
 
-                //Succès de la requête
                 success: function(data) {
                     if (data.replace(/^\s+/g,'').replace(/\s+$/g,'') != '')
-                    {    // on les insère juste avant le loader
-                        loader.before(data);
+                    {    // on les insère juste avant le loading
+                        loading.before(data);
                         //on supprime de la page le script pour ne pas intéragir avec les next & prev
                         //$('article .scriptaddbutton').remove();
                         //si l'élement courant est caché, selectionner le premier élément du scroll
-                        //ou si le div loader est sélectionné (quand 0 article restant suite au raccourcis M)
+                        //ou si le div loading est sélectionné (quand 0 article restant suite au raccourcis M)
                         //if (($('article section.eventSelected').attr('style')=='display: none;')
-                        //    || ($('article div.eventSelected').attr('id')=='loader'))
+                        //    || ($('article div.eventSelected').attr('id')=='loading'))
                         //{
                         //    targetThisEvent($('article section.scroll:first'), true);
                         //}
@@ -415,21 +407,14 @@ function scrollInfini(go) {
                         $(window).data('enCoursScroll',0);
                         // appel récursif tant qu'un scroll n'est pas detecté.
                         if ($(window).scrollTop()==0) scrollInfini();
-                        loader
-                            .delay(loaderDelayTime)
-                            .fadeOut(loaderFadeTime);
+                        showOrHide( loading, 'hide' );
                     } else {
-                        loader
-                            .fadeOut(loaderFadeTime);
-                        $('.wrapper')
-                            .append('<div class="infinite-scroll--end js-infinite-scroll--end">'+_t('LEEDVIBES_NO_MORE_EVENT')+'</div>');
+                        showOrHide( loading, 'hide' );
+                        showOrHide( $('#no-more-events'), 'show' );
                     }
                  },
                 complete: function(){
-                    // le chargement est terminé, on fait disparaitre notre loader
-                    loader
-                        .delay(loaderDelayTime)
-                        .fadeOut(loaderFadeTime);
+                    // le chargement est terminé, on fait disparaitre notre loading
                     setScrollInfiniLimit();
                 }
             });
@@ -466,5 +451,24 @@ function synchronize(code){
         '</section>');
     }else{
         alert(_t('YOU_MUST_BE_CONNECTED_FEED'));
+    }
+}
+
+function showOrHide( identifier, action ) {
+    var el = $( identifier );
+
+    if( ! action || action == 'show' ) {
+        el.animate(
+            {opacity: 'show', height: 'show'},
+            {duration: 'slow', complete: function() { el.removeClass( 'hidden' ); }}
+        )
+    }
+
+    if( ! action || action == 'hide' ) {
+        el.delay( 4000 )
+            .animate(
+                {opacity: 'hide', height: 'hide'},
+                {duration: 'slow', complete: function() { el.addClass( 'hidden'); }}
+            );
     }
 }

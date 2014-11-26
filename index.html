@@ -107,6 +107,12 @@
         <section id="articles" class="wrapper">
             {if="count($events) > 0"}
                 {include="article"}
+                <div id="infinite-scroll-loading" class="hidden">
+                    <p class="infinite-scroll">{function="_t('LOADING')"}</p>
+                </div>
+                <div id="no-more-events" class="hidden">
+                    <p class="infinite-scroll--end js-infinite-scroll--end">{function="_t('LEEDVIBES_NO_MORE_EVENT')"}</p>
+                </div>
             {else}
                 <div class="infinite-scroll--end">
                     {function="_t('LEEDVIBES_NOTHING_TO_READ')"}

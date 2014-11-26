@@ -79,6 +79,7 @@ body {
 }
 
 .infinite-scroll {
+    margin: 0;
     padding: 1em 0.5em;
     @extend %text-color-light;
     background-color: rgba($sidebar-color-bg, 0.9);
