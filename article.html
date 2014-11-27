@@ -1,10 +1,10 @@
+{$last_event=count($events)-1}
 {loop="$events"}
-
     {$plainDescription=strip_tags($value->getDescription())}
         {function="Plugin::callHook("event_pre_section", array(&$value))"}
         {* [fix] - undefined $value->view if LeedRSSOrSiteView plugin is not installed *}
         <article
-            class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} event--read js-event--read{/if}{if="$value->view == 1"} article__content--website js-website{/if}"
+            class="feed__entry js-feed__entry{if="$value->getUnread() == 0"} event--read js-event--read{/if}{if="$value->view == 1"} article__content--website js-website{/if}{if="$key == $last_event"} feed__entry--last{/if}"
             data-id="{$value->getId()}"
             data-feed-id="{$value->getFeed()}"
             data-favorite="{$value->getFavorite()}"
