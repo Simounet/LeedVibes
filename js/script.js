@@ -108,8 +108,8 @@ EventObject.prototype = {
     readUnreadButtonAction: function(){
         var id = this.entry.data('id');
 
-        if( this.target.hasClass('js-read-unread') ){
-            readThis( this.target, id );
+        if( this.target.hasClass( this.readButtonClass ) ){
+            readThis( $(this.target), id );
         }
     },
 
@@ -137,7 +137,7 @@ EventObject.prototype = {
 
         var readOrUnreadAtToggle = function () {
             if( ! entry.hasClass( 'js-event--read' ) && entry.hasClass('js-focus') ) {
-                readThis( target, entry.data('id') );
+                readThis( $(target), entry.data('id') );
             }
         }
 
@@ -272,15 +272,18 @@ function setScrollInfiniLimit() {
 /* FROM marigolds/js/script.js */
 function readThis(element,id,callback){
     // [facto] - get entry directly
-    var entry = $(element).parents('.js-feed__entry');
-    var nextEvent = $('#'+id).next();
+    var entry = element.parents('.js-feed__entry'),
+        nextEvent = $('#'+id).next(),
+        readUnreadButton = entry.find( '.js-read-unread' );
     //sur les éléments non lus
     if(!entry.hasClass('js-event--read')){
         entry.find('[type="checkbox"]').prop('checked', true);
         // Decrement feed number
         countersHandler( entry.data('feed-id') );
         entry.addClass('event--read js-event--read');
-        if( ( entry.find('.js-article__content').css('display') == 'none' ) && $(element).hasClass('js-read-unread') ) {
+        readUnreadButton.prop( 'title', _t( 'LEEDVIBES_MARK_AS_UNREAD' ) );
+
+        if( ( entry.find('.js-article__content').css('display') == 'none' ) && element.hasClass('js-read-unread') ) {
             // If the article is not visible
             // We pressed the read button as first action
             // So we doesn't need to toggle the content opened class
@@ -316,6 +319,7 @@ function readThis(element,id,callback){
             }
         });
     }else{  // sur les éléments lus
+        readUnreadButton.prop( 'title', _t( 'LEEDVIBES_MARK_AS_READ' ) );
         $.ajax({
                 url: "./action.php?action=unreadContent",
                 data:{id:id},

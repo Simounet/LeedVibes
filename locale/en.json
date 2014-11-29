@@ -5,5 +5,7 @@
   "LEEDVIBES_READ_ALL_CONFIRM": "Mark all events as read?",
   "LEEDVIBES_NOTHING_TO_READ": "Oh no, your reading list is empty!",
   "LEEDVIBES_MARK_ALL_AS_READ": "Mark all feeds as read.",
-  "LEEDVIBES_CONNECTION": "Connection"
+  "LEEDVIBES_CONNECTION": "Connection",
+  "LEEDVIBES_MARK_AS_READ": "Mark as read",
+  "LEEDVIBES_MARK_AS_UNREAD": "Mark as unread"
 }
