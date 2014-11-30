@@ -25,7 +25,22 @@ function setLeedvibesTemplate() {
     raintpl::configure("tpl_dir", 'plugins/leedvibes/' );
 }
 
+function setLeedvibesNewEventsFilter( &$_, &$filter, &$article_conf, &$tpl ) {
+    if( isset( $_['custom-action'] )
+        && $_['custom-action'] == 'new-events'
+    ) {
+        // [todo] - utiliser le dernier id plutôt que la date
+        $filter[MYSQL_PREFIX . 'event`.`id'] = '> ' . $_['last-id-checked'];
+        $filter['unread'] = '1';
+        $article_conf['articlePerPages'] = 100;
+
+        $tpl->assign( 'view_json', true );
+        $tpl->assign( 'scroll', 1 );
+    }
+}
+
 Plugin::addHook("event_pre_title", "leedvibes");
 Plugin::addHook("index_pre_treatment", "setLeedvibesTemplate");
+Plugin::addHook("article_pre_action", "setLeedvibesNewEventsFilter");
 
 ?>

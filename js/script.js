@@ -1,5 +1,6 @@
 var scrollInfiniLimit = '',
-    eventObj;
+    eventObj,
+    idsDisplayed = [];
 function _t(key,args){
     value = i18n[key];
     if(args!=null){
@@ -27,6 +28,10 @@ $(function() {
         button.toggleClass( 'is-toggled' );
     });
 
+    $('.js-new-events').click( function() {
+        getNewEvents( $(this).data( 'sync-code' ) );
+    });
+
     $( '.sidebar' ).on( 'click', '.js-mark-as-read', function() {
         button = $(this);
         if( button.parents('.js-feed__item').length ) {
@@ -41,7 +46,7 @@ $(function() {
         }
     });
 
-    $('.wrapper').append('<div id="loader" class="infinite-scroll hidden">'+_t('LOADING')+'</div>');
+    pushIdsDisplayed( $('.js-feed__entry') );
 
     setScrollInfiniLimit();
 
@@ -403,9 +408,7 @@ function scrollInfini(go) {
                         //    targetThisEvent($('article section.scroll:first'), true);
                         //}
                         // on les affiche avec un fadeIn
-                        $('.wrapper article.scroll').fadeIn(600);
-                        // on supprime le tag de classe pour le prochain scroll
-                        $('.wrapper article.scroll').removeClass('scroll');
+                        var newEventsClass = 'feed__entry--new';
                         $(window).data('ajaxready', true);
                         $(window).data('page', $(window).data('page')+1);
                         $(window).data('enCoursScroll',0);
@@ -447,15 +450,74 @@ function getUrlVars()
     return vars;
 }
 
-//synchronisation manuelle lancée depuis le boutton du menu
-function synchronize(code){
-    if(code!=''){
-        $('#articles').prepend('<section>'+
-        '<iframe class="importFrame" src="action.php?action=synchronize&format=html&code='+code+'" name="idFrameSynchro" id="idFrameSynchro" width="100%" height="300" ></iframe>'+
-        '</section>');
-    }else{
-        alert(_t('YOU_MUST_BE_CONNECTED_FEED'));
-    }
+function getNewEvents(code){
+    var noNewEventsId =  '#no-new-events';
+
+    // Check if ajax queries are locked
+    if( $(window).data('ajaxready') == false ) return;
+
+    // Lock ajax queries
+    $(window).data('ajaxready', false);
+
+    // Loaders config
+    var loadingClass = 'animation-spin',
+        loader = $('.js-new-events').children(":first"),
+        loaderFadeTime = 500;
+
+    // Show loader
+    loader.addClass( loadingClass );
+    loader.prop( 'disabled', 'disabled' );
+
+    // General settings
+    var action = getUrlVars()['action'],
+        folder = getUrlVars()['folder'],
+        feed = getUrlVars()['feed'],
+        order = ( getUrlVars()['order'] != '' ) ? '&order=' + getUrlVars()['order'] : '',
+        lastIdChecked = idsDisplayed[0];
+
+    $.ajax({
+        url: './article.php',
+        type: 'POST',
+        dataType: "html",
+        data: 'custom-action=new-events&action='+action+'&folder='+folder+'&feed='+feed+order+'&last-id-checked='+lastIdChecked,
+
+        success: function(data) {
+            if( data.replace(/^\s+/g,'').replace(/\s+$/g,'') != '' ) {
+
+                $( noNewEventsId )
+                    // Adding new events
+                    // [todo] - Add new events number as an info to the left menu
+                    .after( data );
+                    // Updating first id general info for the next call
+                    //.data( 'first-id', $( $(data)[0] ).data( 'id' ) );
+                    // [todo] - Clean undesired TextNode in data var
+                    pushIdsDisplayed( $(data) );
+
+            } else {
+
+                if( ! $( noNewEventsId ).is( ':visible' ) ) {
+                    showOrHide( noNewEventsId );
+                }
+
+            }
+
+        },
+        complete: function(){
+
+            // Ajax queries autorized again
+            $(window).data( 'ajaxready', true );
+            loader.prop( 'disabled', '' );
+
+            // Hide loader
+            setTimeout(
+                function() {
+                    loader.removeClass( loadingClass );
+                },
+                loaderFadeTime
+            );
+
+        }
+    });
 }
 
 function showOrHide( identifier, action ) {
@@ -475,4 +537,17 @@ function showOrHide( identifier, action ) {
                 {duration: 'slow', complete: function() { el.addClass( 'hidden'); }}
             );
     }
+}
+
+function pushIdsDisplayed( events ) {
+    events.each( function() {
+        var id = $(this).data('id');
+
+        if( typeof( id ) !== 'undefined' ) {
+            idsDisplayed.push( id );
+        }
+    });
+
+    idsDisplayed.sort();
+    idsDisplayed.reverse();
 }

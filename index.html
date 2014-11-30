@@ -38,7 +38,7 @@
             {else}
                 <a href="action.php?action=logout" class="settings-item" title="{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})"><img src="images/logout.svg" alt=""></a>
                 <a href="settings.php" class="settings-item" title="{function="_t('MANAGE')"}"><img src="images/settings.svg" alt=""></a>
-                <button class="settings-item" title="{function="_t('LAUNCH_SYNCHRONISATION')"}" onclick="synchronize('{if="$myUser"}{$synchronisationCode}{/if}');">
+                <button class="settings-item new-events js-new-events" title="{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}" data-sync-code="{$synchronisationCode}">
                     <img alt="Reload" src="images/reload.svg" />
                 </button>
                 <a href="index.php?action=favorites" class="settings-item" title="{function="_t('FAVORITES')"}">
@@ -106,6 +106,9 @@
         </div>
         <section id="articles" class="wrapper">
             {if="count($events) > 0"}
+                <div id="no-new-events" class="hidden">
+                    <p class="infinite-scroll--end js-infinite-scroll--end">{function="_t('LEEDVIBES_NO_NEW_EVENTS')"}</p>
+                </div>
                 {include="article"}
                 <div id="infinite-scroll-loading" class="hidden">
                     <p class="infinite-scroll">{function="_t('LOADING')"}</p>

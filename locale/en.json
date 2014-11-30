@@ -1,11 +1,13 @@
 {
   "LEEDVIBES_NO_MORE_EVENT": "The last item has already been shown.",
+  "LEEDVIBES_NO_NEW_EVENTS": "There is no new events since the last time.",
   "LEEDVIBES_MN": "mn",
   "LEEDVIBES_IN_THE_FUTURE": "In the future",
   "LEEDVIBES_READ_ALL_CONFIRM": "Mark all events as read?",
   "LEEDVIBES_NOTHING_TO_READ": "Oh no, your reading list is empty!",
   "LEEDVIBES_MARK_ALL_AS_READ": "Mark all feeds as read.",
   "LEEDVIBES_CONNECTION": "Connection",
+  "LEEDVIBES_GET_NEW_EVENTS": "Show new events",
   "LEEDVIBES_MARK_AS_READ": "Mark as read",
   "LEEDVIBES_MARK_AS_UNREAD": "Mark as unread"
 }
