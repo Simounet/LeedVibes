@@ -12,8 +12,10 @@ class Utils {
 
         if( $timestamp > $now ) {
             $date_tmp = _t('LEEDVIBES_IN_THE_FUTURE');
+            $date['less-than-one-hour'] = true;
         } elseif( $less_than_one_hour ) {
             $date_tmp = $diff . ' ' . _t('LEEDVIBES_MN');
+            $date['less-than-one-hour'] = true;
         } elseif( $less_than_one_day ) {
             $date_tmp = date('G:i', $timestamp);
         } elseif( $current_year ) {

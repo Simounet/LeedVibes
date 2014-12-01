@@ -13,6 +13,7 @@ include( __DIR__ . '/classes/Utils.php' );
 function leedvibes( &$event ) {
     $utils = new Utils();
     $date = $utils->formatDate( $event->getPubdate() );
+    $event->dateLessThanOneHour = isset( $date['less-than-one-hour'] ) ? true : false;
     $event->dateValue = $date['value'];
     $event->dateTitle = $date['title'];
 

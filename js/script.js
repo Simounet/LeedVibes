@@ -503,6 +503,7 @@ function getNewEvents(code){
 
         },
         complete: function(){
+            updateEventsDate();
 
             // Ajax queries autorized again
             $(window).data( 'ajaxready', true );
@@ -550,4 +551,47 @@ function pushIdsDisplayed( events ) {
 
     idsDisplayed.sort();
     idsDisplayed.reverse();
+}
+
+function updateEventsDate() {
+
+    var dateNow = new Date();
+
+    $('[data-timestamp]:not([data-timestamp=""])').each( function() {
+        var eventItem = $(this),
+            eventItemDataAttribute = 'timestamp',
+            date = new Date( eventItem.data( eventItemDataAttribute ) *1000 );
+
+        var newDate = getNewEventDate( date );
+
+        if( typeof( newDate ) == 'number' ) {
+            eventItem.html( newDate + ' ' + _t('LEEDVIBES_MN') );
+        } else if( newDate ) {
+            eventItem.html( newDate );
+            eventItem.removeData( eventItemDataAttribute );
+        }
+    });
+
+    function getNewEventDate( date ) {
+
+        var diff = dateNow.getTime() - date.getTime(),
+            diffMinutes = Math.floor( diff / 1000 / 60 ),
+            timeMinutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(),
+            timeString = date.getHours() + ':' + timeMinutes;
+
+        // If the event date is in the future
+        // We do nothin' (Jon Snow)
+        if( diff < 1 ) {
+            return false;
+        }
+
+        var result = ( diffMinutes < 60 ) ?
+                diffMinutes
+                :
+                timeString;
+
+        return result;
+
+    }
+
 }
