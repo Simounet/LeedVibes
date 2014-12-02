@@ -468,6 +468,9 @@ function getNewEvents(code){
     loader.addClass( loadingClass );
     loader.prop( 'disabled', 'disabled' );
 
+    var lastEventClass = 'feed__entry--new-last';
+    $( '.' + lastEventClass ).removeClass( lastEventClass );
+
     // General settings
     var action = getUrlVars()['action'],
         folder = getUrlVars()['folder'],

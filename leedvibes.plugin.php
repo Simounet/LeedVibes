@@ -34,9 +34,6 @@ function setLeedvibesNewEventsFilter( &$_, &$filter, &$article_conf, &$tpl ) {
         $filter[MYSQL_PREFIX . 'event`.`id'] = '> ' . $_['last-id-checked'];
         $filter['unread'] = '1';
         $article_conf['articlePerPages'] = 100;
-
-        $tpl->assign( 'view_json', true );
-        $tpl->assign( 'scroll', 1 );
     }
 }
 

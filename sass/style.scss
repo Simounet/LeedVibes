@@ -127,8 +127,9 @@ $entry-space: 0.5em;
     }
 }
 
-.feed__entry--last {
-    border-bottom-color: #000;
+.feed__entry--new-last {
+    border-bottom-color: $sidebar-color-bg;
+    border-width: 4px;
 }
 
 %feed-event-read {
@@ -409,9 +410,7 @@ $checkbox-size: 22px;
         height: 25px;
     }
   }
-  &:hover label:after {
-      @include opacity( 1 );
-  }
+
   input[type=checkbox] {
       width: $checkbox-size;
       visibility: hidden;
