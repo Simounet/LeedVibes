@@ -10,7 +10,6 @@ $feed-bgc-used: #DDD;
 $error-color: #c53d3d;
 
 @import "normalize";
-@import "vendor/flex";
 
 /* MIXINS */
 @import "partials/mixins/_helpers.scss";
@@ -46,7 +45,8 @@ img[src$=".svg"] {
 
 /* GENERAL STYLE */
 body {
-    @include flexbox;
+    @include display-flex;
+    @include flex-wrap(wrap);
 
     @media($breakpoint) {
         display: block;
@@ -58,8 +58,9 @@ body {
 }
 
 .wrapper {
-    @include flex(4 0 0);
-    margin: 0.5em 0; 
+    @include flex( 13 0 );
+    margin: 0.5em 0;
+    min-width: 0;
     background-color: #FFF;
 
     @media($breakpoint) {
@@ -142,7 +143,7 @@ $border-base: $border-base-width solid transparent;
 $border-color-active: rgba(255, 255, 255, 0.2);
 
 .sidebar {
-    @include flex(1 0 0);
+    @include flex(1 auto);
     font-size: 0.9em;
     white-space: nowrap;
     
