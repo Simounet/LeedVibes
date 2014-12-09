@@ -58,7 +58,7 @@ body {
 }
 
 .wrapper {
-    @include flex( 13 0 );
+    @include flex( 1 1 0 );
     margin: 0.5em 0;
     min-width: 0;
     background-color: #FFF;
@@ -105,8 +105,9 @@ body {
     border: none;
 }
 %overflow-sidebar {
-    display: inline-block;
-    width: 80%;
+    display: block;
+    margin-right: 3em;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     vertical-align: middle;
@@ -143,14 +144,15 @@ $border-base: $border-base-width solid transparent;
 $border-color-active: rgba(255, 255, 255, 0.2);
 
 .sidebar {
-    @include flex(1 auto);
+    @include flex( 0 0 em( 300px ) );
     font-size: 0.9em;
-    white-space: nowrap;
+    overflow: hidden;
     
     [class*="__item"] {
         position: relative;
-        padding-bottom: 0.3em;
-        padding-top: 0.3em;
+        $padding : 0.5em;
+        padding-bottom: $padding;
+        padding-top: $padding;
         border-left: $border-base;
         
         &,
@@ -179,6 +181,10 @@ $border-color-active: rgba(255, 255, 255, 0.2);
     @media($breakpoint) {
         padding: 12px 0;
     }
+}
+
+.sidebar-item-label {
+    @extend %overflow-sidebar;
 }
 
 .feeds-list-toggle.is-toggled:before {
@@ -214,6 +220,7 @@ $border-color-active: rgba(255, 255, 255, 0.2);
     @extend %overflow-sidebar;
 }
 .folder__button {
+    float: left;
     width: 1.5em;
 }
 
@@ -229,17 +236,27 @@ $border-color-active: rgba(255, 255, 255, 0.2);
     padding: 4px 0;
     background-color: #4b4b4b;
 }
-.feed__item a {
-    margin: 0 0 0 1.4em;
-    @extend %overflow-sidebar;
+
+.feed__item {
+    height: 16px; /* Favicon's height */
+    line-height: 16px;
 }
-.feed__item img, %img-vertical-align {
+
+%img-vertical-align {
     margin-right: 0.3em;
     vertical-align: middle;
 }
 
+.feed__item img {
+    float: left;
+    margin-left: 1.4em;
+
+    @extend %img-vertical-align;
+}
+
 .mark-as-read {
     position: absolute;
+    top: 0.8em; /* FIX vertical alignement */
     right: 0.5em;
     font-size: 0.8em;
 }
