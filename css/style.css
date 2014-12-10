@@ -940,11 +940,11 @@ body {
   text-decoration: underline;
 }
 /* line 464, ../sass/style.scss */
-.article__content--website .article__content {
+.event--website-view .article__content {
   width: auto;
 }
 /* line 467, ../sass/style.scss */
-.article__content--website .article__content iframe {
+.event--website-view .article__content iframe {
   width: 100%;
 }
 
