@@ -4,7 +4,7 @@
         {function="Plugin::callHook("event_pre_section", array(&$value))"}
         {* [fix] - undefined $value->view if LeedRSSOrSiteView plugin is not installed *}
         <article
-            class="event js-event{if="$value->getUnread() == 0"} event--read js-event--read{/if}{if="$value->view == 1"} event--website-view js-website{/if}{if="$key == $last_event"} event--new-last{/if}"
+            class="event js-event{if="$value->getUnread() == 0"} event--read js-event--read{/if}{if="$value->view == 1"} event--website-view js-website-view{/if}{if="$key == $last_event"} event--new-last{/if}"
             data-id="{$value->getId()}"
             data-feed-id="{$value->getFeed()}"
             data-favorite="{$value->getFavorite()}"

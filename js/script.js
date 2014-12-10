@@ -119,7 +119,7 @@ EventObject.prototype = {
     },
 
     toggleEvent: function() {
-        var websiteView = this.entry.hasClass('js-website'); // [todo] - move this var to LeedRSSOrSiteView plugin
+        var websiteView = this.entry.hasClass('js-website-view'); // [todo] - move this var to LeedRSSOrSiteView plugin
 
         this.toggleHeaderFocus();
         this.toggleItem( websiteView );
