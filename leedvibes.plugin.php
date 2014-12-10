@@ -30,7 +30,6 @@ function setLeedvibesNewEventsFilter( &$_, &$filter, &$article_conf, &$tpl ) {
     if( isset( $_['custom-action'] )
         && $_['custom-action'] == 'new-events'
     ) {
-        // [todo] - utiliser le dernier id plutôt que la date
         $filter[MYSQL_PREFIX . 'event`.`id'] = '> ' . $_['last-id-checked'];
         $filter['unread'] = '1';
         $article_conf['articlePerPages'] = 100;
