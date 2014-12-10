@@ -13,7 +13,7 @@ function _t(key,args){
 
 $(function() {
 
-    $( '.wrapper' ).on( 'click', '.js-feed__entry', function( event ) { 
+    $( '.wrapper' ).on( 'click', '.js-event', function( event ) { 
         event.preventDefault();
         eventObj = new EventObject( event );
     });
@@ -46,7 +46,7 @@ $(function() {
         }
     });
 
-    pushIdsDisplayed( $('.js-feed__entry') );
+    pushIdsDisplayed( $('.js-event') );
 
     setScrollInfiniLimit();
 
@@ -86,7 +86,7 @@ function EventObject( event ) {
         this.readUnreadButtonAction();
     }
 
-    this.existingEntryFocused = $('.js-feed__entry.js-focus');
+    this.existingEntryFocused = $('.js-event.js-focus');
     this.isExistingEntryFocused = this.existingEntryFocused.length;
     this.currentEntryIsPrevious = ( this.entry[0] == this.existingEntryFocused[0] );
 
@@ -130,10 +130,10 @@ EventObject.prototype = {
         // And there is and existing focused element
         // Then remove focus class
         if( ! this.currentEntryIsPrevious && this.isExistingEntryFocused ) {
-            this.existingEntryFocused.removeClass('js-focus feed__entry--focus');
+            this.existingEntryFocused.removeClass('js-focus event--focus');
         }
 
-        this.entry.toggleClass('js-focus feed__entry--focus');
+        this.entry.toggleClass('js-focus event--focus');
     },
 
     toggleItem: function( special ) {
@@ -270,14 +270,14 @@ function countersHandler( feedID, operation ) {
 
 function setScrollInfiniLimit() {
     // Catch the 5th event from the bottom
-    scrollInfiniLimit = $('.js-feed__entry').slice(-5, -4);
+    scrollInfiniLimit = $('.js-event').slice(-5, -4);
 }
 
 
 /* FROM marigolds/js/script.js */
 function readThis(element,id,callback){
     // [facto] - get entry directly
-    var entry = element.parents('.js-feed__entry'),
+    var entry = element.parents('.js-event'),
         nextEvent = $('#'+id).next(),
         readUnreadButton = entry.find( '.js-read-unread' );
     //sur les éléments non lus
@@ -408,7 +408,7 @@ function scrollInfini(go) {
                         //    targetThisEvent($('article section.scroll:first'), true);
                         //}
                         // on les affiche avec un fadeIn
-                        var newEventsClass = 'feed__entry--new';
+                        var newEventsClass = 'event--new';
                         $(window).data('ajaxready', true);
                         $(window).data('page', $(window).data('page')+1);
                         $(window).data('enCoursScroll',0);
@@ -468,7 +468,7 @@ function getNewEvents(code){
     loader.addClass( loadingClass );
     loader.prop( 'disabled', 'disabled' );
 
-    var lastEventClass = 'feed__entry--new-last';
+    var lastEventClass = 'event--new-last';
     $( '.' + lastEventClass ).removeClass( lastEventClass );
 
     // General settings

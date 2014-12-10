@@ -115,12 +115,12 @@ body {
 
 /* FEED */
 $entry-space: 0.5em;
-.feed__entry {
+.event {
     position: relative;
     padding: 0 $entry-space;
     border-bottom: 0.1em solid #D9D9D9;
 
-    &:not(.feed__entry--focus):hover {
+    &:not(.event--focus):hover {
         background-color: $feed-bgc-used;
     }
 
@@ -129,7 +129,7 @@ $entry-space: 0.5em;
     }
 }
 
-.feed__entry--new-last {
+.event--new-last {
     border-bottom-color: $sidebar-color-bg;
     border-width: 4px;
 }
@@ -269,7 +269,7 @@ $border-color-active: rgba(255, 255, 255, 0.2);
     white-space: nowrap;
     cursor: pointer;
 
-    .feed__entry--focus & {
+    .event--focus & {
         padding-bottom: 0.6em;
     }
 
@@ -326,7 +326,7 @@ $border-color-active: rgba(255, 255, 255, 0.2);
         display: none;
     }
     
-    .feed__entry--focus & {
+    .event--focus & {
         display: none;
     }
 
@@ -341,7 +341,7 @@ $border-color-active: rgba(255, 255, 255, 0.2);
         $support-for-original-webkit-gradients : false;
         @include background-image(linear-gradient(to left, white 6em, rgba(255, 255, 255, 0) 100%));
 
-        .feed__entry:hover & {
+        .event:hover & {
             @include background-image(linear-gradient(to left, $feed-bgc-used 6em, rgba($feed-bgc-used, 0) 100%));
 
             @media($breakpoint) {
@@ -495,7 +495,7 @@ $checkbox-size: 22px;
         right: 4em;
     }
 
-    .feed__entry--focus & {
+    .event--focus & {
         display: inherit;
     }
 }

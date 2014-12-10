@@ -562,22 +562,22 @@ body {
 
 /* FEED */
 /* line 118, ../sass/style.scss */
-.feed__entry {
+.event {
   position: relative;
   padding: 0 0.5em;
   border-bottom: 0.1em solid #D9D9D9;
 }
 /* line 123, ../sass/style.scss */
-.feed__entry:not(.feed__entry--focus):hover {
+.event:not(.event--focus):hover {
   background-color: #DDD;
 }
 /* line 127, ../sass/style.scss */
-.feed__entry a {
+.event a {
   color: #424242;
 }
 
 /* line 132, ../sass/style.scss */
-.feed__entry--new-last {
+.event--new-last {
   border-bottom-color: #424242;
   border-width: 4px;
 }
@@ -712,7 +712,7 @@ body {
   cursor: pointer;
 }
 /* line 272, ../sass/style.scss */
-.feed__entry--focus .article__header {
+.event--focus .article__header {
   padding-bottom: 0.6em;
 }
 @media (max-width: 650px) {
@@ -772,7 +772,7 @@ body {
   }
 }
 /* line 329, ../sass/style.scss */
-.feed__entry--focus .article__description {
+.event--focus .article__description {
   display: none;
 }
 /* line 333, ../sass/style.scss */
@@ -792,7 +792,7 @@ body {
   background-image: linear-gradient(to left, #ffffff 6em, rgba(255, 255, 255, 0) 100%);
 }
 /* line 344, ../sass/style.scss */
-.feed__entry:hover .article__description:after {
+.event:hover .article__description:after {
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjEuMCIgeTE9IjAuNSIgeDI9IjAuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSI2ZW0iIHN0b3AtY29sb3I9IiNkZGRkZGQiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkZGRkZGQiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background-size: 100%;
   background-image: -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(6em, #dddddd), color-stop(100%, rgba(221, 221, 221, 0)));
@@ -802,7 +802,7 @@ body {
 }
 @media (max-width: 650px) {
   /* line 344, ../sass/style.scss */
-  .feed__entry:hover .article__description:after {
+  .event:hover .article__description:after {
     background: none;
   }
 }
@@ -979,7 +979,7 @@ body {
   }
 }
 /* line 498, ../sass/style.scss */
-.feed__entry--focus .article__content__switch-view {
+.event--focus .article__content__switch-view {
   display: inherit;
 }
 
