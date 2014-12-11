@@ -568,7 +568,11 @@ function updateEventsDate() {
         var newDate = getNewEventDate( date );
 
         if( typeof( newDate ) == 'number' ) {
-            eventItem.html( newDate + ' ' + _t('LEEDVIBES_MN') );
+            if( newDate == 0 ) {
+                eventItem.html( _t( 'LEEDVIBES_NOW' ) );
+            } else {
+                eventItem.html( newDate + ' ' + _t( 'LEEDVIBES_MN' ) );
+            }
         } else if( newDate ) {
             eventItem.html( newDate );
             eventItem.removeData( eventItemDataAttribute );
