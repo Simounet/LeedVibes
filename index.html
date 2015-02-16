@@ -27,13 +27,13 @@
                     <p>{function="_t('IF_ADMIN_THEN_CONFIG')"}</p>
                 {/if}
                 <form action="action.php?action=login" class="settings__fields" method="POST">
-                    <input type="text" name="login" tabindex="1" placeholder="{function="_t('LOGIN')"}"/>
-                    <input type="password" name="password" tabindex="2" placeholder="{function="_t('PASSWORD')"}"/>
-                    <input type="submit" value="{function="_t('LEEDVIBES_CONNECTION')"}" tabindex="4" />
+                    <input type="text" name="login" placeholder="{function="_t('LOGIN')"}"/>
+                    <input type="password" name="password" placeholder="{function="_t('PASSWORD')"}"/>
                     <label class="rememberMe">
-                        <input type="checkbox" tabindex="3" name="rememberMe" />
+                        <input type="checkbox" name="rememberMe" />
                         <span>{function="_t('REMEMBER_ME')"}</span>
                     </label>
+                    <input type="submit" value="{function="_t('LEEDVIBES_CONNECTION')"}" />
                 </form>
             {else}
                 <a href="action.php?action=logout" class="settings-item" title="{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})"><img src="images/logout.svg" alt=""></a>
