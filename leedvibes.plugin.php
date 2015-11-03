@@ -26,7 +26,7 @@ function setLeedvibesTemplate() {
     raintpl::configure("tpl_dir", 'plugins/leedvibes/' );
 }
 
-function setLeedvibesNewEventsFilter( &$_, &$filter, &$article_conf, &$tpl ) {
+function setLeedvibesNewEventsFilter( &$_, &$filter, &$article_conf ) {
     if( isset( $_['custom-action'] )
         && $_['custom-action'] == 'new-events'
     ) {
