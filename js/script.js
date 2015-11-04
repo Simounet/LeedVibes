@@ -72,11 +72,8 @@ function EventObject( event ) {
     this.entry   = $(event.currentTarget);
     this.content = this.entry.find( '.' + this.contentClass );
 
-    // Work around for SVGs click handling
-    var favoriteTarget = this.target.parents( '.' + this.favoriteClass )
-    var isFavoriteAction = favoriteTarget.length;
-    if( isFavoriteAction ) {
-        this.favorite( favoriteTarget );
+    if( this.target.hasClass( this.favoriteClass ) ) {
+        this.favorite( this.target );
         return;
     }
 
@@ -200,11 +197,10 @@ EventObject.prototype = {
     },
 
     favorite: function( favoriteTarget ) {
-        var favImage = favoriteTarget,
-            favAction = ( this.entry.data( 'favorite' ) == 1 ) ? 'remove' : 'add',
+        var favAction = ( this.entry.data( 'favorite' ) == 1 ) ? 'remove' : 'add',
             favText = ( this.entry.data( 'favorite' ) != 1 ) ? 'UNFAVORIZE' : 'FAVORIZE';
 
-        favImage.toggleClass('article-favorite--favorited');
+        favoriteTarget.toggleClass('article-favorite--favorited');
         this.entry.data( 'favorite', ! this.entry.data( 'favorite' ) );
         $.ajax({
             url: "./action.php?action=" + favAction + "Favorite",
@@ -214,7 +210,7 @@ EventObject.prototype = {
                     alert(msg.texte)
                 } else {
                     if( console && console.log && msg!="" ) console.log(msg);
-                    favImage
+                    favoriteTarget
                         .prop( 'alt', _t( favText ) )
                         .prop( 'title', _t( favText ) );
                 }
