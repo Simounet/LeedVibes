@@ -59,8 +59,10 @@ body {
 
 .wrapper {
     @include flex( 1 1 0 );
-    margin: 0.5em 0;
+    $margin: 0.5em;
+    margin: $margin 0;
     min-width: 0;
+    min-height: calc( 100vh - #{$margin} * 2 );
     background-color: #FFF;
 
     @media($breakpoint) {
