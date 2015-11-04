@@ -609,7 +609,7 @@ body {
 }
 /* line 170, ../sass/style.scss */
 .sidebar [class*="__item"].selected {
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: white;
 }
 /* line 176, ../sass/style.scss */
 .sidebar .settings__fields {
@@ -1006,7 +1006,7 @@ body {
 }
 /* line 521, ../sass/style.scss */
 .settings-item:hover, .settings-item:active, .settings-item:focus {
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: white;
 }
 
 /* line 528, ../sass/style.scss */

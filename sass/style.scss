@@ -143,7 +143,7 @@ $entry-space: 0.5em;
 /* SIDEBAR */
 $border-base-width: em( 5px );
 $border-base: $border-base-width solid transparent;
-$border-color-active: rgba(255, 255, 255, 0.2);
+$border-color-active: white;
 
 .sidebar {
     @include flex( 0 0 em( 300px ) );
