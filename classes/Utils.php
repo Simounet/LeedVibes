@@ -4,6 +4,7 @@ class Utils {
 
     public function formatDate( $timestamp ) {
         $now = strtotime("now");
+        $today = strtotime('today UTC');
         $diff = round( ( $now - $timestamp ) / 60 );
 
         $less_than_one_minute = $diff < 1 ? true : false;
@@ -20,7 +21,10 @@ class Utils {
         } elseif( $less_than_one_hour ) {
             $date_tmp = $diff . ' ' . _t('LEEDVIBES_MN');
             $date['less-than-one-hour'] = true;
-        } elseif( $less_than_one_day ) {
+        } elseif(
+            $less_than_one_day
+            && $timestamp >= $today
+        ) {
             $date_tmp = date('G:i', $timestamp);
         } elseif( $current_year ) {
             $date_tmp = date('j M', $timestamp);
