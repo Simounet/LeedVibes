@@ -447,7 +447,7 @@ function getUrlVars()
 }
 
 function getNewEvents(code){
-    var noNewEventsId =  '#no-new-events';
+    var noNewEvents =  $('#no-new-events');
 
     // Check if ajax queries are locked
     if( $(window).data('ajaxready') == false ) return;
@@ -483,7 +483,7 @@ function getNewEvents(code){
         success: function(data) {
             if( data.replace(/^\s+/g,'').replace(/\s+$/g,'') != '' ) {
 
-                $( noNewEventsId )
+                noNewEvents
                     // Adding new events
                     // [todo] - Add new events number as an info to the left menu
                     .after( data );
@@ -494,8 +494,8 @@ function getNewEvents(code){
 
             } else {
 
-                if( ! $( noNewEventsId ).is( ':visible' ) ) {
-                    showOrHide( noNewEventsId );
+                if( ! noNewEvents.is( ':visible' ) ) {
+                    showOrHide( noNewEvents );
                 }
 
             }
@@ -520,9 +520,7 @@ function getNewEvents(code){
     });
 }
 
-function showOrHide( identifier, action ) {
-    var el = $( identifier );
-
+function showOrHide( el, action ) {
     if( ! action || action == 'show' ) {
         el.animate(
             {opacity: 'show', height: 'show'},
