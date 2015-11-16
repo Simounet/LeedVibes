@@ -30,7 +30,9 @@ function setLeedvibesNewEventsFilter( &$_, &$filter, &$article_conf ) {
     if( isset( $_['custom-action'] )
         && $_['custom-action'] == 'new-events'
     ) {
-        $filter[MYSQL_PREFIX . 'event`.`id'] = '> ' . $_['last-id-checked'];
+        if( isset( $_['last-id-checked'] ) && $_['last-id-checked'] !== 'undefined' ) {
+            $filter[MYSQL_PREFIX . 'event`.`id'] = '> ' . $_['last-id-checked'];
+        }
         $filter['unread'] = '1';
         $article_conf['articlePerPages'] = 100;
     }

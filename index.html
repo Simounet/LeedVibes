@@ -108,22 +108,22 @@
             {include="favorite"}
         </div>
         <section id="articles" class="wrapper">
-            {if="count($events) > 0"}
-                <div id="no-new-events" class="hidden">
-                    <p class="infinite-scroll--end js-infinite-scroll--end">{function="_t('LEEDVIBES_NO_NEW_EVENTS')"}</p>
-                </div>
+            <div id="no-new-events" class="hidden">
+                <p class="infinite-scroll--end js-infinite-scroll--end">{function="_t('LEEDVIBES_NO_NEW_EVENTS')"}</p>
+            </div>
+            {$countEventsPositive=count($events) > 0}
+            {if="$countEventsPositive"}
                 {include="article"}
-                <div id="infinite-scroll-loading" class="hidden">
-                    <p class="infinite-scroll">{function="_t('LOADING')"}</p>
-                </div>
-                <div id="no-more-events" class="hidden">
-                    <p class="infinite-scroll--end js-infinite-scroll--end">{function="_t('LEEDVIBES_NO_MORE_EVENT')"}</p>
-                </div>
-            {else}
-                <div class="infinite-scroll--end">
-                    {function="_t('LEEDVIBES_NOTHING_TO_READ')"}
-                </div>
             {/if}
+            <div id="infinite-scroll-loading" class="hidden">
+                <p class="infinite-scroll">{function="_t('LOADING')"}</p>
+            </div>
+            <div id="no-more-events" class="hidden">
+                <p class="infinite-scroll--end js-infinite-scroll--end">{function="_t('LEEDVIBES_NO_MORE_EVENT')"}</p>
+            </div>
+            <div class="infinite-scroll--end{if="$countEventsPositive"} hidden{/if}">
+                {function="_t('LEEDVIBES_NOTHING_TO_READ')"}
+            </div>
         </section>
     {/if}
     <script>
