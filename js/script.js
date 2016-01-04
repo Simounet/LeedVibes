@@ -94,8 +94,11 @@ function EventObject( event ) {
 
     // If click on the entry's title
     // Or on the entry's header
-    if( this.target.parents( '.' + this.headerClass ).length
-        || this.target.hasClass( this.headerClass )
+    if( ! this.target.hasClass( this.readButtonClass )
+        && (
+            this.target.parents( '.' + this.headerClass ).length
+            || this.target.hasClass( this.headerClass )
+        )
     ) {
         this.toggleEvent();
     }
