@@ -33,17 +33,35 @@ $(function() {
     });
 
     $( '.sidebar' ).on( 'click', '.js-mark-as-read', function() {
-        button = $(this);
+        var button = $(this),
+            confirmText = '',
+            url = 'action.php?action=';
         if( button.parents('.js-feed__item').length ) {
-            if(confirm(_t('CONFIRM_MARK_FEED_AS_READ')))
-                window.location='action.php?action=readAll&feed=' + button.parents('.js-feed__item').data('id');
+            confirmText = 'CONFIRM_MARK_FEED_AS_READ',
+            url += 'readAll&feed=' + button.parents('.js-feed__item').data('id');
         } else if( button.parents('.js-folder__item').length ) {
-            if(confirm(_t('READ_ALL_FOLDER_CONFIRM')))
-                window.location='action.php?action=readFolder&folder=' + button.parents('.js-folder').data('id');
+            confirmText = 'READ_ALL_FOLDER_CONFIRM',
+            url += 'readFolder&folder=' + button.parents('.js-folder').data('id');
         } else {
-            if(confirm(_t('LEEDVIBES_READ_ALL_CONFIRM')))
-                window.location='action.php?action=readAll';
+            confirmText = 'LEEDVIBES_READ_ALL_CONFIRM',
+            url += 'readAll';
         }
+        if(! confirm(_t(confirmText))) {
+            return false;
+        }
+
+        $.ajax({
+            url: url
+        })
+            .done(function() {
+                $('.js-event').remove();
+                $('#no-new-events').removeClass( 'hidden' );
+                button.html( "0" );
+            })
+            .fail(function() {
+                alert( "error" );
+            });
+
     });
 
     pushIdsDisplayed( $('.js-event') );

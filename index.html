@@ -50,6 +50,7 @@
             {/if}
         </div>
         {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
+            {$currentItemsCount=$unread['total']}
             <ul id="feeds-list">
                 <li class="folder">
                     <div class="folder__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}">
@@ -60,14 +61,19 @@
                 <!-- [todo] -  Remove order=unread on feeds' links, use the settings instead -->
                 {loop="folders"}
                     {$feeds=""}
+                    {$folderSelected=0}
                     {if="isset($allFeedsPerFolder[$value->getId()])"}
                         {$feeds=$allFeedsPerFolder[$value->getId()]}
                     {/if}
                     {if="isset($allEvents[$value->getId()])"}
                         {$unreadEventsForFolder=$allEvents[$value->getId()]}
                     {/if}
+                    {if="isset($currentFolder) && ($value->getId() == $currentFolder->getId())"}
+                        {$folderSelected=1}
+                        {$currentItemsCount=$unreadEventsForFolder}
+                    {/if}
                     <li class="folder js-folder" data-id="{$value->getId()}">
-                        <div class="folder__item js-folder__item{if="isset($currentFolder) && ($value->getId() == $currentFolder->getId())"} selected{/if}">
+                        <div class="folder__item js-folder__item{if="$folderSelected"} selected{/if}">
                             <button class="folder__button sidebar-item js-toggle-button{if="!$value->getIsopen()"} folder-closed{/if}" title="Switch dossier"><img src="images/triangle.svg" alt="" /></button>
                             {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
                             <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}" class="sidebar-item">{function="htmlentities($value->getName())"}</a>
