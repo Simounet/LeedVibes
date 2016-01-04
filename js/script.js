@@ -63,7 +63,7 @@ $(function() {
                 }
                 if( isSelectedItem ) {
                     $('.js-event').remove();
-                    $('#no-new-events').removeClass( 'hidden' );
+                    $('.infinite-scroll--end').removeClass( 'hidden' );
                 }
                 button.html( "0" );
             })
