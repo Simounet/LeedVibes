@@ -54,8 +54,17 @@ $(function() {
             url: url
         })
             .done(function() {
-                $('.js-event').remove();
-                $('#no-new-events').removeClass( 'hidden' );
+                var isSelectedItem = button.parents( '.selected' ).length;
+                if(
+                    button.hasClass( '.js-total-counter' )
+                    && ! isSelectedItem
+                ) {
+                    window.location=url;
+                }
+                if( isSelectedItem ) {
+                    $('.js-event').remove();
+                    $('#no-new-events').removeClass( 'hidden' );
+                }
                 button.html( "0" );
             })
             .fail(function() {
