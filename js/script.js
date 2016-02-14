@@ -83,20 +83,33 @@ $(function() {
 
     setScrollInfiniLimit();
 
-    var load = false;
-    var offset = $('.wrapper:last').offset(); 
-
     $(window)
         .data('ajaxready', true)
         .data('page', 1)
         .data('nblus', 0)
         .scroll(function(){
-            if((offset.top-$(window).height() <= $(window).scrollTop()) 
-            && load==false) {
+            if( canLoadMore() ) {
                 scrollInfini();
             }
         });
 });
+
+function canLoadMore() {
+    if( $('#no-more-events').is( ':visible' ) ) {
+        $(window).unbind('scroll');
+    }
+    if( (
+            ( typeof( scrollInfiniLimit.offset() ) !== 'undefined' )
+            && scrollInfiniLimit.offset().top < (
+                $(window).scrollTop() + $(window).height()
+            )
+        )
+        && $(window).data( 'ajaxready' ) === true
+    ) {
+        return true;
+    }
+
+}
 
 function EventObject( event ) { 
     this.target  = $(event.target);
