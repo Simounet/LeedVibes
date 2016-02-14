@@ -59,10 +59,8 @@ body {
 
 .wrapper {
     @include flex( 1 1 0 );
-    $margin: 0.5em;
-    margin: $margin 0;
     min-width: 0;
-    min-height: calc( 100vh - #{$margin} * 2 );
+    min-height: 100vh;
     background-color: #FFF;
 
     @media($breakpoint) {
@@ -285,6 +283,7 @@ $border-color-active: white;
 
         @media($breakpoint) {
             margin-top: 0.15em;
+            margin-left: 15%;
             vertical-align: top;
         }
     }
@@ -309,7 +308,7 @@ $border-color-active: white;
 
     @media($breakpoint) {
         display: inline-block;
-        width: 80%;
+        width: 65%;
     }
 
     [class~="event--read"] & a {
@@ -341,7 +340,7 @@ $border-color-active: white;
         bottom: 0;
         width: 16em;
         $support-for-original-webkit-gradients : false;
-        @include background-image(linear-gradient(to left, white 6em, rgba(255, 255, 255, 0) 100%));
+        @include background-image(linear-gradient(to left, white 48%, rgba(255, 255, 255, 0) 100%));
 
         .event:hover & {
             @include background-image(linear-gradient(to left, $feed-bgc-used 6em, rgba($feed-bgc-used, 0) 100%));
@@ -364,7 +363,8 @@ $border-color-active: white;
     font-size: 0.9em;
 
     @media( $breakpoint ) {
-        right: 0;
+        bottom: 5%;
+        left: 10%;
     }
 }
 
@@ -383,7 +383,9 @@ $position-top-on-break: 30px;
     }
 
     @media( $breakpoint ) {
-        top: $position-top-on-break;
+        width: 15%;
+        height: 100%;
+        left: 0;
     }
 }
 
