@@ -362,9 +362,6 @@ function readThis(element,id,callback){
                     $(window).data('nblus', $(window).data('nblus')+1);
                     // on diminue le nombre d'article en haut de page
                     $('#nbarticle').html(parseInt($('#nbarticle').html()) - 1);
-                    if(scrollInfiniLimit.offset().top < ($(window).scrollTop() + $(window).height()) ) {
-                        scrollInfini( true );
-                    }
                 }
             }
         });
@@ -407,7 +404,7 @@ function targetThisEvent(event,focusOn){
     // on débloque les touches le plus tard possible afin de passer derrière l'appel ajax
 }
 
-function scrollInfini(go) {
+function scrollInfini() {
     var deviceAgent = navigator.userAgent.toLowerCase();
     var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
 
@@ -415,59 +412,54 @@ function scrollInfini(go) {
         // On teste si ajaxready vaut false, auquel cas on stoppe la fonction
         if ($(window).data('ajaxready') == false) return;
 
-        if( go 
-           || (($(window).scrollTop() + $(window).height()) + 50 >= $(document).height()
-           || agentID && ($(window).scrollTop() + $(window).height()) + 150 > $(document).height()))
-        {
-            // CONFIGS
-            var loading = $('#infinite-scroll-loading'),
-                loadingFadeTime = 500,
-                loadingDelayTime = 2000;
-            // lorsqu'on commence un traitement, on met ajaxready à false
-            $(window).data('ajaxready', false);
+        // CONFIGS
+        var loading = $('#infinite-scroll-loading'),
+            loadingFadeTime = 500,
+            loadingDelayTime = 2000;
+        // lorsqu'on commence un traitement, on met ajaxready à false
+        $(window).data('ajaxready', false);
 
-            loading.removeClass( 'hidden' );
+        loading.removeClass( 'hidden' );
 
-            // récupération des variables passées en Get
-            var action = getUrlVars()['action'];
-            var folder = getUrlVars()['folder'];
-            var feed = getUrlVars()['feed'];
-            var order = ( getUrlVars()['order'] != '' ) ? '&order=' + getUrlVars()['order'] : '';
+        // récupération des variables passées en Get
+        var action = getUrlVars()['action'];
+        var folder = getUrlVars()['folder'];
+        var feed = getUrlVars()['feed'];
+        var order = ( getUrlVars()['order'] != '' ) ? '&order=' + getUrlVars()['order'] : '';
 
-            $.ajax({
-                url: './article.php',
-                type: 'post',
-                data: 'scroll='+$(window).data('page')+'&nblus='+$(window).data('nblus')+'&action='+action+'&folder='+folder+'&feed='+feed+order,
+        $.ajax({
+            url: './article.php',
+            type: 'post',
+            data: 'scroll='+$(window).data('page')+'&nblus='+$(window).data('nblus')+'&action='+action+'&folder='+folder+'&feed='+feed+order,
 
-                success: function(data) {
-                    if (data.replace(/^\s+/g,'').replace(/\s+$/g,'') != '')
-                    {    // on les insère juste avant le loading
-                        $('.articles').after(data);
-                        //on supprime de la page le script pour ne pas intéragir avec les next & prev
-                        //$('article .scriptaddbutton').remove();
-                        //si l'élement courant est caché, selectionner le premier élément du scroll
-                        //ou si le div loading est sélectionné (quand 0 article restant suite au raccourcis M)
-                        //if (($('article section.eventSelected').attr('style')=='display: none;')
-                        //    || ($('article div.eventSelected').attr('id')=='loading'))
-                        //{
-                        //    targetThisEvent($('article section.scroll:first'), true);
-                        //}
-                        // on les affiche avec un fadeIn
-                        var newEventsClass = 'event--new';
-                        $(window).data('page', $(window).data('page')+1);
-                    } else {
-                        loading.addClass( 'hidden' );
-                        $('#no-more-events').removeClass( 'hidden' );
-                    }
-                 },
-                complete: function(){
+            success: function(data) {
+                if (data.replace(/^\s+/g,'').replace(/\s+$/g,'') != '')
+                {    // on les insère juste avant le loading
+                    $('.articles').after(data);
+                    //on supprime de la page le script pour ne pas intéragir avec les next & prev
+                    //$('article .scriptaddbutton').remove();
+                    //si l'élement courant est caché, selectionner le premier élément du scroll
+                    //ou si le div loading est sélectionné (quand 0 article restant suite au raccourcis M)
+                    //if (($('article section.eventSelected').attr('style')=='display: none;')
+                    //    || ($('article div.eventSelected').attr('id')=='loading'))
+                    //{
+                    //    targetThisEvent($('article section.scroll:first'), true);
+                    //}
+                    // on les affiche avec un fadeIn
+                    var newEventsClass = 'event--new';
+                    $(window).data('page', $(window).data('page')+1);
+                } else {
                     loading.addClass( 'hidden' );
-                    $(window).data('ajaxready', true);
-                    // le chargement est terminé, on fait disparaitre notre loading
-                    setScrollInfiniLimit();
+                    $('#no-more-events').removeClass( 'hidden' );
                 }
-            });
-        }
+             },
+            complete: function(){
+                loading.addClass( 'hidden' );
+                $(window).data('ajaxready', true);
+                // le chargement est terminé, on fait disparaitre notre loading
+                setScrollInfiniLimit();
+            }
+        });
     }
 };
 
