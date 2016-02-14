@@ -1,4 +1,4 @@
-var scrollInfiniLimit = '',
+var infiniteScrollLimit = '',
     eventObj,
     idsDisplayed = [];
 function _t(key,args){
@@ -89,7 +89,7 @@ $(function() {
         .data('nblus', 0)
         .scroll(function(){
             if( canLoadMore() ) {
-                scrollInfini();
+                infiniteScroll();
             }
         });
 });
@@ -99,8 +99,8 @@ function canLoadMore() {
         $(window).unbind('scroll');
     }
     if( (
-            ( typeof( scrollInfiniLimit.offset() ) !== 'undefined' )
-            && scrollInfiniLimit.offset().top < (
+            ( typeof( infiniteScrollLimit.offset() ) !== 'undefined' )
+            && infiniteScrollLimit.offset().top < (
                 $(window).scrollTop() + $(window).height()
             )
         )
@@ -315,17 +315,14 @@ function countersHandler( feedID, operation ) {
 
 function setScrollInfiniLimit() {
     // Catch the 5th event from the bottom
-    scrollInfiniLimit = $('.js-event').slice(-5, -4);
+    infiniteScrollLimit = $('.js-event').slice(-5, -4);
 }
 
-
-/* FROM marigolds/js/script.js */
 function readThis(element,id,callback){
     // [facto] - get entry directly
     var entry = element.parents('.js-event'),
         nextEvent = $('#'+id).next(),
         readUnreadButton = entry.find( '.js-read-unread' );
-    //sur les éléments non lus
     if(!entry.hasClass('js-event--read')){
         entry.find('[type="checkbox"]').prop('checked', true);
         // Decrement feed number
@@ -358,14 +355,12 @@ function readThis(element,id,callback){
                 if(msg.status == 'noconnect') {
                     alert(msg.texte)
                 } else {
-                    // on compte combien d'article ont été lus afin de les soustraires de la requête pour le scroll infini
+                    // nblus increment, used by the infinite scroll function
                     $(window).data('nblus', $(window).data('nblus')+1);
-                    // on diminue le nombre d'article en haut de page
-                    $('#nbarticle').html(parseInt($('#nbarticle').html()) - 1);
                 }
             }
         });
-    }else{  // sur les éléments lus
+    }else{
         readUnreadButton.prop( 'title', _t( 'LEEDVIBES_MARK_AS_READ' ) );
         $.ajax({
                 url: "./action.php?action=unreadContent",
@@ -401,70 +396,47 @@ function targetThisEvent(event,focusOn){
         $('.eventSelected').removeClass('eventSelected');
         target.addClass('eventSelected');
     }
-    // on débloque les touches le plus tard possible afin de passer derrière l'appel ajax
 }
 
-function scrollInfini() {
-    var deviceAgent = navigator.userAgent.toLowerCase();
-    var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
+function infiniteScroll() {
+    var loading = $('#infinite-scroll-loading'),
+        loadingFadeTime = 500,
+        loadingDelayTime = 2000;
+    $(window).data('ajaxready', false);
 
-    if($('.wrapper').length && ! $('#no-more-events').is( ':visible' ) ) {
-        // On teste si ajaxready vaut false, auquel cas on stoppe la fonction
-        if ($(window).data('ajaxready') == false) return;
+    loading.removeClass( 'hidden' );
 
-        // CONFIGS
-        var loading = $('#infinite-scroll-loading'),
-            loadingFadeTime = 500,
-            loadingDelayTime = 2000;
-        // lorsqu'on commence un traitement, on met ajaxready à false
-        $(window).data('ajaxready', false);
+    var urlVars = getAllUrlVars(),
+        action  = urlVars.action,
+        folder  = urlVars.folder,
+        feed    = urlVars.feed,
+        order   = ( urlVars.order != '' ) ? '&order=' + urlVars.order : '';
 
-        loading.removeClass( 'hidden' );
+    $.ajax({
+        url: './article.php',
+        type: 'post',
+        data: 'scroll='+$(window).data('page')+'&nblus='+$(window).data('nblus')+'&action='+action+'&folder='+folder+'&feed='+feed+order,
 
-        // récupération des variables passées en Get
-        var action = getUrlVars()['action'];
-        var folder = getUrlVars()['folder'];
-        var feed = getUrlVars()['feed'];
-        var order = ( getUrlVars()['order'] != '' ) ? '&order=' + getUrlVars()['order'] : '';
-
-        $.ajax({
-            url: './article.php',
-            type: 'post',
-            data: 'scroll='+$(window).data('page')+'&nblus='+$(window).data('nblus')+'&action='+action+'&folder='+folder+'&feed='+feed+order,
-
-            success: function(data) {
-                if (data.replace(/^\s+/g,'').replace(/\s+$/g,'') != '')
-                {    // on les insère juste avant le loading
-                    $('.articles').after(data);
-                    //on supprime de la page le script pour ne pas intéragir avec les next & prev
-                    //$('article .scriptaddbutton').remove();
-                    //si l'élement courant est caché, selectionner le premier élément du scroll
-                    //ou si le div loading est sélectionné (quand 0 article restant suite au raccourcis M)
-                    //if (($('article section.eventSelected').attr('style')=='display: none;')
-                    //    || ($('article div.eventSelected').attr('id')=='loading'))
-                    //{
-                    //    targetThisEvent($('article section.scroll:first'), true);
-                    //}
-                    // on les affiche avec un fadeIn
-                    var newEventsClass = 'event--new';
-                    $(window).data('page', $(window).data('page')+1);
-                } else {
-                    loading.addClass( 'hidden' );
-                    $('#no-more-events').removeClass( 'hidden' );
-                }
-             },
-            complete: function(){
+        success: function(data) {
+            if (data.replace(/^\s+/g,'').replace(/\s+$/g,'') != '')
+            {
+                $('.articles').after(data);
+                $(window).data('page', $(window).data('page')+1);
+            } else {
                 loading.addClass( 'hidden' );
-                $(window).data('ajaxready', true);
-                // le chargement est terminé, on fait disparaitre notre loading
-                setScrollInfiniLimit();
+                $('#no-more-events').removeClass( 'hidden' );
             }
-        });
-    }
+         },
+        complete: function(){
+            loading.addClass( 'hidden' );
+            $(window).data('ajaxready', true);
+            setScrollInfiniLimit();
+        }
+    });
 };
 
-// permet de récupérer les variables passée en get dans l'URL et des les parser
-function getUrlVars()
+// Returns an array containing all the url's variables
+function getAllUrlVars()
 {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -505,11 +477,11 @@ function getNewEvents(code){
     var lastEventClass = 'event--new-last';
     $( '.' + lastEventClass ).removeClass( lastEventClass );
 
-    // General settings
-    var action = getUrlVars()['action'],
-        folder = getUrlVars()['folder'],
-        feed = getUrlVars()['feed'],
-        order = ( getUrlVars()['order'] != '' ) ? '&order=' + getUrlVars()['order'] : '',
+    var urlVars = getAllUrlVars(),
+        action  = urlVars.action,
+        folder  = urlVars.folder,
+        feed    = urlVars.feed,
+        order   = ( urlVars.order != '' ) ? '&order=' + urlVars.order : '',
         lastIdChecked = idsDisplayed[0];
 
     $.ajax({
