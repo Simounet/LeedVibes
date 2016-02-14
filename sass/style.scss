@@ -79,15 +79,14 @@ body {
     font-weight: bold;
 }
 
-.infinite-scroll {
+.notifications {
     margin: 0;
-    padding: 1em 0.5em;
     @extend %text-color-light;
-    background-color: rgba($sidebar-color-bg, 0.9);
-}
-.infinite-scroll--end {
     background-color: $sidebar-color-bg;
-    @extend .infinite-scroll;
+
+    > * {
+        padding: 1em 0.5em;
+    }
 }
 
 %text-color-light {

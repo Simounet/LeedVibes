@@ -411,7 +411,7 @@ function scrollInfini(go) {
     var deviceAgent = navigator.userAgent.toLowerCase();
     var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
 
-    if($('.wrapper').length) {
+    if($('.wrapper').length && ! $('#no-more-events').is( ':visible' ) ) {
         // On teste si ajaxready vaut false, auquel cas on stoppe la fonction
         if ($(window).data('ajaxready') == false) return;
 
@@ -426,7 +426,7 @@ function scrollInfini(go) {
             // lorsqu'on commence un traitement, on met ajaxready à false
             $(window).data('ajaxready', false);
 
-            showOrHide( loading, 'show' );
+            loading.removeClass( 'hidden' );
 
             // récupération des variables passées en Get
             var action = getUrlVars()['action'];
@@ -442,7 +442,7 @@ function scrollInfini(go) {
                 success: function(data) {
                     if (data.replace(/^\s+/g,'').replace(/\s+$/g,'') != '')
                     {    // on les insère juste avant le loading
-                        loading.before(data);
+                        $('.articles').after(data);
                         //on supprime de la page le script pour ne pas intéragir avec les next & prev
                         //$('article .scriptaddbutton').remove();
                         //si l'élement courant est caché, selectionner le premier élément du scroll
@@ -454,18 +454,15 @@ function scrollInfini(go) {
                         //}
                         // on les affiche avec un fadeIn
                         var newEventsClass = 'event--new';
-                        $(window).data('ajaxready', true);
                         $(window).data('page', $(window).data('page')+1);
-                        $(window).data('enCoursScroll',0);
-                        // appel récursif tant qu'un scroll n'est pas detecté.
-                        if ($(window).scrollTop()==0) scrollInfini();
-                        showOrHide( loading, 'hide' );
                     } else {
-                        showOrHide( loading, 'hide' );
-                        showOrHide( $('#no-more-events'), 'show' );
+                        loading.addClass( 'hidden' );
+                        $('#no-more-events').removeClass( 'hidden' );
                     }
                  },
                 complete: function(){
+                    loading.addClass( 'hidden' );
+                    $(window).data('ajaxready', true);
                     // le chargement est terminé, on fait disparaitre notre loading
                     setScrollInfiniLimit();
                 }
@@ -544,7 +541,7 @@ function getNewEvents(code){
             } else {
 
                 if( ! noNewEvents.is( ':visible' ) ) {
-                    showOrHide( noNewEvents );
+                    notifSlide( noNewEvents );
                 }
 
             }
@@ -569,21 +566,17 @@ function getNewEvents(code){
     });
 }
 
-function showOrHide( el, action ) {
-    if( ! action || action == 'show' ) {
-        el.animate(
+function notifSlide( el ) {
+    el
+        .animate(
             {opacity: 'show', height: 'show'},
-            {duration: 'slow', complete: function() { el.removeClass( 'hidden' ); }}
+            {duration: 'slow'}
         )
-    }
-
-    if( ! action || action == 'hide' ) {
-        el.delay( 4000 )
-            .animate(
-                {opacity: 'hide', height: 'hide'},
-                {duration: 'slow', complete: function() { el.addClass( 'hidden'); }}
-            );
-    }
+        .delay( 4000 )
+        .animate(
+            {opacity: 'hide', height: 'hide'},
+            {duration: 'slow'}
+        );
 }
 
 function pushIdsDisplayed( events ) {
