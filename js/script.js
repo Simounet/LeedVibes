@@ -54,18 +54,24 @@ $(function() {
             url: url
         })
             .done(function() {
-                var isSelectedItem = button.parents( '.selected' ).length;
+                var isTotalCounterButton = button.hasClass( 'js-total-counter' ),
+                    isSelectedItem = button.parents( '.selected' ).length;
                 if(
-                    button.hasClass( '.js-total-counter' )
+                    isTotalCounterButton
                     && ! isSelectedItem
                 ) {
                     window.location=url;
                 }
                 if( isSelectedItem ) {
                     $('.js-event').remove();
-                    $('.infinite-scroll--end').removeClass( 'hidden' );
+                    $('.js-infinite-scroll-end').removeClass( 'hidden' );
                 }
-                button.html( "0" );
+
+                var buttonToClear = isTotalCounterButton ?
+                    $('.js-mark-as-read:visible')
+                    :
+                    button;
+                buttonToClear.html( "0" );
             })
             .fail(function() {
                 alert( "error" );
