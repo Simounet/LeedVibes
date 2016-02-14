@@ -862,20 +862,21 @@ body {
 @media (max-width: 650px) {
   /* line 390, ../sass/style.scss */
   .article__read-unread {
-    top: 30px;
+    width: 15%;
+    height: 100%;
   }
 }
 
-/* line 407, ../sass/style.scss */
+/* line 408, ../sass/style.scss */
 .article__read-unread--checkbox label {
   width: 22px;
   height: 22px;
   cursor: pointer;
   position: absolute;
-  left: 0;
-  top: 9px;
+  top: 50%;
+  left: calc( 50% - 7px );
 }
-/* line 414, ../sass/style.scss */
+/* line 415, ../sass/style.scss */
 .article__read-unread--checkbox label:after {
   content: '';
   width: 8px;
@@ -895,34 +896,35 @@ body {
   transform: rotate(-45deg);
 }
 @media (max-width: 650px) {
-  /* line 407, ../sass/style.scss */
+  /* line 408, ../sass/style.scss */
   .article__read-unread--checkbox label {
-    height: 25px;
+    top: calc( 50% - 11px );
+    left: calc( 50% - 11px );
   }
 }
-/* line 434, ../sass/style.scss */
+/* line 436, ../sass/style.scss */
 .article__read-unread--checkbox input[type=checkbox] {
   width: 22px;
   visibility: hidden;
 }
 @media (max-width: 650px) {
-  /* line 434, ../sass/style.scss */
+  /* line 436, ../sass/style.scss */
   .article__read-unread--checkbox input[type=checkbox] {
     padding-top: 0.2em;
   }
 }
-/* line 442, ../sass/style.scss */
+/* line 444, ../sass/style.scss */
 .article__read-unread--checkbox input[type=checkbox]:checked + label:after {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
 
-/* line 448, ../sass/style.scss */
+/* line 450, ../sass/style.scss */
 .article__read-unread--label-content {
   display: none;
 }
 
-/* line 451, ../sass/style.scss */
+/* line 453, ../sass/style.scss */
 .article__content {
   display: none;
   margin: 0 auto 1em;
@@ -930,41 +932,41 @@ body {
   line-height: 1.625em;
 }
 @media (max-width: 650px) {
-  /* line 451, ../sass/style.scss */
+  /* line 453, ../sass/style.scss */
   .article__content {
     width: auto;
   }
 }
-/* line 461, ../sass/style.scss */
+/* line 463, ../sass/style.scss */
 .article__content a:hover,
 .article__content a:active {
   text-decoration: underline;
 }
-/* line 466, ../sass/style.scss */
+/* line 468, ../sass/style.scss */
 .event--website-view .article__content {
   width: auto;
 }
-/* line 469, ../sass/style.scss */
+/* line 471, ../sass/style.scss */
 .event--website-view .article__content iframe {
   width: 100%;
 }
 
-/* line 475, ../sass/style.scss */
+/* line 477, ../sass/style.scss */
 .article__content--is-opened {
   display: block;
 }
 
-/* line 479, ../sass/style.scss */
+/* line 481, ../sass/style.scss */
 .article__content__infos {
   margin: 1em 0;
 }
-/* line 482, ../sass/style.scss */
+/* line 484, ../sass/style.scss */
 .article__content__infos a {
   font-size: 0.9em;
   line-height: 1.2em;
 }
 
-/* line 488, ../sass/style.scss */
+/* line 490, ../sass/style.scss */
 .article__content__switch-view {
   display: none;
   position: absolute;
@@ -973,19 +975,19 @@ body {
   z-index: 20;
 }
 @media (max-width: 650px) {
-  /* line 488, ../sass/style.scss */
+  /* line 490, ../sass/style.scss */
   .article__content__switch-view {
     top: 2.4em;
     right: 4em;
   }
 }
-/* line 500, ../sass/style.scss */
+/* line 502, ../sass/style.scss */
 .event--focus .article__content__switch-view {
   display: inherit;
 }
 
 /* USER SETTINGS */
-/* line 506, ../sass/style.scss */
+/* line 508, ../sass/style.scss */
 .settings {
   margin: 1em auto;
   padding: 0 1em;
@@ -994,7 +996,7 @@ body {
   white-space: normal;
 }
 
-/* line 516, ../sass/style.scss */
+/* line 518, ../sass/style.scss */
 .settings-item {
   padding: 0.5em 1.5em;
   border-bottom: 0.38462em solid transparent;
@@ -1004,12 +1006,12 @@ body {
   -webkit-transition-delay: 0s;
   transition: border 0.2s ease-in-out 0s;
 }
-/* line 521, ../sass/style.scss */
+/* line 523, ../sass/style.scss */
 .settings-item:hover, .settings-item:active, .settings-item:focus {
   border-color: white;
 }
 
-/* line 528, ../sass/style.scss */
+/* line 530, ../sass/style.scss */
 button.settings-item {
   height: 2.61538em;
   border-top-width: 0;
@@ -1018,14 +1020,14 @@ button.settings-item {
   background-color: transparent;
 }
 
-/* line 536, ../sass/style.scss */
+/* line 538, ../sass/style.scss */
 .settings__fields input[type='text'],
 .settings__fields input[type='password'] {
   min-width: 7em;
   width: 35%;
 }
 
-/* line 541, ../sass/style.scss */
+/* line 543, ../sass/style.scss */
 .settings__fields input[type='text'],
 .settings__fields input[type='password'],
 .settings__fields input[type='submit'] {
@@ -1035,12 +1037,12 @@ button.settings-item {
   color: #303030;
 }
 
-/* line 550, ../sass/style.scss */
+/* line 552, ../sass/style.scss */
 .favorite-inverted {
   fill: white;
 }
 
-/* line 554, ../sass/style.scss */
+/* line 556, ../sass/style.scss */
 .animation-spin {
   -moz-animation: spin 4s linear infinite;
   -webkit-animation: spin 4s linear infinite;
@@ -1067,40 +1069,40 @@ button.settings-item {
 }
 /* MEDIA QUERIES */
 @media (max-width: 650px) {
-  /* line 563, ../sass/style.scss */
+  /* line 565, ../sass/style.scss */
   td {
     display: block;
   }
 }
-/* line 568, ../sass/style.scss */
+/* line 570, ../sass/style.scss */
 .mobile-only {
   display: none;
 }
 @media (max-width: 650px) {
-  /* line 568, ../sass/style.scss */
+  /* line 570, ../sass/style.scss */
   .mobile-only {
     display: inline;
   }
 }
 
 /* IE9- */
-/* line 577, ../sass/style.scss */
+/* line 579, ../sass/style.scss */
 .no-flexboxlegacy body {
   display: block;
 }
 
-/* line 581, ../sass/style.scss */
+/* line 583, ../sass/style.scss */
 .no-flexboxlegacy .wrapper {
   margin-left: 20%;
 }
 
-/* line 585, ../sass/style.scss */
+/* line 587, ../sass/style.scss */
 .no-flexboxlegacy .sidebar {
   float: left;
   width: 20%;
 }
 
-/* line 589, ../sass/style.scss */
+/* line 591, ../sass/style.scss */
 .no-boxshadow .article__read-unread--label-content {
   display: inline;
   padding: 3px;
@@ -1109,7 +1111,7 @@ button.settings-item {
 }
 
 /* IE7 */
-/* line 596, ../sass/style.scss */
+/* line 598, ../sass/style.scss */
 .no-flexboxlegacy.no-boxsizing .sidebar {
   width: 19%;
 }

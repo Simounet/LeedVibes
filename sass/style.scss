@@ -397,7 +397,8 @@ $position-top-on-break: 30px;
     cursor: pointer;
 
     @media( $breakpoint ) {
-        top: $position-top-on-break;
+        width: 15%;
+        height: 100%;
     }
 }
 // Thanks to: http://codepen.io/Twikito/pen/vhyKz
@@ -409,8 +410,8 @@ $checkbox-size: 22px;
       height: $checkbox-size;
       cursor: pointer;
       position: absolute;
-      left: 0;
-      top: 9px;
+      top: 50%;
+      left: calc( 50% - 7px );
       &:after {
           content: '';
           width: 8px;
@@ -426,9 +427,10 @@ $checkbox-size: 22px;
           @include transform( rotate(-45deg) );
       }
 
-    @media( $breakpoint ) {
-        height: 25px;
-    }
+      @media( $breakpoint ) {
+          top: calc( 50% - #{$checkbox-size/2} );
+          left: calc( 50% - #{$checkbox-size/2} );
+      }
   }
 
   input[type=checkbox] {
