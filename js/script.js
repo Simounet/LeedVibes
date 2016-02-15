@@ -1,10 +1,12 @@
+/*jslint browser: true*/ /*global  $*/ /*global  i18n*/
+"use strict";
 var infiniteScrollLimit = '',
     eventObj,
     idsDisplayed = [];
 function _t(key,args){
-    value = i18n[key];
-    if(args!=null){
-        for(i=0;i<args.length;i++){
+    var value = i18n[key];
+    if(typeof( args ) !== 'undefined' ){
+        for(var i=0;i<args.length;i++){
             value = value.replace('$'+(i+1),args[i]);
         }
     }
@@ -190,7 +192,7 @@ EventObject.prototype = {
             if( ! entry.hasClass( 'js-event--read' ) && entry.hasClass('js-focus') ) {
                 readThis( $(target), entry.data('id') );
             }
-        }
+        };
 
         // Content handling
         if( special ) {
@@ -215,8 +217,8 @@ EventObject.prototype = {
     },
 
     toggleContent: function( callback ) {
-        eventId = this.entry.data('id');
-        if( this.content.children().length == 0 ) {
+        var eventId = this.entry.data('id');
+        if( this.content.children().length === 0 ) {
             $.ajax({
                 url: "./plugins/leedvibes/article_content.php",
                 data:{ id: eventId },
@@ -256,9 +258,9 @@ EventObject.prototype = {
             data:{id: this.entry.data( 'id' )},
             success:function(msg){
                 if(msg.status == 'noconnect') {
-                    alert(msg.texte)
+                    alert(msg.texte);
                 } else {
-                    if( console && console.log && msg!="" ) console.log(msg);
+                    if( console && console.log && typeof( msg ) !== 'undefined' ) console.log(msg);
                     favoriteTarget
                         .prop( 'alt', _t( favText ) )
                         .prop( 'title', _t( favText ) );
@@ -269,10 +271,10 @@ EventObject.prototype = {
 }
 
 function toggleFolder( button ) {
-    folderBloc = button.parents('.js-folder');
-    feedBloc = folderBloc.find('.js-toggle-item');
+    var folderBloc = button.parents('.js-folder'),
+        feedBloc = folderBloc.find('.js-toggle-item');
 
-    open = 0;
+    var open = 0;
     if( feedBloc.css('display') == 'none' ) {
         open = 1;
     }
@@ -304,9 +306,9 @@ function countersHandler( feedID, operation ) {
         }
 
         return i;
-    }
+    };
 
-    for (i = 0; i < elements.length; ++i) {
+    for (var i = 0; i < elements.length; ++i) {
         var element = elements[i];
         element.html( counterHandler( element ) );
     }
@@ -353,7 +355,7 @@ function readThis(element,id,callback){
             data:{id:id},
             success:function(msg){
                 if(msg.status == 'noconnect') {
-                    alert(msg.texte)
+                    alert(msg.texte);
                 } else {
                     // nblus increment, used by the infinite scroll function
                     $(window).data('nblus', $(window).data('nblus')+1);
@@ -367,9 +369,9 @@ function readThis(element,id,callback){
                 data:{id:id},
                 success:function(msg){
                     if(msg.status == 'noconnect') {
-                        alert(msg.texte)
+                        alert(msg.texte);
                     } else {
-                        if( console && console.log && msg!="" ) console.log(msg);
+                        if( console && console.log && typeof( msg ) !== 'undefined' ) console.log(msg);
                         entry.find('[type="checkbox"]').prop('checked', false);
                         entry.removeClass('event--read js-event--read');
                         if(callback){
@@ -385,7 +387,7 @@ function readThis(element,id,callback){
 }
 
 function targetThisEvent(event,focusOn){
-    target = $(event);
+    var target = $(event);
     if(target.prop("tagName")=='SECTION'){
         $('.eventSelected').removeClass('eventSelected');
         target.addClass('eventSelected');
@@ -410,7 +412,7 @@ function infiniteScroll() {
         action  = urlVars.action,
         folder  = urlVars.folder,
         feed    = urlVars.feed,
-        order   = ( urlVars.order != '' ) ? '&order=' + urlVars.order : '';
+        order   = ( typeof( urlVars.order ) !== 'undefined' ) ? '&order=' + urlVars.order : '';
 
     $.ajax({
         url: './article.php',
@@ -418,7 +420,7 @@ function infiniteScroll() {
         data: 'scroll='+$(window).data('page')+'&nblus='+$(window).data('nblus')+'&action='+action+'&folder='+folder+'&feed='+feed+order,
 
         success: function(data) {
-            if (data.replace(/^\s+/g,'').replace(/\s+$/g,'') != '')
+            if (data.replace(/^\s+/g,'').replace(/\s+$/g,'') !== '')
             {
                 $('.articles').after(data);
                 $(window).data('page', $(window).data('page')+1);
@@ -433,7 +435,7 @@ function infiniteScroll() {
             setScrollInfiniLimit();
         }
     });
-};
+}
 
 // Returns an array containing all the url's variables
 function getAllUrlVars()
@@ -445,7 +447,7 @@ function getAllUrlVars()
         hash = hashes[i].split('=');
         vars.push(hash[0]);
         if (hash[1]){
-            rehash = hash[1].split('#');
+            var rehash = hash[1].split('#');
             vars[hash[0]] = rehash[0];
         } else {
             vars[hash[0]] = '';
@@ -460,7 +462,7 @@ function getNewEvents(code){
     var noNewEvents =  $('#no-new-events');
 
     // Check if ajax queries are locked
-    if( $(window).data('ajaxready') == false ) return;
+    if( $(window).data('ajaxready') === false ) return;
 
     // Lock ajax queries
     $(window).data('ajaxready', false);
@@ -481,7 +483,7 @@ function getNewEvents(code){
         action  = urlVars.action,
         folder  = urlVars.folder,
         feed    = urlVars.feed,
-        order   = ( urlVars.order != '' ) ? '&order=' + urlVars.order : '',
+        order   = ( typeof( urlVars.order ) !== 'undefined' ) ? '&order=' + urlVars.order : '',
         lastIdChecked = idsDisplayed[0];
 
     $.ajax({
@@ -491,7 +493,7 @@ function getNewEvents(code){
         data: 'custom-action=new-events&action='+action+'&folder='+folder+'&feed='+feed+order+'&last-id-checked='+lastIdChecked,
 
         success: function(data) {
-            if( data.replace(/^\s+/g,'').replace(/\s+$/g,'') != '' ) {
+            if( data.replace(/^\s+/g,'').replace(/\s+$/g,'') !== '' ) {
 
                 noNewEvents
                     // Adding new events
@@ -568,7 +570,7 @@ function updateEventsDate() {
         var newDate = getNewEventDate( date );
 
         if( typeof( newDate ) == 'number' ) {
-            if( newDate == 0 ) {
+            if( newDate === 0 ) {
                 eventItem.html( _t( 'LEEDVIBES_NOW' ) );
             } else {
                 eventItem.html( newDate + ' ' + _t( 'LEEDVIBES_MN' ) );
