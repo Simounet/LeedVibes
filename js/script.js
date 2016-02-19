@@ -309,8 +309,10 @@ function countersHandler( feedID, operation ) {
     };
 
     for (var i = 0; i < elements.length; ++i) {
-        var element = elements[i];
-        element.html( counterHandler( element ) );
+        var element = elements[i],
+            newCount = counterHandler( element );
+        element.html( newCount );
+        newCount === 0 ? element.addClass( 'hidden' ) : element.removeClass( 'hidden' );
     }
 
 }
@@ -494,15 +496,19 @@ function getNewEvents(code){
 
         success: function(data) {
             if( data.replace(/^\s+/g,'').replace(/\s+$/g,'') !== '' ) {
-
+                var newEvents = [];
+                $( $.parseHTML( $.trim( data ) ) ).each( function() {
+                    var parsedNode = $(this);
+                    if( parsedNode.prop("tagName") === 'ARTICLE' ) {
+                        newEvents.push( parsedNode );
+                        countersHandler( parsedNode.data('feed-id'), '+' );
+                    }
+                });
                 $( '.articles' )
-                    // Adding new events
-                    // [todo] - Add new events number as an info to the left menu
-                    .prepend( data );
-                    // Updating first id general info for the next call
-                    //.data( 'first-id', $( $(data)[0] ).data( 'id' ) );
-                    // [todo] - Clean undesired TextNode in data var
-                    pushIdsDisplayed( $(data) );
+                    .prepend( newEvents );
+                // Updating first id general info for the next call
+                //.data( 'first-id', $( $(data)[0] ).data( 'id' ) );
+                pushIdsDisplayed( $( newEvents ) );
 
             } else {
 

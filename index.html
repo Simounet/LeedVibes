@@ -77,9 +77,7 @@
                             <button class="folder__button sidebar-item js-toggle-button{if="!$value->getIsopen()"} folder-closed{/if}" title="Switch dossier"><img src="images/triangle.svg" alt="" /></button>
                             {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
                             <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}" class="sidebar-item">{function="htmlentities($value->getName())"}</a>
-                            {if="$unreadEventsForFolder > 0"}
-                                <button class="mark-as-read sidebar-item js-mark-as-read js-folder-counter" title="{function="_t('MARK_AS_READ_FOLDER_ITEMS',array($unreadEventsForFolder))"}">{$unreadEventsForFolder}</button>
-                            {/if}
+                            <button class="mark-as-read sidebar-item js-mark-as-read js-folder-counter{if="$unreadEventsForFolder === 0"} hidden{/if}" title="{function="_t('MARK_AS_READ_FOLDER_ITEMS',array($unreadEventsForFolder))"}">{$unreadEventsForFolder}</button>
                             {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
                         </div>
                         <ul class="feed js-toggle-item{if="!$value->getIsopen()"} hidden{/if}">
@@ -91,9 +89,7 @@
                                             {if="isset($value2['favicon'])"}{$value2['favicon']}{/if}
                                             <span class="sidebar-item-label">{function="htmlentities($value2['name'])"}</span>
                                         </a>
-                                        {if="isset($unread[$value2['id']]) && $unread[$value2['id']] > 0"}
-                                            <button class="sidebar-item mark-as-read js-mark-as-read js-feed-counter" title="{function="_t('MARK_AS_READ')"}">{$unread[$value2['id']]}</button>
-                                        {/if}
+                                        <button class="sidebar-item mark-as-read js-mark-as-read js-feed-counter{if="isset($unread[$value2['id']]) && $unread[$value2['id']] === 0"} hidden{/if}" title="{function="_t('MARK_AS_READ')"}">{$unread[$value2['id']]}</button>
                                 {function="Plugin::callHook("menu_post_feed_link", array(&$value))"}
                                     </li>
                                 {/loop}
