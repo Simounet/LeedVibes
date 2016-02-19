@@ -422,7 +422,7 @@ function infiniteScroll() {
         success: function(data) {
             if (data.replace(/^\s+/g,'').replace(/\s+$/g,'') !== '')
             {
-                $('.articles').after(data);
+                $('.articles').append(data);
                 $(window).data('page', $(window).data('page')+1);
             } else {
                 loading.addClass( 'hidden' );
@@ -495,10 +495,10 @@ function getNewEvents(code){
         success: function(data) {
             if( data.replace(/^\s+/g,'').replace(/\s+$/g,'') !== '' ) {
 
-                noNewEvents
+                $( '.articles' )
                     // Adding new events
                     // [todo] - Add new events number as an info to the left menu
-                    .after( data );
+                    .prepend( data );
                     // Updating first id general info for the next call
                     //.data( 'first-id', $( $(data)[0] ).data( 'id' ) );
                     // [todo] - Clean undesired TextNode in data var
