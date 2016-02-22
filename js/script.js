@@ -70,10 +70,31 @@ $(function() {
                 }
 
                 var buttonToClear = isTotalCounterButton ?
-                    $('.js-mark-as-read:visible')
+                    $('.js-mark-as-read')
                     :
                     button;
-                buttonToClear.html( "0" );
+                var buttonCount = buttonToClear.html();
+                if(
+                    buttonToClear.hasClass( 'js-folder-counter' ) ||
+                    isTotalCounterButton
+                ) {
+                    if( isTotalCounterButton ) {
+                        buttonToClear
+                            .addClass('hidden')
+                            .html( "0" );
+                    } else {
+                        $('.js-total-counter' ).html( parseInt( $('.js-total-counter').html() ) - buttonCount );
+                        buttonToClear
+                            .addClass( 'hidden' )
+                            .html( "0" )
+                            .parents( '.js-folder' )
+                            .find('.js-mark-as-read')
+                                .addClass( 'hidden' )
+                                .html( "0" );
+                    }
+                } else {
+                    feedCounters( buttonToClear.parents('.js-feed__item').data( 'id' ), '-', buttonCount );
+                }
             })
             .fail(function() {
                 alert( "error" );
@@ -290,7 +311,10 @@ function toggleFolder( button ) {
     });
 }
 
-function countersHandler( feedID, operation ) {
+function feedCounters( feedID, operation, operationNumber ) {
+    if( typeof( operationNumber ) === 'undefined' ) {
+        operationNumber = 1;
+    }
     var feed = $('.js-feed__item[data-id="'+feedID+'"]'),
         elements = [ feed.find('.js-feed-counter'),
                      feed.parents('.js-folder').find('.js-folder-counter'),
@@ -300,9 +324,9 @@ function countersHandler( feedID, operation ) {
     var counterHandler = function( counter ) {
         var i = parseInt(counter.html());
         if( operation == '+' || operation == 'plus' ) {
-            i++;
+            i += operationNumber;
         } else {
-            i--;
+            i -= operationNumber;
         }
 
         return i;
@@ -330,7 +354,7 @@ function readThis(element,id,callback){
     if(!entry.hasClass('js-event--read')){
         entry.find('[type="checkbox"]').prop('checked', true);
         // Decrement feed number
-        countersHandler( entry.data('feed-id') );
+        feedCounters( entry.data('feed-id') );
         entry.addClass('event--read js-event--read');
         readUnreadButton.prop( 'title', _t( 'LEEDVIBES_MARK_AS_UNREAD' ) );
 
@@ -383,7 +407,7 @@ function readThis(element,id,callback){
                 }
         });
         // Increment feed number
-        countersHandler( entry.data('feed-id'), '+' );
+        feedCounters( entry.data('feed-id'), '+' );
     }
 
 }
@@ -501,7 +525,7 @@ function getNewEvents(code){
                     var parsedNode = $(this);
                     if( parsedNode.prop("tagName") === 'ARTICLE' ) {
                         newEvents.push( parsedNode );
-                        countersHandler( parsedNode.data('feed-id'), '+' );
+                        feedCounters( parsedNode.data('feed-id'), '+' );
                     }
                 });
                 $( '.articles' )
