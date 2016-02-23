@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="36"
+   height="36"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="leed-logo.svg">
+  <metadata
+     id="metadata30">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs28" />
+  <sodipodi:namedview
+     pagecolor="#424242"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1052"
+     id="namedview26"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="4.7943722"
+     inkscape:cx="150.38524"
+     inkscape:cy="38.383514"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <rect
+     style="color:#000000;fill:#424242;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+     id="rect2987"
+     width="36.083973"
+     height="35.979679"
+     x="0.052144475"
+     y="0.020315306"
+     ry="4.7341666"
+     rx="4.6929998" />
+  <g
+     style="fill:#ffffff;fill-opacity:1"
+     id="g6"
+     transform="matrix(0.0378781,0,0,0.03736634,-1.2053805,-0.11041167)">
+    <path
+       style="fill:#ffffff;fill-opacity:1"
+       inkscape:connector-curvature="0"
+       id="path8"
+       d="m 464.0625,74.125 -294.53125,180.46875 228.90625,326.5625 186.71875,-43.75 -6.25,357.8125 265.625,-593.75 -215.625,43.71875 c 1.414,7.34715 2.1875,14.92771 2.1875,22.6875 0,65.92899 -53.44601,119.375 -119.375,119.375 -65.92899,0 -119.375,-53.44601 -119.375,-119.375 0,-58.61882 42.25898,-107.3473 97.96875,-117.4375 L 487.5,235.0625 z"
+       sodipodi:nodetypes="cccccccsssccc" />
+    <path
+       style="fill:#ffffff;fill-opacity:1"
+       inkscape:connector-curvature="0"
+       id="path10"
+       d="m -448.4375,425.95312 c 0,16.61169 -17.48888,30.07813 -39.0625,30.07813 -21.57362,0 -39.0625,-13.46644 -39.0625,-30.07813 0,-16.61168 17.48888,-30.07812 39.0625,-30.07812 21.57362,0 39.0625,13.46644 39.0625,30.07812 z"
+       transform="matrix(1.8897257,0,0,2.4541893,1432.9603,-677.49462)" />
+    <path
+       style="fill:#ffffff;fill-opacity:1"
+       inkscape:connector-curvature="0"
+       id="path12"
+       d="m 588.9217,166.72692 c -31.86163,0 -59.23965,19.16444 -71.2626,46.58854 12.74588,-8.47155 28.02667,-13.41923 44.47825,-13.41923 44.45247,0 80.48833,36.03585 80.48833,80.48832 0,8.1866 -1.21816,16.09461 -3.49008,23.53777 16.8651,-14.26804 27.56894,-35.59166 27.56894,-59.41256 0,-42.95828 -34.82457,-77.78284 -77.78284,-77.78284 z m 33.14225,-89.930487 0,0 0,0 0,0" />
+    <path
+       style="fill:#ffffff;fill-opacity:1"
+       inkscape:connector-curvature="0"
+       id="path14"
+       d="m 622.06395,76.796433 c -45.63907,0 -85.86575,23.132838 -109.62645,58.303307 22.8166,-17.04392 51.11687,-27.13606 81.78696,-27.13606 75.56242,0 136.81663,61.2542 136.81663,136.81663 0,18.52968 -3.68721,36.18044 -10.36203,52.29712 20.89979,-23.38376 33.60219,-54.23326 33.60219,-88.0637 0,-73.02252 -59.19478,-132.217297 -132.2173,-132.217297 z" />
+  </g>
+  <g
+     id="g16"
+     style="font-size:37.47461319px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#6a6a6a;font-family:Sans"
+     transform="matrix(0.93686538,0,0,1.0673892,-181.22516,-478.43486)" />
+</svg>
