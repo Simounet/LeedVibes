@@ -1,5 +1,4 @@
-/*jslint browser: true*/ /*global  $*/ /*global  i18n*/
-"use strict";
+/*jslint browser: true*/ /*global  $*/ /*global  i18n*/ /*global console*/ /*global alert*/ /*global confirm*/ /*global toggleWebsite*/
 var infiniteScrollLimit = '',
     eventObj,
     idsDisplayed = [];
@@ -14,6 +13,7 @@ function _t(key,args){
 }
 
 $(function() {
+    "use strict";
 
     $( '.wrapper' ).on( 'click', '.js-event', function( event ) { 
         event.preventDefault();
@@ -39,15 +39,16 @@ $(function() {
             confirmText = '',
             url = 'action.php?action=';
         if( button.parents('.js-feed__item').length ) {
-            confirmText = 'CONFIRM_MARK_FEED_AS_READ',
+            confirmText = 'CONFIRM_MARK_FEED_AS_READ';
             url += 'readAll&feed=' + button.parents('.js-feed__item').data('id');
         } else if( button.parents('.js-folder__item').length ) {
-            confirmText = 'READ_ALL_FOLDER_CONFIRM',
+            confirmText = 'READ_ALL_FOLDER_CONFIRM';
             url += 'readFolder&folder=' + button.parents('.js-folder').data('id');
         } else {
-            confirmText = 'LEEDVIBES_READ_ALL_CONFIRM',
+            confirmText = 'LEEDVIBES_READ_ALL_CONFIRM';
             url += 'readAll';
         }
+        url += '&last-event-id=' + idsDisplayed[0];
         if(! confirm(_t(confirmText))) {
             return false;
         }
@@ -59,8 +60,8 @@ $(function() {
                 var isTotalCounterButton = button.hasClass( 'js-total-counter' ),
                     isSelectedItem = button.parents( '.selected' ).length;
                 if(
-                    isTotalCounterButton
-                    && ! isSelectedItem
+                    isTotalCounterButton &&
+                    ! isSelectedItem
                 ) {
                     window.location=url;
                 }
@@ -118,16 +119,17 @@ $(function() {
 });
 
 function canLoadMore() {
+    "use strict";
     if( $('#no-more-events').is( ':visible' ) ) {
         $(window).unbind('scroll');
     }
     if( (
-            ( typeof( infiniteScrollLimit.offset() ) !== 'undefined' )
-            && infiniteScrollLimit.offset().top < (
+            ( typeof( infiniteScrollLimit.offset() ) !== 'undefined' ) &&
+            infiniteScrollLimit.offset().top < (
                 $(window).scrollTop() + $(window).height()
             )
-        )
-        && $(window).data( 'ajaxready' ) === true
+        ) &&
+        $(window).data( 'ajaxready' ) === true
     ) {
         return true;
     }
@@ -135,6 +137,7 @@ function canLoadMore() {
 }
 
 function EventObject( event ) { 
+    "use strict";
     this.target  = $(event.target);
     this.targetClasses = ( typeof( this.target.attr('class') ) != 'undefined' ) ? this.target.attr('class') : '';
 
@@ -163,10 +166,10 @@ function EventObject( event ) {
 
     // If click on the entry's title
     // Or on the entry's header
-    if( ! this.target.hasClass( this.readButtonClass )
-        && (
-            this.target.parents( '.' + this.headerClass ).length
-            || this.target.hasClass( this.headerClass )
+    if( ! this.target.hasClass( this.readButtonClass ) &&
+        (
+            this.target.parents( '.' + this.headerClass ).length ||
+            this.target.hasClass( this.headerClass )
         )
     ) {
         this.toggleEvent();
@@ -180,6 +183,7 @@ EventObject.prototype = {
     favoriteClass: 'js-favorite',
 
     readUnreadButtonAction: function(){
+        "use strict";
         var id = this.entry.data('id');
 
         if( this.target.hasClass( this.readButtonClass ) ){
@@ -188,6 +192,7 @@ EventObject.prototype = {
     },
 
     toggleEvent: function() {
+        "use strict";
         var websiteView = this.entry.hasClass('js-website-view'); // [todo] - move this var to LeedRSSOrSiteView plugin
 
         this.toggleHeaderFocus();
@@ -195,6 +200,7 @@ EventObject.prototype = {
     },
 
     toggleHeaderFocus: function() {
+        "use strict";
         // If we are not clicking on the already focused element
         // And there is and existing focused element
         // Then remove focus class
@@ -206,6 +212,7 @@ EventObject.prototype = {
     },
 
     toggleItem: function( special ) {
+        "use strict";
         var entry = this.entry,
             target = this.target;
 
@@ -238,6 +245,7 @@ EventObject.prototype = {
     },
 
     toggleContent: function( callback ) {
+        "use strict";
         var eventId = this.entry.data('id');
         if( this.content.children().length === 0 ) {
             $.ajax({
@@ -260,15 +268,17 @@ EventObject.prototype = {
     },
 
     hideEntryIfNotUnfolded: function() {
+        "use strict";
         if(
-            ! this.target.siblings( '[type="checkbox"]' ).prop( 'checked' )
-           && this.content.not( ':visible' ).length
+            ! this.target.siblings( '[type="checkbox"]' ).prop( 'checked' ) &&
+           this.content.not( ':visible' ).length
         ) {
             this.entry.addClass( 'hidden' );
         }
     },
 
     favorite: function( favoriteTarget ) {
+        "use strict";
         var favAction = ( this.entry.data( 'favorite' ) == 1 ) ? 'remove' : 'add',
             favText = ( this.entry.data( 'favorite' ) != 1 ) ? 'UNFAVORIZE' : 'FAVORIZE';
 
@@ -289,9 +299,10 @@ EventObject.prototype = {
             }
         });
     }
-}
+};
 
 function toggleFolder( button ) {
+    "use strict";
     var folderBloc = button.parents('.js-folder'),
         feedBloc = folderBloc.find('.js-toggle-item');
 
@@ -312,6 +323,7 @@ function toggleFolder( button ) {
 }
 
 function feedCounters( feedID, operation, operationNumber ) {
+    "use strict";
     if( typeof( operationNumber ) === 'undefined' ) {
         operationNumber = 1;
     }
@@ -336,17 +348,23 @@ function feedCounters( feedID, operation, operationNumber ) {
         var element = elements[i],
             newCount = counterHandler( element );
         element.html( newCount );
-        newCount === 0 ? element.addClass( 'hidden' ) : element.removeClass( 'hidden' );
+        if( newCount === 0 ) {
+            element.addClass( 'hidden' );
+        } else {
+            element.removeClass( 'hidden' );
+        }
     }
 
 }
 
 function setScrollInfiniLimit() {
+    "use strict";
     // Catch the 5th event from the bottom
     infiniteScrollLimit = $('.js-event').slice(-5, -4);
 }
 
 function readThis(element,id,callback){
+    "use strict";
     // [facto] - get entry directly
     var entry = element.parents('.js-event'),
         nextEvent = $('#'+id).next(),
@@ -413,6 +431,7 @@ function readThis(element,id,callback){
 }
 
 function targetThisEvent(event,focusOn){
+    "use strict";
     var target = $(event);
     if(target.prop("tagName")=='SECTION'){
         $('.eventSelected').removeClass('eventSelected');
@@ -427,6 +446,7 @@ function targetThisEvent(event,focusOn){
 }
 
 function infiniteScroll() {
+    "use strict";
     var loading = $('#infinite-scroll-loading'),
         loadingFadeTime = 500,
         loadingDelayTime = 2000;
@@ -466,6 +486,7 @@ function infiniteScroll() {
 // Returns an array containing all the url's variables
 function getAllUrlVars()
 {
+    "use strict";
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for(var i = 0; i < hashes.length; i++)
@@ -485,6 +506,7 @@ function getAllUrlVars()
 }
 
 function getNewEvents(code){
+    "use strict";
     var noNewEvents =  $('#no-new-events');
 
     // Check if ajax queries are locked
@@ -563,6 +585,7 @@ function getNewEvents(code){
 }
 
 function notifSlide( el ) {
+    "use strict";
     el
         .animate(
             {opacity: 'show', height: 'show'},
@@ -576,6 +599,7 @@ function notifSlide( el ) {
 }
 
 function pushIdsDisplayed( events ) {
+    "use strict";
     events.each( function() {
         var id = $(this).data('id');
 
@@ -589,6 +613,7 @@ function pushIdsDisplayed( events ) {
 }
 
 function updateEventsDate() {
+    "use strict";
 
     var dateNow = new Date();
 
