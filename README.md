@@ -1,5 +1,7 @@
 # LeedVibes
 
+## Description
+
 LeedVibes Is Not Netvibes. :)
 This is a plugin for [Leed's](https://github.com/ldleman/Leed), the amazing RSS reader.
 
@@ -7,12 +9,17 @@ This is a plugin for [Leed's](https://github.com/ldleman/Leed), the amazing RSS 
 
 You need to have a working copy of Leed. If not look at the [Leed's install instructions](https://github.com/ldleman/Leed#installation-1).
 
-## Installation
+## Install
 
 1. Download [LeedVibes](archive/master.zip) into the `plugins` folder of Leed
 2. Go to the `Available plugins` layer of the `settings` page
-3. Activate `LeedVibes`
+3. Activate `LeedVibes` from the settings page
 4. Go back to the main page and YATAAAA!
+
+## Uninstall
+
+1. Disable `LeedVibes` from the settings page
+2. Remove the `LeedVibes` folder from `plugins`
 
 ## Recommended plugins
 
