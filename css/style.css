@@ -884,11 +884,11 @@ body {
 
 /* line 418, ../sass/style.scss */
 .article__read-unread--checkbox label {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: 20%;
   left: calc( 50% - 7px );
 }
 /* line 425, ../sass/style.scss */
@@ -897,7 +897,7 @@ body {
   width: 8px;
   height: 3px;
   position: absolute;
-  top: 2px;
+  top: 7px;
   left: 3px;
   border: 3px solid black;
   border-top: none;
@@ -913,13 +913,13 @@ body {
 @media (max-width: 650px) {
   /* line 418, ../sass/style.scss */
   .article__read-unread--checkbox label {
-    top: calc( 50% - 11px );
-    left: calc( 50% - 11px );
+    top: calc( 50% - 12px );
+    left: calc( 50% - 12px );
   }
 }
 /* line 446, ../sass/style.scss */
 .article__read-unread--checkbox input[type=checkbox] {
-  width: 22px;
+  width: 24px;
   visibility: hidden;
 }
 @media (max-width: 650px) {
