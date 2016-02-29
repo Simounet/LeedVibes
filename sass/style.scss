@@ -186,6 +186,15 @@ $border-color-active: white;
     @extend %overflow-sidebar;
 }
 
+.go-top {
+    @include inline-block();
+    padding: 2px 20px;
+    color: $feed-bgc-used;
+    text-align: center;
+    background-color: $sidebar-color-alt;
+    border-radius: 20%;
+}
+
 .feeds-list-toggle.is-toggled:before {
     display: inline-block;
     margin-right: 2px;

@@ -10,5 +10,6 @@
   "LEEDVIBES_CONNECTION": "Connection",
   "LEEDVIBES_GET_NEW_EVENTS": "Show new events",
   "LEEDVIBES_MARK_AS_READ": "Mark as read",
-  "LEEDVIBES_MARK_AS_UNREAD": "Mark as unread"
+  "LEEDVIBES_MARK_AS_UNREAD": "Mark as unread",
+  "LEEDVIBES_GO_TOP": "Go to the top"
 }

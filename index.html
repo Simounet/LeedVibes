@@ -19,7 +19,7 @@
 <body>
     {function="Plugin::callHook("menu_pre_folder_menu", array(&$myUser))"}
     {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
-        <aside class="sidebar">
+        <aside id="sidebar" class="sidebar">
     {/if}
         <div class="settings">
             {if="!$myUser"}
@@ -126,6 +126,7 @@
                 </div>
                 <div id="no-more-events" class="js-infinite-scroll-end hidden">
                     {function="_t('LEEDVIBES_NO_MORE_EVENT')"}
+                    <a href="#sidebar" class="go-top" title="{function="_t('LEEDVIBES_GO_TOP')"}">↑</a>
                 </div>
                 <div class="js-infinite-scroll--end{if="$countEventsPositive"} hidden{/if}">
                     {function="_t('LEEDVIBES_NOTHING_TO_READ')"}

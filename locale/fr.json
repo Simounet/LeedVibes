@@ -10,5 +10,6 @@
   "LEEDVIBES_CONNECTION": "Connexion",
   "LEEDVIBES_GET_NEW_EVENTS": "Afficher les nouvelles entrées",
   "LEEDVIBES_MARK_AS_READ": "Marquer comme lu",
-  "LEEDVIBES_MARK_AS_UNREAD": "Marquer comme non-lu"
+  "LEEDVIBES_MARK_AS_UNREAD": "Marquer comme non-lu",
+  "LEEDVIBES_GO_TOP": "Aller en haut"
 }
