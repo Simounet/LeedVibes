@@ -1,6 +1,7 @@
 @import "compass/css3";
 // VARS
 $font-size-base: 13px;
+$sidebar-button-size: 10%;
 $sidebar-color-bg: #424242;
 $sidebar-color-bg-darken: darken( $sidebar-color-bg, 7% );
 $sidebar-color-alt: #686868;
@@ -229,7 +230,7 @@ $border-color-active: white;
 }
 .folder__button {
     float: left;
-    width: 1.5em;
+    width: $sidebar-button-size;
 }
 
 .folder-closed img {
@@ -264,6 +265,7 @@ $border-color-active: white;
 
 .mark-as-read {
     position: absolute;
+    width: $sidebar-button-size;
     top: 0.8em; /* FIX vertical alignement */
     right: 0.5em;
     font-size: 0.8em;
