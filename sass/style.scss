@@ -148,36 +148,43 @@ $border-color-active: white;
     font-size: 0.9em;
     overflow: hidden;
     
-    [class*="__item"] {
-        position: relative;
-        $padding : 0.5em;
-        padding-bottom: $padding;
-        padding-top: $padding;
-        border-left: $border-base;
-        
-        &,
-        a {
-            @extend %text-color-light;
-        }
-        
-        &:hover,
-        &:active {
-            background-color: $sidebar-color-bg-darken;
-        }
-
-        &.selected {
-            border-color: $border-color-active;
-        }
-
-    }
-    
     .settings__fields {
         padding: 20%;
     }
 
 }
 
+[class*="__item"] {
+    position: relative;
+    $padding : 0.5em;
+    padding-bottom: $padding;
+    padding-top: $padding;
+    border-left: $border-base;
+    
+    &,
+    a {
+        @extend %text-color-light;
+    }
+    
+    &:hover,
+    &:active {
+        background-color: $sidebar-color-bg-darken;
+    }
+
+    &.selected {
+        border-color: $border-color-active;
+    }
+}
+    
 .sidebar-item {
+    display: block;
+    height: 16px; /* Favicon's height */
+    line-height: 16px;
+}
+
+.folder__button,
+.sidebar-item,
+.mark-as-read {
     @media($breakpoint) {
         padding: 12px 0;
     }
@@ -244,11 +251,6 @@ $border-color-active: white;
 .feed {
     padding: 4px 0;
     background-color: #4b4b4b;
-}
-
-.feed__item {
-    height: 16px; /* Favicon's height */
-    line-height: 16px;
 }
 
 %img-vertical-align {
