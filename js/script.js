@@ -555,7 +555,7 @@ function getNewEvents(code){
                 // Updating first id general info for the next call
                 //.data( 'first-id', $( $(data)[0] ).data( 'id' ) );
                 pushIdsDisplayed( $( newEvents ) );
-
+                $('.js-infinite-scroll-end').addClass( 'hidden' );
             } else {
 
                 if( ! noNewEvents.is( ':visible' ) ) {
