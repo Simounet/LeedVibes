@@ -67,7 +67,7 @@ $(function() {
                 }
                 if( isSelectedItem ) {
                     $('.js-event').remove();
-                    $('.js-infinite-scroll-end').removeClass( 'hidden' );
+                    $('#no-more-events').removeClass( 'hidden' );
                 }
 
                 var buttonToClear = isTotalCounterButton ?

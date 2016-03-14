@@ -525,8 +525,9 @@ body {
   margin: 0;
   background-color: #424242;
 }
-/* line 88, ../sass/style.scss */
-.notifications > * {
+
+/* line 89, ../sass/style.scss */
+.notifications__text {
   padding: 1em 0.5em;
 }
 

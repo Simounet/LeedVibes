@@ -112,7 +112,7 @@
         </div>
         <section class="wrapper">
             <div id="no-new-events" class="notifications hidden">
-                <div class="js-infinite-scroll-end">{function="_t('LEEDVIBES_NO_NEW_EVENTS')"}</div>
+                <div class="notifications__text">{function="_t('LEEDVIBES_NO_NEW_EVENTS')"}</div>
             </div>
             <section class="articles">
                 {$countEventsPositive=count($events) > 0}
@@ -121,14 +121,14 @@
                 {/if}
             </section>
             <div class="notifications">
-                <div id="infinite-scroll-loading" class="infinite-scroll hidden">
+                <div id="infinite-scroll-loading" class="infinite-scroll notifications__text hidden">
                     {function="_t('LOADING')"}
                 </div>
-                <div id="no-more-events" class="js-infinite-scroll-end hidden">
+                <div id="no-more-events" class="js-infinite-scroll-end notifications__text hidden">
                     {function="_t('LEEDVIBES_NO_MORE_EVENT')"}
                     <a href="#sidebar" class="go-top" title="{function="_t('LEEDVIBES_GO_TOP')"}">↑</a>
                 </div>
-                <div class="js-infinite-scroll-end{if="$countEventsPositive"} hidden{/if}">
+                <div class="js-infinite-scroll-end notifications__text{if="$countEventsPositive"} hidden{/if}">
                     {function="_t('LEEDVIBES_NOTHING_TO_READ')"}
                 </div>
             </div>

@@ -84,10 +84,10 @@ body {
     margin: 0;
     @extend %text-color-light;
     background-color: $sidebar-color-bg;
+}
 
-    > * {
-        padding: 1em 0.5em;
-    }
+.notifications__text {
+    padding: 1em 0.5em;
 }
 
 %text-color-light {
