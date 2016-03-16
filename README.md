@@ -4,6 +4,11 @@
 
 LeedVibes Is Not Netvibes. :)
 This is a plugin for [Leed's](https://github.com/ldleman/Leed), the amazing RSS reader.
+![LeedVibes screenshot](http://leedvibes.simounet.net/images/leedvibes-screenshot.png)
+
+## Demo
+
+Feel free to try LeedVibes with [this demo instance](http://demo.leedvibes.simounet.net/).
 
 ## Requirements
 
