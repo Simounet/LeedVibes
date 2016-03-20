@@ -1,6 +1,6 @@
 <?php
 
 $configurationManager = new Configuration();
-$configurationManager->change('articlePerPages','50');
+$configurationManager->put('articlePerPages','50');
 
 ?>
