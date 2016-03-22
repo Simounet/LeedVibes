@@ -32,6 +32,7 @@ $(function() {
 
     $('.js-new-events').click( function() {
         getNewEvents( $(this).data( 'sync-code' ) );
+        cleanReadEvents();
     });
 
     $( '.sidebar' ).on( 'click', '.js-mark-as-read', function() {
@@ -582,6 +583,10 @@ function getNewEvents(code){
 
         }
     });
+}
+
+function cleanReadEvents() {
+    $('.js-event--read').remove();
 }
 
 function notifSlide( el ) {
