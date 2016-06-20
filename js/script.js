@@ -271,7 +271,7 @@ EventObject.prototype = {
     hideEntryIfNotUnfolded: function() {
         "use strict";
         if(
-            ! this.target.siblings( '[type="checkbox"]' ).prop( 'checked' ) &&
+           ! this.target.hasClass( 'article__read-read' ) &&
            this.content.not( ':visible' ).length
         ) {
             this.entry.addClass( 'hidden' );
@@ -369,13 +369,14 @@ function readThis(element,id,callback){
     // [facto] - get entry directly
     var entry = element.parents('.js-event'),
         nextEvent = $('#'+id).next(),
-        readUnreadButton = entry.find( '.js-read-unread' );
+        readUnreadButton = entry.find( '.js-read-unread' ),
+        readUnreadImage = readUnreadButton.find( 'img' );
     if(!entry.hasClass('js-event--read')){
-        entry.find('[type="checkbox"]').prop('checked', true);
+        readUnreadButton.addClass('article__read-read');
         // Decrement feed number
         feedCounters( entry.data('feed-id') );
         entry.addClass('event--read js-event--read');
-        readUnreadButton.prop( 'title', _t( 'LEEDVIBES_MARK_AS_UNREAD' ) );
+        readUnreadImage.prop( 'alt', _t( 'LEEDVIBES_MARK_AS_UNREAD' ) );
 
         if( ( entry.find('.js-article__content').css('display') == 'none' ) && element.hasClass('js-read-unread') ) {
             // If the article is not visible
@@ -408,7 +409,7 @@ function readThis(element,id,callback){
             }
         });
     }else{
-        readUnreadButton.prop( 'title', _t( 'LEEDVIBES_MARK_AS_READ' ) );
+        readUnreadImage.prop( 'alt', _t( 'LEEDVIBES_MARK_AS_READ' ) );
         $.ajax({
                 url: "./action.php?action=unreadContent",
                 data:{id:id},
@@ -417,7 +418,7 @@ function readThis(element,id,callback){
                         alert(msg.texte);
                     } else {
                         if( console && console.log && typeof( msg ) !== 'undefined' ) console.log(msg);
-                        entry.find('[type="checkbox"]').prop('checked', false);
+                        readUnreadButton.removeClass('article__read-read');
                         entry.removeClass('event--read js-event--read');
                         if(callback){
                             callback();

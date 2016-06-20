@@ -29,18 +29,13 @@
                         <use xlink:href="#svg-favorite" />
                     </svg>
                 </button>
-                <div class="article__read-unread article__read-unread--checkbox">
-                    <input
-                        type="checkbox"
-                        id="event{$value->getId()}"
-                        {if="$value->getUnread() == 0"}checked="checked"{/if}
+                <button class="article__read-unread js-read-unread{if="$value->getUnread() == 0"} article__read-read{/if}">
+                    <img
+                        src="plugins/leedvibes/images/check.svg"
+                        class=""
+                        alt="{if="$value->getUnread() == 0"}{function="_t('LEEDVIBES_MARK_AS_UNREAD')"}{else}{function="_t('LEEDVIBES_MARK_AS_READ')"}{/if}"
                     />
-                    <label
-                        class="js-read-unread"
-                        for="event{$value->getId()}"
-                        title="{if="$value->getUnread() == 0"}{function="_t('LEEDVIBES_MARK_AS_UNREAD')"}{else}{function="_t('LEEDVIBES_MARK_AS_READ')"}{/if}"
-                    >{* [IE] - This span is IE specific *}<span class="article__read-unread--label-content js-read-unread">X</span></label>
-                </div>
+                </button>
             </header>
             {if="isset($value->view)"}
                 <button class="article__content__switch-view js-switch-view" data-view="{$value->view}">{if="$value->view == 0"}{function="_t('SITE_VIEW')"}{else}{function="_t('RSS_VIEW')"}{/if}</button>

@@ -304,7 +304,7 @@ $border-color-active: white;
         min-height: 4em;
     }
 
-    img {
+    .feed-icon {
         @extend %img-vertical-align;
 
         @media($breakpoint) {
@@ -396,11 +396,12 @@ $border-color-active: white;
 
 $opacity-low: 0.3;
 $position-top-on-break: 30px;
+$article-action-padding: 0.6em;
 .article-favorite {
     position: absolute;
-    padding: 0.6em;
+    padding: $article-action-padding;
     top: 0;
-    right: 1.4em;
+    right: 1.7em;
     @include opacity( $opacity-low );
     @extend %button-unstyled;
 
@@ -422,67 +423,26 @@ $position-top-on-break: 30px;
 
 .article__read-unread {
     position: absolute;
-    width: 2em;
+    padding: $article-action-padding 0.3em;
+    width: 1.7em;
     top: 0;
     right: 0;
     color: white;
+    background-color: transparent;
     border: none;
+    @include opacity( $opacity-low );
     cursor: pointer;
 
     @media( $breakpoint ) {
-        width: 15%;
-        height: 100%;
+        padding: 0.9em 0px;
+        width: 2em;
     }
 }
-// Thanks to: http://codepen.io/Twikito/pen/vhyKz
-$checkbox-size: 24px;
-.article__read-unread--checkbox {
 
-  label {
-      width: $checkbox-size;
-      height: $checkbox-size;
-      cursor: pointer;
-      position: absolute;
-      top: 20%;
-      left: calc( 50% - 7px );
-      &:after {
-          content: '';
-          width: 8px;
-          height: 3px;
-          position: absolute;
-          top: 7px;
-          left: 3px;
-          border: 3px solid black;
-          border-top: none;
-          border-right: none;
-          background: transparent;
-          @include opacity( $opacity-low );
-          @include transform( rotate(-45deg) );
-      }
-
-      @media( $breakpoint ) {
-          top: calc( 50% - #{$checkbox-size/2} );
-          left: calc( 50% - #{$checkbox-size/2} );
-      }
-  }
-
-  input[type=checkbox] {
-      width: $checkbox-size;
-      visibility: hidden;
-
-      @media( $breakpoint ) {
-          padding-top: 0.2em;
-      }
-
-      &:checked + label:after {
-          @include opacity( 1 );
-      }
-
-  }
+.article__read-read {
+    @include opacity( 1 );
 }
-.article__read-unread--label-content {
-    display: none;
-}
+
 .article__content {
     display: none;
     margin: 0 auto 1em;
@@ -620,12 +580,6 @@ button.settings-item {
 .no-flexboxlegacy .sidebar {
     float: left;
     width: 20%;
-}
-.no-boxshadow .article__read-unread--label-content {
-    display: inline;
-    padding: 3px;
-    color: #222;
-    border: 1px solid #222;
 }
 /* IE7 */
 .no-flexboxlegacy.no-boxsizing .sidebar {
