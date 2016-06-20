@@ -44,6 +44,10 @@ img[src$=".svg"] {
   vertical-align: middle;
 }
 
+%button-focused {
+    border: 1px dashed $feed-bgc-used;
+}
+
 /* GENERAL STYLE */
 body {
     @include display-flex;
@@ -240,6 +244,10 @@ $border-color-active: white;
 .folder__button {
     float: left;
     width: $sidebar-button-size;
+
+    &:focus {
+        @extend %button-focused;
+    }
 }
 
 .folder-closed img {
@@ -273,6 +281,10 @@ $border-color-active: white;
     top: 0.8em; /* FIX vertical alignement */
     right: 0.5em;
     font-size: 0.8em;
+
+    &:focus {
+        @extend %button-focused;
+    }
 }
 
 /* ARTICLE */
@@ -394,6 +406,11 @@ $position-top-on-break: 30px;
 
     &--favorited {
         @include opacity( 1 );
+    }
+
+    &:focus {
+        @extend %button-focused;
+        border-color: $sidebar-color-bg;
     }
 
     @media( $breakpoint ) {
