@@ -849,8 +849,8 @@ body {
 @media (max-width: 650px) {
   /* line 385, ../sass/style.scss */
   .article__date {
+    right: 1%;
     bottom: 5%;
-    left: 10%;
   }
 }
 
