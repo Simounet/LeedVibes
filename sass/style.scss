@@ -77,10 +77,6 @@ body {
         margin-bottom: 0px;
     }
 }
-
-.hidden {
-    display: none;
-}
 .selected a {
     @extend %text-color-light;
     font-weight: bold;
@@ -93,7 +89,9 @@ body {
 }
 
 .notifications__text {
+    display: block;
     padding: 1em 0.5em;
+    color: $feed-bgc-used;
 }
 
 %text-color-light {
@@ -203,7 +201,6 @@ $border-color-active: white;
 .go-top {
     @include inline-block();
     padding: 2px 20px;
-    color: $feed-bgc-used;
     text-align: center;
     background-color: $sidebar-color-alt;
     border-radius: 20%;
@@ -584,4 +581,10 @@ button.settings-item {
 /* IE7 */
 .no-flexboxlegacy.no-boxsizing .sidebar {
     width: 19%;
+}
+
+// Utils
+
+.hidden {
+    display: none;
 }
