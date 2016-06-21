@@ -205,14 +205,37 @@ $border-color-active: white;
     border-radius: 20%;
 }
 
-.feeds-list-toggle.is-toggled:before {
-    display: inline-block;
-    margin-right: 2px;
+.feeds-list-toggle {
+    position: relative;
+    overflow: hidden;
+}
+
+$feeds-list-toggle-transition: transform 0.3s;
+.feeds-list-toggle:before {
+    position: absolute;
     width: 15px;
     height: 15px;
+    left: 35%;
+    top: -20px;
     content: '';
     background-image: url( '../images/close.svg' );
-    vertical-align: middle;
+    transition: $feeds-list-toggle-transition;
+
+    @at-root .is-toggled#{&} {
+        transform: translate3d(0, 180%, 0);
+    }
+}
+
+.feeds-list-toggle__label {
+    position: absolute;
+    margin-top: 16%;
+    top: 0;
+    left: 22%;
+    transition: $feeds-list-toggle-transition;
+
+    .is-toggled & {
+        transform: translate3d(0, 150%, 0);
+    }
 }
 
 #feeds-list {
