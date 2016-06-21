@@ -143,8 +143,7 @@ $entry-space: 0.5em;
 }
 
 /* SIDEBAR */
-$border-base-width: em( 5px );
-$border-base: $border-base-width solid transparent;
+$border-base: em( 5px ) solid transparent;
 $border-color-active: white;
 
 .sidebar {
@@ -496,6 +495,8 @@ $article-action-padding: 0.6em;
 
 /* USER SETTINGS */
 .settings {
+    @include display-flex();
+    @include justify-content( space-around );
     margin: 1em auto;
     padding: 0 1em;
     @extend %sidebar-padding-side;
@@ -504,10 +505,11 @@ $article-action-padding: 0.6em;
     white-space: normal;
 }
 
-$settings-padding-top-bottom: 0.5em;
 .settings-item {
-    padding: $settings-padding-top-bottom 1.5em;
+    padding: 0.5em 1.5em;
+    min-width: 15px;
     border-bottom: $border-base;
+    box-sizing: content-box;
     @include transition(border 0.2s ease-in-out 0s);
 
     &:hover,
@@ -518,7 +520,6 @@ $settings-padding-top-bottom: 0.5em;
 }
 
 button.settings-item {
-    height: $settings-padding-top-bottom*2+$border-base-width+em( 16px ); // padding-top + padding-bottom + border-bottom + height
     border-top-width: 0;
     border-right-width: 0;
     border-left-width: 0;
