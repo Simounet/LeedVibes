@@ -501,6 +501,8 @@ $article-action-padding: 0.6em;
     position: absolute;
     right: 8em;
     top: 0.4em;
+    background: none;
+    border: 1px solid $feed-event-read-color;
     z-index: 20;
 
     @media($breakpoint) {

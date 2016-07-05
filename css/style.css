@@ -981,6 +981,8 @@ body {
   position: absolute;
   right: 8em;
   top: 0.4em;
+  background: none;
+  border: 1px solid #BBB;
   z-index: 20;
 }
 @media (max-width: 650px) {
@@ -990,13 +992,13 @@ body {
     right: 4em;
   }
 }
-/* line 511, ../sass/style.scss */
+/* line 513, ../sass/style.scss */
 .event--focus .article__content__switch-view {
   display: inherit;
 }
 
 /* USER SETTINGS */
-/* line 517, ../sass/style.scss */
+/* line 519, ../sass/style.scss */
 .user-login,
 .settings {
   display: -webkit-flex;
@@ -1010,13 +1012,13 @@ body {
   white-space: normal;
 }
 
-/* line 529, ../sass/style.scss */
+/* line 531, ../sass/style.scss */
 .user-login {
   -webkit-flex-direction: column;
   flex-direction: column;
 }
 
-/* line 533, ../sass/style.scss */
+/* line 535, ../sass/style.scss */
 .settings-item {
   padding: 0.5em 1.5em;
   min-width: 15px;
@@ -1028,12 +1030,12 @@ body {
   -webkit-transition-delay: 0s;
   transition: border 0.2s ease-in-out 0s;
 }
-/* line 540, ../sass/style.scss */
+/* line 542, ../sass/style.scss */
 .settings-item:hover, .settings-item:active, .settings-item:focus {
   border-color: white;
 }
 
-/* line 547, ../sass/style.scss */
+/* line 549, ../sass/style.scss */
 button.settings-item {
   border-top-width: 0;
   border-right-width: 0;
@@ -1041,14 +1043,14 @@ button.settings-item {
   background-color: transparent;
 }
 
-/* line 554, ../sass/style.scss */
+/* line 556, ../sass/style.scss */
 .settings__fields input[type='text'],
 .settings__fields input[type='password'] {
   min-width: 7em;
   width: 35%;
 }
 
-/* line 559, ../sass/style.scss */
+/* line 561, ../sass/style.scss */
 .settings__fields input[type='text'],
 .settings__fields input[type='password'],
 .settings__fields input[type='submit'] {
@@ -1058,12 +1060,12 @@ button.settings-item {
   color: #303030;
 }
 
-/* line 568, ../sass/style.scss */
+/* line 570, ../sass/style.scss */
 .favorite-inverted {
   fill: white;
 }
 
-/* line 572, ../sass/style.scss */
+/* line 574, ../sass/style.scss */
 .animation-spin {
   -moz-animation: spin 4s linear infinite;
   -webkit-animation: spin 4s linear infinite;
@@ -1090,46 +1092,46 @@ button.settings-item {
 }
 /* MEDIA QUERIES */
 @media (max-width: 650px) {
-  /* line 581, ../sass/style.scss */
+  /* line 583, ../sass/style.scss */
   td {
     display: block;
   }
 }
-/* line 586, ../sass/style.scss */
+/* line 588, ../sass/style.scss */
 .mobile-only {
   display: none;
 }
 @media (max-width: 650px) {
-  /* line 586, ../sass/style.scss */
+  /* line 588, ../sass/style.scss */
   .mobile-only {
     display: inline;
   }
 }
 
 /* IE9- */
-/* line 595, ../sass/style.scss */
+/* line 597, ../sass/style.scss */
 .no-flexboxlegacy body {
   display: block;
 }
 
-/* line 599, ../sass/style.scss */
+/* line 601, ../sass/style.scss */
 .no-flexboxlegacy .wrapper {
   margin-left: 20%;
 }
 
-/* line 603, ../sass/style.scss */
+/* line 605, ../sass/style.scss */
 .no-flexboxlegacy .sidebar {
   float: left;
   width: 20%;
 }
 
 /* IE7 */
-/* line 608, ../sass/style.scss */
+/* line 610, ../sass/style.scss */
 .no-flexboxlegacy.no-boxsizing .sidebar {
   width: 19%;
 }
 
-/* line 614, ../sass/style.scss */
+/* line 616, ../sass/style.scss */
 .hidden {
   display: none;
 }
