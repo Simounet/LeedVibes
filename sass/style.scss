@@ -9,6 +9,7 @@ $feed-entry-color: $sidebar-color-bg;
 $breakpoint: "max-width: 650px";
 $feed-bgc-used: #DDD;
 $error-color: #c53d3d;
+$feed-event-read-color: #BBB;
 
 @import "normalize";
 
@@ -136,10 +137,6 @@ $entry-space: 0.5em;
 .event--new-last {
     border-bottom-color: $sidebar-color-bg;
     border-width: 4px;
-}
-
-%feed-event-read {
-    color: #BBB;
 }
 
 /* SIDEBAR */
@@ -357,7 +354,7 @@ $feeds-list-toggle-transition: transform 0.3s;
     }
 
     [class~="event--read"] & a {
-        @extend %feed-event-read;
+        color: $feed-event-read-color;
     }
 }
 .article__description {
@@ -365,7 +362,7 @@ $feeds-list-toggle-transition: transform 0.3s;
     margin-left: 0.4em;
     color: #888;
     [class~="event--read"] & {
-        @extend %feed-event-read;
+        color: $feed-event-read-color;
     }
 
     @media($breakpoint) {
