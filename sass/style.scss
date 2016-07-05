@@ -517,6 +517,7 @@ $article-action-padding: 0.6em;
 }
 
 /* USER SETTINGS */
+.user-login,
 .settings {
     @include display-flex();
     @include justify-content( space-around );
@@ -526,6 +527,10 @@ $article-action-padding: 0.6em;
     color: #CACACA;
     text-align: center;
     white-space: normal;
+}
+
+.user-login {
+    @include flex-direction( column );
 }
 
 .settings-item {

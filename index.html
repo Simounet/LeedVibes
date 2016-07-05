@@ -21,8 +21,8 @@
     {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
         <aside id="sidebar" class="sidebar">
     {/if}
-        <div class="settings">
-            {if="!$myUser"}
+        {if="!$myUser"}
+            <div class="user-login">
                 {if="($configurationManager->get('articleDisplayAnonymous')=='0')"}
                     <h3>{function="_t('YOU_MUST_BE_LOGGED')"}</h3>
                     <p>{function="_t('IF_ADMIN_THEN_CONFIG')"}</p>
@@ -36,7 +36,10 @@
                     </label>
                     <input type="submit" value="{function="_t('LEEDVIBES_CONNECTION')"}" />
                 </form>
-            {else}
+            </div>
+        {/if}
+        <div class="settings">
+            {if="$myUser"}
                 <a href="action.php?action=logout" class="settings-item" title="{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})"><img src="images/logout.svg" alt=""></a>
                 <a href="settings.php" class="settings-item" title="{function="_t('MANAGE')"}"><img src="images/settings.svg" alt=""></a>
                 <button class="settings-item new-events js-new-events" title="{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}" data-sync-code="{$synchronisationCode}">
