@@ -1,6 +1,7 @@
 <div class="article__content--rss js-article__content--rss">
     <header class="article__content__infos">
         <h1><a href="{$value->getLink()}">{$value->getTitle()}</a></h1>
+        <div><span class="article-author">{$value->getCreator()}</span> - <span class="article-pubdate">{function="date('H:i Y-m-d', $value->getPubdate())"}</span></div>
     </header>
     {$value->getContent()}
 </div>
