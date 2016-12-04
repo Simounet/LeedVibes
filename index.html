@@ -80,7 +80,7 @@
                         <div class="folder__item js-folder__item{if="$folderSelected"} selected{/if}">
                             <button class="folder__button js-toggle-button{if="!$value->getIsopen()"} folder-closed{/if}" title="Switch dossier"><img src="images/triangle.svg" alt="" /></button>
                             {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
-                            <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}" class="sidebar-item">{function="htmlentities($value->getName())"}</a>
+                            <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}" class="sidebar-item">{$value->getName()}</a>
                             <button class="mark-as-read js-mark-as-read js-folder-counter{if="$unreadEventsForFolder === 0"} hidden{/if}" title="{function="_t('MARK_AS_READ_FOLDER_ITEMS',array($unreadEventsForFolder))"}">{$unreadEventsForFolder}</button>
                             {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
                         </div>
@@ -91,7 +91,7 @@
                                         {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
                                         <a href="index.php?action=selectedFeed&amp;feed={$value2['id']}&amp;order=unread" title="{function="htmlentities($value2['url'])"}" class="sidebar-item">
                                             {if="isset($value2['favicon'])"}{$value2['favicon']}{/if}
-                                            <span class="sidebar-item-label">{function="htmlentities($value2['name'])"}</span>
+                                            <span class="sidebar-item-label">{$value2['name']}</span>
                                         </a>
                                         <button class="mark-as-read js-mark-as-read js-feed-counter{if="! isset($unread[$value2['id']])"} hidden{/if}" title="{function="_t('MARK_AS_READ')"}">{if="isset( $unread[$value2['id']] )"}{$unread[$value2['id']]}{else}0{/if}</button>
                                 {function="Plugin::callHook("menu_post_feed_link", array(&$value))"}
