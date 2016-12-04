@@ -37,9 +37,8 @@
                     <input type="submit" value="{function="_t('LEEDVIBES_CONNECTION')"}" />
                 </form>
             </div>
-        {/if}
-        <div class="settings">
-            {if="$myUser"}
+        {else}
+            <div class="settings">
                 <a href="action.php?action=logout" class="settings-item" title="{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})"><img src="images/logout.svg" alt=""></a>
                 <a href="settings.php" class="settings-item" title="{function="_t('MANAGE')"}"><img src="images/settings.svg" alt=""></a>
                 <button class="settings-item new-events js-new-events" title="{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}" data-sync-code="{$synchronisationCode}">
@@ -51,8 +50,8 @@
                     </svg>
                 </a>
                 <button class="mobile-only settings-item feeds-list-toggle js-toggle-target" data-target="#feeds-list"><span class="feeds-list-toggle__label">Menu</span></button>
-            {/if}
-        </div>
+            </div>
+        {/if}
         {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
             {$currentItemsCount=$unread['total']}
             <ul id="feeds-list">
