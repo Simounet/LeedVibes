@@ -37,7 +37,11 @@ ul {
 li {
     list-style: none;
 }
-img {
+img,
+audio,
+canvas,
+progress,
+video {
     max-width: 100%;
     height: auto;
 }

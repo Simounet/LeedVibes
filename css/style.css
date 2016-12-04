@@ -465,9 +465,13 @@ li {
 }
 
 /* line 40, ../sass/style.scss */
-img {
-  max-width: 100%;
-  height: auto;
+img,
+audio,
+canvas,
+progress,
+video {
+    max-width: 100%;
+    height: auto;
 }
 
 /* line 44, ../sass/style.scss */
