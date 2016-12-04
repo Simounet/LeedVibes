@@ -39,18 +39,24 @@ $(function() {
         var button = $(this),
             confirmText = '',
             url = 'action.php?action=';
+        var feedEl = {};
+        var name = '';
         if( button.parents('.js-feed__item').length ) {
+            feedEl = button.parents('.js-feed__item');
+            name = feedEl.find('.js-feed-name').html() + '\n';
             confirmText = 'CONFIRM_MARK_FEED_AS_READ';
-            url += 'readAll&feed=' + button.parents('.js-feed__item').data('id');
+            url += 'readAll&feed=' + feedEl.data('id');
         } else if( button.parents('.js-folder__item').length ) {
+            feedEl = button.parents('.js-folder');
+            name = feedEl.find('.js-folder-name').html() + '\n';
             confirmText = 'READ_ALL_FOLDER_CONFIRM';
-            url += 'readFolder&folder=' + button.parents('.js-folder').data('id');
+            url += 'readFolder&folder=' + feedEl.data('id');
         } else {
             confirmText = 'LEEDVIBES_READ_ALL_CONFIRM';
             url += 'readAll';
         }
         url += '&last-event-id=' + idsDisplayed[0];
-        if(! confirm(_t(confirmText))) {
+        if(! confirm(name + _t(confirmText))) {
             return false;
         }
 
