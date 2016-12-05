@@ -16,7 +16,7 @@ You need to have a working copy of Leed. If not look at the [Leed's install inst
 
 ## Install
 
-1. Download [LeedVibes](archive/master.zip) into the `plugins` folder of Leed
+1. Download [LeedVibes](https://github.com/Simounet/LeedVibes/archive/dev.zip) into the `plugins` folder of Leed
 2. Go to the `Available plugins` layer of the `settings` page
 3. Activate `LeedVibes` from the settings page
 4. Go back to the main page and YATAAAA!
