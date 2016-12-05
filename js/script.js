@@ -231,15 +231,15 @@ EventObject.prototype = {
 
         // Content handling
         if( special ) {
-            toggleWebsite( this.content, readOrUnreadAtToggle() );
+            toggleWebsite( this.content, this.currentEntryIsPrevious, readOrUnreadAtToggle() );
         } else {
             this.toggleContent( readOrUnreadAtToggle() );
         }
 
         // Hide the previous entry
         if( this.existingEntryFocusedContent.length ) {
-            if( special ) {
-                toggleWebsite( this.existingEntryFocusedContent );
+            if( this.existingEntryFocusedContent.data('article-url').length > 0 ) {
+                toggleWebsite( this.existingEntryFocusedContent, true );
             }
             this.existingEntryFocused.addClass( 'hidden' );
             this.existingEntryFocusedContent.removeClass( 'article__content--is-opened' );
