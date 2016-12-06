@@ -1,0 +1,31 @@
+{
+    "extends": "standard",
+    "installedESLint": true,
+    "plugins": [
+        "standard",
+        "promise"
+    ],
+    "env": {
+        "browser": true,
+        "jquery": true
+    },
+    "globals": {
+        "i18n": true
+    },
+    "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "eol-last": 0,
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-console":0
+    }
+}
