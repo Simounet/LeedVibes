@@ -19,7 +19,7 @@
                     <span class="article__date" title="{$value->dateTitle}"{if="$value->dateLessThanOneHour"} data-timestamp="{$value->getPubdate()}"{/if}>{$value->dateValue}</span>
                 {/if}
                 <button
-                    class="article-favorite js-favorite{if="$value->getFavorite()==1"} article-favorite--favorited{/if}"
+                    class="article-favorite js-favorite{if="$value->getFavorite()==1"} article-favorite--favorited js-favorite--favorited{/if}"
                     title="{if="$value->getFavorite()==0"}{function="_t('FAVORIZE')"}{else}{function="_t('UNFAVORIZE')"}{/if}"
                 >
                     <svg

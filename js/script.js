@@ -31,8 +31,16 @@ $(function () {
     });
 
     $('.js-new-events').click(function () {
-        getNewEvents($(this).data('sync-code'));
-        cleanReadEvents();
+        var urlVars = getAllUrlVars();
+        switch (urlVars.action) {
+            case 'favorites':
+                cleanUnstarredEvents();
+                break;
+            default:
+                getNewEvents($(this).data('sync-code'), urlVars);
+                cleanReadEvents();
+                break;
+        }
     });
 
     $('.sidebar').on('click', '.js-mark-as-read', function () {
@@ -281,7 +289,9 @@ EventObject.prototype = {
         var favAction = (this.entry.data('favorite') === 1) ? 'remove' : 'add';
         var favText = (this.entry.data('favorite') !== 1) ? 'UNFAVORIZE' : 'FAVORIZE';
 
-        favoriteTarget.toggleClass('article-favorite--favorited');
+        favoriteTarget
+            .toggleClass('article-favorite--favorited')
+            .toggleClass('js-favorite--favorited');
         this.entry.data('favorite', !this.entry.data('favorite'));
         $.ajax({
             url: './action.php?action=' + favAction + 'Favorite',
@@ -498,7 +508,7 @@ function getAllUrlVars () {
     return vars;
 }
 
-function getNewEvents (code) {
+function getNewEvents (code, urlVars) {
     'use strict';
     var noNewEvents = $('#no-new-events');
 
@@ -520,7 +530,6 @@ function getNewEvents (code) {
     var lastEventClass = 'event--new-last';
     $('.' + lastEventClass).removeClass(lastEventClass);
 
-    var urlVars = getAllUrlVars();
     var action = urlVars.action;
     var folder = urlVars.folder;
     var feed = urlVars.feed;
@@ -575,6 +584,13 @@ function getNewEvents (code) {
 
 function cleanReadEvents () {
     $('.js-event--read').remove();
+}
+
+function cleanUnstarredEvents () {
+    $('.js-favorite')
+        .not('.article-favorite--favorited')
+        .parents('.js-event')
+        .remove();
 }
 
 function notifSlide (el) {
