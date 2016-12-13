@@ -300,7 +300,6 @@ EventObject.prototype = {
                 if (msg.status === 'noconnect') {
                     alert(msg.texte);
                 } else {
-                    if (console && console.log && typeof (msg) !== 'undefined') console.log(msg);
                     favoriteTarget
                         .prop('alt', _t(favText))
                         .prop('title', _t(favText));
@@ -425,7 +424,6 @@ function readThis (element, id, callback) {
                 if (msg.status === 'noconnect') {
                     alert(msg.texte);
                 } else {
-                    if (console && console.log && typeof (msg) !== 'undefined') console.log(msg);
                     readUnreadButton.removeClass('article__read-read');
                     entry.removeClass('event--read js-event--read');
                     if (callback) {
