@@ -1,6 +1,7 @@
 var infiniteScrollLimit = '';
 var eventObj;
 var idsDisplayed = [];
+var anonymousState = 0;
 
 function _t (key, args) {
     var value = i18n[key];
@@ -14,6 +15,8 @@ function _t (key, args) {
 
 $(function () {
     'use strict';
+
+    anonymousState = $('[data-anonymous-state]').data('anonymous-state');
 
     $('.wrapper').on('click', '.js-event', function (event) {
         event.preventDefault();
@@ -297,7 +300,7 @@ EventObject.prototype = {
             url: './action.php?action=' + favAction + 'Favorite',
             data: {id: this.entry.data('id')},
             success: function (msg) {
-                if (msg.status === 'noconnect') {
+                if (!anonymousState && msg.status === 'noconnect') {
                     alert(msg.texte);
                 } else {
                     favoriteTarget
@@ -407,7 +410,7 @@ function readThis (element, id, callback) {
             url: './action.php?action=readContent',
             data: {id: id},
             success: function (msg) {
-                if (msg.status === 'noconnect') {
+                if (!anonymousState && msg.status === 'noconnect') {
                     alert(msg.texte);
                 } else {
                     // nblus increment, used by the infinite scroll function
@@ -421,7 +424,7 @@ function readThis (element, id, callback) {
             url: './action.php?action=unreadContent',
             data: {id: id},
             success: function (msg) {
-                if (msg.status === 'noconnect') {
+                if (!anonymousState && msg.status === 'noconnect') {
                     alert(msg.texte);
                 } else {
                     readUnreadButton.removeClass('article__read-read');

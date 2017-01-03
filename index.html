@@ -16,7 +16,7 @@
     <script src="js/script.js"></script>
     {function="Plugin::callJs()"}
 </head>
-<body>
+<body data-anonymous-state="{$configurationManager->get('articleDisplayAnonymous')}">
     {function="Plugin::callHook("menu_pre_folder_menu", array(&$myUser))"}
     {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
         <aside id="sidebar" class="sidebar">
