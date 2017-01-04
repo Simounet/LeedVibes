@@ -19,7 +19,6 @@ $(function () {
     anonymousState = $('[data-anonymous-state]').data('anonymous-state');
 
     $('.wrapper').on('click', '.js-event', function (event) {
-        event.preventDefault();
         eventObj = new EventObject(event);
     });
 
@@ -158,12 +157,14 @@ function EventObject (event) {
     this.content = this.entry.find('.' + this.contentClass);
 
     if (this.target.hasClass(this.favoriteClass)) {
+        event.preventDefault();
         this.favorite(this.target);
         return;
     }
 
     // Read button handling
     if (this.targetClasses.indexOf(this.readButtonClass) !== -1) {
+        event.preventDefault();
         this.hideEntryIfNotUnfolded();
         this.readUnreadButtonAction();
     }
@@ -182,6 +183,7 @@ function EventObject (event) {
             this.target.hasClass(this.headerClass)
         )
     ) {
+        event.preventDefault();
         this.toggleEvent();
     }
 }
