@@ -45,11 +45,7 @@ video {
     height: auto;
 }
 img[src$=".svg"] {
-  vertical-align: middle;
-}
-
-%button-focused {
-    border: 1px dashed $feed-bgc-used;
+    vertical-align: middle;
 }
 
 /* GENERAL STYLE */
@@ -62,6 +58,11 @@ body {
         display: block;
         width: 100vw;
     }
+}
+
+button {
+    background-color: transparent;
+    border: none;
 }
 
 .error {
@@ -82,13 +83,13 @@ body {
     }
 }
 .selected a {
-    @extend %text-color-light;
+    color: #FFF;
     font-weight: bold;
 }
 
 .notifications {
     margin: 0;
-    @extend %text-color-light;
+    color: #FFF;
     background-color: $sidebar-color-bg;
 }
 
@@ -98,19 +99,19 @@ body {
     color: $feed-bgc-used;
 }
 
-%text-color-light {
-    color: #FFF;
-}
 %text-color-dark {
     color: #000;
 }
 %sidebar-padding-side {
     padding: 0 0.8em;
 }
-%button-unstyled {
-    @extend %text-color-light;
-    background-color: inherit;
-    border: none;
+
+%button-focused {
+    border: 1px dashed transparent;
+
+    &:focus {
+        border-color: $feed-bgc-used;
+    }
 }
 %overflow-sidebar {
     display: block;
@@ -166,7 +167,7 @@ $border-color-active: white;
 
     &,
     a {
-        @extend %text-color-light;
+        color: #FFF;
     }
 
     &:hover,
@@ -252,21 +253,16 @@ $feeds-list-toggle-transition: transform 0.3s;
     border-bottom: 0.2em solid #484848;
 }
 
-.folder button {
-    @extend %button-unstyled;
-}
-
 .folder__item a {
     margin: 0 0.3em;
     @extend %overflow-sidebar;
 }
 .folder__button {
     float: left;
+    margin-right: 5px;
+    padding: 0;
     width: $sidebar-button-size;
-
-    &:focus {
-        @extend %button-focused;
-    }
+    @extend %button-focused;
 }
 
 .folder-closed img {
@@ -300,10 +296,7 @@ $feeds-list-toggle-transition: transform 0.3s;
     top: 0.8em; /* FIX vertical alignement */
     right: 0.5em;
     font-size: 0.8em;
-
-    &:focus {
-        @extend %button-focused;
-    }
+    @extend %button-focused;
 }
 
 /* ARTICLE */
@@ -364,6 +357,7 @@ $feeds-list-toggle-transition: transform 0.3s;
     display: inline-block;
     margin-left: 0.4em;
     color: #888;
+
     [class~="event--read"] & {
         color: $feed-event-read-color;
     }
@@ -371,7 +365,7 @@ $feeds-list-toggle-transition: transform 0.3s;
     @media($breakpoint) {
         display: none;
     }
-    
+
     .event--focus & {
         display: none;
     }
@@ -422,14 +416,13 @@ $article-action-padding: 0.6em;
     top: 0;
     right: 1.7em;
     opacity: $opacity-low;
-    @extend %button-unstyled;
+    @extend %button-focused;
 
     &--favorited {
         opacity: 1;
     }
 
     &:focus {
-        @extend %button-focused;
         border-color: $sidebar-color-bg;
     }
 

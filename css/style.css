@@ -430,10 +430,6 @@ img[src$=".svg"] {
   vertical-align: middle;
 }
 
-.folder__button:focus, .mark-as-read:focus, .article-favorite:focus {
-  border: 1px dashed #DDD;
-}
-
 /* GENERAL STYLE */
 body {
   display: -ms-flexbox;
@@ -448,6 +444,11 @@ body {
     display: block;
     width: 100vw;
   }
+}
+
+button {
+  background-color: transparent;
+  border: none;
 }
 
 .error {
@@ -469,11 +470,13 @@ body {
 }
 
 .selected a {
+  color: #FFF;
   font-weight: bold;
 }
 
 .notifications {
   margin: 0;
+  color: #FFF;
   background-color: #424242;
 }
 
@@ -483,20 +486,18 @@ body {
   color: #DDD;
 }
 
-.selected a, .notifications, .folder button, .article-favorite, [class*="__item"],
-[class*="__item"] a {
-  color: #FFF;
-}
-
 .folder__item,
 .feed-all__item a, .user-login,
 .settings {
   padding: 0 0.8em;
 }
 
-.folder button, .article-favorite {
-  background-color: inherit;
-  border: none;
+.folder__button, .mark-as-read, .article-favorite {
+  border: 1px dashed transparent;
+}
+
+.folder__button:focus, .mark-as-read:focus, .article-favorite:focus {
+  border-color: #DDD;
 }
 
 .sidebar-item-label, .folder__item a {
@@ -545,6 +546,11 @@ body {
   padding-bottom: 0.5em;
   padding-top: 0.5em;
   border-left: 0.38462em solid transparent;
+}
+
+[class*="__item"],
+[class*="__item"] a {
+  color: #FFF;
 }
 
 [class*="__item"]:hover, [class*="__item"]:active {
@@ -630,6 +636,8 @@ body {
 
 .folder__button {
   float: left;
+  margin-right: 5px;
+  padding: 0;
   width: 10%;
 }
 
