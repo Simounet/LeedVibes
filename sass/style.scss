@@ -1,4 +1,3 @@
-@import "compass/css3";
 // VARS
 $font-size-base: 13px;
 $sidebar-button-size: 10%;
@@ -55,8 +54,8 @@ img[src$=".svg"] {
 
 /* GENERAL STYLE */
 body {
-    @include display-flex;
-    @include flex-wrap(wrap);
+    display: flex;
+    flex-wrap: wrap;
     width: 99vw;
 
     @media($breakpoint) {
@@ -70,7 +69,7 @@ body {
 }
 
 .wrapper {
-    @include flex( 1 1 0 );
+    flex: 1 1 0;
     min-width: 0;
     min-height: 100vh;
     background-color: #FFF;
@@ -148,10 +147,10 @@ $border-base: em( 5px ) solid transparent;
 $border-color-active: white;
 
 .sidebar {
-    @include flex( 0 0 em( 300px ) );
+    flex: 0 0 em( 300px );
     font-size: 0.9em;
     overflow: hidden;
-    
+
     .settings__fields {
         padding: 20%;
     }
@@ -164,12 +163,12 @@ $border-color-active: white;
     padding-bottom: $padding;
     padding-top: $padding;
     border-left: $border-base;
-    
+
     &,
     a {
         @extend %text-color-light;
     }
-    
+
     &:hover,
     &:active {
         background-color: $sidebar-color-bg-darken;
@@ -179,7 +178,7 @@ $border-color-active: white;
         border-color: $border-color-active;
     }
 }
-    
+
 .sidebar-item {
     display: block;
     height: 16px; /* Favicon's height */
@@ -199,7 +198,7 @@ $border-color-active: white;
 }
 
 .go-top {
-    @include inline-block();
+    display: inline-block;
     padding: 2px 20px;
     text-align: center;
     background-color: $sidebar-color-alt;
@@ -271,7 +270,7 @@ $feeds-list-toggle-transition: transform 0.3s;
 }
 
 .folder-closed img {
-    @include transform(rotate(270deg));
+    transform: rotate(270deg);
 }
 
 .folder__item,
@@ -386,10 +385,10 @@ $feeds-list-toggle-transition: transform 0.3s;
         bottom: 0;
         width: 16em;
         $support-for-original-webkit-gradients : false;
-        @include background-image(linear-gradient(to left, white 48%, rgba(255, 255, 255, 0) 100%));
+        background-image: linear-gradient(to left, white 48%, rgba(255, 255, 255, 0) 100%);
 
         .event:hover & {
-            @include background-image(linear-gradient(to left, $feed-bgc-used 6em, rgba($feed-bgc-used, 0) 100%));
+            background-image: linear-gradient(to left, $feed-bgc-used 6em, rgba($feed-bgc-used, 0) 100%);
 
             @media($breakpoint) {
                 background: none;
@@ -422,11 +421,11 @@ $article-action-padding: 0.6em;
     padding: $article-action-padding;
     top: 0;
     right: 1.7em;
-    @include opacity( $opacity-low );
+    opacity: $opacity-low;
     @extend %button-unstyled;
 
     &--favorited {
-        @include opacity( 1 );
+        opacity: 1;
     }
 
     &:focus {
@@ -450,7 +449,7 @@ $article-action-padding: 0.6em;
     color: white;
     background-color: transparent;
     border: none;
-    @include opacity( $opacity-low );
+    opacity: $opacity-low;
     cursor: pointer;
 
     @media( $breakpoint ) {
@@ -460,7 +459,7 @@ $article-action-padding: 0.6em;
 }
 
 .article__read-read {
-    @include opacity( 1 );
+    opacity: 1;
 }
 
 .article__content {
@@ -472,7 +471,7 @@ $article-action-padding: 0.6em;
     @media($breakpoint) {
         width: auto;
     }
-    
+
     a:hover,
     a:active {
         text-decoration: underline;
@@ -522,8 +521,8 @@ $article-action-padding: 0.6em;
 /* USER SETTINGS */
 .user-login,
 .settings {
-    @include display-flex();
-    @include justify-content( space-around );
+    display: flex;
+    justify-content: space-around;
     margin: 1em auto;
     padding: 0 1em;
     @extend %sidebar-padding-side;
@@ -533,7 +532,7 @@ $article-action-padding: 0.6em;
 }
 
 .user-login {
-    @include flex-direction( column );
+    flex-direction: column;
 }
 
 .settings-item {
@@ -541,7 +540,7 @@ $article-action-padding: 0.6em;
     min-width: 15px;
     border-bottom: $border-base;
     box-sizing: content-box;
-    @include transition(border 0.2s ease-in-out 0s);
+    transition: border 0.2s ease-in-out 0s;
 
     &:hover,
     &:active,
@@ -576,10 +575,10 @@ button.settings-item {
 }
 
 .animation-spin {
-    @include animation( spin 4s linear infinite );
+    animation: spin 4s linear infinite;
 }
-@include keyframes( spin ) {
-    100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); }
+@keyframes spin {
+    100% { transform: rotate(360deg); }
 }
 
 /* MEDIA QUERIES */
@@ -610,6 +609,7 @@ button.settings-item {
     float: left;
     width: 20%;
 }
+
 /* IE7 */
 .no-flexboxlegacy.no-boxsizing .sidebar {
     width: 19%;

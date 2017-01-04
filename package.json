@@ -1,0 +1,20 @@
+{
+  "name": "leedvibes",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Simounet/LeedVibes.git"
+  },
+  "author": "Simounet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Simounet/LeedVibes/issues"
+  },
+  "homepage": "https://github.com/Simounet/LeedVibes#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-sass": "^3.0.0",
+    "gulp-sourcemaps": "^1.9.1"
+  }
+}
