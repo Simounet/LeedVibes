@@ -21,6 +21,7 @@
     "eslint-plugin-standard": "^2.0.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
+    "gulp-real-favicon": "^0.2.2",
     "gulp-sass": "^3.0.0",
     "gulp-sourcemaps": "^1.9.1",
     "stylelint": "^7.7.0"

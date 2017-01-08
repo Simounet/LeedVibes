@@ -5,13 +5,20 @@
     <title>{$delimiter=' · '}{if="isset($currentFeed)"}{$currentFeed->getName()}{$delimiter}{/if}{if="isset($currentFolder)"}{$currentFolder->getName()}{$delimiter}{/if}LeedVibes</title>
     <link rel="stylesheet" href="css/style.css" media="all">
     <meta name="viewport" content="width=device-width">
-    <link rel="icon" type="image/png" href="images/favicon.png" />
     {function="Plugin::callLink()"}
     {function="Plugin::callCss()"}
     <script src="js/modernizr.custom.js"></script>
     <!--[if lte IE 8]>
         <script src="js/respond.js"></script>
     <![endif]-->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="images/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="images/favicons/manifest.json">
+    <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="images/favicons/mstile-144x144.png">
+    <meta name="theme-color" content="#424242">
     <script src="js/jquery.min.js"></script>
     <script src="js/script.js"></script>
     {function="Plugin::callJs()"}
