@@ -29,9 +29,9 @@ You need to have a working copy of Leed. If not look at the [Leed's install inst
 ## Recommended plugins
 
 LeedVibes loves friends. You can totally use it alone but adding this bunch of plugins can lead your experience to the next level!
-- [fleedicon_content](https://github.com/ldleman/Leed-market/tree/master/fleedicon_content) (add the favicon's feed to the sidebar feeds list and in front of every item on the main list)
-- [LeedRSSOrSiteView](https://github.com/Simounet/LeedRSSOrSiteView) (choose if you prefer to see the RSS feed or the live, iframe, version)
-- [LeedSmartFeedsUpdate](https://github.com/Simounet/LeedSmartFeedsUpdate) (smarter/quicker feeds updates)
+- [fleedicon_content](https://github.com/Leed-market/fleedicon_content) (add the favicon's feed to the sidebar feeds list and in front of every item on the main list)
+- [LeedRSSOrSiteView](https://github.com/Leed-market/LeedRSSOrSiteView) (choose if you prefer to see the RSS feed or the live, iframe, version)
+- [LeedSmartFeedsUpdate](https://github.com/Leed-market/LeedSmartFeedsUpdate) (smarter/quicker feeds updates)
 
 ## What makes LeedVibes an awesome theme?
 
@@ -40,12 +40,6 @@ LeedVibes loves friends. You can totally use it alone but adding this bunch of p
 - Easy items (clicking on the check icon)/folder (clicking on the folder counter)/all (clicking on the `All feeds` counter) mark as read
 - Works great on mobile
 - Infinite scrolling
-
-## Wanna contribute?
-
-You will need:
-- [Compass](http://compass-style.org/)
-- [JSLint](https://github.com/douglascrockford/JSLint)
 
 ## Any idea or trouble?
 
