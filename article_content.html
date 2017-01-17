@@ -2,6 +2,7 @@
     <header class="article__content__infos">
         <h1><a href="{$value->getLink()}">{$value->getTitle()}</a></h1>
         <div>{if="$creator"}<span class="article-author">{$creator}</span> - {/if}<span class="article-pubdate">{function="date('H:i Y-m-d', $value->getPubdate())"}</span></div>
+        {function="Plugin::callHook("event_post_top_options", array(&$value))"}
     </header>
     {$value->getContent()}
 </div>
