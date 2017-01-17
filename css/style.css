@@ -693,7 +693,6 @@ button {
 @media (max-width: 650px) {
   .article__header .feed-icon {
     margin-top: 0.15em;
-    margin-left: 15%;
     vertical-align: top;
   }
 }
@@ -711,6 +710,19 @@ button {
 @media (max-width: 650px) {
   .article__header .article__feed-title {
     display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .article__title,
+  .feed-icon {
+    margin-left: 15%;
+  }
+}
+
+@media (max-width: 650px) {
+  .feed-icon + .article__title {
+    margin-left: 0;
   }
 }
 

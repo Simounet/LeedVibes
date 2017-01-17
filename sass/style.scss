@@ -321,7 +321,6 @@ $feeds-list-toggle-transition: transform 0.3s;
 
         @media($breakpoint) {
             margin-top: 0.15em;
-            margin-left: 15%;
             vertical-align: top;
         }
     }
@@ -340,6 +339,20 @@ $feeds-list-toggle-transition: transform 0.3s;
         }
     }
 }
+
+.article__title,
+.feed-icon {
+    @media($breakpoint) {
+        margin-left: 15%;
+    }
+}
+
+.feed-icon + .article__title {
+    @media($breakpoint) {
+        margin-left: 0;
+    }
+}
+
 .article__title {
     display: inline;
     font-size: 1em;
