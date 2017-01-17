@@ -102,9 +102,6 @@ button {
 %text-color-dark {
     color: #000;
 }
-%sidebar-padding-side {
-    padding: 0 0.8em;
-}
 
 %button-focused {
     border: 1px dashed transparent;
@@ -115,11 +112,9 @@ button {
 }
 %overflow-sidebar {
     display: block;
-    margin-right: 3em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    vertical-align: middle;
 }
 
 /* FEED */
@@ -159,11 +154,13 @@ $border-color-active: white;
 }
 
 [class*="__item"] {
+    display: flex;
     position: relative;
     $padding : 0.5em;
     padding-bottom: $padding;
     padding-top: $padding;
     border-left: $border-base;
+    justify-content: space-between;
 
     &,
     a {
@@ -181,7 +178,8 @@ $border-color-active: white;
 }
 
 .sidebar-item {
-    display: block;
+    flex-grow: 1;
+    max-width: 80%;
     height: 16px; /* Favicon's height */
     line-height: 16px;
 }
@@ -270,8 +268,10 @@ $feeds-list-toggle-transition: transform 0.3s;
 }
 
 .folder__item,
-.feed-all__item a {
-    @extend %sidebar-padding-side;
+.feed__item {
+    $size: 0.8em;
+    padding-left: $size;
+    padding-right: $size;
 }
 .feed {
     padding: 4px 0;
@@ -291,10 +291,7 @@ $feeds-list-toggle-transition: transform 0.3s;
 }
 
 .mark-as-read {
-    position: absolute;
-    width: $sidebar-button-size;
-    top: 0.8em; /* FIX vertical alignement */
-    right: 0.5em;
+    padding-right: 0;
     font-size: 0.8em;
     @extend %button-focused;
 }
@@ -531,7 +528,6 @@ $article-action-padding: 0.6em;
     justify-content: space-around;
     margin: 1em auto;
     padding: 0 1em;
-    @extend %sidebar-padding-side;
     color: #CACACA;
     text-align: center;
     white-space: normal;

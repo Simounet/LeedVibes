@@ -486,12 +486,6 @@ button {
   color: #DDD;
 }
 
-.folder__item,
-.feed-all__item a, .user-login,
-.settings {
-  padding: 0 0.8em;
-}
-
 .folder__button, .mark-as-read, .article-favorite {
   border: 1px dashed transparent;
 }
@@ -502,11 +496,9 @@ button {
 
 .sidebar-item-label, .folder__item a {
   display: block;
-  margin-right: 3em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  vertical-align: middle;
 }
 
 /* FEED */
@@ -542,10 +534,14 @@ button {
 }
 
 [class*="__item"] {
+  display: -ms-flexbox;
+  display: flex;
   position: relative;
   padding-bottom: 0.5em;
   padding-top: 0.5em;
   border-left: 0.38462em solid transparent;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 [class*="__item"],
@@ -562,7 +558,9 @@ button {
 }
 
 .sidebar-item {
-  display: block;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  max-width: 80%;
   height: 16px;
   /* Favicon's height */
   line-height: 16px;
@@ -646,6 +644,12 @@ button {
   transform: rotate(270deg);
 }
 
+.folder__item,
+.feed__item {
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+}
+
 .feed {
   padding: 4px 0;
   background-color: #4b4b4b;
@@ -662,11 +666,7 @@ button {
 }
 
 .mark-as-read {
-  position: absolute;
-  width: 10%;
-  top: 0.8em;
-  /* FIX vertical alignement */
-  right: 0.5em;
+  padding-right: 0;
   font-size: 0.8em;
 }
 
