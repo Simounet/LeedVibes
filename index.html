@@ -51,7 +51,7 @@
                 <button class="settings-item new-events js-new-events" title="{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}" data-sync-code="{$synchronisationCode}">
                     <img alt="Reload" src="images/reload.svg" />
                 </button>
-                <a href="index.php?action=favorites" class="settings-item" title="{function="_t('FAVORITES')"}">
+                <a href="./?action=favorites" class="settings-item" title="{function="_t('FAVORITES')"}">
                     <svg width="15" height="15" class="favorite-inverted">
                         <use xlink:href="#svg-favorite" />
                     </svg>
@@ -100,7 +100,7 @@
                         <div class="folder__item js-folder__item{if="$folderSelected"} selected{/if}">
                             <button class="folder__button js-toggle-button{if="!$value->getIsopen()"} folder-closed{/if}" title="Switch dossier"><img src="images/triangle.svg" alt="" /></button>
                             {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
-                            <a href="index.php?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}" class="sidebar-item js-folder-name">{$value->getName()}</a>
+                            <a href="./?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}" class="sidebar-item js-folder-name">{$value->getName()}</a>
                             <button class="mark-as-read js-mark-as-read js-folder-counter{if="$unreadEventsForFolder === 0"} hidden{/if}" title="{function="_t('MARK_AS_READ_FOLDER_ITEMS',array($unreadEventsForFolder))"}">{$unreadEventsForFolder}</button>
                             {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
                         </div>
@@ -109,7 +109,7 @@
                                 {loop="feeds"}
                                     <li class="feed__item js-feed__item{if="isset($currentFeed) && ($value2['id'] == $currentFeed->getId())"} selected{/if}{if="$feedState->getById($value2['id'])->getLastSyncInError()==1"} error{/if}" data-id="{$value2['id']}">
                                         {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
-                                        <a href="index.php?action=selectedFeed&amp;feed={$value2['id']}&amp;order=unread" title="{function="htmlentities($value2['url'])"}" class="sidebar-item">
+                                        <a href="./?action=selectedFeed&amp;feed={$value2['id']}&amp;order=unread" title="{function="htmlentities($value2['url'])"}" class="sidebar-item">
                                             {if="isset($value2['favicon'])"}{$value2['favicon']}{/if}
                                             <span class="sidebar-item-label js-feed-name">{$value2['name']}</span>
                                         </a>
