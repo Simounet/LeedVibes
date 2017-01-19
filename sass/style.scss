@@ -160,7 +160,6 @@ $border-color-active: white;
     padding-bottom: $padding;
     padding-top: $padding;
     border-left: $border-base;
-    justify-content: space-between;
 
     &,
     a {
@@ -179,14 +178,12 @@ $border-color-active: white;
 
 .sidebar-item {
     flex-grow: 1;
-    max-width: 80%;
     height: 16px; /* Favicon's height */
     line-height: 16px;
 }
 
 .folder__button,
-.sidebar-item,
-.mark-as-read {
+.sidebar-item {
     @media($breakpoint) {
         padding: 12px 0;
     }
@@ -269,9 +266,8 @@ $feeds-list-toggle-transition: transform 0.3s;
 
 .folder__item,
 .feed__item {
-    $size: 0.8em;
-    padding-left: $size;
-    padding-right: $size;
+    padding-left: 0.8em;
+    padding-right: 1em;
 }
 .feed {
     padding: 4px 0;
@@ -281,6 +277,10 @@ $feeds-list-toggle-transition: transform 0.3s;
 %img-vertical-align {
     margin-right: 0.3em;
     vertical-align: middle;
+
+    @media($breakpoint) {
+        margin-right: 0.8em;
+    }
 }
 
 .feed__item img {
@@ -294,6 +294,10 @@ $feeds-list-toggle-transition: transform 0.3s;
     padding-right: 0;
     font-size: 0.8em;
     @extend %button-focused;
+
+    @media($breakpoint) {
+        padding: 12px;
+    }
 }
 
 /* ARTICLE */
@@ -309,17 +313,14 @@ $feeds-list-toggle-transition: transform 0.3s;
     }
 
     @media($breakpoint) {
+        display: flex;
+        align-items: center;
         white-space: inherit;
         min-height: 4em;
     }
 
     .feed-icon {
         @extend %img-vertical-align;
-
-        @media($breakpoint) {
-            margin-top: 0.15em;
-            vertical-align: top;
-        }
     }
 
     .article__feed-title {
@@ -340,11 +341,11 @@ $feeds-list-toggle-transition: transform 0.3s;
 .article__title,
 .feed-icon {
     @media($breakpoint) {
-        margin-left: 15%;
+        margin-left: 14%;
     }
 }
 
-.feed-icon + .article__title {
+.feed-icon ~ .article__title {
     @media($breakpoint) {
         margin-left: 0;
     }

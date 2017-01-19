@@ -540,8 +540,6 @@ button {
   padding-bottom: 0.5em;
   padding-top: 0.5em;
   border-left: 0.38462em solid transparent;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
 }
 
 [class*="__item"],
@@ -560,7 +558,6 @@ button {
 .sidebar-item {
   -ms-flex-positive: 1;
   flex-grow: 1;
-  max-width: 80%;
   height: 16px;
   /* Favicon's height */
   line-height: 16px;
@@ -568,8 +565,7 @@ button {
 
 @media (max-width: 650px) {
   .folder__button,
-  .sidebar-item,
-  .mark-as-read {
+  .sidebar-item {
     padding: 12px 0;
   }
 }
@@ -647,7 +643,7 @@ button {
 .folder__item,
 .feed__item {
   padding-left: 0.8em;
-  padding-right: 0.8em;
+  padding-right: 1em;
 }
 
 .feed {
@@ -660,6 +656,12 @@ button {
   vertical-align: middle;
 }
 
+@media (max-width: 650px) {
+  .feed__item img, .article__header .feed-icon {
+    margin-right: 0.8em;
+  }
+}
+
 .feed__item img {
   float: left;
   margin-left: 1.4em;
@@ -668,6 +670,12 @@ button {
 .mark-as-read {
   padding-right: 0;
   font-size: 0.8em;
+}
+
+@media (max-width: 650px) {
+  .mark-as-read {
+    padding: 12px;
+  }
 }
 
 /* ARTICLE */
@@ -685,15 +693,12 @@ button {
 
 @media (max-width: 650px) {
   .article__header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
     white-space: inherit;
     min-height: 4em;
-  }
-}
-
-@media (max-width: 650px) {
-  .article__header .feed-icon {
-    margin-top: 0.15em;
-    vertical-align: top;
   }
 }
 
@@ -716,12 +721,12 @@ button {
 @media (max-width: 650px) {
   .article__title,
   .feed-icon {
-    margin-left: 15%;
+    margin-left: 14%;
   }
 }
 
 @media (max-width: 650px) {
-  .feed-icon + .article__title {
+  .feed-icon ~ .article__title {
     margin-left: 0;
   }
 }
