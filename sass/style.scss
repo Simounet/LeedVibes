@@ -581,8 +581,7 @@ $article-action-padding: 0.6em;
     margin: 1em auto;
     padding: 0 1em;
     color: #CACACA;
-    text-align: center;
-    white-space: normal;
+    align-items: center;
 }
 
 .user-login {
@@ -592,6 +591,7 @@ $article-action-padding: 0.6em;
 .settings-item {
     padding: $settings-padding;
     min-width: 15px;
+    min-height: 15px;
     border-bottom: $border-base;
     box-sizing: content-box;
     transition: border 0.2s ease-in-out 0s;

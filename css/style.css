@@ -973,8 +973,8 @@ button {
   margin: 1em auto;
   padding: 0 1em;
   color: #CACACA;
-  text-align: center;
-  white-space: normal;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .user-login {
@@ -985,6 +985,7 @@ button {
 .settings-item {
   padding: 0.5em 1.5em;
   min-width: 15px;
+  min-height: 15px;
   border-bottom: 0.38462em solid transparent;
   box-sizing: content-box;
   transition: border 0.2s ease-in-out 0s;
