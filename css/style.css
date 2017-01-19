@@ -578,6 +578,49 @@ button {
   border-radius: 20%;
 }
 
+.feed-add {
+  text-align: center;
+}
+
+[data-is-opened="false"] {
+  display: none;
+}
+
+.feed-add-title {
+  margin: 0 0 1em;
+}
+
+.feed-add-url,
+.feed-add-folders {
+  width: 80%;
+}
+
+.feed-add-url {
+  padding: 0.5em;
+  border: none;
+}
+
+.feed-add-folders {
+  margin: 1em 0;
+  padding: 0.5em 2em;
+}
+
+.feed-add-title,
+.feed-add-button {
+  color: white;
+}
+
+.feed-add-button {
+  margin-bottom: 1em;
+  padding: 1em 2em;
+  background-color: #484848;
+}
+
+.feed-add-button:hover, .feed-add-button:active, .feed-add-button:focus {
+  color: #484848;
+  background-color: #DDD;
+}
+
 .feeds-list-toggle {
   position: relative;
   overflow: hidden;
@@ -594,24 +637,28 @@ button {
   transition: transform 0.3s;
 }
 
-.is-toggled.feeds-list-toggle:before {
+.is-opened.feeds-list-toggle:before {
   transform: translate3d(0, 180%, 0);
 }
 
 .feeds-list-toggle__label {
   position: absolute;
-  margin-top: 16%;
+  padding: 0.5em 1.5em;
   top: 0;
-  left: 22%;
+  left: 0;
   transition: transform 0.3s;
 }
 
-.is-toggled .feeds-list-toggle__label {
+.is-opened .feeds-list-toggle__label {
   transform: translate3d(0, 150%, 0);
 }
 
+#feeds-list[data-is-opened="false"] {
+  display: block;
+}
+
 @media (max-width: 650px) {
-  #feeds-list {
+  #feeds-list[data-is-opened="false"] {
     display: none;
   }
 }

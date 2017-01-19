@@ -1,7 +1,9 @@
 // VARS
 $font-size-base: 13px;
 $sidebar-button-size: 10%;
+$settings-padding: 0.5em 1.5em;
 $sidebar-color-bg: #424242;
+$folder-separator: #484848;
 $sidebar-color-bg-darken: darken( $sidebar-color-bg, 7% );
 $sidebar-color-alt: #686868;
 $feed-entry-color: $sidebar-color-bg;
@@ -201,11 +203,56 @@ $border-color-active: white;
     border-radius: 20%;
 }
 
+.feed-add {
+    text-align: center;
+}
+
+[data-is-opened="false"] {
+    display: none;
+}
+
+.feed-add-title {
+    margin: 0 0 1em;
+}
+
+.feed-add-url,
+.feed-add-folders {
+    width: 80%;
+}
+
+.feed-add-url {
+    padding: 0.5em;
+    border: none;
+}
+
+.feed-add-folders {
+    margin: 1em 0;
+    padding: 0.5em 2em;
+}
+
+.feed-add-title,
+.feed-add-button {
+    color: white;
+}
+
+.feed-add-button {
+    margin-bottom: 1em;
+    padding: 1em 2em;
+    background-color: $folder-separator;
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $folder-separator;
+        background-color: $feed-bgc-used;
+    }
+}
+
+
 .feeds-list-toggle {
     position: relative;
     overflow: hidden;
 }
-
 $feeds-list-toggle-transition: transform 0.3s;
 .feeds-list-toggle:before {
     position: absolute;
@@ -217,26 +264,30 @@ $feeds-list-toggle-transition: transform 0.3s;
     background-image: url( '../images/close.svg' );
     transition: $feeds-list-toggle-transition;
 
-    @at-root .is-toggled#{&} {
+    @at-root .is-opened#{&} {
         transform: translate3d(0, 180%, 0);
     }
 }
 
 .feeds-list-toggle__label {
     position: absolute;
-    margin-top: 16%;
+    padding: $settings-padding;
     top: 0;
-    left: 22%;
+    left: 0;
     transition: $feeds-list-toggle-transition;
 
-    .is-toggled & {
+    .is-opened & {
         transform: translate3d(0, 150%, 0);
     }
 }
 
 #feeds-list {
-    @media($breakpoint) {
-        display: none;
+    &[data-is-opened="false"] {
+        display: block;
+
+        @media($breakpoint) {
+            display: none;
+        }
     }
 
     &:target {
@@ -245,7 +296,7 @@ $feeds-list-toggle-transition: transform 0.3s;
 }
 
 .folder {
-    border-bottom: 0.2em solid #484848;
+    border-bottom: 0.2em solid $folder-separator;
 }
 
 .folder__item a {
@@ -539,7 +590,7 @@ $article-action-padding: 0.6em;
 }
 
 .settings-item {
-    padding: 0.5em 1.5em;
+    padding: $settings-padding;
     min-width: 15px;
     border-bottom: $border-base;
     box-sizing: content-box;

@@ -56,12 +56,26 @@
                         <use xlink:href="#svg-favorite" />
                     </svg>
                 </a>
-                <button class="mobile-only settings-item feeds-list-toggle js-toggle-target" data-target="#feeds-list"><span class="feeds-list-toggle__label">Menu</span></button>
+                <button class="mobile-only settings-item feeds-list-toggle js-feeds-list-toggle js-toggle-target" data-target="#feeds-list"><span class="feeds-list-toggle__label"><img  src="images/menu.svg" alt="{function="_t('LEEDVIBES_MENU')"}" /></span></button>
+                <button class="settings-item js-toggle-target" data-target=".feed-add" title="{function="_t('ADD_FEED')"}">
+                    <img  src="images/add.svg" alt="{function="_t('ADD_FEED')"}" />
+                </button>
             </div>
+            <form class="feed-add" data-is-opened="false" action="action.php?action=addFeed" method="POST">
+                <h2 class="feed-add-title">{function="_t('ADD_FEED')"}</h2>
+                <input type="text" name="newUrl" class="feed-add-url" placeholder="https://thebestblog.com/rss"/>
+                <select class="feed-add-folders" name="newUrlCategory">
+                    {loop="$folders"}
+                        <option {if="$value->getId()==1"}selected="selected"{/if} value="{$value->getId()}">{$value->getName()}</option>
+                    {/loop}
+                </select>
+                <input type="text" name="redirect" value="index" hidden />
+                <button class="feed-add-button">{function="_t('ADD')"}</button>
+            </form>
         {/if}
         {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
             {$currentItemsCount=$unread['total']}
-            <ul id="feeds-list">
+            <ul id="feeds-list" data-is-opened="false">
                 <li class="folder">
                     <div class="folder__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}">
                         <a href="./" class="sidebar-item">All feeds</a>

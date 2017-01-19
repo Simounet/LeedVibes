@@ -28,8 +28,30 @@ $(function () {
 
     $('.js-toggle-target').click(function () {
         var button = $(this);
-        $(button.data('target')).slideToggle(200);
-        button.toggleClass('is-toggled');
+        var targetElement = $(button.data('target'));
+        var isExpanded = targetElement.data('is-opened');
+
+        if(isExpanded) {
+            targetElement
+                .slideUp(function() {
+                    $(this)
+                        .attr('data-is-opened', false)
+                        .data('is-opened', false)
+                        .css('display', '');
+                });
+        } else {
+            targetElement
+                .css('display', 'none')
+                .attr('data-is-opened', true)
+                .data('is-opened', true)
+                .slideDown(function() {
+                    $(this).css('display', '');
+                });
+        }
+    });
+
+    $('.js-feeds-list-toggle').click(function() {
+        $(this).toggleClass('is-opened');
     });
 
     $('.js-new-events').click(function () {
