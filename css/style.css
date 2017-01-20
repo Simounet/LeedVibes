@@ -926,8 +926,7 @@ button {
   }
 }
 
-.article__content a:hover,
-.article__content a:active {
+.article__content a {
   text-decoration: underline;
 }
 
