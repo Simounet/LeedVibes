@@ -45,6 +45,11 @@ progress,
 video {
     max-width: 100%;
     height: auto;
+
+    .article__content & {
+        display: block;
+        margin: 0 auto;
+    }
 }
 img[src$=".svg"] {
     vertical-align: middle;

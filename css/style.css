@@ -426,6 +426,15 @@ video {
   height: auto;
 }
 
+.article__content img, .article__content
+audio, .article__content
+canvas, .article__content
+progress, .article__content
+video {
+  display: block;
+  margin: 0 auto;
+}
+
 img[src$=".svg"] {
   vertical-align: middle;
 }
