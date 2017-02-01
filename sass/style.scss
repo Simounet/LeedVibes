@@ -325,8 +325,8 @@ $feeds-list-toggle-transition: transform 0.3s;
 
 .folder__item,
 .feed__item {
-    padding-left: 0.8em;
-    padding-right: 1em;
+    padding-left: 0.4rem;
+    padding-right: 0.8rem;
 }
 .feed {
     padding: 4px 0;
@@ -350,7 +350,7 @@ $feeds-list-toggle-transition: transform 0.3s;
 }
 
 .mark-as-read {
-    padding-right: 0;
+    padding: 0 0.4rem;
     font-size: 0.8em;
     @extend %button-focused;
 
