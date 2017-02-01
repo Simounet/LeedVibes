@@ -12,7 +12,7 @@ Feel free to try LeedVibes with [this demo instance](http://demo.leedvibes.simou
 
 ## Requirements
 
-You need to have a working copy of Leed. If not look at the [Leed's install instructions](https://github.com/ldleman/Leed#installation-1).
+You need to have a working copy of [Leed v1.8 or higher](https://github.com/ldleman/Leed). If not look at the [Leed's install instructions](https://github.com/ldleman/Leed#installation-1).
 
 ## Install
 
