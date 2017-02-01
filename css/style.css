@@ -390,8 +390,12 @@ th {
 
 /* MIXINS */
 /* RESET */
+html {
+  font-size: 62.5%;
+}
+
 body {
-  font-size: 13px;
+  font-size: 1.3rem;
   background-color: #424242;
 }
 
@@ -916,12 +920,13 @@ button {
   display: none;
   margin: 0 auto 1em;
   width: 42.8125em;
-  font-size: 1.2rem;
-  line-height: 2em;
+  font-size: 1.6rem;
+  line-height: 1.7;
 }
 
 @media (max-width: 650px) {
   .article__content {
+    padding: 0 1rem;
     width: auto;
   }
 }
@@ -947,8 +952,8 @@ button {
 }
 
 .article__content__infos a {
-  font-size: 0.9em;
-  line-height: 1.2em;
+  font-size: 2.8rem;
+  line-height: 1;
 }
 
 .article__content__switch-view {

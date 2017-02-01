@@ -18,8 +18,11 @@ $feed-event-read-color: #BBB;
 @import "partials/mixins/_helpers.scss";
 
 /* RESET */
+html {
+    font-size: 62.5%;
+}
 body {
-    font-size: $font-size-base;
+    font-size: 1.3rem;
     background-color: $sidebar-color-bg;
 }
 h1 {
@@ -526,10 +529,11 @@ $article-action-padding: 0.6em;
     display: none;
     margin: 0 auto 1em;
     width: 42.8125em; // font: 16px / width: 685px (http://www.pearsonified.com/typography/)
-    font-size: 1.2rem;
-    line-height: 2em;
+    font-size: 1.6rem;
+    line-height: 1.7;
 
     @media($breakpoint) {
+        padding: 0 1rem;
         width: auto;
     }
 
@@ -554,8 +558,8 @@ $article-action-padding: 0.6em;
     margin: 1em 0;
 
     a {
-        font-size: 0.9em;
-        line-height: 1.2em;
+        font-size: 2.8rem;
+        line-height: 1;
     }
 }
 // [todo] - Do a better style
