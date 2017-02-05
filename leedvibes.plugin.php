@@ -23,7 +23,8 @@ function leedvibes( &$event ) {
 }
 
 function setLeedvibesTemplate() {
-    raintpl::configure("tpl_dir", 'plugins/leedvibes/' );
+    $pathParts = array_reverse( explode( '/', dirname(__FILE__) ) );
+    raintpl::configure("tpl_dir", $pathParts[1] . '/' . $pathParts[0] . '/' );
 }
 
 function setLeedvibesNewEventsFilter( &$_, &$filter, &$article_conf ) {
