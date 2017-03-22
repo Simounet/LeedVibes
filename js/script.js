@@ -54,93 +54,32 @@ $(function () {
         $(this).toggleClass('is-opened');
     });
 
-    $('.js-new-events').click(function () {
-        var urlVars = getAllUrlVars();
-        switch (urlVars.action) {
-            case 'favorites':
-                cleanUnstarredEvents();
-                break;
-            default:
-                getNewEvents($(this).data('sync-code'), urlVars);
-                cleanReadEvents();
-                break;
-        }
+    var refreshEl = $('.js-new-events');
+    var syncCode = $(this).data('sync-code');
+    refreshEl.click(function () {
+        refreshEvents(syncCode);
     });
 
     $('.sidebar').on('click', '.js-mark-as-read', function () {
         var button = $(this);
-        var confirmText = '';
-        var url = 'action.php?action=';
-        var feedEl = {};
-        var name = '';
-        if (button.parents('.js-feed__item').length) {
-            feedEl = button.parents('.js-feed__item');
-            name = feedEl.find('.js-feed-name').html() + '\n';
-            confirmText = 'CONFIRM_MARK_FEED_AS_READ';
-            url += 'readAll&feed=' + feedEl.data('id');
-        } else if (button.parents('.js-folder__item').length) {
-            feedEl = button.parents('.js-folder');
-            name = feedEl.find('.js-folder-name').html() + '\n';
-            confirmText = 'READ_ALL_FOLDER_CONFIRM';
-            url += 'readFolder&folder=' + feedEl.data('id');
-        } else {
-            confirmText = 'LEEDVIBES_READ_ALL_CONFIRM';
-            url += 'readAll';
-        }
-        url += '&last-event-id=' + idsDisplayed[0];
-        if (!confirm(name + _t(confirmText))) {
-            return false;
-        }
-
-        $.ajax({
-            url: url
-        })
-            .done(function () {
-                var isTotalCounterButton = button.hasClass('js-total-counter');
-                var isSelectedItem = button.parents('.selected').length;
-                if (
-                    isTotalCounterButton &&
-                    !isSelectedItem
-                ) {
-                    window.location = url;
-                }
-                if (isSelectedItem) {
-                    $('.js-event').remove();
-                    $('#no-more-events').removeClass('hidden');
-                }
-
-                var buttonToClear = isTotalCounterButton ? $('.js-mark-as-read') : button;
-                var buttonCount = buttonToClear.html();
-                if (
-                    buttonToClear.hasClass('js-folder-counter') ||
-                    isTotalCounterButton
-                ) {
-                    if (isTotalCounterButton) {
-                        buttonToClear
-                            .addClass('hidden')
-                            .html('0');
-                    } else {
-                        $('.js-total-counter').html(parseInt($('.js-total-counter').html()) - buttonCount);
-                        buttonToClear
-                            .addClass('hidden')
-                            .html('0')
-                            .parents('.js-folder')
-                            .find('.js-mark-as-read')
-                                .addClass('hidden')
-                                .html('0');
-                    }
-                } else {
-                    feedCounters(buttonToClear.parents('.js-feed__item').data('id'), '-', buttonCount);
-                }
-            })
-            .fail(function () {
-                alert('error');
-            });
+        markAsRead(button);
     });
 
     pushIdsDisplayed($('.js-event'));
 
     setScrollInfiniLimit();
+
+    Mousetrap.bind('g h', function() { window.location.href = $('[data-link="home"]')[0].href; });
+    Mousetrap.bind('g f', function() { window.location.href = $('[data-link="favorites"]')[0].href; });
+    Mousetrap.bind('g s', function() { window.location.href = $('[data-link="settings"]')[0].href; });
+    Mousetrap.bind('r', function() {
+        refreshEvents(syncCode);
+    });
+
+    Mousetrap.bind('m', function() {
+        var button = $('.selected').find('.js-mark-as-read');
+        markAsRead(button);
+    });
 
     $(window)
         .data('ajaxready', true)
@@ -152,6 +91,89 @@ $(function () {
             }
         });
 });
+
+function markAsRead(button) {
+    var confirmText = '';
+    var url = 'action.php?action=';
+    var feedEl = {};
+    var name = '';
+    if (button.parents('.js-feed__item').length) {
+        feedEl = button.parents('.js-feed__item');
+        name = feedEl.find('.js-feed-name').html() + '\n';
+        confirmText = 'CONFIRM_MARK_FEED_AS_READ';
+        url += 'readAll&feed=' + feedEl.data('id');
+    } else if (button.parents('.js-folder__item').length) {
+        feedEl = button.parents('.js-folder');
+        name = feedEl.find('.js-folder-name').html() + '\n';
+        confirmText = 'READ_ALL_FOLDER_CONFIRM';
+        url += 'readFolder&folder=' + feedEl.data('id');
+    } else {
+        confirmText = 'LEEDVIBES_READ_ALL_CONFIRM';
+        url += 'readAll';
+    }
+    url += '&last-event-id=' + idsDisplayed[0];
+    if (!confirm(name + _t(confirmText))) {
+        return false;
+    }
+
+    $.ajax({
+        url: url
+    })
+    .done(function () {
+        var isTotalCounterButton = button.hasClass('js-total-counter');
+        var isSelectedItem = button.parents('.selected').length;
+        if (
+            isTotalCounterButton &&
+            !isSelectedItem
+        ) {
+            window.location = url;
+        }
+        if (isSelectedItem) {
+            $('.js-event').remove();
+            $('#no-more-events').removeClass('hidden');
+        }
+
+        var buttonToClear = isTotalCounterButton ? $('.js-mark-as-read') : button;
+        var buttonCount = buttonToClear.html();
+        if (
+            buttonToClear.hasClass('js-folder-counter') ||
+            isTotalCounterButton
+        ) {
+            if (isTotalCounterButton) {
+                buttonToClear
+                    .addClass('hidden')
+                    .html('0');
+            } else {
+                $('.js-total-counter').html(parseInt($('.js-total-counter').html()) - buttonCount);
+                buttonToClear
+                    .addClass('hidden')
+                    .html('0')
+                    .parents('.js-folder')
+                    .find('.js-mark-as-read')
+                        .addClass('hidden')
+                        .html('0');
+            }
+        } else {
+            feedCounters(buttonToClear.parents('.js-feed__item').data('id'), '-', buttonCount);
+        }
+    })
+    .fail(function () {
+        alert('error');
+    });
+}
+
+function refreshEvents(syncCode) {
+    var urlVars = getAllUrlVars();
+    switch (urlVars.action) {
+        case 'favorites':
+            cleanUnstarredEvents();
+            break;
+        default:
+            getNewEvents(syncCode, urlVars);
+            cleanReadEvents();
+            break;
+    }
+}
 
 function canLoadMore () {
     'use strict';

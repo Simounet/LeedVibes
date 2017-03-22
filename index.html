@@ -47,8 +47,8 @@
         {else}
             <div class="settings">
                 <a href="action.php?action=logout" class="settings-item" title="{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})"><img src="images/logout.svg" alt=""></a>
-                <a href="settings.php" class="settings-item" title="{function="_t('MANAGE')"}"><img src="images/settings.svg" alt=""></a>
-                <a href="./?action=favorites" class="settings-item" title="{function="_t('FAVORITES')"}">
+                <a href="settings.php" data-link="settings" class="settings-item" title="{function="_t('MANAGE')"}"><img src="images/settings.svg" alt=""></a>
+                <a href="./?action=favorites" data-link="favorites" class="settings-item" title="{function="_t('FAVORITES')"}">
                     <svg width="15" height="15" class="favorite-inverted">
                         <use xlink:href="#svg-favorite" />
                     </svg>
@@ -78,7 +78,7 @@
             <ul id="feeds-list" data-is-opened="false">
                 <li class="folder">
                     <div class="folder__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}">
-                        <a href="./" class="sidebar-item">All feeds</a>
+                        <a href="./" data-link="home" class="sidebar-item">All feeds</a>
                         <button class="mark-as-read js-mark-as-read js-total-counter" title="{function="_t('LEEDVIBES_MARK_ALL_AS_READ')"}">{$unread['total']}</button>
                     </div>
                 </li>
@@ -160,5 +160,6 @@
     <script>
         var  i18n = {$i18n_js};
     </script>
+    <script src="js/mousetrap.min.js"></script>
 </body>
 </html>
