@@ -521,7 +521,7 @@ button {
   border-bottom: 0.1em solid #D9D9D9;
 }
 
-.event:not(.event--focus):hover {
+.event:not(.event--focus):hover, .event--focused:not(.event--focus) {
   background-color: #DDD;
 }
 
@@ -838,12 +838,14 @@ button {
   background-image: linear-gradient(to left, white 48%, rgba(255, 255, 255, 0) 100%);
 }
 
-.event:hover .article__description:after {
+.event:hover .article__description:after,
+.event--focused .article__description:after {
   background-image: linear-gradient(to left, #DDD 6em, rgba(221, 221, 221, 0) 100%);
 }
 
 @media (max-width: 650px) {
-  .event:hover .article__description:after {
+  .event:hover .article__description:after,
+  .event--focused .article__description:after {
     background: none;
   }
 }

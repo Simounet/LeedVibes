@@ -69,12 +69,15 @@ $(function () {
 
     setScrollInfiniLimit();
 
+    var userAction = new UserActionObject();
+    Mousetrap.bind('j', function() { userAction.moveForward(); });
+    Mousetrap.bind('k', function() { userAction.moveBackward(); });
+    Mousetrap.bind('f', function() { userAction.clickFocused('.js-favorite'); });
+    Mousetrap.bind('x', function() { userAction.markAsReadFocused('.js-read-unread'); });
     Mousetrap.bind('g h', function() { window.location.href = $('[data-link="home"]')[0].href; });
     Mousetrap.bind('g f', function() { window.location.href = $('[data-link="favorites"]')[0].href; });
     Mousetrap.bind('g s', function() { window.location.href = $('[data-link="settings"]')[0].href; });
-    Mousetrap.bind('r', function() {
-        refreshEvents(syncCode);
-    });
+    Mousetrap.bind('r', function() { refreshEvents(syncCode); });
 
     Mousetrap.bind('m', function() {
         var button = $('.selected').find('.js-mark-as-read');
@@ -91,6 +94,67 @@ $(function () {
             }
         });
 });
+
+function UserActionObject() {}
+
+UserActionObject.prototype = {
+    focusedClass: 'event--focused',
+    focusedEl: $(),
+    prevEl: false,
+    nextEl: false,
+
+    setFocusedEl: function(el) {
+        el.addClass(this.focusedClass);
+        this.focusedEl = el;
+    },
+
+    setPrevEl: function() {
+        this.prevEl = this._getEl('prev');
+    },
+
+    setNextEl: function() {
+        this.nextEl = this._getEl('next');
+    },
+
+    _getEl: function(action) {
+        if( this.focusedEl.length === 0 ) {
+            return $('.js-event:visible').first();
+        }
+        var el = this.focusedEl[action]('.js-event');
+        if(el.length > 0) {
+            return el;
+        }
+        var existingEl = action + 'El';
+        return this[existingEl];
+    },
+
+    moveForward: function() {
+        this.setNextEl();
+        this._move(this.nextEl);
+    },
+
+    moveBackward: function() {
+        this.setPrevEl();
+        this._move(this.prevEl);
+    },
+
+    _move: function(el) {
+        this.focusedEl.removeClass(this.focusedClass);
+        this.setFocusedEl(el);
+    },
+
+    markAsReadFocused: function(selector) {
+        this.clickFocused(selector);
+        this.moveForward();
+    },
+
+    clickFocused: function(selector) {
+        if(typeof(this.focusedEl).length > 0) {
+            return false;
+        }
+        this.focusedEl.find(selector).first().click();
+    }
+}
 
 function markAsRead(button) {
     var confirmText = '';
