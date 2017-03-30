@@ -621,7 +621,9 @@ function getNewEvents (code, urlVars) {
             // Hide loader
             setTimeout(
                 function () {
-                    loader.removeClass(loadingClass);
+                    loader.one('animationiteration webkitAnimationIteration', function() {
+                        $(this).removeClass(loadingClass);
+                    });
                 },
                 loaderFadeTime
             );
