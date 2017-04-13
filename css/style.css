@@ -924,6 +924,7 @@ button {
   width: 42.8125em;
   font-size: 1.6rem;
   line-height: 1.7;
+  overflow-wrap: break-word;
 }
 
 @media (max-width: 650px) {
