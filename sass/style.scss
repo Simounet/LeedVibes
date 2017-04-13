@@ -104,9 +104,11 @@ button {
 }
 
 .notifications__text {
-    display: block;
+    display: flex;
     padding: 1em 0.5em;
     color: $feed-bgc-used;
+    justify-content: space-between;
+    align-items: center;
 }
 
 %text-color-dark {

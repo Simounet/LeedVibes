@@ -494,9 +494,14 @@ button {
 }
 
 .notifications__text {
-  display: block;
+  display: -ms-flexbox;
+  display: flex;
   padding: 1em 0.5em;
   color: #DDD;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .folder__button, .mark-as-read, .article-favorite {
