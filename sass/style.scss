@@ -336,6 +336,10 @@ $feeds-list-toggle-transition: transform 0.3s;
     background-color: #4b4b4b;
 }
 
+html:not(.no-js) .feed--closed {
+    display: none;
+}
+
 %img-vertical-align {
     margin-right: 0.3em;
     vertical-align: middle;

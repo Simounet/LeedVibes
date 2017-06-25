@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
     <title>{$delimiter=' · '}{if="isset($currentFeed)"}{$currentFeed->getName()}{$delimiter}{/if}{if="isset($currentFolder)"}{$currentFolder->getName()}{$delimiter}{/if}LeedVibes</title>
@@ -104,7 +104,7 @@
                             <button class="mark-as-read js-mark-as-read js-folder-counter{if="$unreadEventsForFolder === 0"} hidden{/if}" title="{function="_t('MARK_AS_READ_FOLDER_ITEMS',array($unreadEventsForFolder))"}">{$unreadEventsForFolder}</button>
                             {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
                         </div>
-                        <ul class="feed js-toggle-item{if="!$value->getIsopen()"} hidden{/if}">
+                        <ul class="feed js-toggle-item{if="!$value->getIsopen()"} feed--closed{/if}">
                             {if="count($feeds)!=0"}
                                 {loop="feeds"}
                                     <li class="feed__item js-feed__item{if="isset($currentFeed) && ($value2['id'] == $currentFeed->getId())"} selected{/if}{if="$feedState->getById($value2['id'])->getLastSyncInError()==1"} error{/if}" data-id="{$value2['id']}">

@@ -716,6 +716,10 @@ button {
   background-color: #4b4b4b;
 }
 
+html:not(.no-js) .feed--closed {
+  display: none;
+}
+
 .feed__item img, .article__header .feed-icon {
   margin-right: 0.3em;
   vertical-align: middle;
