@@ -1058,6 +1058,65 @@ button.settings-item {
   }
 }
 
+.shortcuts-toggle {
+  display: none;
+}
+
+@media (min-width: 650px) {
+  html:not(.no-js) .shortcuts-toggle {
+    display: block;
+  }
+}
+
+.shortcuts {
+  position: fixed;
+  display: none;
+  left: 0;
+  top: 0;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background-color: #303030e6;
+  overflow: scroll;
+}
+
+.shortcuts:hover {
+  cursor: pointer;
+}
+
+.shortcuts-list {
+  margin: 0;
+  padding: 0;
+}
+
+.shortcut {
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 10px;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.shortcut-key {
+  display: inline-block;
+  margin-right: 20px;
+  padding: 5px 5px 10px 5px;
+  min-width: 20px;
+  color: #777777;
+  font-size: 12px;
+  background-color: #DDDDDD;
+  border: 2px solid #F9F7F7;
+  border-bottom: 4px solid #898989;
+  border-right: 4px solid #898989;
+  border-radius: 3px;
+  box-shadow: 0 0 10px #111010;
+}
+
+.shortcut-key + .shortcut-key {
+  margin-left: 20px;
+}
+
 /* MEDIA QUERIES */
 @media (max-width: 650px) {
   td {

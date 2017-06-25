@@ -125,6 +125,9 @@
             </ul>
         {/if}
     {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
+            <button class="shortcuts-toggle js-shortcuts-toggle" title="{function="_t('LEEDVIBES_SHORTCUTS_BUTTON_TITLE')"}" >
+                <img src="images/shortcuts.svg" alt="{function="_t('LEEDVIBES_SHORTCUTS')"}" />
+            </button>
         </aside>
     {/if}
     {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
@@ -155,6 +158,20 @@
                     {function="_t('LEEDVIBES_NOTHING_TO_READ')"}
                 </div>
             </div>
+        </section>
+        <section class="shortcuts js-shortcuts">
+            <ul class="shortcuts-list">
+                <li class="shortcut"><span class="shortcut-key">M</span> <span class="shortcut-text">Mark the current folder as read</span></li>
+                <li class="shortcut"><span class="shortcut-key">X</span> <span class="shortcut-text">Mark the current article as read</span></li>
+                <li class="shortcut"><span class="shortcut-key">F</span> <span class="shortcut-text">Mark the current article as favorited / unfavorited</span></li>
+                <li class="shortcut"><span class="shortcut-key">K</span> <span class="shortcut-text">Select the previous article</span></li>
+                <li class="shortcut"><span class="shortcut-key">J</span> <span class="shortcut-text">Select the next article</span></li>
+                <li class="shortcut"><span class="shortcut-key">R</span> <span class="shortcut-text">Refresh the article's list</span></li>
+                <li class="shortcut"><span class="shortcut-key">G</span> + <span class="shortcut-key">H</span> <span class="shortcut-text">Go to the home page</span></li>
+                <li class="shortcut"><span class="shortcut-key">G</span> + <span class="shortcut-key">S</span> <span class="shortcut-text">Go to the settings page</span></li>
+                <li class="shortcut"><span class="shortcut-key">G</span> + <span class="shortcut-key">F</span> <span class="shortcut-text">Go to the favorites page</span></li>
+                <li class="shortcut"><span class="shortcut-key">?</span> <span class="shortcut-text">Show / hide this shortcuts' help</span></li>
+            </ul>
         </section>
     {/if}
     <script>

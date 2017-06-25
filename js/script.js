@@ -65,6 +65,14 @@ $(function () {
         markAsRead(button);
     });
 
+    var shortcutsContainer = $('.js-shortcuts');
+    $('.js-shortcuts-toggle').on('click', function() {
+        shortcutsContainer.show();
+    });
+    shortcutsContainer.on('click', function() {
+        $(this).hide();
+    });
+
     pushIdsDisplayed($('.js-event'));
 
     setScrollInfiniLimit();
@@ -78,6 +86,7 @@ $(function () {
     Mousetrap.bind('g f', function() { window.location.href = $('[data-link="favorites"]')[0].href; });
     Mousetrap.bind('g s', function() { window.location.href = $('[data-link="settings"]')[0].href; });
     Mousetrap.bind('r', function() { refreshEvents(syncCode); });
+    Mousetrap.bind('?', function() { userAction.toggleHelp(shortcutsContainer); });
 
     Mousetrap.bind('m', function() {
         var button = $('.selected').find('.js-mark-as-read');
@@ -153,6 +162,10 @@ UserActionObject.prototype = {
             return false;
         }
         this.focusedEl.find(selector).first().click();
+    },
+
+    toggleHelp: function(el) {
+        el.toggle();
     }
 }
 

@@ -7,7 +7,9 @@ $folder-separator: #484848;
 $sidebar-color-bg-darken: darken( $sidebar-color-bg, 7% );
 $sidebar-color-alt: #686868;
 $feed-entry-color: $sidebar-color-bg;
-$breakpoint: "max-width: 650px";
+$breakpoint: "650px";
+$breakpoint-min: "min-width: #{$breakpoint}";
+$breakpoint-max: "max-width: #{$breakpoint}";
 $feed-bgc-used: #DDD;
 $error-color: #c53d3d;
 $feed-event-read-color: #BBB;
@@ -28,7 +30,7 @@ body {
 h1 {
     margin: 0;
 
-    @media( $breakpoint ) {
+    @media( $breakpoint-max ) {
         font-size: 1.3em;
     }
 }
@@ -64,7 +66,7 @@ body {
     flex-wrap: wrap;
     width: 99vw;
 
-    @media($breakpoint) {
+    @media($breakpoint-max) {
         display: block;
         width: 100vw;
     }
@@ -85,7 +87,7 @@ button {
     min-height: 100vh;
     background-color: #FFF;
 
-    @media($breakpoint) {
+    @media($breakpoint-max) {
         // Avoid extra margin-bottom when all
         // the content is read and infinite-scroll-end
         // shows up
@@ -197,7 +199,7 @@ $border-color-active: white;
 
 .folder__button,
 .sidebar-item {
-    @media($breakpoint) {
+    @media($breakpoint-max) {
         padding: 12px 0;
     }
 }
@@ -296,7 +298,7 @@ $feeds-list-toggle-transition: transform 0.3s;
     &[data-is-opened="false"] {
         display: block;
 
-        @media($breakpoint) {
+        @media($breakpoint-max) {
             display: none;
         }
     }
@@ -344,7 +346,7 @@ html:not(.no-js) .feed--closed {
     margin-right: 0.3em;
     vertical-align: middle;
 
-    @media($breakpoint) {
+    @media($breakpoint-max) {
         margin-right: 0.8em;
     }
 }
@@ -361,7 +363,7 @@ html:not(.no-js) .feed--closed {
     font-size: 0.8em;
     @extend %button-focused;
 
-    @media($breakpoint) {
+    @media($breakpoint-max) {
         padding: 12px;
     }
 }
@@ -378,7 +380,7 @@ html:not(.no-js) .feed--closed {
         padding-bottom: 0.6em;
     }
 
-    @media($breakpoint) {
+    @media($breakpoint-max) {
         display: flex;
         align-items: center;
         white-space: inherit;
@@ -398,7 +400,7 @@ html:not(.no-js) .feed--closed {
         text-overflow: ellipsis;
         vertical-align: middle;
 
-        @media($breakpoint) {
+        @media($breakpoint-max) {
             display: none;
         }
     }
@@ -406,13 +408,13 @@ html:not(.no-js) .feed--closed {
 
 .article__title,
 .feed-icon {
-    @media($breakpoint) {
+    @media($breakpoint-max) {
         margin-left: 14%;
     }
 }
 
 .feed-icon ~ .article__title {
-    @media($breakpoint) {
+    @media($breakpoint-max) {
         margin-left: 0;
     }
 }
@@ -421,7 +423,7 @@ html:not(.no-js) .feed--closed {
     display: inline;
     font-size: 1em;
 
-    @media($breakpoint) {
+    @media($breakpoint-max) {
         display: inline-block;
         width: 65%;
     }
@@ -439,7 +441,7 @@ html:not(.no-js) .feed--closed {
         color: $feed-event-read-color;
     }
 
-    @media($breakpoint) {
+    @media($breakpoint-max) {
         display: none;
     }
 
@@ -462,13 +464,13 @@ html:not(.no-js) .feed--closed {
         .event--focused & {
             background-image: linear-gradient(to left, $feed-bgc-used 6em, rgba($feed-bgc-used, 0) 100%);
 
-            @media($breakpoint) {
+            @media($breakpoint-max) {
                 background: none;
             }
 
         }
 
-        @media($breakpoint) {
+        @media($breakpoint-max) {
             background: none;
         }
     }
@@ -479,7 +481,7 @@ html:not(.no-js) .feed--closed {
     color: $feed-entry-color;
     font-size: 0.9em;
 
-    @media( $breakpoint ) {
+    @media( $breakpoint-max ) {
         right: 1%;
         bottom: 5%;
     }
@@ -504,7 +506,7 @@ $article-action-padding: 0.6em;
         border-color: $sidebar-color-bg;
     }
 
-    @media( $breakpoint ) {
+    @media( $breakpoint-max ) {
         width: 15%;
         height: 100%;
         left: 0;
@@ -523,7 +525,7 @@ $article-action-padding: 0.6em;
     opacity: $opacity-low;
     cursor: pointer;
 
-    @media( $breakpoint ) {
+    @media( $breakpoint-max ) {
         padding: 0.9em 0px;
         width: 2em;
     }
@@ -541,7 +543,7 @@ $article-action-padding: 0.6em;
     line-height: 1.7;
     overflow-wrap: break-word;
 
-    @media($breakpoint) {
+    @media($breakpoint-max) {
         padding: 0 1rem;
         width: auto;
     }
@@ -581,7 +583,7 @@ $article-action-padding: 0.6em;
     border: 1px solid $feed-event-read-color;
     z-index: 20;
 
-    @media($breakpoint) {
+    @media($breakpoint-max) {
         top: 2.4em;
         right: 4em;
     }
@@ -654,8 +656,67 @@ button.settings-item {
     100% { transform: rotate(360deg); }
 }
 
+.shortcuts-toggle {
+    display: none;
+}
+
+@media( $breakpoint-min ) {
+    html:not(.no-js) .shortcuts-toggle {
+        display: block;
+    }
+}
+
+.shortcuts {
+    position: fixed;
+    display: none;
+    left: 0;
+    top: 0;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: #{$sidebar-color-bg-darken}e6;
+    overflow: scroll;
+}
+
+.shortcuts:hover {
+    cursor: pointer;
+}
+
+
+.shortcuts-list {
+    margin: 0;
+    padding: 0;
+}
+
+.shortcut {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+$shortcut-key-space: 20px;
+.shortcut-key {
+    display: inline-block;
+    margin-right: $shortcut-key-space;
+    padding: 5px 5px 10px 5px;
+    min-width: 20px;
+    color: #777777;
+    font-size: 12px;
+    background-color: #DDDDDD;
+    border: 2px solid #F9F7F7;
+    border-bottom: 4px solid #898989;
+    border-right: 4px solid #898989;
+    border-radius: 3px;
+    box-shadow: 0 0 10px #111010;
+
+    & + & {
+        margin-left: $shortcut-key-space;
+    }
+}
+
 /* MEDIA QUERIES */
-@media($breakpoint) {
+@media($breakpoint-max) {
     td {
         display: block;
     }
@@ -664,7 +725,7 @@ button.settings-item {
 .mobile-only {
     display: none;
 
-    @media($breakpoint) {
+    @media($breakpoint-max) {
         display: inline;
     }
 }
