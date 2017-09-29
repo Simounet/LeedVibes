@@ -140,7 +140,7 @@
             <div id="no-new-events" class="notifications hidden">
                 <div class="notifications__text">{function="_t('LEEDVIBES_NO_NEW_EVENTS')"}</div>
             </div>
-            <section class="articles">
+            <section class="articles" data-articles-per-page="{$articlePerPages}">
                 {$countEventsPositive=count($events) > 0}
                 {if="$countEventsPositive"}
                     {include="article"}

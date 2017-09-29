@@ -96,13 +96,52 @@ $(function () {
     $(window)
         .data('ajaxready', true)
         .data('page', 1)
-        .data('nblus', 0)
-        .scroll(function () {
-            if (canLoadMore()) {
-                infiniteScroll();
-            }
-        });
+        .data('nblus', 0);
 });
+    document.addEventListener("DOMContentLoaded", function(event) {
+        const firstSentinelEl = document.getElementsByClassName('js-article__header')[0];
+        const articlesPerPage = $('[data-articles-per-page]').data('articles-per-page');
+        if( typeof( firstSentinelEl ) !== 'object' ) {
+            return false;
+        }
+        let watchCount = Math.floor( articlesPerPage / 2 );
+        const sentinel = {
+            el: null,
+            set: function(el) {
+                this.el = el;
+                this.el.classList.add('sentinel');
+                sentinelObserver.observe(this.el);
+            },
+            unset: function() {
+                if (!this.el)
+                    return;
+                sentinelObserver.unobserve(this.el);
+                this.el.classList.remove('sentinel');
+                this.el = null;
+            }
+        }
+        const sentinelListener = function(entries) {
+          for (entry of entries) {
+
+            if (entry.isIntersecting) {
+              sentinel.unset();
+              infiniteScroll().then( function() {
+                  updateSentinel();
+              });
+            }
+          }
+        }
+        const updateSentinel = function() {
+            const newSentinelEl = document.getElementsByClassName('js-article__header')[watchCount];
+            if( typeof( newSentinelEl  ) !== 'object' ) {
+             return false;
+            }
+            sentinel.set( newSentinelEl );
+            watchCount += articlesPerPage;
+        },
+        sentinelObserver = new IntersectionObserver(sentinelListener);
+        updateSentinel();
+    });
 
 function UserActionObject() {}
 
@@ -126,7 +165,7 @@ UserActionObject.prototype = {
     },
 
     _getEl: function(action) {
-        if( this.focusedEl.length === 0 ) {
+        if( this.focusedEl.length === 0 || this.focusedEl[0].parentNode === null ) {
             return $('.js-event:visible').first();
         }
         var el = this.focusedEl[action]('.js-event');
@@ -249,23 +288,6 @@ function refreshEvents(syncCode) {
             getNewEvents(syncCode, urlVars);
             cleanReadEvents();
             break;
-    }
-}
-
-function canLoadMore () {
-    'use strict';
-    if ($('#no-more-events').is(':visible')) {
-        $(window).unbind('scroll');
-    }
-    if ((
-            (typeof (infiniteScrollLimit.offset()) !== 'undefined') &&
-            infiniteScrollLimit.offset().top < (
-                $(window).scrollTop() + $(window).height()
-            )
-        ) &&
-        $(window).data('ajaxready') === true
-    ) {
-        return true;
     }
 }
 
@@ -580,6 +602,10 @@ function targetThisEvent (event, focusOn) {
 
 function infiniteScroll () {
     'use strict';
+    var noMoreEventsEl = $('#no-more-events');
+    if(noMoreEventsEl.is(':visible')) {
+        return false;
+    }
     var loading = $('#infinite-scroll-loading');
     $(window).data('ajaxready', false);
 
@@ -591,7 +617,7 @@ function infiniteScroll () {
     var feed = urlVars.feed;
     var order = (typeof (urlVars.order) !== 'undefined') ? '&order=' + urlVars.order : '';
 
-    $.ajax({
+    return $.ajax({
         url: './article.php',
         type: 'post',
         data: 'scroll=' + $(window).data('page') + '&nblus=' + $(window).data('nblus') + '&action=' + action + '&folder=' + folder + '&feed=' + feed + order,
@@ -600,9 +626,15 @@ function infiniteScroll () {
             if (data.replace(/^\s+/g, '').replace(/\s+$/g, '') !== '') {
                 $('.articles').append(data);
                 $(window).data('page', $(window).data('page') + 1);
+                const articlesPerPage = $('[data-articles-per-page]').data('articles-per-page');
+                const noMoreEvents = $(data).filter('article').length < articlesPerPage;
+                if(noMoreEvents) {
+                    loading.addClass('hidden');
+                    noMoreEventsEl.removeClass('hidden');
+                }
             } else {
                 loading.addClass('hidden');
-                $('#no-more-events').removeClass('hidden');
+                noMoreEventsEl.removeClass('hidden');
             }
         },
         complete: function () {
