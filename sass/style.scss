@@ -2,6 +2,7 @@
 $font-size-base: 13px;
 $sidebar-button-size: 10%;
 $settings-padding: 0.5em 1.5em;
+$sidebar-color: #fff;
 $sidebar-color-bg: #424242;
 $folder-separator: #484848;
 $sidebar-color-bg-darken: darken( $sidebar-color-bg, 7% );
@@ -162,6 +163,10 @@ $border-color-active: white;
     font-size: 0.9em;
     overflow: hidden;
 
+    a {
+        color: $sidebar-color;
+    }
+
     .settings__fields {
         padding: 20%;
     }
@@ -178,7 +183,7 @@ $border-color-active: white;
 
     &,
     a {
-        color: #FFF;
+        color: $sidebar-color;
     }
 
     &:hover,
@@ -226,6 +231,7 @@ $border-color-active: white;
 
 .feed-add-title {
     margin: 0 0 1em;
+    color: $sidebar-color;
 }
 
 .feed-add-url,
@@ -243,14 +249,21 @@ $border-color-active: white;
     padding: 0.5em 2em;
 }
 
-.feed-add-title,
-.feed-add-button {
-    color: white;
+.sidebar > section {
+    margin: 2em auto 3em;
+    padding: 0 1em;
+
+    li {
+        display: flex;
+        color: $sidebar-color;
+        justify-content: space-between;
+    }
 }
 
+.sidebar > section button,
 .feed-add-button {
-    margin-bottom: 1em;
     padding: 1em 2em;
+    color: $sidebar-color;
     background-color: $folder-separator;
 
     &:hover,
@@ -261,6 +274,9 @@ $border-color-active: white;
     }
 }
 
+.feed-add-button {
+    margin-bottom: 1em;
+}
 
 .feeds-list-toggle {
     position: relative;
