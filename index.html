@@ -24,7 +24,6 @@
     {function="Plugin::callJs()"}
 </head>
 <body data-anonymous-state="{$configurationManager->get('articleDisplayAnonymous')}">
-    {function="Plugin::callHook("menu_pre_folder_menu", array(&$myUser))"}
     {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
         <aside id="sidebar" class="sidebar">
     {/if}
@@ -72,6 +71,7 @@
                 <input type="text" name="redirect" value="index" hidden />
                 <button class="feed-add-button">{function="_t('ADD')"}</button>
             </form>
+            {function="Plugin::callHook("menu_pre_folder_menu", array(&$myUser))"}
         {/if}
         {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
             {$currentItemsCount=$unread['total']}
@@ -128,9 +128,9 @@
             <button class="shortcuts-toggle js-shortcuts-toggle" title="{function="_t('LEEDVIBES_SHORTCUTS_BUTTON_TITLE')"}" >
                 <img src="images/shortcuts.svg" alt="{function="_t('LEEDVIBES_SHORTCUTS')"}" />
             </button>
+            {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
         </aside>
     {/if}
-    {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
     
     {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
         <div class="svg-list hidden">
