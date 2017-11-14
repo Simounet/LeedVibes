@@ -566,7 +566,7 @@ button {
 
 [class*="__item"],
 [class*="__item"] a {
-  color: #FFF;
+  color: #fff;
 }
 
 [class*="__item"]:hover, [class*="__item"]:active {
@@ -610,6 +610,7 @@ button {
 
 .feed-add-title {
   margin: 0 0 1em;
+  color: #fff;
 }
 
 .feed-add-url,
@@ -627,20 +628,36 @@ button {
   padding: 0.5em 2em;
 }
 
-.feed-add-title,
+.sidebar > section {
+  margin: 2em auto 3em;
+  padding: 0 1em;
+}
+
+.sidebar > section li {
+  display: -ms-flexbox;
+  display: flex;
+  color: #fff;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.sidebar > section button,
 .feed-add-button {
-  color: white;
+  padding: 1em 2em;
+  color: #fff;
+  background-color: #484848;
+}
+
+.sidebar > section button:hover, .sidebar > section button:active, .sidebar > section button:focus,
+.feed-add-button:hover,
+.feed-add-button:active,
+.feed-add-button:focus {
+  color: #484848;
+  background-color: #DDD;
 }
 
 .feed-add-button {
   margin-bottom: 1em;
-  padding: 1em 2em;
-  background-color: #484848;
-}
-
-.feed-add-button:hover, .feed-add-button:active, .feed-add-button:focus {
-  color: #484848;
-  background-color: #DDD;
 }
 
 .feeds-list-toggle {
