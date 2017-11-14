@@ -542,8 +542,9 @@ $article-action-padding: 0.6em;
     cursor: pointer;
 
     @media( $breakpoint-max ) {
-        padding: 0.9em 0px;
-        width: 2em;
+        padding: 0.9em 0.5em 3em 1em;
+        width: 15%;
+        height: 100%;
     }
 }
 

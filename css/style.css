@@ -939,8 +939,9 @@ html:not(.no-js) .feed--closed {
 
 @media (max-width: 650px) {
   .article__read-unread {
-    padding: 0.9em 0px;
-    width: 2em;
+    padding: 0.9em 0.5em 3em 1em;
+    width: 15%;
+    height: 100%;
   }
 }
 
