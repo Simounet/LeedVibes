@@ -56,7 +56,8 @@ $(function () {
 
     var refreshEl = $('.js-new-events');
     var syncCode = $(this).data('sync-code');
-    refreshEl.click(function () {
+    refreshEl.click(function (e) {
+        e.preventDefault();
         refreshEvents(syncCode);
     });
 
