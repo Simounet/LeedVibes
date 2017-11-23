@@ -200,6 +200,7 @@ $border-color-active: white;
     flex-grow: 1;
     height: 16px; /* Favicon's height */
     line-height: 16px;
+    overflow: hidden;
 }
 
 .folder__button,

@@ -583,6 +583,7 @@ button {
   height: 16px;
   /* Favicon's height */
   line-height: 16px;
+  overflow: hidden;
 }
 
 @media (max-width: 650px) {
