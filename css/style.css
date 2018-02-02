@@ -424,6 +424,7 @@ li {
 img,
 audio,
 canvas,
+iframe,
 progress,
 video {
   max-width: 100%;
@@ -433,6 +434,7 @@ video {
 .article__content img, .article__content
 audio, .article__content
 canvas, .article__content
+iframe, .article__content
 progress, .article__content
 video {
   display: block;
@@ -441,6 +443,10 @@ video {
 
 img[src$=".svg"] {
   vertical-align: middle;
+}
+
+iframe {
+  width: auto;
 }
 
 /* GENERAL STYLE */

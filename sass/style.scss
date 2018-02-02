@@ -47,6 +47,7 @@ li {
 img,
 audio,
 canvas,
+iframe,
 progress,
 video {
     max-width: 100%;
@@ -59,6 +60,10 @@ video {
 }
 img[src$=".svg"] {
     vertical-align: middle;
+}
+
+iframe {
+    width: auto;
 }
 
 /* GENERAL STYLE */
