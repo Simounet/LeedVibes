@@ -84,7 +84,7 @@
                 </li>
                 <!-- [todo] -  Remove order=unread on feeds' links, use the settings instead -->
                 {loop="folders"}
-                    {$feeds=""}
+                    {$feeds=[]}
                     {$folderSelected=0}
                     {if="isset($allFeedsPerFolder[$value->getId()])"}
                         {$feeds=$allFeedsPerFolder[$value->getId()]}
