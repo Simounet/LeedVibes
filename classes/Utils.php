@@ -3,6 +3,9 @@
 class Utils {
 
     public function formatDate( $timestamp ) {
+        if(!$timestamp) {
+            return false;
+        }
         $now = strtotime("now");
         $today = strtotime('today UTC');
         $diff = round( ( $now - $timestamp ) / 60 );
