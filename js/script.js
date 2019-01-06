@@ -297,6 +297,11 @@ function EventObject (event) {
     this.target = $(event.target);
     this.targetClasses = (typeof (this.target.attr('class')) === 'string') ? this.target.attr('class') : '';
 
+    if(this.targetClasses === '') {
+        this.target = this.target.parent();
+        this.targetClasses = (typeof (this.target.attr('class')) === 'string') ? this.target.attr('class') : '';
+    }
+
     this.entry = $(event.currentTarget);
     this.content = this.entry.find('.' + this.contentClass);
 
