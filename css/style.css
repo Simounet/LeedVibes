@@ -748,20 +748,17 @@ html:not(.no-js) .feed--closed {
   display: none;
 }
 
-.feed__item img, .article__header .feed-icon {
+.feed__item img {
+  float: left;
+  margin-left: 1.4em;
   margin-right: 0.3em;
   vertical-align: middle;
 }
 
 @media (max-width: 650px) {
-  .feed__item img, .article__header .feed-icon {
+  .feed__item img {
     margin-right: 0.8em;
   }
-}
-
-.feed__item img {
-  float: left;
-  margin-left: 1.4em;
 }
 
 .mark-as-read {
@@ -790,8 +787,11 @@ html:not(.no-js) .feed--closed {
 
 @media (max-width: 650px) {
   .article__header {
-    display: -ms-flexbox;
-    display: flex;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 40px auto 40px;
+    grid-template-columns: 40px auto 40px;
+    grid-template-areas: "favicon site date" "favorite title mark";
     -ms-flex-align: center;
     align-items: center;
     white-space: inherit;
@@ -811,13 +811,26 @@ html:not(.no-js) .feed--closed {
 
 @media (max-width: 650px) {
   .article__header .article__feed-title {
-    display: none;
+    width: auto;
+    grid-area: site;
+  }
+}
+
+.feed-icon {
+  margin-right: 0.3em;
+  vertical-align: middle;
+  justify-self: center;
+  grid-area: favicon;
+}
+
+@media (max-width: 650px) {
+  .feed-icon {
+    margin: 0;
   }
 }
 
 @media (max-width: 650px) {
-  .article__title,
-  .feed-icon {
+  .article__title {
     margin-left: 14%;
   }
 }
@@ -836,7 +849,7 @@ html:not(.no-js) .feed--closed {
 @media (max-width: 650px) {
   .article__title {
     display: inline-block;
-    width: 65%;
+    grid-area: title;
   }
 }
 
@@ -902,8 +915,10 @@ html:not(.no-js) .feed--closed {
 
 @media (max-width: 650px) {
   .article__date {
-    right: 1%;
-    bottom: 5%;
+    position: relative;
+    right: 0;
+    grid-area: date;
+    justify-self: right;
   }
 }
 
@@ -925,9 +940,12 @@ html:not(.no-js) .feed--closed {
 
 @media (max-width: 650px) {
   .article-favorite {
-    width: 15%;
-    height: 100%;
-    left: 0;
+    position: relative;
+    padding: 0;
+    width: 100%;
+    right: 0;
+    grid-area: favorite;
+    justify-self: left;
   }
 }
 
@@ -946,9 +964,12 @@ html:not(.no-js) .feed--closed {
 
 @media (max-width: 650px) {
   .article__read-unread {
-    padding: 0.9em 0.5em 3em 1em;
-    width: 15%;
+    position: relative;
+    padding: 0;
+    width: 100%;
     height: 100%;
+    grid-area: mark;
+    justify-self: right;
   }
 }
 

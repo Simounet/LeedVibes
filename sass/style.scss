@@ -364,20 +364,15 @@ html:not(.no-js) .feed--closed {
     display: none;
 }
 
-%img-vertical-align {
+.feed__item img {
+    float: left;
+    margin-left: 1.4em;
     margin-right: 0.3em;
     vertical-align: middle;
 
     @media($breakpoint-max) {
         margin-right: 0.8em;
     }
-}
-
-.feed__item img {
-    float: left;
-    margin-left: 1.4em;
-
-    @extend %img-vertical-align;
 }
 
 .mark-as-read {
@@ -403,14 +398,12 @@ html:not(.no-js) .feed--closed {
     }
 
     @media($breakpoint-max) {
-        display: flex;
+        display: grid;
+        grid-template-columns: 40px auto 40px;
+        grid-template-areas: "favicon site date" "favorite title mark";
         align-items: center;
         white-space: inherit;
         min-height: 4em;
-    }
-
-    .feed-icon {
-        @extend %img-vertical-align;
     }
 
     .article__feed-title {
@@ -423,13 +416,24 @@ html:not(.no-js) .feed--closed {
         vertical-align: middle;
 
         @media($breakpoint-max) {
-            display: none;
+            width: auto;
+            grid-area: site;
         }
     }
 }
 
-.article__title,
 .feed-icon {
+    margin-right: 0.3em;
+    vertical-align: middle;
+    justify-self: center;
+    grid-area: favicon;
+
+    @media($breakpoint-max) {
+        margin: 0;
+    }
+}
+
+.article__title {
     @media($breakpoint-max) {
         margin-left: 14%;
     }
@@ -447,7 +451,7 @@ html:not(.no-js) .feed--closed {
 
     @media($breakpoint-max) {
         display: inline-block;
-        width: 65%;
+        grid-area:title;
     }
 
     [class~="event--read"] & a {
@@ -504,8 +508,10 @@ html:not(.no-js) .feed--closed {
     font-size: 0.9em;
 
     @media( $breakpoint-max ) {
-        right: 1%;
-        bottom: 5%;
+        position: relative;
+        right: 0;
+        grid-area: date;
+        justify-self: right;
     }
 }
 
@@ -529,9 +535,12 @@ $article-action-padding: 0.6em;
     }
 
     @media( $breakpoint-max ) {
-        width: 15%;
-        height: 100%;
-        left: 0;
+        position: relative;
+        padding: 0;
+        width: 100%;
+        right: 0;
+        grid-area: favorite;
+        justify-self: left;
     }
 }
 
@@ -548,9 +557,12 @@ $article-action-padding: 0.6em;
     cursor: pointer;
 
     @media( $breakpoint-max ) {
-        padding: 0.9em 0.5em 3em 1em;
-        width: 15%;
+        position: relative;
+        padding: 0;
+        width: 100%;
         height: 100%;
+        grid-area: mark;
+        justify-self: right;
     }
 }
 
