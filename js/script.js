@@ -18,8 +18,10 @@ $(function () {
 
     anonymousState = $('[data-anonymous-state]').data('anonymous-state');
 
-    $('.wrapper').on('click', '.js-event', function (event) {
-        eventObj = new EventObject(event);
+    $('.wrapper').on('click keypress', '.js-event', function (event) {
+        if (event.type === 'click' || event.which === 13) {
+            eventObj = new EventObject(event);
+        }
     });
 
     $('.js-toggle-button').click(function () {
