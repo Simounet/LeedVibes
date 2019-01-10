@@ -510,11 +510,13 @@ button {
   align-items: center;
 }
 
-.folder__button, .mark-as-read, .article-favorite {
+.folder__button, .mark-as-read, .article-favorite,
+.article__read-unread {
   border: 1px dashed transparent;
 }
 
-.folder__button:focus, .mark-as-read:focus, .article-favorite:focus {
+.folder__button:focus, .mark-as-read:focus, .article-favorite:focus,
+.article__read-unread:focus {
   border-color: #DDD;
 }
 
@@ -836,8 +838,9 @@ html:not(.no-js) .feed--closed {
 }
 
 @media (max-width: 650px) {
+  .article__feed-title,
   .feed-icon ~ .article__title {
-    margin-left: 0;
+    margin-left: 0.5em;
   }
 }
 
@@ -923,9 +926,7 @@ html:not(.no-js) .feed--closed {
 }
 
 .article-favorite {
-  position: absolute;
   padding: 0.6em;
-  top: 0;
   right: 1.7em;
   opacity: 0.3;
 }
@@ -934,15 +935,8 @@ html:not(.no-js) .feed--closed {
   opacity: 1;
 }
 
-.article-favorite:focus {
-  border-color: #424242;
-}
-
 @media (max-width: 650px) {
   .article-favorite {
-    position: relative;
-    padding: 0;
-    width: 100%;
     right: 0;
     grid-area: favorite;
     justify-self: left;
@@ -950,26 +944,44 @@ html:not(.no-js) .feed--closed {
 }
 
 .article__read-unread {
-  position: absolute;
   padding: 0.6em 0.3em;
   width: 1.7em;
-  top: 0;
   right: 0;
   color: white;
   background-color: transparent;
-  border: none;
   opacity: 0.3;
   cursor: pointer;
 }
 
 @media (max-width: 650px) {
   .article__read-unread {
+    grid-area: mark;
+    justify-self: right;
+  }
+}
+
+.article-favorite,
+.article__read-unread {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+}
+
+.article-favorite:hover, .article-favorite:active, .article-favorite:focus,
+.article__read-unread:hover,
+.article__read-unread:active,
+.article__read-unread:focus {
+  border-color: #424242;
+}
+
+@media (max-width: 650px) {
+  .article-favorite,
+  .article__read-unread {
     position: relative;
     padding: 0;
     width: 100%;
-    height: 100%;
-    grid-area: mark;
-    justify-self: right;
+    border-color: #BBB;
   }
 }
 

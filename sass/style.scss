@@ -439,9 +439,10 @@ html:not(.no-js) .feed--closed {
     }
 }
 
+.article__feed-title,
 .feed-icon ~ .article__title {
     @media($breakpoint-max) {
-        margin-left: 0;
+        margin-left: 0.5em;
     }
 }
 
@@ -519,17 +520,46 @@ $opacity-low: 0.3;
 $position-top-on-break: 30px;
 $article-action-padding: 0.6em;
 .article-favorite {
-    position: absolute;
     padding: $article-action-padding;
-    top: 0;
     right: 1.7em;
     opacity: $opacity-low;
-    @extend %button-focused;
 
     &--favorited {
         opacity: 1;
     }
 
+    @media( $breakpoint-max ) {
+        right: 0;
+        grid-area: favorite;
+        justify-self: left;
+    }
+}
+
+.article__read-unread {
+    padding: $article-action-padding 0.3em;
+    width: 1.7em;
+    right: 0;
+    color: white;
+    background-color: transparent;
+    opacity: $opacity-low;
+    cursor: pointer;
+
+    @media( $breakpoint-max ) {
+        grid-area: mark;
+        justify-self: right;
+    }
+}
+
+.article-favorite,
+.article__read-unread {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    @extend %button-focused;
+
+    &:hover,
+    &:active,
     &:focus {
         border-color: $sidebar-color-bg;
     }
@@ -538,31 +568,7 @@ $article-action-padding: 0.6em;
         position: relative;
         padding: 0;
         width: 100%;
-        right: 0;
-        grid-area: favorite;
-        justify-self: left;
-    }
-}
-
-.article__read-unread {
-    position: absolute;
-    padding: $article-action-padding 0.3em;
-    width: 1.7em;
-    top: 0;
-    right: 0;
-    color: white;
-    background-color: transparent;
-    border: none;
-    opacity: $opacity-low;
-    cursor: pointer;
-
-    @media( $breakpoint-max ) {
-        position: relative;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        grid-area: mark;
-        justify-self: right;
+        border-color: $feed-event-read-color;
     }
 }
 
