@@ -612,7 +612,7 @@ function infiniteScroll () {
     'use strict';
     var noMoreEventsEl = $('#no-more-events');
     if(noMoreEventsEl.is(':visible')) {
-        return false;
+        return Promise.resolve();
     }
     var loading = $('#infinite-scroll-loading');
     $(window).data('ajaxready', false);
