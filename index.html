@@ -107,7 +107,7 @@
                         <ul class="feed js-toggle-item{if="!$value->getIsopen()"} feed--closed{/if}">
                             {if="count($feeds)!=0"}
                                 {loop="feeds"}
-                                    <li class="feed__item js-feed__item{if="isset($currentFeed) && ($value2['id'] == $currentFeed->getId())"} selected{/if}{if="$feedState->getById($value2['id'])->getLastSyncInError()==1"} error{/if}" data-id="{$value2['id']}">
+                                    <li class="feed__item js-feed__item{if="isset($currentFeed) && ($value2['id'] == $currentFeed->getId())"} selected{/if}{if="$feedState->getById($value2['id'])->getLastSyncInError()==1"} error{/if}" data-id="{$value2['url']}">
                                         {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
                                         <a href="./?action=selectedFeed&amp;feed={$value2['id']}&amp;order=unread" title="{function="htmlentities($value2['url'])"}" class="sidebar-item">
                                             {if="isset($value2['favicon'])"}{$value2['favicon']}{/if}

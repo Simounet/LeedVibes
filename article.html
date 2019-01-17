@@ -6,7 +6,7 @@
         <article
             class="event js-event{if="$value->getUnread() == 0"} event--read js-event--read{/if}{if="isset($value->view) && $value->view == 1"} event--website-view js-website-view{/if}{if="$key == $last_event"} event--new-last{/if}"
             data-id="{$value->getId()}"
-            data-feed-id="{$value->getFeed()}"
+            data-feed-id="{$value->getFeedUrl()}"
             data-favorite="{$value->getFavorite()}"
         >
             {function="Plugin::callHook("event_pre_title", array(&$value))"}

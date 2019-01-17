@@ -18,7 +18,7 @@ function leedvibes( &$event ) {
     $event->dateTitle = $date['title'];
 
     $feed = new Feed();
-    $usedFeed = $feed->getById($event->getFeed());
+    $usedFeed = $feed->getByUrl($event->getFeedUrl());
     $event->feedName = $usedFeed->getName();
 }
 
