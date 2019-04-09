@@ -995,6 +995,7 @@ html:not(.no-js) .feed--closed {
   width: 42.8125em;
   font-size: 1.6rem;
   line-height: 1.7;
+  overflow: auto;
   overflow-wrap: break-word;
 }
 
