@@ -356,10 +356,8 @@ EventObject.prototype = {
 
     toggleEvent: function () {
         'use strict';
-        var websiteView = this.entry.hasClass('js-website-view'); // [todo] - move this var to LeedRSSOrSiteView plugin
-
         this.toggleHeaderFocus();
-        this.toggleItem(websiteView);
+        this.toggleItem();
     },
 
     toggleHeaderFocus: function () {
@@ -374,7 +372,7 @@ EventObject.prototype = {
         this.entry.toggleClass('js-focus event--focus');
     },
 
-    toggleItem: function (special) {
+    toggleItem: function () {
         'use strict';
         var entry = this.entry;
         var target = this.target;
@@ -385,18 +383,10 @@ EventObject.prototype = {
             }
         };
 
-        // Content handling
-        if (special) {
-            toggleWebsite(this.content, this.currentEntryIsPrevious, readOrUnreadAtToggle());
-        } else {
-            this.toggleContent(readOrUnreadAtToggle());
-        }
+        this.toggleContent(readOrUnreadAtToggle());
 
         // Hide the previous entry
         if (this.existingEntryFocusedContent.length) {
-            if (this.existingEntryFocusedContent.data('article-url').length > 0) {
-                toggleWebsite(this.existingEntryFocusedContent, true);
-            }
             this.existingEntryFocused.addClass('hidden');
             this.existingEntryFocusedContent.removeClass('leedvibes-article-content--is-opened');
         }

@@ -1010,14 +1010,6 @@ html:not(.no-js) .feed--closed {
   text-decoration: underline;
 }
 
-.event--website-view .leedvibes-article-content {
-  width: auto;
-}
-
-.event--website-view .leedvibes-article-content iframe {
-  width: 100%;
-}
-
 .leedvibes-article-content--is-opened {
   display: block;
 }
