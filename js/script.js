@@ -341,7 +341,7 @@ function EventObject (event) {
 
 EventObject.prototype = {
     headerClass: 'js-article__header',
-    contentClass: 'js-article__content',
+    contentClass: 'js-leedvibes-article-content',
     readButtonClass: 'js-read-unread',
     favoriteClass: 'js-favorite',
 
@@ -398,11 +398,11 @@ EventObject.prototype = {
                 toggleWebsite(this.existingEntryFocusedContent, true);
             }
             this.existingEntryFocused.addClass('hidden');
-            this.existingEntryFocusedContent.removeClass('article__content--is-opened');
+            this.existingEntryFocusedContent.removeClass('leedvibes-article-content--is-opened');
         }
 
         // Toggle current entry
-        this.content.toggleClass('article__content--is-opened');
+        this.content.toggleClass('leedvibes-article-content--is-opened');
 
         $(window).scrollTop(this.entry.offset().top);
     },
@@ -541,12 +541,12 @@ function readThis (element, id, callback) {
         entry.addClass('event--read js-event--read');
         readUnreadImage.prop('alt', _t('LEEDVIBES_MARK_AS_UNREAD'));
 
-        if ((entry.find('.js-article__content').css('display') === 'none') && element.hasClass('js-read-unread')) {
+        if ((entry.find('.js-leedvibes-article-content').css('display') === 'none') && element.hasClass('js-read-unread')) {
             // If the article is not visible
             // We pressed the read button as first action
             // So we doesn't need to toggle the content opened class
-            if (entry.find('.js-article__content').is(':visible')) {
-                entry.toggleClass('article__content--is-opened', function () {
+            if (entry.find('.js-leedvibes-article-content').is(':visible')) {
+                entry.toggleClass('leedvibes-article-content--is-opened', function () {
                     if (callback) {
                         callback();
                     } else {
