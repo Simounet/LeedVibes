@@ -1100,6 +1100,10 @@ button.settings-item {
   background-color: transparent;
 }
 
+button.settings-item:focus {
+  outline: dotted 1px;
+}
+
 .settings__fields input[type='text'],
 .settings__fields input[type='password'] {
   min-width: 7em;
