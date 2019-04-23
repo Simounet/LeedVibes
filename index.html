@@ -75,7 +75,7 @@
         {/if}
         {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
             {$currentItemsCount=$unread['total']}
-            <ul id="feeds-list" data-is-opened="false">
+            <ul id="feeds-list" class="feeds-list" data-is-opened="false">
                 <li class="folder">
                     <div class="folder__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}">
                         <a href="./" data-link="home" class="sidebar-item">All feeds</a>
