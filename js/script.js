@@ -501,8 +501,12 @@ function feedCounters (feedID, operation, operationNumber) {
 
     for (var i = 0; i < elements.length; ++i) {
         var element = elements[i];
-        var newCount = counterHandler(element);
-        element.html(newCount);
+        var counterEl = element.find('[data-count="number"]');
+        var textEl = element.find('[data-count="text"]');
+        var newCount = counterHandler(counterEl);
+        var newCountTextKey = newCount > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD';
+        counterEl.html(newCount);
+        textEl.html(_t(newCountTextKey));
         if (newCount === 0) {
             element.addClass('hidden');
         } else {
