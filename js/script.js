@@ -467,7 +467,7 @@ function toggleFolder (button) {
     button.attr('aria-expanded', newAriaExpanded);
     var buttonTitle = isAriaExpanded ?
         'LEEDVIBES_FOLDER_TOGGLE_OFF' : 'LEEDVIBES_FOLDER_TOGGLE_ON';
-    button.prop('title', _t(buttonTitle) + ' ' + folderNameText);
+    button.prop('title', _t(buttonTitle, [folderNameText]));
 
     feedBloc.slideToggle(200, function () {
         $(this).toggleClass('hidden');
