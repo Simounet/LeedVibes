@@ -36,7 +36,7 @@ class Utils {
         }
 
         $date['value'] = $date_tmp;
-        $date['title'] = date('H:i Y-m-d', $timestamp);
+        $date['datetime'] = date('Y-m-d H:i', $timestamp);
 
         return $date;
     }

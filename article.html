@@ -16,7 +16,7 @@
                 <h1 class="article__title js-article__title" tabindex="0"><a href="{$value->getLink()}" target="_blank">{$value->getTitle()}</a></h1>
                 <span class="article__description">{function="Functions::truncate(strip_tags($value->getDescription()),300)"}</span>
                 {if="$articleDisplayDate"}
-                    <span class="article__date" title="{$value->dateTitle}"{if="$value->dateLessThanOneHour"} data-timestamp="{$value->getPubdate()}"{/if}>{$value->dateValue}</span>
+                    <time class="article__date" title="{$value->datetime}" datetime="{$value->datetime}"{if="$value->dateLessThanOneHour"} data-timestamp="{$value->getPubdate()}"{/if}>{$value->dateValue}</time>
                 {/if}
                 <button
                     class="article-favorite js-favorite{if="$value->getFavorite()==1"} article-favorite--favorited js-favorite--favorited{/if}"

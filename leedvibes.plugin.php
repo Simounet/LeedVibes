@@ -15,7 +15,7 @@ function leedvibes( &$event ) {
     $date = $utils->formatDate( $event->getPubdate() );
     $event->dateLessThanOneHour = isset( $date['less-than-one-hour'] ) ? true : false;
     $event->dateValue = $date['value'];
-    $event->dateTitle = $date['title'];
+    $event->datetime = $date['datetime'];
 
     $feed = new Feed();
     $usedFeed = $feed->getById($event->getFeed());
