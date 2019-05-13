@@ -107,7 +107,13 @@
                             </button>
                             {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
                             <a href="./?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}" class="sidebar-item js-folder-name">{$value->getName()}</a>
-                            <button class="mark-as-read js-mark-as-read js-folder-counter{if="$unreadEventsForFolder === 0"} hidden{/if}" title="{function="_t('MARK_AS_READ_FOLDER_ITEMS',array($unreadEventsForFolder))"}"><span data-count="number">{$unreadEventsForFolder}</span> <span class="sr-only" data-count="text">{function="_t($unreadEventsForFolder > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span></button>
+                            <button
+                                class="mark-as-read js-mark-as-read js-folder-counter
+                                {if="$unreadEventsForFolder === 0"} hidden{/if}"
+                                title="{function="_t('LEEDVIBES_FOLDER_MARK_AS_READ', array($value->getName()))"}"
+                            >
+                                <span data-count="number">{$unreadEventsForFolder}</span> <span class="sr-only" data-count="text">{function="_t($unreadEventsForFolder > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span>
+                            </button>
                             {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
                         </div>
                         <ul class="feed js-toggle-item{if="!$value->getIsopen()"} feed--closed{/if}">
@@ -120,7 +126,13 @@
                                             <span class="sidebar-item-label js-feed-name">{$value2['name']}</span>
                                         </a>
                                         {$feedUnreadCount=isset( $unread[$value2['id']] ) ? $unread[$value2['id']] : 0}
-                                        <button class="mark-as-read js-mark-as-read js-feed-counter{if="! isset($unread[$value2['id']])"} hidden{/if}" title="{function="_t('MARK_AS_READ')"}"><span data-count="number">{$feedUnreadCount}</span> <span class="sr-only" data-count="text">{function="_t($feedUnreadCount > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span></button>
+                                        <button
+                                            class="mark-as-read js-mark-as-read js-feed-counter
+                                            {if="! isset($unread[$value2['id']])"} hidden{/if}"
+                                            title="{function="_t('LEEDVIBES_FEED_MARK_AS_READ', array($value2['name']))"}"
+                                        >
+                                            <span data-count="number">{$feedUnreadCount}</span> <span class="sr-only" data-count="text">{function="_t($feedUnreadCount > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span>
+                                        </button>
                                 {function="Plugin::callHook("menu_post_feed_link", array(&$value))"}
                                     </li>
                                 {/loop}

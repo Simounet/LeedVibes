@@ -1,6 +1,8 @@
 {
   "LEEDVIBES_ALL_FEEDS": "Tous les flux",
   "LEEDVIBES_CONNECTION": "Connexion",
+  "LEEDVIBES_FEED_MARK_AS_READ": "Marquer comme lus tous les événements du flux $1",
+  "LEEDVIBES_FOLDER_MARK_AS_READ": "Marquer comme lus tous les événements du dossier $1",
   "LEEDVIBES_FOLDER_TOGGLE_OFF": "Montrer la liste des flux du dossier",
   "LEEDVIBES_FOLDER_TOGGLE_ON": "Masquer la liste des flux du dossier",
   "LEEDVIBES_GET_NEW_EVENTS": "Afficher les nouvelles entrées",
