@@ -78,7 +78,7 @@
             <ul id="feeds-list" class="feeds-list" data-is-opened="false">
                 <li class="folder">
                     <div class="folder__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}">
-                        <a href="./" data-link="home" class="sidebar-item">All feeds</a>
+                        <a href="./" data-link="home" class="sidebar-item">{function="_t('LEEDVIBES_ALL_FEEDS')"}</a>
                         <button class="mark-as-read js-mark-as-read js-total-counter" title="{function="_t('LEEDVIBES_MARK_ALL_AS_READ')"}"><span data-count="number">{$unread['total']}</span> <span class="sr-only" data-count="text">{function="_t($unread['total'] > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span></button>
                     </div>
                 </li>
