@@ -46,7 +46,7 @@
         {else}
             <div class="settings">
                 <a href="action.php?action=logout" class="settings-item" title="{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})"><img src="images/logout.svg" alt=""></a>
-                <a href="settings.php" data-link="settings" class="settings-item" title="{function="_t('MANAGE')"}"><img src="images/settings.svg" alt=""></a>
+                <a href="settings.php" data-link="settings" class="settings-item" title="{function="_t('MANAGE')"}"><img src="images/settings.svg" alt="{function="_t('MANAGE')"}"></a>
                 <a href="./?action=favorites" data-link="favorites" class="settings-item" title="{function="_t('FAVORITES')"}">
                     <svg width="15" height="15" class="favorite-inverted">
                         <use xlink:href="#svg-favorite" />
@@ -54,7 +54,7 @@
                 </a>
                 <button class="mobile-only settings-item feeds-list-toggle js-feeds-list-toggle js-toggle-target" data-target="#feeds-list"><span class="feeds-list-toggle__label"><img  src="images/menu.svg" alt="{function="_t('LEEDVIBES_MENU')"}" /></span></button>
                 <a href="." class="settings-item new-events js-new-events" title="{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}" data-sync-code="{$synchronisationCode}">
-                    <img alt="Reload" src="images/reload.svg" />
+                    <img src="images/reload.svg" alt="{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}" />
                 </a>
                 <button class="settings-item js-toggle-target" data-target=".feed-add" title="{function="_t('ADD_FEED')"}">
                     <img  src="images/add.svg" alt="{function="_t('ADD_FEED')"}" />
