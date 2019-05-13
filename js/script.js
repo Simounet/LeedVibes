@@ -459,20 +459,23 @@ function toggleFolder (button) {
     'use strict';
     var folderBloc = button.parents('.js-folder');
     var feedBloc = folderBloc.find('.js-toggle-item');
-    var newAriaExpanded = button.attr('aria-expanded') === "true" ?
+    var folderNameEl = folderBloc.find('.js-folder-name');
+    var folderNameText = folderNameEl.text();
+    var isAriaExpanded = button.attr('aria-expanded') === "true";
+    var newAriaExpanded = isAriaExpanded ?
         "false" : "true";
     button.attr('aria-expanded', newAriaExpanded);
-
-    var open = 0;
-    if (feedBloc.css('display') === 'none') {
-        open = 1;
-    }
+    var buttonTitle = isAriaExpanded ?
+        'LEEDVIBES_FOLDER_TOGGLE_OFF' : 'LEEDVIBES_FOLDER_TOGGLE_ON';
+    button.prop('title', _t(buttonTitle) + ' ' + folderNameText);
 
     feedBloc.slideToggle(200, function () {
         $(this).toggleClass('hidden');
     });
     button.toggleClass('folder-closed');
 
+    var open = isAriaExpanded ?
+        0 : 1;
     $.ajax({
         url: './action.php?action=changeFolderState',
         data: { id: folderBloc.data('id'), isopen: open }

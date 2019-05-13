@@ -1,6 +1,8 @@
 {
   "LEEDVIBES_ALL_FEEDS": "All feeds",
   "LEEDVIBES_CONNECTION": "Connection",
+  "LEEDVIBES_FOLDER_TOGGLE_OFF": "Show the feed list of the folder",
+  "LEEDVIBES_FOLDER_TOGGLE_ON": "Hide the feed list of the folder",
   "LEEDVIBES_GET_NEW_EVENTS": "Show new events",
   "LEEDVIBES_GO_TOP": "Go to the top",
   "LEEDVIBES_IN_THE_FUTURE": "In the future",

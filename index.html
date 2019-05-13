@@ -100,7 +100,7 @@
                         <div class="folder__item js-folder__item{if="$folderSelected"} selected{/if}">
                             <button
                                 class="folder__button js-toggle-button{if="!$value->getIsopen()"} folder-closed{/if}"
-                                title="Switch dossier"
+                                title="{function="_t($value->getIsopen() ? 'LEEDVIBES_FOLDER_TOGGLE_ON' : 'LEEDVIBES_FOLDER_TOGGLE_OFF')"} {$value->getName()}"
                                 aria-expanded="{if="$value->getIsopen()"}true{else}false{/if}"
                             >
                                 <img src="images/triangle.svg" alt="" />

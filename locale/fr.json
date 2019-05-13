@@ -1,6 +1,8 @@
 {
   "LEEDVIBES_ALL_FEEDS": "Tous les flux",
   "LEEDVIBES_CONNECTION": "Connexion",
+  "LEEDVIBES_FOLDER_TOGGLE_OFF": "Montrer la liste des flux du dossier",
+  "LEEDVIBES_FOLDER_TOGGLE_ON": "Masquer la liste des flux du dossier",
   "LEEDVIBES_GET_NEW_EVENTS": "Afficher les nouvelles entrées",
   "LEEDVIBES_GO_TOP": "Aller en haut",
   "LEEDVIBES_IN_THE_FUTURE": "Dans le futur",
