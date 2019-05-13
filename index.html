@@ -98,7 +98,13 @@
                     {/if}
                     <li class="folder js-folder" data-id="{$value->getId()}">
                         <div class="folder__item js-folder__item{if="$folderSelected"} selected{/if}">
-                            <button class="folder__button js-toggle-button{if="!$value->getIsopen()"} folder-closed{/if}" title="Switch dossier"><img src="images/triangle.svg" alt="" /></button>
+                            <button
+                                class="folder__button js-toggle-button{if="!$value->getIsopen()"} folder-closed{/if}"
+                                title="Switch dossier"
+                                aria-expanded="{if="$value->getIsopen()"}true{else}false{/if}"
+                            >
+                                <img src="images/triangle.svg" alt="" />
+                            </button>
                             {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
                             <a href="./?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}" class="sidebar-item js-folder-name">{$value->getName()}</a>
                             <button class="mark-as-read js-mark-as-read js-folder-counter{if="$unreadEventsForFolder === 0"} hidden{/if}" title="{function="_t('MARK_AS_READ_FOLDER_ITEMS',array($unreadEventsForFolder))"}"><span data-count="number">{$unreadEventsForFolder}</span> <span class="sr-only" data-count="text">{function="_t($unreadEventsForFolder > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span></button>

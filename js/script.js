@@ -459,6 +459,9 @@ function toggleFolder (button) {
     'use strict';
     var folderBloc = button.parents('.js-folder');
     var feedBloc = folderBloc.find('.js-toggle-item');
+    var newAriaExpanded = button.attr('aria-expanded') === "true" ?
+        "false" : "true";
+    button.attr('aria-expanded', newAriaExpanded);
 
     var open = 0;
     if (feedBloc.css('display') === 'none') {
@@ -468,7 +471,7 @@ function toggleFolder (button) {
     feedBloc.slideToggle(200, function () {
         $(this).toggleClass('hidden');
     });
-    $(button).toggleClass('folder-closed');
+    button.toggleClass('folder-closed');
 
     $.ajax({
         url: './action.php?action=changeFolderState',
