@@ -127,7 +127,7 @@
         {/if}
     {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
             <button class="shortcuts-toggle js-shortcuts-toggle" title="{function="_t('LEEDVIBES_SHORTCUTS_BUTTON_TITLE')"}" >
-                <img src="images/shortcuts.svg" alt="{function="_t('LEEDVIBES_SHORTCUTS')"}" />
+                <img src="images/shortcuts.svg" alt="{function="_t('LEEDVIBES_SHORTCUTS_ICON')"}" />
             </button>
             {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
         </aside>

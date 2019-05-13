@@ -14,5 +14,8 @@
   "LEEDVIBES_GO_TOP": "Aller en haut",
   "LEEDVIBES_UNREAD": "non lu",
   "LEEDVIBES_UNREADS": "non lus",
-  "LEEDVIBES_ALL_FEEDS": "Tous les flux"
+  "LEEDVIBES_ALL_FEEDS": "Tous les flux",
+  "LEEDVIBES_MENU": "Liste des flux",
+  "LEEDVIBES_SHORTCUTS_BUTTON_TITLE": "Liste des raccourcis",
+  "LEEDVIBES_SHORTCUTS_ICON": "Icon des raccourcis"
 }
