@@ -915,7 +915,7 @@ html:not(.no-js) .feed--closed {
 
 .article__date {
   position: absolute;
-  right: 5em;
+  right: 65px;
   color: #424242;
   font-size: 0.9em;
 }
@@ -930,8 +930,7 @@ html:not(.no-js) .feed--closed {
 }
 
 .article-favorite {
-  padding: 0.6em;
-  right: 1.7em;
+  right: 30px;
   opacity: 0.3;
 }
 
@@ -948,7 +947,6 @@ html:not(.no-js) .feed--closed {
 }
 
 .article__read-unread {
-  padding: 0.6em 0.3em;
   width: 1.7em;
   right: 0;
   color: white;
@@ -967,7 +965,15 @@ html:not(.no-js) .feed--closed {
 .article-favorite,
 .article__read-unread {
   position: absolute;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  width: 30px;
   height: 100%;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
   top: 0;
   bottom: 0;
 }
