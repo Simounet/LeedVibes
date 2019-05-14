@@ -294,31 +294,28 @@ function refreshEvents(syncCode) {
     }
 }
 
+function getBubblingTarget(current, targetClass) {
+    var parentEl = current.parents('.' + targetClass);
+    return parentEl.length === 1 ?
+        parentEl : current;
+}
+
 function EventObject (event) {
     'use strict';
     this.target = $(event.target);
-    this.targetClasses = (typeof (this.target.attr('class')) === 'string') ? this.target.attr('class') : '';
-
-    if(this.targetClasses === '') {
-        this.target = this.target.parent();
-        this.targetClasses = (typeof (this.target.attr('class')) === 'string') ? this.target.attr('class') : '';
-    }
 
     this.entry = $(event.currentTarget);
     this.content = this.entry.find('.' + this.contentClass);
 
-    var favoriteParent = this.target.parents('.' + this.favoriteClass);
-    if(favoriteParent.length === 1) {
-        this.target = favoriteParent;
-    }
+    this.target = getBubblingTarget(this.target, this.favoriteClass);
     if (this.target.hasClass(this.favoriteClass)) {
         event.preventDefault();
         this.favorite(this.target);
         return;
     }
 
-    // Read button handling
-    if (this.targetClasses.indexOf(this.readButtonClass) !== -1) {
+    this.target = getBubblingTarget(this.target, this.readButtonClass);
+    if (this.target.hasClass(this.readButtonClass)) {
         event.preventDefault();
         this.hideEntryIfNotUnfolded();
         this.readUnreadButtonAction();
