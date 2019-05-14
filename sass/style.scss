@@ -58,9 +58,6 @@ video {
         margin: 0 auto;
     }
 }
-img[src$=".svg"] {
-    vertical-align: middle;
-}
 
 iframe {
     width: auto;
@@ -353,7 +350,7 @@ $feeds-list-toggle-transition: transform 0.3s;
     @extend %button-focused;
 }
 
-.folder-closed img {
+.folder-closed {
     transform: rotate(270deg);
 }
 

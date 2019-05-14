@@ -441,10 +441,6 @@ video {
   margin: 0 auto;
 }
 
-img[src$=".svg"] {
-  vertical-align: middle;
-}
-
 iframe {
   width: auto;
 }
@@ -738,7 +734,7 @@ button {
   width: 10%;
 }
 
-.folder-closed img {
+.folder-closed {
   -ms-transform: rotate(270deg);
   transform: rotate(270deg);
 }

@@ -45,19 +45,66 @@
             </div>
         {else}
             <div class="settings">
-                <a href="action.php?action=logout" class="settings-item" title="{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})"><img src="images/logout.svg" alt=""></a>
-                <a href="settings.php" data-link="settings" class="settings-item" title="{function="_t('MANAGE')"}"><img src="images/settings.svg" alt="{function="_t('MANAGE')"}"></a>
-                <a href="./?action=favorites" data-link="favorites" class="settings-item" title="{function="_t('FAVORITES')"}">
-                    <svg width="15" height="15" class="favorite-inverted">
+                <a href="action.php?action=logout" class="settings-item">
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})</title>
+                        <use xlink:href="#svg-logout" />
+                    </svg>
+                </a>
+                <a href="settings.php" data-link="settings" class="settings-item">
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{function="_t('MANAGE')"}</title>
+                        <use xlink:href="#svg-settings" />
+                    </svg>
+                </a>
+                <a href="./?action=favorites" data-link="favorites" class="settings-item">
+                    <svg
+                        width="15"
+                        height="15"
+                        class="favorite-inverted"
+                        role="img"
+                    >
+                        <title>{function="_t('FAVORITES')"}</title>
                         <use xlink:href="#svg-favorite" />
                     </svg>
                 </a>
-                <button class="mobile-only settings-item feeds-list-toggle js-feeds-list-toggle js-toggle-target" data-target="#feeds-list"><span class="feeds-list-toggle__label"><img  src="images/menu.svg" alt="{function="_t('LEEDVIBES_MENU')"}" /></span></button>
-                <a href="." class="settings-item new-events js-new-events" title="{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}" data-sync-code="{$synchronisationCode}">
-                    <img src="images/reload.svg" alt="{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}" />
+                <button class="mobile-only settings-item feeds-list-toggle js-feeds-list-toggle js-toggle-target" data-target="#feeds-list"><span class="feeds-list-toggle__label">
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{function="_t('LEEDVIBES_MENU')"}</title>
+                        <use xlink:href="#svg-menu" />
+                    </svg>
+                </span></button>
+                <a href="." class="settings-item new-events js-new-events" data-sync-code="{$synchronisationCode}">
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}</title>
+                        <use xlink:href="#svg-reload" />
+                    </svg>
                 </a>
-                <button class="settings-item js-toggle-target" data-target=".feed-add" title="{function="_t('ADD_FEED')"}">
-                    <img  src="images/add.svg" alt="{function="_t('ADD_FEED')"}" />
+                <button class="settings-item js-toggle-target" data-target=".feed-add">
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{function="_t('ADD_FEED')"}</title>
+                        <use xlink:href="#svg-add" />
+                    </svg>
                 </button>
             </div>
             <form class="feed-add" data-is-opened="false" action="action.php?action=addFeed" method="POST">
@@ -103,7 +150,13 @@
                                 title="{function="_t($value->getIsopen() ? 'LEEDVIBES_FOLDER_TOGGLE_ON' : 'LEEDVIBES_FOLDER_TOGGLE_OFF', array($value->getName()))"}"
                                 aria-expanded="{if="$value->getIsopen()"}true{else}false{/if}"
                             >
-                                <img src="images/triangle.svg" alt="" />
+                                <svg
+                                    width="6"
+                                    height="6"
+                                    role="img"
+                                >
+                                    <use xlink:href="#svg-triangle" />
+                                </svg>
                             </button>
                             {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
                             <a href="./?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}" class="sidebar-item js-folder-name">{$value->getName()}</a>
@@ -145,16 +198,21 @@
         {/if}
     {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
             <button class="shortcuts-toggle js-shortcuts-toggle" title="{function="_t('LEEDVIBES_SHORTCUTS_BUTTON_TITLE')"}" >
-                <img src="images/shortcuts.svg" alt="{function="_t('LEEDVIBES_SHORTCUTS_ICON')"}" />
+                <svg
+                    width="15"
+                    height="15"
+                    role="img"
+                >
+                    <title>{function="_t('LEEDVIBES_SHORTCUTS_ICON')"}</title>
+                    <use xlink:href="#svg-shortcuts" />
+                </svg>
             </button>
             {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
         </aside>
     {/if}
     
     {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
-        <div class="svg-list hidden">
-            {include="favorite"}
-        </div>
+        {include="svg-list"}
         <main class="wrapper" aria-live="polite">
             <div id="no-new-events" class="notifications hidden">
                 <div class="notifications__text">{function="_t('LEEDVIBES_NO_NEW_EVENTS')"}</div>

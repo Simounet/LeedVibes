@@ -25,16 +25,21 @@
                     <svg
                         width="15"
                         height="15"
+                        role="img"
                     >
+                        <title>{function="_t('LEEDVIBES_ADD_TO_FAVORITES')"}</title>
                         <use xlink:href="#svg-favorite" />
                     </svg>
                 </button>
                 <button class="article__read-unread js-read-unread{if="$value->getUnread() == 0"} article__read-read{/if}">
-                    <img
-                        src="plugins/leedvibes/images/check.svg"
-                        class=""
-                        alt="{if="$value->getUnread() == 0"}{function="_t('LEEDVIBES_MARK_AS_UNREAD')"}{else}{function="_t('LEEDVIBES_MARK_AS_READ')"}{/if}"
-                    />
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{if="$value->getUnread() == 0"}{function="_t('LEEDVIBES_MARK_AS_UNREAD')"}{else}{function="_t('LEEDVIBES_MARK_AS_READ')"}{/if}</title>
+                        <use xlink:href="#svg-check" />
+                    </svg>
                 </button>
             </header>
             {if="isset($value->view)"}
