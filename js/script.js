@@ -307,6 +307,10 @@ function EventObject (event) {
     this.entry = $(event.currentTarget);
     this.content = this.entry.find('.' + this.contentClass);
 
+    var favoriteParent = this.target.parents('.' + this.favoriteClass);
+    if(favoriteParent.length === 1) {
+        this.target = favoriteParent;
+    }
     if (this.target.hasClass(this.favoriteClass)) {
         event.preventDefault();
         this.favorite(this.target);
@@ -438,7 +442,10 @@ EventObject.prototype = {
         favoriteTarget
             .toggleClass('article-favorite--favorited')
             .toggleClass('js-favorite--favorited');
-        this.entry.data('favorite', !this.entry.data('favorite'));
+
+        var favDataFavorite = (this.entry.data('favorite') === 1) ?
+            0 : 1;
+        this.entry.data('favorite', favDataFavorite);
         $.ajax({
             url: './action.php?action=' + favAction + 'Favorite',
             data: {id: this.entry.data('id')},
