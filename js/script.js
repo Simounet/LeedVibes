@@ -269,7 +269,8 @@ function markAsRead(button) {
                     .addClass('hidden')
                     .html('0');
             } else {
-                $('.js-total-counter').html(parseInt(getButtonCount($('.js-total-counter'))) - buttonCount);
+                var totalButton = $('.js-total-counter');
+                totalButton.html(parseInt(getButtonCount(totalButton)) - buttonCount);
                 buttonToClear
                     .addClass('hidden')
                     .html('0')
