@@ -253,7 +253,7 @@ function markAsRead(button) {
         }
 
         var buttonToClear = isTotalCounterButton ? $('.js-mark-as-read') : button;
-        var buttonCount = buttonToClear.html();
+        var buttonCount = buttonToClear.find('[data-count="number"]').html();
         if (
             buttonToClear.hasClass('js-folder-counter') ||
             isTotalCounterButton
