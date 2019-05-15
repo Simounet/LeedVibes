@@ -211,6 +211,12 @@ UserActionObject.prototype = {
     }
 }
 
+function getButtonCount(buttonEl) {
+    return buttonEl
+        .find('[data-count="number"]')
+        .html();
+}
+
 function markAsRead(button) {
     var confirmText = '';
     var url = 'action.php?action=';
@@ -253,7 +259,7 @@ function markAsRead(button) {
         }
 
         var buttonToClear = isTotalCounterButton ? $('.js-mark-as-read') : button;
-        var buttonCount = buttonToClear.find('[data-count="number"]').html();
+        var buttonCount = getButtonCount(buttonToClear);
         if (
             buttonToClear.hasClass('js-folder-counter') ||
             isTotalCounterButton
@@ -263,7 +269,7 @@ function markAsRead(button) {
                     .addClass('hidden')
                     .html('0');
             } else {
-                $('.js-total-counter').html(parseInt($('.js-total-counter').html()) - buttonCount);
+                $('.js-total-counter').html(parseInt(getButtonCount($('.js-total-counter'))) - buttonCount);
                 buttonToClear
                     .addClass('hidden')
                     .html('0')
