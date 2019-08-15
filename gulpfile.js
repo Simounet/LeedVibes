@@ -16,7 +16,6 @@ gulp.task('css', () => {
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
         .pipe(autoprefixer({
-            browsers: ['last 3 versions'],
             cascade: false
         }))
         .pipe(sourcemaps.write('.'))

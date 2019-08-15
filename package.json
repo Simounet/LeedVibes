@@ -1,6 +1,9 @@
 {
   "name": "leedvibes",
   "version": "1.0.0",
+  "browserslist": [
+    "last 3 versions"
+  ],
   "scripts": {
     "lint": "stylelint sass/style.scss && eslint js/script.js && eslint tests/index.js"
   },
@@ -15,16 +18,16 @@
   },
   "homepage": "https://github.com/Simounet/LeedVibes#readme",
   "devDependencies": {
-    "eslint": "^3.12.2",
-    "eslint-config-standard": "^6.2.1",
-    "eslint-plugin-promise": "^3.4.0",
-    "eslint-plugin-standard": "^2.0.1",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-real-favicon": "^0.2.2",
-    "gulp-sass": "^3.0.0",
-    "gulp-sourcemaps": "^1.9.1",
-    "mousetrap": "^1.6.0",
-    "stylelint": "^7.7.0"
+    "eslint": "6.x",
+    "eslint-config-standard": "13.x",
+    "eslint-plugin-promise": "4.x",
+    "eslint-plugin-standard": "4.x",
+    "gulp": "4.x",
+    "gulp-autoprefixer": "6.x",
+    "gulp-real-favicon": "0.x",
+    "gulp-sass": "4.x",
+    "gulp-sourcemaps": "2.x",
+    "mousetrap": "1.6.x",
+    "stylelint": "10.x"
   }
 }
