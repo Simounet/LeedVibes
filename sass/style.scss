@@ -408,7 +408,7 @@ html:not(.no-js) .feed--closed {
 
     @media($breakpoint-max) {
         display: grid;
-        grid-template-columns: 40px auto 40px;
+        grid-template-columns: 40px auto 80px;
         grid-template-areas: "favicon site date" "favorite title mark";
         align-items: center;
         white-space: inherit;
@@ -577,7 +577,7 @@ html:not(.no-js) .feed--closed {
         position: relative;
         padding: 0;
         width: 100%;
-        border-color: $feed-event-read-color;
+        min-height: 50px;
     }
 }
 
