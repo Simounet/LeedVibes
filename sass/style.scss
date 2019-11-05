@@ -179,7 +179,8 @@ $border-color-active: white;
 
 }
 
-[class*="__item"] {
+.folder__item,
+.feed__item {
     display: flex;
     position: relative;
     $padding : 0.5em;
