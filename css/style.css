@@ -416,14 +416,6 @@ a {
   text-decoration: none;
 }
 
-ul {
-  padding: 0;
-}
-
-li {
-  list-style: none;
-}
-
 img,
 audio,
 canvas,
@@ -729,6 +721,7 @@ button {
 
 .feeds-list {
   margin-top: 0;
+  padding: 0;
 }
 
 .feeds-list[data-is-opened="false"] {

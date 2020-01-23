@@ -42,12 +42,6 @@ h1 {
 a {
     text-decoration: none;
 }
-ul {
-    padding: 0;
-}
-li {
-    list-style: none;
-}
 img,
 audio,
 canvas,
@@ -320,6 +314,7 @@ $feeds-list-toggle-transition: transform 0.3s;
 
 .feeds-list {
     margin-top:0;
+    padding: 0;
 
     &[data-is-opened="false"] {
         display: block;
