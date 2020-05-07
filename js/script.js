@@ -1,4 +1,3 @@
-var infiniteScrollLimit = '';
 var eventObj;
 var idsDisplayed = [];
 var anonymousState = 0;
@@ -33,9 +32,9 @@ $(function () {
         var targetElement = $(button.data('target'));
         var isExpanded = targetElement.data('is-opened');
 
-        if(isExpanded) {
+        if (isExpanded) {
             targetElement
-                .slideUp(function() {
+                .slideUp(function () {
                     $(this)
                         .attr('data-is-opened', false)
                         .data('is-opened', false)
@@ -46,13 +45,13 @@ $(function () {
                 .css('display', 'none')
                 .attr('data-is-opened', true)
                 .data('is-opened', true)
-                .slideDown(function() {
+                .slideDown(function () {
                     $(this).css('display', '');
                 });
         }
     });
 
-    $('.js-feeds-list-toggle').click(function() {
+    $('.js-feeds-list-toggle').click(function () {
         $(this).toggleClass('is-opened');
     });
 
@@ -69,29 +68,28 @@ $(function () {
     });
 
     var shortcutsContainer = $('.js-shortcuts');
-    $('.js-shortcuts-toggle').on('click', function() {
+    $('.js-shortcuts-toggle').on('click', function () {
         shortcutsContainer.show();
     });
-    shortcutsContainer.on('click', function() {
+    shortcutsContainer.on('click', function () {
         $(this).hide();
     });
 
     pushIdsDisplayed($('.js-event'));
 
-    setScrollInfiniLimit();
 
     var userAction = new UserActionObject();
-    Mousetrap.bind('j', function() { userAction.moveForward(); });
-    Mousetrap.bind('k', function() { userAction.moveBackward(); });
-    Mousetrap.bind('f', function() { userAction.clickFocused('.js-favorite'); });
-    Mousetrap.bind('x', function() { userAction.markAsReadFocused('.js-read-unread'); });
-    Mousetrap.bind('g h', function() { window.location.href = $('[data-link="home"]')[0].href; });
-    Mousetrap.bind('g f', function() { window.location.href = $('[data-link="favorites"]')[0].href; });
-    Mousetrap.bind('g s', function() { window.location.href = $('[data-link="settings"]')[0].href; });
-    Mousetrap.bind('r', function() { refreshEvents(syncCode); });
-    Mousetrap.bind('?', function() { userAction.toggleHelp(shortcutsContainer); });
+    Mousetrap.bind('j', function () { userAction.moveForward(); });
+    Mousetrap.bind('k', function () { userAction.moveBackward(); });
+    Mousetrap.bind('f', function () { userAction.clickFocused('.js-favorite'); });
+    Mousetrap.bind('x', function () { userAction.markAsReadFocused('.js-read-unread'); });
+    Mousetrap.bind('g h', function () { window.location.href = $('[data-link="home"]')[0].href; });
+    Mousetrap.bind('g f', function () { window.location.href = $('[data-link="favorites"]')[0].href; });
+    Mousetrap.bind('g s', function () { window.location.href = $('[data-link="settings"]')[0].href; });
+    Mousetrap.bind('r', function () { refreshEvents(syncCode); });
+    Mousetrap.bind('?', function () { userAction.toggleHelp(shortcutsContainer); });
 
-    Mousetrap.bind('m', function() {
+    Mousetrap.bind('m', function () {
         var button = $('.selected').find('.js-mark-as-read');
         markAsRead(button);
     });
@@ -101,52 +99,50 @@ $(function () {
         .data('page', 1)
         .data('nblus', 0);
 });
-    document.addEventListener("DOMContentLoaded", function(event) {
-        const firstSentinelEl = document.getElementsByClassName('js-article__header')[0];
-        const articlesPerPage = $('[data-articles-per-page]').data('articles-per-page');
-        if( typeof( firstSentinelEl ) !== 'object' ) {
+document.addEventListener('DOMContentLoaded', function (event) {
+    const firstSentinelEl = document.getElementsByClassName('js-article__header')[0];
+    const articlesPerPage = $('[data-articles-per-page]').data('articles-per-page');
+    if (typeof (firstSentinelEl) !== 'object') {
+        return false;
+    }
+    let watchCount = Math.floor(articlesPerPage / 2);
+    const sentinel = {
+        el: null,
+        set: function (el) {
+            this.el = el;
+            this.el.classList.add('sentinel');
+            sentinelObserver.observe(this.el);
+        },
+        unset: function () {
+            if (!this.el) { return; }
+            sentinelObserver.unobserve(this.el);
+            this.el.classList.remove('sentinel');
+            this.el = null;
+        }
+    };
+    const sentinelListener = function (entries) {
+        entries.map(entry => {
+            if (entry.isIntersecting) {
+                sentinel.unset();
+                infiniteScroll().then(function () {
+                    updateSentinel();
+                });
+            }
+        });
+    };
+    const updateSentinel = function () {
+        const newSentinelEl = document.getElementsByClassName('js-article__header')[watchCount];
+        if (typeof (newSentinelEl) !== 'object') {
             return false;
         }
-        let watchCount = Math.floor( articlesPerPage / 2 );
-        const sentinel = {
-            el: null,
-            set: function(el) {
-                this.el = el;
-                this.el.classList.add('sentinel');
-                sentinelObserver.observe(this.el);
-            },
-            unset: function() {
-                if (!this.el)
-                    return;
-                sentinelObserver.unobserve(this.el);
-                this.el.classList.remove('sentinel');
-                this.el = null;
-            }
-        }
-        const sentinelListener = function(entries) {
-          for (entry of entries) {
+        sentinel.set(newSentinelEl);
+        watchCount += articlesPerPage;
+    };
+    const sentinelObserver = new IntersectionObserver(sentinelListener);
+    updateSentinel();
+});
 
-            if (entry.isIntersecting) {
-              sentinel.unset();
-              infiniteScroll().then( function() {
-                  updateSentinel();
-              });
-            }
-          }
-        }
-        const updateSentinel = function() {
-            const newSentinelEl = document.getElementsByClassName('js-article__header')[watchCount];
-            if( typeof( newSentinelEl  ) !== 'object' ) {
-             return false;
-            }
-            sentinel.set( newSentinelEl );
-            watchCount += articlesPerPage;
-        },
-        sentinelObserver = new IntersectionObserver(sentinelListener);
-        updateSentinel();
-    });
-
-function UserActionObject() {}
+function UserActionObject () {}
 
 UserActionObject.prototype = {
     focusedClass: 'event--focused',
@@ -154,70 +150,70 @@ UserActionObject.prototype = {
     prevEl: false,
     nextEl: false,
 
-    setFocusedEl: function(el) {
+    setFocusedEl: function (el) {
         el.addClass(this.focusedClass);
         this.focusedEl = el;
     },
 
-    setPrevEl: function() {
+    setPrevEl: function () {
         this.prevEl = this._getEl('prev');
     },
 
-    setNextEl: function() {
+    setNextEl: function () {
         this.nextEl = this._getEl('next');
     },
 
-    _getEl: function(action) {
-        if( this.focusedEl.length === 0 || this.focusedEl[0].parentNode === null ) {
+    _getEl: function (action) {
+        if (this.focusedEl.length === 0 || this.focusedEl[0].parentNode === null) {
             return $('.js-event:visible').first();
         }
         var el = this.focusedEl[action]('.js-event');
-        if(el.length > 0) {
+        if (el.length > 0) {
             return el;
         }
         var existingEl = action + 'El';
         return this[existingEl];
     },
 
-    moveForward: function() {
+    moveForward: function () {
         this.setNextEl();
         this._move(this.nextEl);
     },
 
-    moveBackward: function() {
+    moveBackward: function () {
         this.setPrevEl();
         this._move(this.prevEl);
     },
 
-    _move: function(el) {
+    _move: function (el) {
         this.focusedEl.removeClass(this.focusedClass);
         this.setFocusedEl(el);
     },
 
-    markAsReadFocused: function(selector) {
+    markAsReadFocused: function (selector) {
         this.clickFocused(selector);
         this.moveForward();
     },
 
-    clickFocused: function(selector) {
-        if(typeof(this.focusedEl).length > 0) {
+    clickFocused: function (selector) {
+        if (typeof (this.focusedEl).length > 0) {
             return false;
         }
         this.focusedEl.find(selector).first().click();
     },
 
-    toggleHelp: function(el) {
+    toggleHelp: function (el) {
         el.toggle();
     }
-}
+};
 
-function getButtonCount(buttonEl) {
+function getButtonCount (buttonEl) {
     return buttonEl
         .find('[data-count="number"]')
         .html();
 }
 
-function markAsRead(button) {
+function markAsRead (button) {
     var confirmText = '';
     var url = 'action.php?action=';
     var feedEl = {};
@@ -244,51 +240,51 @@ function markAsRead(button) {
     $.ajax({
         url: url
     })
-    .done(function () {
-        var isTotalCounterButton = button.hasClass('js-total-counter');
-        var isSelectedItem = button.parents('.selected').length;
-        if (
-            isTotalCounterButton &&
+        .done(function () {
+            var isTotalCounterButton = button.hasClass('js-total-counter');
+            var isSelectedItem = button.parents('.selected').length;
+            if (
+                isTotalCounterButton &&
             !isSelectedItem
-        ) {
-            window.location = url;
-        }
-        if (isSelectedItem) {
-            $('.js-event').remove();
-            $('#no-more-events').removeClass('hidden');
-        }
+            ) {
+                window.location = url;
+            }
+            if (isSelectedItem) {
+                $('.js-event').remove();
+                $('#no-more-events').removeClass('hidden');
+            }
 
-        var buttonToClear = isTotalCounterButton ? $('.js-mark-as-read') : button;
-        var buttonCount = getButtonCount(buttonToClear);
-        if (
-            buttonToClear.hasClass('js-folder-counter') ||
+            var buttonToClear = isTotalCounterButton ? $('.js-mark-as-read') : button;
+            var buttonCount = getButtonCount(buttonToClear);
+            if (
+                buttonToClear.hasClass('js-folder-counter') ||
             isTotalCounterButton
-        ) {
-            if (isTotalCounterButton) {
-                buttonToClear
-                    .addClass('hidden')
-                    .html('0');
-            } else {
-                var totalButton = $('.js-total-counter');
-                totalButton.html(parseInt(getButtonCount(totalButton)) - buttonCount);
-                buttonToClear
-                    .addClass('hidden')
-                    .html('0')
-                    .parents('.js-folder')
-                    .find('.js-mark-as-read')
+            ) {
+                if (isTotalCounterButton) {
+                    buttonToClear
                         .addClass('hidden')
                         .html('0');
+                } else {
+                    var totalButton = $('.js-total-counter');
+                    totalButton.html(parseInt(getButtonCount(totalButton)) - buttonCount);
+                    buttonToClear
+                        .addClass('hidden')
+                        .html('0')
+                        .parents('.js-folder')
+                        .find('.js-mark-as-read')
+                        .addClass('hidden')
+                        .html('0');
+                }
+            } else {
+                feedCounters(buttonToClear.parents('.js-feed__item').data('id'), '-', buttonCount);
             }
-        } else {
-            feedCounters(buttonToClear.parents('.js-feed__item').data('id'), '-', buttonCount);
-        }
-    })
-    .fail(function () {
-        alert('error');
-    });
+        })
+        .fail(function () {
+            alert('error');
+        });
 }
 
-function refreshEvents(syncCode) {
+function refreshEvents (syncCode) {
     var urlVars = getAllUrlVars();
     switch (urlVars.action) {
         case 'favorites':
@@ -301,10 +297,10 @@ function refreshEvents(syncCode) {
     }
 }
 
-function getBubblingTarget(current, targetClass) {
+function getBubblingTarget (current, targetClass) {
     var parentEl = current.parents('.' + targetClass);
-    return parentEl.length === 1 ?
-        parentEl : current;
+    return parentEl.length === 1
+        ? parentEl : current;
 }
 
 function EventObject (event) {
@@ -431,7 +427,7 @@ EventObject.prototype = {
     hideEntryIfNotUnfolded: function () {
         'use strict';
         if (
-           !this.target.hasClass('article__read-read') &&
+            !this.target.hasClass('article__read-read') &&
            this.content.not(':visible').length
         ) {
             this.entry.addClass('hidden');
@@ -447,12 +443,12 @@ EventObject.prototype = {
             .toggleClass('article-favorite--favorited')
             .toggleClass('js-favorite--favorited');
 
-        var favDataFavorite = (this.entry.data('favorite') === 1) ?
-            0 : 1;
+        var favDataFavorite = (this.entry.data('favorite') === 1)
+            ? 0 : 1;
         this.entry.data('favorite', favDataFavorite);
         $.ajax({
             url: './action.php?action=' + favAction + 'Favorite',
-            data: {id: this.entry.data('id')},
+            data: { id: this.entry.data('id') },
             success: function (msg) {
                 if (!anonymousState && msg.status === 'noconnect') {
                     alert(msg.texte);
@@ -472,12 +468,12 @@ function toggleFolder (button) {
     var feedBloc = folderBloc.find('.js-toggle-item');
     var folderNameEl = folderBloc.find('.js-folder-name');
     var folderNameText = folderNameEl.text();
-    var isAriaExpanded = button.attr('aria-expanded') === "true";
-    var newAriaExpanded = isAriaExpanded ?
-        "false" : "true";
+    var isAriaExpanded = button.attr('aria-expanded') === 'true';
+    var newAriaExpanded = isAriaExpanded
+        ? 'false' : 'true';
     button.attr('aria-expanded', newAriaExpanded);
-    var buttonTitle = isAriaExpanded ?
-        'LEEDVIBES_FOLDER_TOGGLE_OFF' : 'LEEDVIBES_FOLDER_TOGGLE_ON';
+    var buttonTitle = isAriaExpanded
+        ? 'LEEDVIBES_FOLDER_TOGGLE_OFF' : 'LEEDVIBES_FOLDER_TOGGLE_ON';
     button.prop('title', _t(buttonTitle, [folderNameText]));
 
     feedBloc.slideToggle(200, function () {
@@ -485,8 +481,8 @@ function toggleFolder (button) {
     });
     button.toggleClass('folder-closed');
 
-    var open = isAriaExpanded ?
-        0 : 1;
+    var open = isAriaExpanded
+        ? 0 : 1;
     $.ajax({
         url: './action.php?action=changeFolderState',
         data: { id: folderBloc.data('id'), isopen: open }
@@ -532,12 +528,6 @@ function feedCounters (feedID, operation, operationNumber) {
     }
 }
 
-function setScrollInfiniLimit () {
-    'use strict';
-    // Catch the 5th event from the bottom
-    infiniteScrollLimit = $('.js-event').slice(-5, -4);
-}
-
 function readThis (element, id, callback) {
     'use strict';
     // [facto] - get entry directly
@@ -572,7 +562,7 @@ function readThis (element, id, callback) {
         }
         $.ajax({
             url: './action.php?action=readContent',
-            data: {id: id},
+            data: { id: id },
             success: function (msg) {
                 if (!anonymousState && msg.status === 'noconnect') {
                     alert(msg.texte);
@@ -586,7 +576,7 @@ function readThis (element, id, callback) {
         readUnreadImage.prop('alt', _t('LEEDVIBES_MARK_AS_READ'));
         $.ajax({
             url: './action.php?action=unreadContent',
-            data: {id: id},
+            data: { id: id },
             success: function (msg) {
                 if (!anonymousState && msg.status === 'noconnect') {
                     alert(msg.texte);
@@ -622,7 +612,7 @@ function targetThisEvent (event, focusOn) {
 function infiniteScroll () {
     'use strict';
     var noMoreEventsEl = $('#no-more-events');
-    if(noMoreEventsEl.is(':visible')) {
+    if (noMoreEventsEl.is(':visible')) {
         return Promise.resolve();
     }
     var loading = $('#infinite-scroll-loading');
@@ -647,7 +637,7 @@ function infiniteScroll () {
                 $(window).data('page', $(window).data('page') + 1);
                 const articlesPerPage = $('[data-articles-per-page]').data('articles-per-page');
                 const noMoreEvents = $(data).filter('article').length < articlesPerPage;
-                if(noMoreEvents) {
+                if (noMoreEvents) {
                     loading.addClass('hidden');
                     noMoreEventsEl.removeClass('hidden');
                 }
@@ -659,7 +649,6 @@ function infiniteScroll () {
         complete: function () {
             loading.addClass('hidden');
             $(window).data('ajaxready', true);
-            setScrollInfiniLimit();
         }
     });
 }
@@ -749,7 +738,7 @@ function getNewEvents (code, urlVars) {
             // Hide loader
             setTimeout(
                 function () {
-                    loader.one('animationiteration webkitAnimationIteration', function() {
+                    loader.one('animationiteration webkitAnimationIteration', function () {
                         $(this).removeClass(loadingClass);
                     });
                 },
@@ -774,13 +763,13 @@ function notifSlide (el) {
     'use strict';
     el
         .animate(
-            {opacity: 'show', height: 'show'},
-            {duration: 'slow'}
+            { opacity: 'show', height: 'show' },
+            { duration: 'slow' }
         )
         .delay(4000)
         .animate(
-            {opacity: 'hide', height: 'hide'},
-            {duration: 'slow'}
+            { opacity: 'hide', height: 'hide' },
+            { duration: 'slow' }
         );
 }
 

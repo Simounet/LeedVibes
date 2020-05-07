@@ -1,6 +1,5 @@
 {
     "extends": "standard",
-    "installedESLint": true,
     "plugins": [
         "standard",
         "promise"
@@ -10,7 +9,8 @@
         "jquery": true
     },
     "globals": {
-        "i18n": true
+        "i18n": true,
+        "Mousetrap": true
     },
     "rules": {
         "indent": [

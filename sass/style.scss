@@ -313,7 +313,7 @@ $feeds-list-toggle-transition: transform 0.3s;
 }
 
 .feeds-list {
-    margin-top:0;
+    margin-top: 0;
     padding: 0;
 
     &[data-is-opened="false"] {
@@ -456,7 +456,7 @@ html:not(.no-js) .feed--closed {
 
     @media($breakpoint-max) {
         display: inline-block;
-        grid-area:title;
+        grid-area: title;
     }
 
     [class~="event--read"] & a {
