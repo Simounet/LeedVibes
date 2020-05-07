@@ -5,7 +5,8 @@
     "last 3 versions"
   ],
   "scripts": {
-    "lint": "stylelint sass/style.scss && eslint js/script.js && eslint tests/index.js"
+    "lint": "stylelint sass/style.scss && eslint js/script.js && eslint tests/index.js",
+    "deps:update": "cp node_modules/jquery/dist/jquery.min.js js/ && cp node_modules/mousetrap/mousetrap.min.js js/"
   },
   "repository": {
     "type": "git",
