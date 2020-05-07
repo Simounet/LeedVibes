@@ -19,19 +19,19 @@
   },
   "homepage": "https://github.com/Simounet/LeedVibes#readme",
   "devDependencies": {
-    "eslint": "6.x",
+    "eslint": "^6.8.0",
     "eslint-config-standard": "13.x",
     "eslint-plugin-promise": "4.x",
-    "eslint-plugin-standard": "4.x",
+    "eslint-plugin-standard": "^4.0.1",
     "gulp": "4.x",
     "gulp-autoprefixer": "6.x",
     "gulp-real-favicon": "0.x",
-    "gulp-sass": "4.x",
+    "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "2.x",
     "stylelint": "10.x"
   },
   "dependencies": {
     "jquery": "^3.5.1",
-    "mousetrap": "1.6.x"
+    "mousetrap": "^1.6.5"
   }
 }
