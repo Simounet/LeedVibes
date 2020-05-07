@@ -1,13 +1,13 @@
 var eventObj;
-var idsDisplayed = [];
-var anonymousState = 0;
+const idsDisplayed = [];
+let anonymousState = 0;
 
 function _t (key, args) {
-    var value = i18n[key];
-    if (typeof (args) !== 'undefined') {
-        for (var i = 0; i < args.length; i++) {
-            value = value.replace('$' + (i + 1), args[i]);
-        }
+    let value = i18n[key];
+    if (typeof (args) === 'object') {
+        args.map((arg, i) => {
+            value = value.replace('$' + (i + 1), arg);
+        });
     }
     return value;
 }
@@ -28,9 +28,9 @@ $(function () {
     });
 
     $('.js-toggle-target').click(function () {
-        var button = $(this);
-        var targetElement = $(button.data('target'));
-        var isExpanded = targetElement.data('is-opened');
+        const button = $(this);
+        const targetElement = $(button.data('target'));
+        const isExpanded = targetElement.data('is-opened');
 
         if (isExpanded) {
             targetElement
@@ -55,19 +55,19 @@ $(function () {
         $(this).toggleClass('is-opened');
     });
 
-    var refreshEl = $('.js-new-events');
-    var syncCode = $(this).data('sync-code');
+    const refreshEl = $('.js-new-events');
+    const syncCode = $(this).data('sync-code');
     refreshEl.click(function (e) {
         e.preventDefault();
         refreshEvents(syncCode);
     });
 
     $('.sidebar').on('click', '.js-mark-as-read', function () {
-        var button = $(this);
+        const button = $(this);
         markAsRead(button);
     });
 
-    var shortcutsContainer = $('.js-shortcuts');
+    const shortcutsContainer = $('.js-shortcuts');
     $('.js-shortcuts-toggle').on('click', function () {
         shortcutsContainer.show();
     });
@@ -78,7 +78,7 @@ $(function () {
     pushIdsDisplayed($('.js-event'));
 
 
-    var userAction = new UserActionObject();
+    const userAction = new UserActionObject();
     Mousetrap.bind('j', function () { userAction.moveForward(); });
     Mousetrap.bind('k', function () { userAction.moveBackward(); });
     Mousetrap.bind('f', function () { userAction.clickFocused('.js-favorite'); });
@@ -90,7 +90,7 @@ $(function () {
     Mousetrap.bind('?', function () { userAction.toggleHelp(shortcutsContainer); });
 
     Mousetrap.bind('m', function () {
-        var button = $('.selected').find('.js-mark-as-read');
+        const button = $('.selected').find('.js-mark-as-read');
         markAsRead(button);
     });
 
@@ -167,11 +167,11 @@ UserActionObject.prototype = {
         if (this.focusedEl.length === 0 || this.focusedEl[0].parentNode === null) {
             return $('.js-event:visible').first();
         }
-        var el = this.focusedEl[action]('.js-event');
+        const el = this.focusedEl[action]('.js-event');
         if (el.length > 0) {
             return el;
         }
-        var existingEl = action + 'El';
+        const existingEl = action + 'El';
         return this[existingEl];
     },
 
@@ -214,10 +214,10 @@ function getButtonCount (buttonEl) {
 }
 
 function markAsRead (button) {
-    var confirmText = '';
-    var url = 'action.php?action=';
-    var feedEl = {};
-    var name = '';
+    let confirmText = '';
+    let url = 'action.php?action=';
+    let feedEl = {};
+    let name = '';
     if (button.parents('.js-feed__item').length) {
         feedEl = button.parents('.js-feed__item');
         name = feedEl.find('.js-feed-name').html() + '\n';
@@ -241,8 +241,8 @@ function markAsRead (button) {
         url: url
     })
         .done(function () {
-            var isTotalCounterButton = button.hasClass('js-total-counter');
-            var isSelectedItem = button.parents('.selected').length;
+            const isTotalCounterButton = button.hasClass('js-total-counter');
+            const isSelectedItem = button.parents('.selected').length;
             if (
                 isTotalCounterButton &&
             !isSelectedItem
@@ -254,8 +254,8 @@ function markAsRead (button) {
                 $('#no-more-events').removeClass('hidden');
             }
 
-            var buttonToClear = isTotalCounterButton ? $('.js-mark-as-read') : button;
-            var buttonCount = getButtonCount(buttonToClear);
+            const buttonToClear = isTotalCounterButton ? $('.js-mark-as-read') : button;
+            const buttonCount = getButtonCount(buttonToClear);
             if (
                 buttonToClear.hasClass('js-folder-counter') ||
             isTotalCounterButton
@@ -265,7 +265,7 @@ function markAsRead (button) {
                         .addClass('hidden')
                         .html('0');
                 } else {
-                    var totalButton = $('.js-total-counter');
+                    const totalButton = $('.js-total-counter');
                     totalButton.html(parseInt(getButtonCount(totalButton)) - buttonCount);
                     buttonToClear
                         .addClass('hidden')
@@ -285,7 +285,7 @@ function markAsRead (button) {
 }
 
 function refreshEvents (syncCode) {
-    var urlVars = getAllUrlVars();
+    const urlVars = getAllUrlVars();
     switch (urlVars.action) {
         case 'favorites':
             cleanUnstarredEvents();
@@ -298,7 +298,7 @@ function refreshEvents (syncCode) {
 }
 
 function getBubblingTarget (current, targetClass) {
-    var parentEl = current.parents('.' + targetClass);
+    const parentEl = current.parents('.' + targetClass);
     return parentEl.length === 1
         ? parentEl : current;
 }
@@ -351,7 +351,7 @@ EventObject.prototype = {
 
     readUnreadButtonAction: function () {
         'use strict';
-        var id = this.entry.data('id');
+        const id = this.entry.data('id');
 
         if (this.target.hasClass(this.readButtonClass)) {
             readThis($(this.target), id);
@@ -378,10 +378,10 @@ EventObject.prototype = {
 
     toggleItem: function () {
         'use strict';
-        var entry = this.entry;
-        var target = this.target;
+        const entry = this.entry;
+        const target = this.target;
 
-        var readOrUnreadAtToggle = function () {
+        const readOrUnreadAtToggle = function () {
             if (!entry.hasClass('js-event--read') && entry.hasClass('js-focus')) {
                 readThis($(target), entry.data('id'));
             }
@@ -403,7 +403,7 @@ EventObject.prototype = {
 
     toggleContent: function (callback) {
         'use strict';
-        var eventId = this.entry.data('id');
+        const eventId = this.entry.data('id');
         if (this.content.children().length === 0) {
             $.ajax({
                 url: './plugins/leedvibes/article_content.php',
@@ -436,14 +436,14 @@ EventObject.prototype = {
 
     favorite: function (favoriteTarget) {
         'use strict';
-        var favAction = (this.entry.data('favorite') === 1) ? 'remove' : 'add';
-        var favText = (this.entry.data('favorite') !== 1) ? 'UNFAVORIZE' : 'FAVORIZE';
+        const favAction = (this.entry.data('favorite') === 1) ? 'remove' : 'add';
+        const favText = (this.entry.data('favorite') !== 1) ? 'UNFAVORIZE' : 'FAVORIZE';
 
         favoriteTarget
             .toggleClass('article-favorite--favorited')
             .toggleClass('js-favorite--favorited');
 
-        var favDataFavorite = (this.entry.data('favorite') === 1)
+        const favDataFavorite = (this.entry.data('favorite') === 1)
             ? 0 : 1;
         this.entry.data('favorite', favDataFavorite);
         $.ajax({
@@ -464,15 +464,15 @@ EventObject.prototype = {
 
 function toggleFolder (button) {
     'use strict';
-    var folderBloc = button.parents('.js-folder');
-    var feedBloc = folderBloc.find('.js-toggle-item');
-    var folderNameEl = folderBloc.find('.js-folder-name');
-    var folderNameText = folderNameEl.text();
-    var isAriaExpanded = button.attr('aria-expanded') === 'true';
-    var newAriaExpanded = isAriaExpanded
+    const folderBloc = button.parents('.js-folder');
+    const feedBloc = folderBloc.find('.js-toggle-item');
+    const folderNameEl = folderBloc.find('.js-folder-name');
+    const folderNameText = folderNameEl.text();
+    const isAriaExpanded = button.attr('aria-expanded') === 'true';
+    const newAriaExpanded = isAriaExpanded
         ? 'false' : 'true';
     button.attr('aria-expanded', newAriaExpanded);
-    var buttonTitle = isAriaExpanded
+    const buttonTitle = isAriaExpanded
         ? 'LEEDVIBES_FOLDER_TOGGLE_OFF' : 'LEEDVIBES_FOLDER_TOGGLE_ON';
     button.prop('title', _t(buttonTitle, [folderNameText]));
 
@@ -481,7 +481,7 @@ function toggleFolder (button) {
     });
     button.toggleClass('folder-closed');
 
-    var open = isAriaExpanded
+    const open = isAriaExpanded
         ? 0 : 1;
     $.ajax({
         url: './action.php?action=changeFolderState',
@@ -494,30 +494,25 @@ function feedCounters (feedID, operation, operationNumber) {
     if (typeof (operationNumber) === 'undefined') {
         operationNumber = 1;
     }
-    var feed = $('.js-feed__item[data-id="' + feedID + '"]');
-    var elements = [
+    const feed = $('.js-feed__item[data-id="' + feedID + '"]');
+    const elements = [
         feed.find('.js-feed-counter'),
         feed.parents('.js-folder').find('.js-folder-counter'),
         $('.js-total-counter')
     ];
 
-    var counterHandler = function (counter) {
-        var i = parseInt(counter.html());
-        if (operation === '+' || operation === 'plus') {
-            i += operationNumber;
-        } else {
-            i -= operationNumber;
-        }
-
-        return i;
+    const counterHandler = function (counter) {
+        const currentValue = parseInt(counter.html());
+        return operation === '+' || operation === 'plus'
+            ? currentValue + operationNumber
+            : currentValue - operationNumber;
     };
 
-    for (var i = 0; i < elements.length; ++i) {
-        var element = elements[i];
-        var counterEl = element.find('[data-count="number"]');
-        var textEl = element.find('[data-count="text"]');
-        var newCount = counterHandler(counterEl);
-        var newCountTextKey = newCount > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD';
+    elements.map(element => {
+        const counterEl = element.find('[data-count="number"]');
+        const textEl = element.find('[data-count="text"]');
+        const newCount = counterHandler(counterEl);
+        const newCountTextKey = newCount > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD';
         counterEl.html(newCount);
         textEl.html(_t(newCountTextKey));
         if (newCount === 0) {
@@ -525,16 +520,16 @@ function feedCounters (feedID, operation, operationNumber) {
         } else {
             element.removeClass('hidden');
         }
-    }
+    });
 }
 
 function readThis (element, id, callback) {
     'use strict';
     // [facto] - get entry directly
-    var entry = element.parents('.js-event');
-    var nextEvent = $('#' + id).next();
-    var readUnreadButton = entry.find('.js-read-unread');
-    var readUnreadImage = readUnreadButton.find('img');
+    const entry = element.parents('.js-event');
+    const nextEvent = $('#' + id).next();
+    const readUnreadButton = entry.find('.js-read-unread');
+    const readUnreadImage = readUnreadButton.find('img');
     if (!entry.hasClass('js-event--read')) {
         readUnreadButton.addClass('article__read-read');
         // Decrement feed number
@@ -596,11 +591,11 @@ function readThis (element, id, callback) {
 
 function targetThisEvent (event, focusOn) {
     'use strict';
-    var target = $(event);
+    const target = $(event);
     if (target.prop('tagName') === 'SECTION') {
         $('.eventSelected').removeClass('eventSelected');
         target.addClass('eventSelected');
-        var id = target.attr('id');
+        const id = target.attr('id');
         if (id && focusOn)window.location = '#' + id;
     }
     if (target.prop('tagName') === 'DIV') {
@@ -611,20 +606,20 @@ function targetThisEvent (event, focusOn) {
 
 function infiniteScroll () {
     'use strict';
-    var noMoreEventsEl = $('#no-more-events');
+    const noMoreEventsEl = $('#no-more-events');
     if (noMoreEventsEl.is(':visible')) {
         return Promise.resolve();
     }
-    var loading = $('#infinite-scroll-loading');
+    const loading = $('#infinite-scroll-loading');
     $(window).data('ajaxready', false);
 
     loading.removeClass('hidden');
 
-    var urlVars = getAllUrlVars();
-    var action = urlVars.action;
-    var folder = urlVars.folder;
-    var feed = urlVars.feed;
-    var order = (typeof (urlVars.order) !== 'undefined') ? '&order=' + urlVars.order : '';
+    const urlVars = getAllUrlVars();
+    const action = urlVars.action;
+    const folder = urlVars.folder;
+    const feed = urlVars.feed;
+    const order = (typeof (urlVars.order) !== 'undefined') ? '&order=' + urlVars.order : '';
 
     return $.ajax({
         url: './article.php',
@@ -656,25 +651,24 @@ function infiniteScroll () {
 // Returns an array containing all the url's variables
 function getAllUrlVars () {
     'use strict';
-    var vars = [];
-    var hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for (var i = 0; i < hashes.length; i++) {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        if (hash[1]) {
-            var rehash = hash[1].split('#');
-            vars[hash[0]] = rehash[0];
+    const vars = [];
+    const urlParams = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    urlParams.map(urlParam => {
+        const [key, value] = urlParam.split('=');
+        vars.push(key);
+        if (value) {
+            const rehash = value.split('#');
+            vars[key] = rehash[0];
         } else {
-            vars[hash[0]] = '';
+            vars[key] = '';
         }
-    }
+    });
     return vars;
 }
 
 function getNewEvents (code, urlVars) {
     'use strict';
-    var noNewEvents = $('#no-new-events');
+    const noNewEvents = $('#no-new-events');
 
     // Check if ajax queries are locked
     if ($(window).data('ajaxready') === false) return;
@@ -683,22 +677,22 @@ function getNewEvents (code, urlVars) {
     $(window).data('ajaxready', false);
 
     // Loaders config
-    var loadingClass = 'animation-spin';
-    var loader = $('.js-new-events').children(':first');
-    var loaderFadeTime = 500;
+    const loadingClass = 'animation-spin';
+    const loader = $('.js-new-events').children(':first');
+    const loaderFadeTime = 500;
 
     // Show loader
     loader.addClass(loadingClass);
     loader.prop('disabled', 'disabled');
 
-    var lastEventClass = 'event--new-last';
+    const lastEventClass = 'event--new-last';
     $('.' + lastEventClass).removeClass(lastEventClass);
 
-    var action = urlVars.action;
-    var folder = urlVars.folder;
-    var feed = urlVars.feed;
-    var order = (typeof (urlVars.order) !== 'undefined') ? '&order=' + urlVars.order : '';
-    var lastIdChecked = idsDisplayed[0];
+    const action = urlVars.action;
+    const folder = urlVars.folder;
+    const feed = urlVars.feed;
+    const order = (typeof (urlVars.order) !== 'undefined') ? '&order=' + urlVars.order : '';
+    const lastIdChecked = idsDisplayed[0];
 
     $.ajax({
         url: './article.php',
@@ -708,9 +702,9 @@ function getNewEvents (code, urlVars) {
 
         success: function (data) {
             if (data.replace(/^\s+/g, '').replace(/\s+$/g, '') !== '') {
-                var newEvents = [];
+                const newEvents = [];
                 $($.parseHTML($.trim(data))).each(function () {
-                    var parsedNode = $(this);
+                    const parsedNode = $(this);
                     if (parsedNode.prop('tagName') === 'ARTICLE') {
                         newEvents.push(parsedNode);
                         feedCounters(parsedNode.data('feed-id'), '+');
@@ -776,7 +770,7 @@ function notifSlide (el) {
 function pushIdsDisplayed (events) {
     'use strict';
     events.each(function () {
-        var id = $(this).data('id');
+        const id = $(this).data('id');
 
         if (typeof (id) !== 'undefined') {
             idsDisplayed.push(id);
@@ -790,14 +784,14 @@ function pushIdsDisplayed (events) {
 function updateEventsDate () {
     'use strict';
 
-    var dateNow = new Date();
+    const dateNow = new Date();
 
     $('[data-timestamp]:not([data-timestamp=""])').each(function () {
-        var eventItem = $(this);
-        var eventItemDataAttribute = 'timestamp';
-        var date = new Date(eventItem.data(eventItemDataAttribute) * 1000);
+        const eventItem = $(this);
+        const eventItemDataAttribute = 'timestamp';
+        const date = new Date(eventItem.data(eventItemDataAttribute) * 1000);
 
-        var newDate = getNewEventDate(date);
+        const newDate = getNewEventDate(date);
 
         if (typeof (newDate) === 'number') {
             if (newDate === 0) {
@@ -812,10 +806,10 @@ function updateEventsDate () {
     });
 
     function getNewEventDate (date) {
-        var diff = dateNow.getTime() - date.getTime();
-        var diffMinutes = Math.floor(diff / 1000 / 60);
-        var timeMinutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
-        var timeString = date.getHours() + ':' + timeMinutes;
+        const diff = dateNow.getTime() - date.getTime();
+        const diffMinutes = Math.floor(diff / 1000 / 60);
+        const timeMinutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+        const timeString = date.getHours() + ':' + timeMinutes;
 
         // If the event date is in the future
         // We do nothin' (Jon Snow)
@@ -823,7 +817,7 @@ function updateEventsDate () {
             return false;
         }
 
-        var result = (diffMinutes < 60) ? diffMinutes : timeString;
+        const result = (diffMinutes < 60) ? diffMinutes : timeString;
 
         return result;
     }
