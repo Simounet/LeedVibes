@@ -478,6 +478,7 @@ button {
 @media (max-width: 650px) {
   .wrapper {
     margin-bottom: 0px;
+    padding-bottom: 60px;
   }
 }
 
@@ -617,6 +618,7 @@ button {
 
 .feed-add {
   text-align: center;
+  z-index: 100;
 }
 
 [data-is-opened="false"] {
@@ -719,9 +721,30 @@ button {
   transform: translate3d(0, 150%, 0);
 }
 
+@media (max-width: 650px) {
+  .feeds-list,
+  .feed-add {
+    background-color: #424242;
+    -webkit-transition: all 130ms ease-in;
+    -o-transition: all 130ms ease-in;
+    transition: all 130ms ease-in;
+    will-change: transform;
+    overflow: auto;
+  }
+}
+
 .feeds-list {
   margin-top: 0;
   padding: 0;
+}
+
+@media (max-width: 650px) {
+  .feeds-list {
+    position: fixed;
+    width: 100%;
+    max-height: calc(100vh - 60px);
+    z-index: 1000;
+  }
 }
 
 .feeds-list[data-is-opened="false"] {
@@ -730,7 +753,8 @@ button {
 
 @media (max-width: 650px) {
   .feeds-list[data-is-opened="false"] {
-    display: none;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
   }
 }
 
@@ -1106,8 +1130,22 @@ html:not(.no-js) .feed--closed {
 }
 
 .settings {
-  padding: 1em;
+  position: relative;
+  padding: 13px 10px;
+  min-height: 34px;
   background-color: #303030;
+  z-index: 1000;
+}
+
+@media (max-width: 650px) {
+  .settings {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 1000;
+  }
 }
 
 .user-login {
@@ -1120,7 +1158,7 @@ html:not(.no-js) .feed--closed {
 .settings-item {
   padding: 0.5em 1.5em;
   min-width: 15px;
-  min-height: 15px;
+  min-height: 18px;
   border-bottom: 0.38462em solid transparent;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;

@@ -30,24 +30,23 @@ $(function () {
     $('.js-toggle-target').click(function () {
         const button = $(this);
         const targetElement = $(button.data('target'));
+        const bodyOverflowNeeded = button.data('toggle-overflow') || false;
         const isExpanded = targetElement.data('is-opened');
 
         if (isExpanded) {
+            if (bodyOverflowNeeded !== false) {
+                $('body').css('overflow', '');
+            }
             targetElement
-                .slideUp(function () {
-                    $(this)
-                        .attr('data-is-opened', false)
-                        .data('is-opened', false)
-                        .css('display', '');
-                });
+                .attr('data-is-opened', false)
+                .data('is-opened', false);
         } else {
             targetElement
-                .css('display', 'none')
                 .attr('data-is-opened', true)
-                .data('is-opened', true)
-                .slideDown(function () {
-                    $(this).css('display', '');
-                });
+                .data('is-opened', true);
+            if (bodyOverflowNeeded !== false) {
+                $('body').css('overflow', 'hidden');
+            }
         }
     });
 

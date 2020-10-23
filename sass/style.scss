@@ -19,6 +19,10 @@ $opacity-low: 0.3;
 $position-top-on-break: 30px;
 $action-icon-width: 30px;
 
+$settings-horizontal-padding: 13px;
+$settings-min-height: 34px;
+$settings-height: $settings-horizontal-padding * 2 + $settings-min-height;
+
 @import "normalize";
 
 /* MIXINS */
@@ -93,6 +97,7 @@ button {
         // the content is read and infinite-scroll-end
         // shows up
         margin-bottom: 0px;
+        padding-bottom: 60px;
     }
 }
 .selected a {
@@ -225,6 +230,7 @@ $border-color-active: white;
 
 .feed-add {
     text-align: center;
+    z-index: 100;
 }
 
 [data-is-opened="false"] {
@@ -312,15 +318,32 @@ $feeds-list-toggle-transition: transform 0.3s;
     }
 }
 
+.feeds-list,
+.feed-add {
+    @media($breakpoint-max) {
+        background-color: $sidebar-color-bg;
+        transition: all 130ms ease-in;;
+        will-change: transform;
+        overflow: auto;
+    }
+}
+
 .feeds-list {
     margin-top: 0;
     padding: 0;
+
+    @media($breakpoint-max) {
+        position: fixed;
+        width: 100%;
+        max-height: calc(100vh - #{$settings-height});
+        z-index: 1000;
+    }
 
     &[data-is-opened="false"] {
         display: block;
 
         @media($breakpoint-max) {
-            display: none;
+            transform: translate3d(0, -100%, 0);
         }
     }
 
@@ -647,8 +670,19 @@ html:not(.no-js) .feed--closed {
 }
 
 .settings {
-    padding: 1em;
+    position: relative;
+    padding: $settings-horizontal-padding 10px;
+    min-height: $settings-min-height;
     background-color: $sidebar-color-bg-darken;
+    z-index: 1000;
+
+    @media($breakpoint-max) {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 1000;
+    }
 }
 
 .user-login {
@@ -658,7 +692,7 @@ html:not(.no-js) .feed--closed {
 .settings-item {
     padding: $settings-padding;
     min-width: 15px;
-    min-height: 15px;
+    min-height: 18px;
     border-bottom: $border-base;
     box-sizing: content-box;
     transition: border 0.2s ease-in-out 0s;
