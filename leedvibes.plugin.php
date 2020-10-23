@@ -12,10 +12,11 @@ include( __DIR__ . '/classes/Utils.php' );
 
 function leedvibes( &$event ) {
     $utils = new Utils();
-    $date = $utils->formatDate( $event->getPubdate() );
-    $event->dateLessThanOneHour = isset( $date['less-than-one-hour'] ) ? true : false;
-    $event->dateValue = $date['value'];
-    $event->datetime = $date['datetime'];
+    $pubdate = $event->getPubdate();
+    $date = $utils->formatDate( $pubdate );
+    $event->dateLessThanOneHour = $date && isset( $date['less-than-one-hour'] ) ? true : false;
+    $event->dateValue = $date ? $date['value'] : '';
+    $event->datetime = $date ? $date['datetime'] : '';
 
     $feed = new Feed();
     $usedFeed = $feed->getById($event->getFeed());
