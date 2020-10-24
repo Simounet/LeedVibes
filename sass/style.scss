@@ -318,10 +318,12 @@ $feeds-list-toggle-transition: transform 0.3s;
 .feeds-list,
 .feed-add {
     @media($breakpoint-max) {
+        position: fixed;
         background-color: $sidebar-color-bg;
         transition: all 130ms ease-in;;
         will-change: transform;
         overflow: auto;
+        z-index: 1000;
     }
 }
 
@@ -330,10 +332,8 @@ $feeds-list-toggle-transition: transform 0.3s;
     padding: 0;
 
     @media($breakpoint-max) {
-        position: fixed;
         width: 100%;
         max-height: calc(100vh - #{$settings-height});
-        z-index: 1000;
     }
 
     &[data-is-opened="false"] {

@@ -721,12 +721,14 @@ button {
 @media (max-width: 650px) {
   .feeds-list,
   .feed-add {
+    position: fixed;
     background-color: #424242;
     -webkit-transition: all 130ms ease-in;
     -o-transition: all 130ms ease-in;
     transition: all 130ms ease-in;
     will-change: transform;
     overflow: auto;
+    z-index: 1000;
   }
 }
 
@@ -737,10 +739,8 @@ button {
 
 @media (max-width: 650px) {
   .feeds-list {
-    position: fixed;
     width: 100%;
     max-height: calc(100vh - 60px);
-    z-index: 1000;
   }
 }
 

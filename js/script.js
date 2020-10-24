@@ -32,6 +32,10 @@ $(function () {
         const targetElement = $(button.data('target'));
         const bodyOverflowNeeded = button.data('toggle-overflow') || false;
         const isExpanded = targetElement.data('is-opened');
+        const alreadyOpened = $('[data-is-opened="true"]');
+        alreadyOpened
+            .attr('data-is-opened', false)
+            .data('is-opened', false);
 
         if (isExpanded) {
             if (bodyOverflowNeeded !== false) {
