@@ -229,6 +229,7 @@ $border-color-active: white;
 }
 
 .feed-add {
+    padding: 10px 5px;
     text-align: center;
     z-index: 100;
 }
@@ -280,10 +281,6 @@ $border-color-active: white;
         color: $folder-separator;
         background-color: $feed-bgc-used;
     }
-}
-
-.feed-add-button {
-    margin-bottom: 1em;
 }
 
 .feeds-list-toggle {

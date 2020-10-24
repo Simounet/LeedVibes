@@ -617,6 +617,7 @@ button {
 }
 
 .feed-add {
+  padding: 10px 5px;
   text-align: center;
   z-index: 100;
 }
@@ -673,10 +674,6 @@ button {
 .feed-add-button:focus {
   color: #484848;
   background-color: #DDD;
-}
-
-.feed-add-button {
-  margin-bottom: 1em;
 }
 
 .feeds-list-toggle {
