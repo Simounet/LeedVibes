@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{$language}" class="no-js">
+<html lang="{$language}" class="{if="isset($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark'"}dark-theme {/if}no-js">
 <head>
     <meta charset="UTF-8">
     <title>{$delimiter=' · '}{if="isset($currentFeed)"}{$currentFeed->getName()}{$delimiter}{/if}{if="isset($currentFolder)"}{$currentFolder->getName()}{$delimiter}{/if}LeedVibes</title>
@@ -65,6 +65,9 @@
                         <use xlink:href="#svg-settings" />
                     </svg>
                 </a>
+                <button class="settings-item js-brightness-toggle">
+                    <img src="images/brightness.svg?#brightness_medium">
+                </button>
                 <a href="./?action=favorites" data-link="favorites" class="settings-item">
                     <svg
                         width="15"
@@ -236,8 +239,13 @@
                 </div>
             </div>
         </main>
-        <section class="shortcuts js-shortcuts">
-            <ul class="shortcuts-list">
+        <section class="popin hidden js-popin">
+            <ul class="brightness-list js-brightness-list">
+                <li class="brightness-item"><button class="brightness-button js-theme-toggle-set" data-theme="light"><img src="images/brightness.svg?#brightness_high" alt="" class="brightness-img"> Clair</button></li>
+                <li class="brightness-item"><button class="brightness-button js-theme-toggle-set" data-theme="dark"><img src="images/brightness.svg?#brightness_low" alt="" class="brightness-img"> Sombre</button></li>
+                <li class="brightness-item"><button class="brightness-button js-theme-toggle-set" data-theme="auto"><img src="images/brightness.svg?#brightness_auto" alt="" class="brightness-img"> Auto</button></li>
+            </ul>
+            <ul class="shortcuts-list js-shortcuts-list">
                 <li class="shortcut"><span class="shortcut-key">M</span> <span class="shortcut-text">Mark the current folder as read</span></li>
                 <li class="shortcut"><span class="shortcut-key">X</span> <span class="shortcut-text">Mark the current article as read</span></li>
                 <li class="shortcut"><span class="shortcut-key">F</span> <span class="shortcut-text">Mark the current article as favorited / unfavorited</span></li>
