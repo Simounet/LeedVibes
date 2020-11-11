@@ -12,10 +12,95 @@ function _t (key, args) {
     return value;
 }
 
+function darkTheme () {
+    const rootEl = document.querySelector('html');
+    const themeDom = {
+        darkClass: 'dark-theme',
+
+        toggleClass (el) {
+            return el.classList.toggle(this.darkClass);
+        },
+
+        addClass (el) {
+            return el.classList.add(this.darkClass);
+        },
+
+        removeClass (el) {
+            return el.classList.remove(this.darkClass);
+        }
+    };
+    const themeCookie = {
+        values: {
+            light: 'light',
+            dark: 'dark'
+        },
+
+        name: 'theme',
+
+        getValue (isDarkTheme) {
+            return isDarkTheme ? this.values.dark : this.values.light;
+        },
+
+        setCookie (isDarkTheme) {
+            const value = this.getValue(isDarkTheme);
+            document.cookie = `${this.name}=${value};samesite=Lax;path=/;max-age=31536000`;
+        },
+
+        removeCookie () {
+            document.cookie = `${this.name}=auto;samesite=Lax;path=/;max-age=0`;
+        },
+
+        exists () {
+            return document.cookie.split(';').map((cookie) => cookie.split('=')).filter((cookie) => cookie[0].trim() === 'theme').length;
+        }
+    };
+    const preferedColorScheme = {
+        choose () {
+            if (this.isAvailable() && themeCookie.exists() === 0) {
+                const isPreferedColorSchemeDark = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+                if (themeCookie.exists() === 0) {
+                    themeDom[isPreferedColorSchemeDark ? 'addClass' : 'removeClass'](rootEl);
+                }
+            }
+        },
+
+        isAvailable () {
+            return typeof window.matchMedia === 'function';
+        },
+
+        init () {
+            if (!this.isAvailable()) {
+                return false;
+            }
+            this.choose();
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(() => {
+                this.choose();
+            });
+        }
+    };
+    preferedColorScheme.init();
+    const themeButtonLow = document.querySelector('.js-theme-toggle-set[data-theme="light"]');
+    themeButtonLow.addEventListener('click', () => {
+        themeDom.removeClass(rootEl);
+        themeCookie.setCookie(false);
+    });
+    const themeButtonHigh = document.querySelector('.js-theme-toggle-set[data-theme="dark"]');
+    themeButtonHigh.addEventListener('click', () => {
+        themeDom.addClass(rootEl);
+        themeCookie.setCookie(true);
+    });
+    const themeButtonAuto = document.querySelector('.js-theme-toggle-set[data-theme="auto"]');
+    themeButtonAuto.addEventListener('click', () => {
+        themeCookie.removeCookie();
+        preferedColorScheme.choose();
+    });
+}
+
 $(function () {
     'use strict';
 
     anonymousState = $('[data-anonymous-state]').data('anonymous-state');
+    darkTheme();
 
     $('.wrapper').on('click keypress', '.js-event', function (event) {
         if (event.type === 'click' || event.which === 13) {
@@ -70,16 +155,56 @@ $(function () {
         markAsRead(button);
     });
 
-    const shortcutsContainer = $('.js-shortcuts');
+    const popin = {
+        el: document.querySelector('.js-popin'),
+        previousFocusedEl: null,
+
+        brightnessClass: 'js-brightness-list',
+        shortcutsClass: 'js-shortcuts-list',
+
+        show: function (name) {
+            Mousetrap.bind('esc', () => { this.close(); });
+            const isShortcuts = name === this.shortcutsClass;
+            this.previousFocusedEl = document.activeElement;
+            this.el.querySelector('.js-brightness-list').classList[isShortcuts ? 'add' : 'remove']('hidden');
+            this.el.querySelector('.js-shortcuts-list').classList[isShortcuts ? 'remove' : 'add']('hidden');
+            this.el.classList.remove('hidden');
+            this.el.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])').focus();
+        },
+
+        close: function () {
+            this.el.classList.add('hidden');
+            this.previousFocusedEl.focus();
+        },
+
+        showShortcuts: function () {
+            this.show(this.shortcutsClass);
+        },
+
+        toggleShortcuts: function () {
+            this.el.querySelector('.js-brightness-list').classList.add('hidden');
+            this.el.querySelector('.js-shortcuts-list').classList.remove('hidden');
+            this.el.classList.toggle('hidden');
+        },
+
+        showBrightness: function () {
+            this.show(this.brightnessClass);
+        },
+
+        init: function () {
+            this.el.addEventListener('click', this.close.bind(this));
+        }
+    };
+    popin.init();
+
     $('.js-shortcuts-toggle').on('click', function () {
-        shortcutsContainer.show();
+        popin.showShortcuts();
     });
-    shortcutsContainer.on('click', function () {
-        $(this).hide();
+    $('.js-brightness-toggle').on('click', function () {
+        popin.showBrightness();
     });
 
     pushIdsDisplayed($('.js-event'));
-
 
     const userAction = new UserActionObject();
     Mousetrap.bind('j', function () { userAction.moveForward(); });
@@ -90,7 +215,7 @@ $(function () {
     Mousetrap.bind('g f', function () { window.location.href = $('[data-link="favorites"]')[0].href; });
     Mousetrap.bind('g s', function () { window.location.href = $('[data-link="settings"]')[0].href; });
     Mousetrap.bind('r', function () { refreshEvents(syncCode); });
-    Mousetrap.bind('?', function () { userAction.toggleHelp(shortcutsContainer); });
+    Mousetrap.bind('?', function () { popin.toggleShortcuts(); });
 
     Mousetrap.bind('m', function () {
         const button = $('.selected').find('.js-mark-as-read');
@@ -203,10 +328,6 @@ UserActionObject.prototype = {
             return false;
         }
         this.focusedEl.find(selector).first().click();
-    },
-
-    toggleHelp: function (el) {
-        el.toggle();
     }
 };
 
