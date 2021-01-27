@@ -47,16 +47,6 @@
             </div>
         {else}
             <div class="settings">
-                <a href="action.php?action=logout" class="settings-item">
-                    <svg
-                        width="15"
-                        height="15"
-                        role="img"
-                    >
-                        <title>{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})</title>
-                        <use xlink:href="#svg-logout" />
-                    </svg>
-                </a>
                 <a href="settings.php" data-link="settings" class="settings-item">
                     <svg
                         width="15"
@@ -202,6 +192,16 @@
             </ul>
         {/if}
     {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
+            <a href="action.php?action=logout">
+                <svg
+                    width="15"
+                    height="15"
+                    role="img"
+                >
+                    <title>{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})</title>
+                    <use xlink:href="#svg-logout" />
+                </svg>
+            </a>
             <button class="shortcuts-toggle js-shortcuts-toggle" title="{function="_t('LEEDVIBES_SHORTCUTS_BUTTON_TITLE')"}" >
                 <svg
                     width="15"
