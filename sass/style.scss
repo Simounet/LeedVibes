@@ -237,10 +237,6 @@ $border-color-active: white;
     z-index: 100;
 }
 
-[data-is-opened="false"] {
-    display: none;
-}
-
 .feed-add-title {
     margin: 0 0 1em;
     color: $sidebar-color;
@@ -390,6 +386,7 @@ $feeds-list-toggle-transition: transform 0.3s;
     background-color: #4b4b4b;
 }
 
+html:not(.no-js) .feed-add,
 html:not(.no-js) .feed--closed {
     display: none;
 }
