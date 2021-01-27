@@ -621,6 +621,8 @@ button {
   padding: 10px 5px;
   width: 100%;
   text-align: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   z-index: 100;
 }
 

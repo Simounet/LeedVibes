@@ -112,7 +112,8 @@ $(function () {
         toggleFolder($(this));
     });
 
-    $('.js-toggle-target').click(function () {
+    $('.js-toggle-target').click(function (event) {
+        event.preventDefault();
         const button = $(this);
         const targetElement = $(button.data('target'));
         const bodyOverflowNeeded = button.data('toggle-overflow') || false;
