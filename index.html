@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{$language}" class="no-js">
+<html lang="{$language}" class="{if="isset($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark'"}dark-theme {/if}no-js">
 <head>
     <meta charset="UTF-8">
     <title>{$delimiter=' · '}{if="isset($currentFeed)"}{$currentFeed->getName()}{$delimiter}{/if}{if="isset($currentFolder)"}{$currentFolder->getName()}{$delimiter}{/if}LeedVibes</title>
@@ -20,113 +20,113 @@
     <meta name="msapplication-TileImage" content="images/favicons/mstile-144x144.png">
     <meta name="theme-color" content="#424242">
     <script src="js/jquery.min.js"></script>
-    <script src="js/script.js"></script>
+    {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
+        <script src="js/script.js"></script>
+    {/if}
     {function="Plugin::callJs()"}
 </head>
 <body data-anonymous-state="{$configurationManager->get('articleDisplayAnonymous')}">
     {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
         <aside id="sidebar" class="sidebar">
     {/if}
-        {if="!$myUser"}
-            <div class="user-login">
-                {if="($configurationManager->get('articleDisplayAnonymous')=='0')"}
-                    <h3>{function="_t('YOU_MUST_BE_LOGGED')"}</h3>
-                    <p>{function="_t('IF_ADMIN_THEN_CONFIG')"}</p>
-                {/if}
-                <form action="action.php?action=login" class="settings__fields" method="POST">
-                    <input type="text" name="login" placeholder="{function="_t('LOGIN')"}"/>
-                    <input type="password" name="password" placeholder="{function="_t('PASSWORD')"}"/>
-                    <label class="rememberMe">
-                        <input type="checkbox" name="rememberMe" />
-                        <span>{function="_t('REMEMBER_ME')"}</span>
-                    </label>
-                    <input type="submit" value="{function="_t('LEEDVIBES_CONNECTION')"}" />
-                </form>
-            </div>
-        {else}
-            <div class="settings">
-                <a href="action.php?action=logout" class="settings-item">
-                    <svg
-                        width="15"
-                        height="15"
-                        role="img"
-                    >
-                        <title>{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})</title>
-                        <use xlink:href="#svg-logout" />
-                    </svg>
-                </a>
-                <a href="settings.php" data-link="settings" class="settings-item">
-                    <svg
-                        width="15"
-                        height="15"
-                        role="img"
-                    >
-                        <title>{function="_t('MANAGE')"}</title>
-                        <use xlink:href="#svg-settings" />
-                    </svg>
-                </a>
-                <a href="./?action=favorites" data-link="favorites" class="settings-item">
-                    <svg
-                        width="15"
-                        height="15"
-                        class="favorite-inverted"
-                        role="img"
-                    >
-                        <title>{function="_t('FAVORITES')"}</title>
-                        <use xlink:href="#svg-favorite" />
-                    </svg>
-                </a>
-                <button class="mobile-only settings-item feeds-list-toggle js-feeds-list-toggle js-toggle-target" data-target="#feeds-list" data-toggle-overflow="true"><span class="feeds-list-toggle__label">
-                    <svg
-                        width="15"
-                        height="15"
-                        role="img"
-                    >
-                        <title>{function="_t('LEEDVIBES_MENU')"}</title>
-                        <use xlink:href="#svg-menu" />
-                    </svg>
-                </span></button>
-                <a href="." class="settings-item new-events js-new-events" data-sync-code="{$synchronisationCode}">
-                    <svg
-                        width="15"
-                        height="15"
-                        role="img"
-                    >
-                        <title>{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}</title>
-                        <use xlink:href="#svg-reload" />
-                    </svg>
-                </a>
-                <button class="settings-item js-toggle-target" data-target=".feed-add">
-                    <svg
-                        width="15"
-                        height="15"
-                        role="img"
-                    >
-                        <title>{function="_t('ADD_FEED')"}</title>
-                        <use xlink:href="#svg-add" />
-                    </svg>
-                </button>
-            </div>
-            <form class="feed-add" data-is-opened="false" action="action.php?action=addFeed" method="POST">
-                <h2 class="feed-add-title">{function="_t('ADD_FEED')"}</h2>
-                <input type="text" name="newUrl" class="feed-add-url" placeholder="https://thebestblog.com/rss"/>
-                <select class="feed-add-folders" name="newUrlCategory">
-                    {loop="$folders"}
-                        <option {if="$value->getId()==1"}selected="selected"{/if} value="{$value->getId()}">{$value->getName()}</option>
-                    {/loop}
-                </select>
-                <input type="text" name="redirect" value="index" hidden />
-                <button class="feed-add-button">{function="_t('ADD')"}</button>
+    {if="!$myUser"}
+        <div class="user-login">
+            {if="($configurationManager->get('articleDisplayAnonymous')=='0')"}
+                <h3>{function="_t('YOU_MUST_BE_LOGGED')"}</h3>
+                <p>{function="_t('IF_ADMIN_THEN_CONFIG')"}</p>
+            {/if}
+            <form action="action.php?action=login" class="settings__fields" method="POST">
+                <input type="text" name="login" placeholder="{function="_t('LOGIN')"}"/>
+                <input type="password" name="password" placeholder="{function="_t('PASSWORD')"}"/>
+                <label class="rememberMe">
+                    <input type="checkbox" name="rememberMe" />
+                    <span>{function="_t('REMEMBER_ME')"}</span>
+                </label>
+                <input type="submit" value="{function="_t('LEEDVIBES_CONNECTION')"}" />
             </form>
-            {function="Plugin::callHook("menu_pre_folder_menu", array(&$myUser))"}
-        {/if}
-        {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
+        </div>
+    {else}
+        <div class="settings">
+            <a href="settings.php" data-link="settings" class="settings-item">
+                <svg
+                    width="15"
+                    height="15"
+                    role="img"
+                >
+                    <title>{function="_t('MANAGE')"}</title>
+                    <use xlink:href="#svg-settings" />
+                </svg>
+            </a>
+            <button class="settings-item js-brightness-toggle">
+                <img src="images/brightness.svg?#brightness_medium">
+            </button>
+            <button class="mobile-only settings-item feeds-list-toggle js-feeds-list-toggle js-toggle-target" data-target=".mobile-toggle" data-toggle-overflow="true"><span class="feeds-list-toggle__label">
+                <svg
+                    width="15"
+                    height="15"
+                    role="img"
+                >
+                    <title>{function="_t('LEEDVIBES_MENU')"}</title>
+                    <use xlink:href="#svg-menu" />
+                </svg>
+            </span></button>
+            <a href="." class="settings-item new-events js-new-events" data-sync-code="{$synchronisationCode}">
+                <svg
+                    width="15"
+                    height="15"
+                    role="img"
+                >
+                    <title>{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}</title>
+                    <use xlink:href="#svg-reload" />
+                </svg>
+            </a>
+            <button class="settings-item js-toggle-target" data-target=".feed-add">
+                <svg
+                    width="15"
+                    height="15"
+                    role="img"
+                >
+                    <title>{function="_t('ADD_FEED')"}</title>
+                    <use xlink:href="#svg-add" />
+                </svg>
+            </button>
+        </div>
+        <form class="feed-add" data-is-opened="false" action="action.php?action=addFeed" method="POST">
+            <h2 class="feed-add-title">{function="_t('ADD_FEED')"}</h2>
+            <input type="text" name="newUrl" class="feed-add-url" placeholder="https://thebestblog.com/rss"/>
+            <select class="feed-add-folders" name="newUrlCategory">
+                {loop="$folders"}
+                    <option {if="$value->getId()==1"}selected="selected"{/if} value="{$value->getId()}">{$value->getName()}</option>
+                {/loop}
+            </select>
+            <input type="text" name="redirect" value="index" hidden />
+            <button class="feed-add-button">{function="_t('ADD')"}</button>
+        </form>
+        {function="Plugin::callHook("menu_pre_folder_menu", array(&$myUser))"}
+    {/if}
+    {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
+        <div class="mobile-toggle" data-is-opened="false">
             {$currentItemsCount=$unread['total']}
-            <ul id="feeds-list" class="feeds-list" data-is-opened="false">
+            <ul class="feeds-list">
                 <li class="folder">
-                    <div class="folder__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}">
+                    <div class="folder__item{if="(!isset($currentFolder)) && (!isset($currentFeed)) && (!isset($favorites))"} selected{/if}">
                         <a href="./" data-link="home" class="sidebar-item">{function="_t('LEEDVIBES_ALL_FEEDS')"}</a>
                         <button class="mark-as-read js-mark-as-read js-total-counter" title="{function="_t('LEEDVIBES_MARK_ALL_AS_READ')"}"><span data-count="number">{$unread['total']}</span> <span class="sr-only" data-count="text">{function="_t($unread['total'] > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span></button>
+                    </div>
+                </li>
+                <li class="folder">
+                    <div class="folder__item{if="isset($favorites)"} selected{/if}">
+                        <a href="./?action=favorites" data-link="favorites" class="sidebar-item">
+                            <svg
+                                width="15"
+                                height="15"
+                                class="favorite-inverted"
+                                role="img"
+                            >
+                                <use xlink:href="#svg-favorite" />
+                            </svg>
+                            {function="_t('FAVORITES')"}
+                        </a>
                     </div>
                 </li>
                 <!-- [todo] -  Remove order=unread on feeds' links, use the settings instead -->
@@ -196,21 +196,33 @@
                 {/loop}
             </ul>
         {/if}
-    {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
-            <button class="shortcuts-toggle js-shortcuts-toggle" title="{function="_t('LEEDVIBES_SHORTCUTS_BUTTON_TITLE')"}" >
-                <svg
-                    width="15"
-                    height="15"
-                    role="img"
-                >
-                    <title>{function="_t('LEEDVIBES_SHORTCUTS_ICON')"}</title>
-                    <use xlink:href="#svg-shortcuts" />
-                </svg>
-            </button>
-            {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
+        {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
+            <div class="extra-settings">
+                <a href="action.php?action=logout" class="settings-item">
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})</title>
+                        <use xlink:href="#svg-logout" />
+                    </svg>
+                </a>
+                <button class="shortcuts-toggle js-shortcuts-toggle settings-item" title="{function="_t('LEEDVIBES_SHORTCUTS_BUTTON_TITLE')"}" >
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{function="_t('LEEDVIBES_SHORTCUTS_ICON')"}</title>
+                        <use xlink:href="#svg-shortcuts" />
+                    </svg>
+                </button>
+                {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
+            </div>
+        </div>
         </aside>
     {/if}
-    
     {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
         {include="svg-list"}
         <main class="wrapper" aria-live="polite">
@@ -236,8 +248,13 @@
                 </div>
             </div>
         </main>
-        <section class="shortcuts js-shortcuts">
-            <ul class="shortcuts-list">
+        <section class="popin hidden js-popin">
+            <ul class="brightness-list js-brightness-list">
+                <li class="brightness-item"><button class="brightness-button js-theme-toggle-set" data-theme="light"><img src="images/brightness.svg?#brightness_high" class="brightness-img"> Clair</button></li>
+                <li class="brightness-item"><button class="brightness-button js-theme-toggle-set" data-theme="dark"><img src="images/brightness.svg?#brightness_low" class="brightness-img"> Sombre</button></li>
+                <li class="brightness-item"><button class="brightness-button js-theme-toggle-set" data-theme="auto"><img src="images/brightness.svg?#brightness_auto" class="brightness-img"> Auto</button></li>
+            </ul>
+            <ul class="shortcuts-list js-shortcuts-list">
                 <li class="shortcut"><span class="shortcut-key">M</span> <span class="shortcut-text">Mark the current folder as read</span></li>
                 <li class="shortcut"><span class="shortcut-key">X</span> <span class="shortcut-text">Mark the current article as read</span></li>
                 <li class="shortcut"><span class="shortcut-key">F</span> <span class="shortcut-text">Mark the current article as favorited / unfavorited</span></li>
