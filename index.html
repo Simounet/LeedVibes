@@ -20,7 +20,9 @@
     <meta name="msapplication-TileImage" content="images/favicons/mstile-144x144.png">
     <meta name="theme-color" content="#424242">
     <script src="js/jquery.min.js"></script>
-    <script src="js/script.js"></script>
+    {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
+        <script src="js/script.js"></script>
+    {/if}
     {function="Plugin::callJs()"}
 </head>
 <body data-anonymous-state="{$configurationManager->get('articleDisplayAnonymous')}">
