@@ -618,6 +618,7 @@ button {
 
 .feed-add {
   padding: 10px 5px;
+  width: 100%;
   text-align: center;
   z-index: 100;
 }
@@ -719,7 +720,7 @@ button {
 }
 
 @media (max-width: 650px) {
-  .feeds-list,
+  .mobile-toggle,
   .feed-add {
     position: fixed;
     background-color: #424242;
@@ -732,27 +733,28 @@ button {
   }
 }
 
-.feeds-list {
-  margin-top: 0;
-  padding: 0;
-}
-
 @media (max-width: 650px) {
-  .feeds-list {
+  .mobile-toggle {
     width: 100%;
     max-height: calc(100vh - 60px);
   }
 }
 
-.feeds-list[data-is-opened="false"] {
+.mobile-toggle[data-is-opened="false"] {
   display: block;
 }
 
 @media (max-width: 650px) {
-  .feeds-list[data-is-opened="false"] {
+  .mobile-toggle[data-is-opened="false"] {
     -webkit-transform: translate3d(0, -100%, 0);
     transform: translate3d(0, -100%, 0);
   }
+}
+
+.feeds-list {
+  display: block;
+  margin-top: 0;
+  padding: 0;
 }
 
 .feeds-list:target {
@@ -1192,6 +1194,15 @@ button.settings-item:focus {
   margin: 0.4em auto;
   padding: 0.5em;
   color: #303030;
+}
+
+.extra-settings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .favorite-inverted {

@@ -60,7 +60,7 @@
             <button class="settings-item js-brightness-toggle">
                 <img src="images/brightness.svg?#brightness_medium">
             </button>
-            <button class="mobile-only settings-item feeds-list-toggle js-feeds-list-toggle js-toggle-target" data-target="#feeds-list" data-toggle-overflow="true"><span class="feeds-list-toggle__label">
+            <button class="mobile-only settings-item feeds-list-toggle js-feeds-list-toggle js-toggle-target" data-target=".mobile-toggle" data-toggle-overflow="true"><span class="feeds-list-toggle__label">
                 <svg
                     width="15"
                     height="15"
@@ -105,121 +105,124 @@
         {function="Plugin::callHook("menu_pre_folder_menu", array(&$myUser))"}
     {/if}
     {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
-        {$currentItemsCount=$unread['total']}
-        <ul id="feeds-list" class="feeds-list" data-is-opened="false">
-            <li class="folder">
-                <div class="folder__item{if="(!isset($currentFolder)) && (!isset($currentFeed)) && (!isset($favorites))"} selected{/if}">
-                    <a href="./" data-link="home" class="sidebar-item">{function="_t('LEEDVIBES_ALL_FEEDS')"}</a>
-                    <button class="mark-as-read js-mark-as-read js-total-counter" title="{function="_t('LEEDVIBES_MARK_ALL_AS_READ')"}"><span data-count="number">{$unread['total']}</span> <span class="sr-only" data-count="text">{function="_t($unread['total'] > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span></button>
-                </div>
-            </li>
-            <li class="folder">
-                <div class="folder__item{if="isset($favorites)"} selected{/if}">
-                    <a href="./?action=favorites" data-link="favorites" class="sidebar-item">
-                        <svg
-                            width="15"
-                            height="15"
-                            class="favorite-inverted"
-                            role="img"
-                        >
-                            <use xlink:href="#svg-favorite" />
-                        </svg>
-                        {function="_t('FAVORITES')"}
-                    </a>
-                </div>
-            </li>
-            <!-- [todo] -  Remove order=unread on feeds' links, use the settings instead -->
-            {loop="folders"}
-                {$feeds=[]}
-                {$folderSelected=0}
-                {if="isset($allFeedsPerFolder[$value->getId()])"}
-                    {$feeds=$allFeedsPerFolder[$value->getId()]}
-                {/if}
-                {if="isset($allEvents[$value->getId()])"}
-                    {$unreadEventsForFolder=$allEvents[$value->getId()]}
-                {/if}
-                {if="isset($currentFolder) && ($value->getId() == $currentFolder->getId())"}
-                    {$folderSelected=1}
-                    {$currentItemsCount=$unreadEventsForFolder}
-                {/if}
-                <li class="folder js-folder" data-id="{$value->getId()}">
-                    <div class="folder__item js-folder__item{if="$folderSelected"} selected{/if}">
-                        <button
-                            class="folder__button js-toggle-button{if="!$value->getIsopen()"} folder-closed{/if}"
-                            title="{function="_t($value->getIsopen() ? 'LEEDVIBES_FOLDER_TOGGLE_ON' : 'LEEDVIBES_FOLDER_TOGGLE_OFF', array($value->getName()))"}"
-                            aria-expanded="{if="$value->getIsopen()"}true{else}false{/if}"
-                        >
+        <div class="mobile-toggle" data-is-opened="false">
+            {$currentItemsCount=$unread['total']}
+            <ul class="feeds-list">
+                <li class="folder">
+                    <div class="folder__item{if="(!isset($currentFolder)) && (!isset($currentFeed)) && (!isset($favorites))"} selected{/if}">
+                        <a href="./" data-link="home" class="sidebar-item">{function="_t('LEEDVIBES_ALL_FEEDS')"}</a>
+                        <button class="mark-as-read js-mark-as-read js-total-counter" title="{function="_t('LEEDVIBES_MARK_ALL_AS_READ')"}"><span data-count="number">{$unread['total']}</span> <span class="sr-only" data-count="text">{function="_t($unread['total'] > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span></button>
+                    </div>
+                </li>
+                <li class="folder">
+                    <div class="folder__item{if="isset($favorites)"} selected{/if}">
+                        <a href="./?action=favorites" data-link="favorites" class="sidebar-item">
                             <svg
-                                width="6"
-                                height="6"
+                                width="15"
+                                height="15"
+                                class="favorite-inverted"
                                 role="img"
                             >
-                                <use xlink:href="#svg-triangle" />
+                                <use xlink:href="#svg-favorite" />
                             </svg>
-                        </button>
-                        {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
-                        <a href="./?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}" class="sidebar-item js-folder-name">{$value->getName()}</a>
-                        <button
-                            class="mark-as-read js-mark-as-read js-folder-counter
-                            {if="$unreadEventsForFolder === 0"} hidden{/if}"
-                            title="{function="_t('LEEDVIBES_FOLDER_MARK_AS_READ', array($value->getName()))"}"
-                        >
-                            <span data-count="number">{$unreadEventsForFolder}</span> <span class="sr-only" data-count="text">{function="_t($unreadEventsForFolder > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span>
-                        </button>
-                        {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
+                            {function="_t('FAVORITES')"}
+                        </a>
                     </div>
-                    <ul class="feed js-toggle-item{if="!$value->getIsopen()"} feed--closed{/if}">
-                        {if="count($feeds)!=0"}
-                            {loop="feeds"}
-                                <li class="feed__item js-feed__item{if="isset($currentFeed) && ($value2['id'] == $currentFeed->getId())"} selected{/if}{if="$feedState->getById($value2['id'])->getLastSyncInError()==1"} error{/if}" data-id="{$value2['id']}">
-                                    {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
-                                    <a href="./?action=selectedFeed&amp;feed={$value2['id']}&amp;order=unread" title="{function="htmlentities($value2['url'])"}" class="sidebar-item">
-                                        {if="isset($value2['favicon'])"}{$value2['favicon']}{/if}
-                                        <span class="sidebar-item-label js-feed-name">{$value2['name']}</span>
-                                    </a>
-                                    {$feedUnreadCount=isset( $unread[$value2['id']] ) ? $unread[$value2['id']] : 0}
-                                    <button
-                                        class="mark-as-read js-mark-as-read js-feed-counter
-                                        {if="! isset($unread[$value2['id']])"} hidden{/if}"
-                                        title="{function="_t('LEEDVIBES_FEED_MARK_AS_READ', array($value2['name']))"}"
-                                    >
-                                        <span data-count="number">{$feedUnreadCount}</span> <span class="sr-only" data-count="text">{function="_t($feedUnreadCount > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span>
-                                    </button>
-                            {function="Plugin::callHook("menu_post_feed_link", array(&$value))"}
-                                </li>
-                            {/loop}
-                        {/if}
-                    </ul>
                 </li>
-                {$unreadEventsForFolder=0}
-            {/loop}
-        </ul>
-    {/if}
-    {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
-            <a href="action.php?action=logout">
-                <svg
-                    width="15"
-                    height="15"
-                    role="img"
-                >
-                    <title>{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})</title>
-                    <use xlink:href="#svg-logout" />
-                </svg>
-            </a>
-            <button class="shortcuts-toggle js-shortcuts-toggle" title="{function="_t('LEEDVIBES_SHORTCUTS_BUTTON_TITLE')"}" >
-                <svg
-                    width="15"
-                    height="15"
-                    role="img"
-                >
-                    <title>{function="_t('LEEDVIBES_SHORTCUTS_ICON')"}</title>
-                    <use xlink:href="#svg-shortcuts" />
-                </svg>
-            </button>
-            {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
+                <!-- [todo] -  Remove order=unread on feeds' links, use the settings instead -->
+                {loop="folders"}
+                    {$feeds=[]}
+                    {$folderSelected=0}
+                    {if="isset($allFeedsPerFolder[$value->getId()])"}
+                        {$feeds=$allFeedsPerFolder[$value->getId()]}
+                    {/if}
+                    {if="isset($allEvents[$value->getId()])"}
+                        {$unreadEventsForFolder=$allEvents[$value->getId()]}
+                    {/if}
+                    {if="isset($currentFolder) && ($value->getId() == $currentFolder->getId())"}
+                        {$folderSelected=1}
+                        {$currentItemsCount=$unreadEventsForFolder}
+                    {/if}
+                    <li class="folder js-folder" data-id="{$value->getId()}">
+                        <div class="folder__item js-folder__item{if="$folderSelected"} selected{/if}">
+                            <button
+                                class="folder__button js-toggle-button{if="!$value->getIsopen()"} folder-closed{/if}"
+                                title="{function="_t($value->getIsopen() ? 'LEEDVIBES_FOLDER_TOGGLE_ON' : 'LEEDVIBES_FOLDER_TOGGLE_OFF', array($value->getName()))"}"
+                                aria-expanded="{if="$value->getIsopen()"}true{else}false{/if}"
+                            >
+                                <svg
+                                    width="6"
+                                    height="6"
+                                    role="img"
+                                >
+                                    <use xlink:href="#svg-triangle" />
+                                </svg>
+                            </button>
+                            {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
+                            <a href="./?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}" class="sidebar-item js-folder-name">{$value->getName()}</a>
+                            <button
+                                class="mark-as-read js-mark-as-read js-folder-counter
+                                {if="$unreadEventsForFolder === 0"} hidden{/if}"
+                                title="{function="_t('LEEDVIBES_FOLDER_MARK_AS_READ', array($value->getName()))"}"
+                            >
+                                <span data-count="number">{$unreadEventsForFolder}</span> <span class="sr-only" data-count="text">{function="_t($unreadEventsForFolder > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span>
+                            </button>
+                            {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
+                        </div>
+                        <ul class="feed js-toggle-item{if="!$value->getIsopen()"} feed--closed{/if}">
+                            {if="count($feeds)!=0"}
+                                {loop="feeds"}
+                                    <li class="feed__item js-feed__item{if="isset($currentFeed) && ($value2['id'] == $currentFeed->getId())"} selected{/if}{if="$feedState->getById($value2['id'])->getLastSyncInError()==1"} error{/if}" data-id="{$value2['id']}">
+                                        {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
+                                        <a href="./?action=selectedFeed&amp;feed={$value2['id']}&amp;order=unread" title="{function="htmlentities($value2['url'])"}" class="sidebar-item">
+                                            {if="isset($value2['favicon'])"}{$value2['favicon']}{/if}
+                                            <span class="sidebar-item-label js-feed-name">{$value2['name']}</span>
+                                        </a>
+                                        {$feedUnreadCount=isset( $unread[$value2['id']] ) ? $unread[$value2['id']] : 0}
+                                        <button
+                                            class="mark-as-read js-mark-as-read js-feed-counter
+                                            {if="! isset($unread[$value2['id']])"} hidden{/if}"
+                                            title="{function="_t('LEEDVIBES_FEED_MARK_AS_READ', array($value2['name']))"}"
+                                        >
+                                            <span data-count="number">{$feedUnreadCount}</span> <span class="sr-only" data-count="text">{function="_t($feedUnreadCount > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span>
+                                        </button>
+                                {function="Plugin::callHook("menu_post_feed_link", array(&$value))"}
+                                    </li>
+                                {/loop}
+                            {/if}
+                        </ul>
+                    </li>
+                    {$unreadEventsForFolder=0}
+                {/loop}
+            </ul>
+        {/if}
+        {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
+            <div class="extra-settings">
+                <a href="action.php?action=logout" class="settings-item">
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})</title>
+                        <use xlink:href="#svg-logout" />
+                    </svg>
+                </a>
+                <button class="shortcuts-toggle js-shortcuts-toggle settings-item" title="{function="_t('LEEDVIBES_SHORTCUTS_BUTTON_TITLE')"}" >
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{function="_t('LEEDVIBES_SHORTCUTS_ICON')"}</title>
+                        <use xlink:href="#svg-shortcuts" />
+                    </svg>
+                </button>
+                {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
+            </div>
+        </div>
         </aside>
     {/if}
-    
     {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
         {include="svg-list"}
         <main class="wrapper" aria-live="polite">

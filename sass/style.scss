@@ -230,6 +230,7 @@ $border-color-active: white;
 
 .feed-add {
     padding: 10px 5px;
+    width: 100%;
     text-align: center;
     z-index: 100;
 }
@@ -315,7 +316,7 @@ $feeds-list-toggle-transition: transform 0.3s;
     }
 }
 
-.feeds-list,
+.mobile-toggle,
 .feed-add {
     @media($breakpoint-max) {
         position: fixed;
@@ -327,10 +328,7 @@ $feeds-list-toggle-transition: transform 0.3s;
     }
 }
 
-.feeds-list {
-    margin-top: 0;
-    padding: 0;
-
+.mobile-toggle {
     @media($breakpoint-max) {
         width: 100%;
         max-height: calc(100vh - #{$settings-height});
@@ -343,6 +341,12 @@ $feeds-list-toggle-transition: transform 0.3s;
             transform: translate3d(0, -100%, 0);
         }
     }
+}
+
+.feeds-list {
+    display: block;
+    margin-top: 0;
+    padding: 0;
 
     &:target {
         display: block;
@@ -724,6 +728,11 @@ button.settings-item {
     margin: 0.4em auto;
     padding: 0.5em;
     color: $sidebar-color-bg-darken;
+}
+
+.extra-settings {
+    display: flex;
+    justify-content: center;
 }
 
 .favorite-inverted {
