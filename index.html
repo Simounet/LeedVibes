@@ -29,172 +29,172 @@
     {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
         <aside id="sidebar" class="sidebar">
     {/if}
-        {if="!$myUser"}
-            <div class="user-login">
-                {if="($configurationManager->get('articleDisplayAnonymous')=='0')"}
-                    <h3>{function="_t('YOU_MUST_BE_LOGGED')"}</h3>
-                    <p>{function="_t('IF_ADMIN_THEN_CONFIG')"}</p>
-                {/if}
-                <form action="action.php?action=login" class="settings__fields" method="POST">
-                    <input type="text" name="login" placeholder="{function="_t('LOGIN')"}"/>
-                    <input type="password" name="password" placeholder="{function="_t('PASSWORD')"}"/>
-                    <label class="rememberMe">
-                        <input type="checkbox" name="rememberMe" />
-                        <span>{function="_t('REMEMBER_ME')"}</span>
-                    </label>
-                    <input type="submit" value="{function="_t('LEEDVIBES_CONNECTION')"}" />
-                </form>
-            </div>
-        {else}
-            <div class="settings">
-                <a href="settings.php" data-link="settings" class="settings-item">
-                    <svg
-                        width="15"
-                        height="15"
-                        role="img"
-                    >
-                        <title>{function="_t('MANAGE')"}</title>
-                        <use xlink:href="#svg-settings" />
-                    </svg>
-                </a>
-                <button class="settings-item js-brightness-toggle">
-                    <img src="images/brightness.svg?#brightness_medium">
-                </button>
-                <button class="mobile-only settings-item feeds-list-toggle js-feeds-list-toggle js-toggle-target" data-target="#feeds-list" data-toggle-overflow="true"><span class="feeds-list-toggle__label">
-                    <svg
-                        width="15"
-                        height="15"
-                        role="img"
-                    >
-                        <title>{function="_t('LEEDVIBES_MENU')"}</title>
-                        <use xlink:href="#svg-menu" />
-                    </svg>
-                </span></button>
-                <a href="." class="settings-item new-events js-new-events" data-sync-code="{$synchronisationCode}">
-                    <svg
-                        width="15"
-                        height="15"
-                        role="img"
-                    >
-                        <title>{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}</title>
-                        <use xlink:href="#svg-reload" />
-                    </svg>
-                </a>
-                <button class="settings-item js-toggle-target" data-target=".feed-add">
-                    <svg
-                        width="15"
-                        height="15"
-                        role="img"
-                    >
-                        <title>{function="_t('ADD_FEED')"}</title>
-                        <use xlink:href="#svg-add" />
-                    </svg>
-                </button>
-            </div>
-            <form class="feed-add" data-is-opened="false" action="action.php?action=addFeed" method="POST">
-                <h2 class="feed-add-title">{function="_t('ADD_FEED')"}</h2>
-                <input type="text" name="newUrl" class="feed-add-url" placeholder="https://thebestblog.com/rss"/>
-                <select class="feed-add-folders" name="newUrlCategory">
-                    {loop="$folders"}
-                        <option {if="$value->getId()==1"}selected="selected"{/if} value="{$value->getId()}">{$value->getName()}</option>
-                    {/loop}
-                </select>
-                <input type="text" name="redirect" value="index" hidden />
-                <button class="feed-add-button">{function="_t('ADD')"}</button>
+    {if="!$myUser"}
+        <div class="user-login">
+            {if="($configurationManager->get('articleDisplayAnonymous')=='0')"}
+                <h3>{function="_t('YOU_MUST_BE_LOGGED')"}</h3>
+                <p>{function="_t('IF_ADMIN_THEN_CONFIG')"}</p>
+            {/if}
+            <form action="action.php?action=login" class="settings__fields" method="POST">
+                <input type="text" name="login" placeholder="{function="_t('LOGIN')"}"/>
+                <input type="password" name="password" placeholder="{function="_t('PASSWORD')"}"/>
+                <label class="rememberMe">
+                    <input type="checkbox" name="rememberMe" />
+                    <span>{function="_t('REMEMBER_ME')"}</span>
+                </label>
+                <input type="submit" value="{function="_t('LEEDVIBES_CONNECTION')"}" />
             </form>
-            {function="Plugin::callHook("menu_pre_folder_menu", array(&$myUser))"}
-        {/if}
-        {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
-            {$currentItemsCount=$unread['total']}
-            <ul id="feeds-list" class="feeds-list" data-is-opened="false">
-                <li class="folder">
-                    <div class="folder__item{if="(!isset($currentFolder)) && (!isset($currentFeed)) && (!isset($favorites))"} selected{/if}">
-                        <a href="./" data-link="home" class="sidebar-item">{function="_t('LEEDVIBES_ALL_FEEDS')"}</a>
-                        <button class="mark-as-read js-mark-as-read js-total-counter" title="{function="_t('LEEDVIBES_MARK_ALL_AS_READ')"}"><span data-count="number">{$unread['total']}</span> <span class="sr-only" data-count="text">{function="_t($unread['total'] > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span></button>
-                    </div>
-                </li>
-                <li class="folder">
-                    <div class="folder__item{if="isset($favorites)"} selected{/if}">
-                        <a href="./?action=favorites" data-link="favorites" class="sidebar-item">
+        </div>
+    {else}
+        <div class="settings">
+            <a href="settings.php" data-link="settings" class="settings-item">
+                <svg
+                    width="15"
+                    height="15"
+                    role="img"
+                >
+                    <title>{function="_t('MANAGE')"}</title>
+                    <use xlink:href="#svg-settings" />
+                </svg>
+            </a>
+            <button class="settings-item js-brightness-toggle">
+                <img src="images/brightness.svg?#brightness_medium">
+            </button>
+            <button class="mobile-only settings-item feeds-list-toggle js-feeds-list-toggle js-toggle-target" data-target="#feeds-list" data-toggle-overflow="true"><span class="feeds-list-toggle__label">
+                <svg
+                    width="15"
+                    height="15"
+                    role="img"
+                >
+                    <title>{function="_t('LEEDVIBES_MENU')"}</title>
+                    <use xlink:href="#svg-menu" />
+                </svg>
+            </span></button>
+            <a href="." class="settings-item new-events js-new-events" data-sync-code="{$synchronisationCode}">
+                <svg
+                    width="15"
+                    height="15"
+                    role="img"
+                >
+                    <title>{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}</title>
+                    <use xlink:href="#svg-reload" />
+                </svg>
+            </a>
+            <button class="settings-item js-toggle-target" data-target=".feed-add">
+                <svg
+                    width="15"
+                    height="15"
+                    role="img"
+                >
+                    <title>{function="_t('ADD_FEED')"}</title>
+                    <use xlink:href="#svg-add" />
+                </svg>
+            </button>
+        </div>
+        <form class="feed-add" data-is-opened="false" action="action.php?action=addFeed" method="POST">
+            <h2 class="feed-add-title">{function="_t('ADD_FEED')"}</h2>
+            <input type="text" name="newUrl" class="feed-add-url" placeholder="https://thebestblog.com/rss"/>
+            <select class="feed-add-folders" name="newUrlCategory">
+                {loop="$folders"}
+                    <option {if="$value->getId()==1"}selected="selected"{/if} value="{$value->getId()}">{$value->getName()}</option>
+                {/loop}
+            </select>
+            <input type="text" name="redirect" value="index" hidden />
+            <button class="feed-add-button">{function="_t('ADD')"}</button>
+        </form>
+        {function="Plugin::callHook("menu_pre_folder_menu", array(&$myUser))"}
+    {/if}
+    {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
+        {$currentItemsCount=$unread['total']}
+        <ul id="feeds-list" class="feeds-list" data-is-opened="false">
+            <li class="folder">
+                <div class="folder__item{if="(!isset($currentFolder)) && (!isset($currentFeed)) && (!isset($favorites))"} selected{/if}">
+                    <a href="./" data-link="home" class="sidebar-item">{function="_t('LEEDVIBES_ALL_FEEDS')"}</a>
+                    <button class="mark-as-read js-mark-as-read js-total-counter" title="{function="_t('LEEDVIBES_MARK_ALL_AS_READ')"}"><span data-count="number">{$unread['total']}</span> <span class="sr-only" data-count="text">{function="_t($unread['total'] > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span></button>
+                </div>
+            </li>
+            <li class="folder">
+                <div class="folder__item{if="isset($favorites)"} selected{/if}">
+                    <a href="./?action=favorites" data-link="favorites" class="sidebar-item">
+                        <svg
+                            width="15"
+                            height="15"
+                            class="favorite-inverted"
+                            role="img"
+                        >
+                            <use xlink:href="#svg-favorite" />
+                        </svg>
+                        {function="_t('FAVORITES')"}
+                    </a>
+                </div>
+            </li>
+            <!-- [todo] -  Remove order=unread on feeds' links, use the settings instead -->
+            {loop="folders"}
+                {$feeds=[]}
+                {$folderSelected=0}
+                {if="isset($allFeedsPerFolder[$value->getId()])"}
+                    {$feeds=$allFeedsPerFolder[$value->getId()]}
+                {/if}
+                {if="isset($allEvents[$value->getId()])"}
+                    {$unreadEventsForFolder=$allEvents[$value->getId()]}
+                {/if}
+                {if="isset($currentFolder) && ($value->getId() == $currentFolder->getId())"}
+                    {$folderSelected=1}
+                    {$currentItemsCount=$unreadEventsForFolder}
+                {/if}
+                <li class="folder js-folder" data-id="{$value->getId()}">
+                    <div class="folder__item js-folder__item{if="$folderSelected"} selected{/if}">
+                        <button
+                            class="folder__button js-toggle-button{if="!$value->getIsopen()"} folder-closed{/if}"
+                            title="{function="_t($value->getIsopen() ? 'LEEDVIBES_FOLDER_TOGGLE_ON' : 'LEEDVIBES_FOLDER_TOGGLE_OFF', array($value->getName()))"}"
+                            aria-expanded="{if="$value->getIsopen()"}true{else}false{/if}"
+                        >
                             <svg
-                                width="15"
-                                height="15"
-                                class="favorite-inverted"
+                                width="6"
+                                height="6"
                                 role="img"
                             >
-                                <use xlink:href="#svg-favorite" />
+                                <use xlink:href="#svg-triangle" />
                             </svg>
-                            {function="_t('FAVORITES')"}
-                        </a>
+                        </button>
+                        {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
+                        <a href="./?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}" class="sidebar-item js-folder-name">{$value->getName()}</a>
+                        <button
+                            class="mark-as-read js-mark-as-read js-folder-counter
+                            {if="$unreadEventsForFolder === 0"} hidden{/if}"
+                            title="{function="_t('LEEDVIBES_FOLDER_MARK_AS_READ', array($value->getName()))"}"
+                        >
+                            <span data-count="number">{$unreadEventsForFolder}</span> <span class="sr-only" data-count="text">{function="_t($unreadEventsForFolder > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span>
+                        </button>
+                        {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
                     </div>
+                    <ul class="feed js-toggle-item{if="!$value->getIsopen()"} feed--closed{/if}">
+                        {if="count($feeds)!=0"}
+                            {loop="feeds"}
+                                <li class="feed__item js-feed__item{if="isset($currentFeed) && ($value2['id'] == $currentFeed->getId())"} selected{/if}{if="$feedState->getById($value2['id'])->getLastSyncInError()==1"} error{/if}" data-id="{$value2['id']}">
+                                    {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
+                                    <a href="./?action=selectedFeed&amp;feed={$value2['id']}&amp;order=unread" title="{function="htmlentities($value2['url'])"}" class="sidebar-item">
+                                        {if="isset($value2['favicon'])"}{$value2['favicon']}{/if}
+                                        <span class="sidebar-item-label js-feed-name">{$value2['name']}</span>
+                                    </a>
+                                    {$feedUnreadCount=isset( $unread[$value2['id']] ) ? $unread[$value2['id']] : 0}
+                                    <button
+                                        class="mark-as-read js-mark-as-read js-feed-counter
+                                        {if="! isset($unread[$value2['id']])"} hidden{/if}"
+                                        title="{function="_t('LEEDVIBES_FEED_MARK_AS_READ', array($value2['name']))"}"
+                                    >
+                                        <span data-count="number">{$feedUnreadCount}</span> <span class="sr-only" data-count="text">{function="_t($feedUnreadCount > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span>
+                                    </button>
+                            {function="Plugin::callHook("menu_post_feed_link", array(&$value))"}
+                                </li>
+                            {/loop}
+                        {/if}
+                    </ul>
                 </li>
-                <!-- [todo] -  Remove order=unread on feeds' links, use the settings instead -->
-                {loop="folders"}
-                    {$feeds=[]}
-                    {$folderSelected=0}
-                    {if="isset($allFeedsPerFolder[$value->getId()])"}
-                        {$feeds=$allFeedsPerFolder[$value->getId()]}
-                    {/if}
-                    {if="isset($allEvents[$value->getId()])"}
-                        {$unreadEventsForFolder=$allEvents[$value->getId()]}
-                    {/if}
-                    {if="isset($currentFolder) && ($value->getId() == $currentFolder->getId())"}
-                        {$folderSelected=1}
-                        {$currentItemsCount=$unreadEventsForFolder}
-                    {/if}
-                    <li class="folder js-folder" data-id="{$value->getId()}">
-                        <div class="folder__item js-folder__item{if="$folderSelected"} selected{/if}">
-                            <button
-                                class="folder__button js-toggle-button{if="!$value->getIsopen()"} folder-closed{/if}"
-                                title="{function="_t($value->getIsopen() ? 'LEEDVIBES_FOLDER_TOGGLE_ON' : 'LEEDVIBES_FOLDER_TOGGLE_OFF', array($value->getName()))"}"
-                                aria-expanded="{if="$value->getIsopen()"}true{else}false{/if}"
-                            >
-                                <svg
-                                    width="6"
-                                    height="6"
-                                    role="img"
-                                >
-                                    <use xlink:href="#svg-triangle" />
-                                </svg>
-                            </button>
-                            {function="Plugin::callHook("menu_pre_folder_link", array(&$value))"}
-                            <a href="./?action=selectedFolder&amp;folder={$value->getId()}" title="{function="_t('READ_FOLDER_ITEMS')"}" class="sidebar-item js-folder-name">{$value->getName()}</a>
-                            <button
-                                class="mark-as-read js-mark-as-read js-folder-counter
-                                {if="$unreadEventsForFolder === 0"} hidden{/if}"
-                                title="{function="_t('LEEDVIBES_FOLDER_MARK_AS_READ', array($value->getName()))"}"
-                            >
-                                <span data-count="number">{$unreadEventsForFolder}</span> <span class="sr-only" data-count="text">{function="_t($unreadEventsForFolder > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span>
-                            </button>
-                            {function="Plugin::callHook("menu_post_folder_link", array(&$value))"}
-                        </div>
-                        <ul class="feed js-toggle-item{if="!$value->getIsopen()"} feed--closed{/if}">
-                            {if="count($feeds)!=0"}
-                                {loop="feeds"}
-                                    <li class="feed__item js-feed__item{if="isset($currentFeed) && ($value2['id'] == $currentFeed->getId())"} selected{/if}{if="$feedState->getById($value2['id'])->getLastSyncInError()==1"} error{/if}" data-id="{$value2['id']}">
-                                        {function="Plugin::callHook("menu_pre_feed_link", array(&$value))"}
-                                        <a href="./?action=selectedFeed&amp;feed={$value2['id']}&amp;order=unread" title="{function="htmlentities($value2['url'])"}" class="sidebar-item">
-                                            {if="isset($value2['favicon'])"}{$value2['favicon']}{/if}
-                                            <span class="sidebar-item-label js-feed-name">{$value2['name']}</span>
-                                        </a>
-                                        {$feedUnreadCount=isset( $unread[$value2['id']] ) ? $unread[$value2['id']] : 0}
-                                        <button
-                                            class="mark-as-read js-mark-as-read js-feed-counter
-                                            {if="! isset($unread[$value2['id']])"} hidden{/if}"
-                                            title="{function="_t('LEEDVIBES_FEED_MARK_AS_READ', array($value2['name']))"}"
-                                        >
-                                            <span data-count="number">{$feedUnreadCount}</span> <span class="sr-only" data-count="text">{function="_t($feedUnreadCount > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span>
-                                        </button>
-                                {function="Plugin::callHook("menu_post_feed_link", array(&$value))"}
-                                    </li>
-                                {/loop}
-                            {/if}
-                        </ul>
-                    </li>
-                    {$unreadEventsForFolder=0}
-                {/loop}
-            </ul>
-        {/if}
+                {$unreadEventsForFolder=0}
+            {/loop}
+        </ul>
+    {/if}
     {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
             <a href="action.php?action=logout">
                 <svg
