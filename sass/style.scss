@@ -30,6 +30,7 @@ $settings-height: $settings-horizontal-padding * 2 + $settings-min-height;
 
 /* RESET */
 html {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     font-size: 62.5%;
 }
 body {
