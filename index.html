@@ -60,17 +60,6 @@
                 <button class="settings-item js-brightness-toggle">
                     <img src="images/brightness.svg?#brightness_medium">
                 </button>
-                <a href="./?action=favorites" data-link="favorites" class="settings-item">
-                    <svg
-                        width="15"
-                        height="15"
-                        class="favorite-inverted"
-                        role="img"
-                    >
-                        <title>{function="_t('FAVORITES')"}</title>
-                        <use xlink:href="#svg-favorite" />
-                    </svg>
-                </a>
                 <button class="mobile-only settings-item feeds-list-toggle js-feeds-list-toggle js-toggle-target" data-target="#feeds-list" data-toggle-overflow="true"><span class="feeds-list-toggle__label">
                     <svg
                         width="15"
@@ -119,9 +108,24 @@
             {$currentItemsCount=$unread['total']}
             <ul id="feeds-list" class="feeds-list" data-is-opened="false">
                 <li class="folder">
-                    <div class="folder__item{if="(!isset($currentFolder)) && (!isset($currentFeed))"} selected{/if}">
+                    <div class="folder__item{if="(!isset($currentFolder)) && (!isset($currentFeed)) && (!isset($favorites))"} selected{/if}">
                         <a href="./" data-link="home" class="sidebar-item">{function="_t('LEEDVIBES_ALL_FEEDS')"}</a>
                         <button class="mark-as-read js-mark-as-read js-total-counter" title="{function="_t('LEEDVIBES_MARK_ALL_AS_READ')"}"><span data-count="number">{$unread['total']}</span> <span class="sr-only" data-count="text">{function="_t($unread['total'] > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span></button>
+                    </div>
+                </li>
+                <li class="folder">
+                    <div class="folder__item{if="isset($favorites)"} selected{/if}">
+                        <a href="./?action=favorites" data-link="favorites" class="sidebar-item">
+                            <svg
+                                width="15"
+                                height="15"
+                                class="favorite-inverted"
+                                role="img"
+                            >
+                                <use xlink:href="#svg-favorite" />
+                            </svg>
+                            {function="_t('FAVORITES')"}
+                        </a>
                     </div>
                 </li>
                 <!-- [todo] -  Remove order=unread on feeds' links, use the settings instead -->
