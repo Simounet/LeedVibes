@@ -753,7 +753,10 @@ function infiniteScroll () {
 
         success: function (data) {
             if (data.replace(/^\s+/g, '').replace(/\s+$/g, '') !== '') {
-                $('.articles').append(data);
+                const articlesEls = $.parseHTML($.trim(data)).filter(item => item.tagName === 'ARTICLE' && !idsDisplayed.includes(item.dataset.id));
+                const articles = $(articlesEls);
+                $('.articles').append(articles);
+                pushIdsDisplayed(articles);
                 $(window).data('page', $(window).data('page') + 1);
                 const articlesPerPage = $('[data-articles-per-page]').data('articles-per-page');
                 const noMoreEvents = $(data).filter('article').length < articlesPerPage;
@@ -902,8 +905,7 @@ function pushIdsDisplayed (events) {
         }
     });
 
-    idsDisplayed.sort();
-    idsDisplayed.reverse();
+    idsDisplayed.sort((a, b) => b - a);
 }
 
 function updateEventsDate () {
