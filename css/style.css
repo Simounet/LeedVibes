@@ -750,6 +750,16 @@ button {
   }
 }
 
+.unreads-badge {
+  background: #555;
+  position: absolute;
+  border-radius: 50%;
+  padding: 2px;
+  z-index: 100;
+  right: 5px;
+  bottom: 0px;
+}
+
 .feeds-list {
   display: block;
   margin-top: 0;

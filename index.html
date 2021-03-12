@@ -60,16 +60,19 @@
             <button class="settings-item js-brightness-toggle">
                 <img src="images/brightness.svg?#brightness_medium">
             </button>
-            <button class="mobile-only settings-item feeds-list-toggle js-feeds-list-toggle js-toggle-target" data-target=".mobile-toggle" data-toggle-overflow="true"><span class="feeds-list-toggle__label">
-                <svg
-                    width="15"
-                    height="15"
-                    role="img"
-                >
-                    <title>{function="_t('LEEDVIBES_MENU')"}</title>
-                    <use xlink:href="#svg-menu" />
-                </svg>
-            </span></button>
+            <button class="mobile-only settings-item feeds-list-toggle js-feeds-list-toggle js-toggle-target" data-target=".mobile-toggle" data-toggle-overflow="true">
+                <span class="feeds-list-toggle__label">
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{function="_t('LEEDVIBES_MENU')"}</title>
+                        <use xlink:href="#svg-menu" />
+                    </svg>
+                    <span class="unreads-badge js-unreads-badge js-total-counter" title="{function="_t('LEEDVIBES_MARK_ALL_AS_READ')"}"><span data-count="number">{$unread['total']}</span> <span class="sr-only" data-count="text">{function="_t($unread['total'] > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span></span>
+                </span>
+            </button>
             <a href="." class="settings-item new-events js-new-events" data-sync-code="{$synchronisationCode}">
                 <svg
                     width="15"
