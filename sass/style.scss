@@ -230,11 +230,16 @@ $border-color-active: white;
 }
 
 .feed-add {
+    display: none;
     padding: 10px 5px;
     width: 100%;
     text-align: center;
     box-sizing: border-box;
     z-index: 100;
+
+    &[data-is-opened="true"] {
+        display: block;
+    }
 }
 
 .feed-add-title {
@@ -333,8 +338,6 @@ $feeds-list-toggle-transition: transform 0.3s;
     }
 
     &[data-is-opened="false"] {
-        display: block;
-
         @media($breakpoint-max) {
             transform: translate3d(0, -100%, 0);
         }
@@ -396,7 +399,6 @@ $feeds-list-toggle-transition: transform 0.3s;
     background-color: #4b4b4b;
 }
 
-html:not(.no-js) .feed-add,
 html:not(.no-js) .feed--closed {
     display: none;
 }

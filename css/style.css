@@ -618,12 +618,17 @@ button {
 }
 
 .feed-add {
+  display: none;
   padding: 10px 5px;
   width: 100%;
   text-align: center;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   z-index: 100;
+}
+
+.feed-add[data-is-opened="true"] {
+  display: block;
 }
 
 .feed-add-title {
@@ -739,10 +744,6 @@ button {
   }
 }
 
-.mobile-toggle[data-is-opened="false"] {
-  display: block;
-}
-
 @media (max-width: 650px) {
   .mobile-toggle[data-is-opened="false"] {
     -webkit-transform: translate3d(0, -100%, 0);
@@ -806,7 +807,6 @@ button {
   background-color: #4b4b4b;
 }
 
-html:not(.no-js) .feed-add,
 html:not(.no-js) .feed--closed {
   display: none;
 }
