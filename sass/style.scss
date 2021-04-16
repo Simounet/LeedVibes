@@ -334,7 +334,7 @@ $feeds-list-toggle-transition: transform 0.3s;
 .mobile-toggle {
     @media($breakpoint-max) {
         width: 100%;
-        max-height: calc(100vh - #{$settings-height});
+        max-height: calc(100% - #{$settings-height});
     }
 
     &[data-is-opened="false"] {

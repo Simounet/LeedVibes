@@ -740,7 +740,7 @@ button {
 @media (max-width: 650px) {
   .mobile-toggle {
     width: 100%;
-    max-height: calc(100vh - 60px);
+    max-height: calc(100% - 60px);
   }
 }
 
