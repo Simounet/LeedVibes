@@ -47,6 +47,13 @@ h1 {
 a {
     text-decoration: none;
 }
+
+a,
+.feeds-list-toggle,
+.folder__button {
+    touch-action: manipulation;
+}
+
 img,
 audio,
 canvas,

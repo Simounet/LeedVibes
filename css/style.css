@@ -417,6 +417,13 @@ a {
   text-decoration: none;
 }
 
+a,
+.feeds-list-toggle,
+.folder__button {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
 img,
 audio,
 canvas,
