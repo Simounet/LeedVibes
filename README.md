@@ -3,16 +3,16 @@
 ## Description
 
 LeedVibes Is Not Netvibes. :)
-This is a plugin for [Leed's](https://github.com/ldleman/Leed), the amazing RSS reader.
+This is a plugin for [Leed's](https://github.com/LeedRSS/Leed), the amazing RSS reader.
 ![LeedVibes screenshot](http://leedvibes.simounet.net/images/leedvibes-screenshot.png)
 
 ## Demo
 
-Feel free to try LeedVibes with [this demo instance](http://demo.leedvibes.simounet.net/).
+Feel free to try LeedVibes with [this demo instance](https://demo.leedvibes.simounet.net/).
 
 ## Requirements
 
-You need to have a working copy of [Leed v1.8 or higher](https://github.com/ldleman/Leed). If not look at the [Leed's install instructions](https://github.com/ldleman/Leed#installation-1).
+You need to have a working copy of [Leed v1.8 or higher](https://github.com/LeedRSS/Leed). If not look at the [Leed's install instructions](https://github.com/LeedRSS/Leed#installation-1).
 
 ## Install
 
