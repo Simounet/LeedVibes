@@ -201,16 +201,18 @@
         {/if}
         {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
             <div class="extra-settings">
-                <a href="action.php?action=logout" class="settings-item">
-                    <svg
-                        width="15"
-                        height="15"
-                        role="img"
-                    >
-                        <title>{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})</title>
-                        <use xlink:href="#svg-logout" />
-                    </svg>
-                </a>
+                {if="$myUser!=false"}
+                    <a href="action.php?action=logout" class="settings-item">
+                        <svg
+                            width="15"
+                            height="15"
+                            role="img"
+                        >
+                            <title>{function="_t('DISCONNECT')"} ({function="_t('IDENTIFIED_WITH',array($myUser->getLogin()))"})</title>
+                            <use xlink:href="#svg-logout" />
+                        </svg>
+                    </a>
+                {/if}
                 <button class="shortcuts-toggle js-shortcuts-toggle settings-item" title="{function="_t('LEEDVIBES_SHORTCUTS_BUTTON_TITLE')"}" >
                     <svg
                         width="15"
@@ -223,7 +225,9 @@
                 </button>
                 {function="Plugin::callHook("menu_post_folder_menu", array(&$myUser))"}
             </div>
+        {/if}
         </div>
+    {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
         </aside>
     {/if}
     {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
