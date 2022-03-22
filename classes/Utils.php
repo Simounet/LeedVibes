@@ -16,8 +16,7 @@ class Utils {
         $current_year = date('yyyy', $timestamp) == date('yyyy') ? true : false;
 
         if( $timestamp > $now ) {
-            $date_tmp = _t('LEEDVIBES_IN_THE_FUTURE');
-            $date['less-than-one-hour'] = true;
+            $date_tmp = date('j M Y', $timestamp);
         } elseif ( $less_than_one_minute ) {
             $date_tmp = _t('LEEDVIBES_NOW');
             $date['less-than-one-hour'] = true;
