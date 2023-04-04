@@ -457,7 +457,7 @@ function refreshEvents (syncCode) {
             break;
         default:
             getNewEvents(syncCode, urlVars);
-            cleanReadEvents();
+            hideReadEvents();
             break;
     }
 }
@@ -913,8 +913,10 @@ function getNewEvents (code, urlVars) {
     });
 }
 
-function cleanReadEvents () {
-    $('.js-event--read').remove();
+function hideReadEvents () {
+    $('.js-event--read')
+        .not('.hidden')
+        .addClass('hidden');
 }
 
 function cleanUnstarredEvents () {
