@@ -73,6 +73,16 @@
                     <span class="unreads-badge js-unreads-badge js-total-counter" title="{function="_t('LEEDVIBES_MARK_ALL_AS_READ')"}"><span data-count="number">{$unread['total']}</span> <span class="sr-only" data-count="text">{function="_t($unread['total'] > 1 ? 'LEEDVIBES_UNREADS' : 'LEEDVIBES_UNREAD')"}</span></span>
                 </span>
             </button>
+            <button class="undo-mark-as-read hidden js-undo-mark-as-read hidden">
+                <svg
+                    width="15"
+                    height="15"
+                    role="img"
+                >
+                    <title>{function="_t('LEEDVIBES_UNDO')"}</title>
+                    <use xlink:href="#svg-undo" />
+                </svg>
+            </button>
             <a href="." class="settings-item new-events js-new-events" data-sync-code="{$synchronisationCode}">
                 <svg
                     width="15"

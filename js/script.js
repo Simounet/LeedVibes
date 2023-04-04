@@ -1,5 +1,44 @@
 var eventObj;
 const idsDisplayed = [];
+const undoMarkAsRead = {
+    ids: [],
+    class: '.js-undo-mark-as-read',
+
+    addId: function (id) {
+        this.ids.push(id);
+        if (this.ids.length === 1) {
+            document.querySelector(this.class).classList.remove('hidden');
+        }
+    },
+
+    pop: function () {
+        const lastMarkAsReadEntryId = this.ids.pop();
+        if (this.ids.length === 0) {
+            document.querySelector(this.class).classList.add('hidden');
+        }
+        return lastMarkAsReadEntryId;
+    },
+
+    init: function () {
+        $(this.class).click(() => {
+            this.undoMarkAsRead();
+        });
+    },
+
+    undoMarkAsRead: function () {
+        'use strict';
+
+        if (this.ids.length === 0) {
+            return false;
+        }
+
+        const lastReadEntry = this.pop();
+        document
+            .querySelector('article[data-id="' + lastReadEntry + '"]')
+            .querySelector('.js-read-unread')
+            .click();
+    }
+};
 let anonymousState = 0;
 
 function _t (key, args) {
@@ -101,6 +140,7 @@ $(function () {
 
     anonymousState = $('[data-anonymous-state]').data('anonymous-state');
     darkTheme();
+    undoMarkAsRead.init();
 
     $('.wrapper').on('click keypress', '.js-event', function (event) {
         if (event.type === 'click' || event.which === 13) {
@@ -655,11 +695,12 @@ function readThis (element, id, callback) {
     const nextEvent = $('#' + id).next();
     const readUnreadButton = entry.find('.js-read-unread');
     const readUnreadImage = readUnreadButton.find('img');
+    const entryReadClasses = 'event--read js-event--read';
     if (!entry.hasClass('js-event--read')) {
         readUnreadButton.addClass('article__read-read');
         // Decrement feed number
         feedCounters(entry.data('feed-id'));
-        entry.addClass('event--read js-event--read');
+        entry.addClass(entryReadClasses);
         readUnreadImage.prop('alt', _t('LEEDVIBES_MARK_AS_UNREAD'));
 
         if ((entry.find('.js-leedvibes-article-content').css('display') === 'none') && element.hasClass('js-read-unread')) {
@@ -680,6 +721,7 @@ function readThis (element, id, callback) {
                 });
             }
         }
+        undoMarkAsRead.addId(id);
         $.ajax({
             url: './action.php?action=readContent',
             data: { id: id },
@@ -693,6 +735,7 @@ function readThis (element, id, callback) {
             }
         });
     } else {
+        entry.removeClass(entryReadClasses + ' hidden');
         readUnreadImage.prop('alt', _t('LEEDVIBES_MARK_AS_READ'));
         $.ajax({
             url: './action.php?action=unreadContent',

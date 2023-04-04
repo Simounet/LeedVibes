@@ -848,6 +848,27 @@ $shortcut-key-space: 20px;
     width: 30px;
 }
 
+.undo-mark-as-read {
+    position: fixed;
+    padding: 10px;
+    right: 10px;
+    bottom: 10px;
+    background-color: $sidebar-color-bg;
+    border-radius: 50%;
+    z-index: 100;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: #333;
+    }
+
+    @media($breakpoint-max) {
+        padding: 20px;
+        bottom: 70px;
+    }
+}
+
 /* MEDIA QUERIES */
 @media($breakpoint-max) {
     td {
