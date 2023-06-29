@@ -13,7 +13,7 @@
             <header class="article__header js-article__header">
                 {if="isset($value->favicon)"}{$value->favicon}{/if}
                 <span class="article__feed-title">{$value->feedName}</span>
-                <h1 class="article__title js-article__title" tabindex="0"><a href="{$value->getLink()}" target="_blank">{$value->getTitle()}</a></h1>
+                <h1 class="article__title js-article__title" tabindex="0"><a href="{$value->getLink()}" target="_blank">{function="strip_tags($value->getTitle())"}</a></h1>
                 <span class="article__description">{function="Functions::truncate(strip_tags($value->getDescription()),300)"}</span>
                 {if="$articleDisplayDate"}
                     <time class="article__date" title="{$value->datetime}" datetime="{$value->datetime}"{if="$value->dateLessThanOneHour"} data-timestamp="{$value->getPubdate()}"{/if}>{$value->dateValue}</time>
