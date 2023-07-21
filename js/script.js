@@ -56,7 +56,7 @@ function _t (key, args) {
     return value;
 }
 
-function darkTheme () {
+(function darkTheme () {
     const rootEl = document.querySelector('html');
     const themeDom = {
         darkClass: 'dark-theme',
@@ -122,29 +122,34 @@ function darkTheme () {
             });
         }
     };
+    const addListeners = () => {
+        $(function () {
+            'use strict';
+            const themeButtonLow = document.querySelector('.js-theme-toggle-set[data-theme="light"]');
+            themeButtonLow.addEventListener('click', () => {
+                themeDom.removeClass(rootEl);
+                themeCookie.setCookie(false);
+            });
+            const themeButtonHigh = document.querySelector('.js-theme-toggle-set[data-theme="dark"]');
+            themeButtonHigh.addEventListener('click', () => {
+                themeDom.addClass(rootEl);
+                themeCookie.setCookie(true);
+            });
+            const themeButtonAuto = document.querySelector('.js-theme-toggle-set[data-theme="auto"]');
+            themeButtonAuto.addEventListener('click', () => {
+                themeCookie.removeCookie();
+                preferedColorScheme.choose();
+            });
+        });
+    };
     preferedColorScheme.init();
-    const themeButtonLow = document.querySelector('.js-theme-toggle-set[data-theme="light"]');
-    themeButtonLow.addEventListener('click', () => {
-        themeDom.removeClass(rootEl);
-        themeCookie.setCookie(false);
-    });
-    const themeButtonHigh = document.querySelector('.js-theme-toggle-set[data-theme="dark"]');
-    themeButtonHigh.addEventListener('click', () => {
-        themeDom.addClass(rootEl);
-        themeCookie.setCookie(true);
-    });
-    const themeButtonAuto = document.querySelector('.js-theme-toggle-set[data-theme="auto"]');
-    themeButtonAuto.addEventListener('click', () => {
-        themeCookie.removeCookie();
-        preferedColorScheme.choose();
-    });
-}
+    addListeners();
+})();
 
 $(function () {
     'use strict';
 
     anonymousState = $('[data-anonymous-state]').data('anonymous-state');
-    darkTheme();
     undoMarkAsRead.init();
 
     $('.wrapper').on('click keypress', '.js-event', function (event) {
