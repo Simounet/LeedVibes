@@ -1,3 +1,8 @@
+$(window)
+    .data('ajaxready', true)
+    .data('page', 1)
+    .data('nblus', 0);
+
 var eventObj;
 const idsDisplayed = [];
 const undoMarkAsRead = {
@@ -262,11 +267,6 @@ $(function () {
         const button = $('.selected').find('.js-mark-as-read');
         markAsRead(button);
     });
-
-    $(window)
-        .data('ajaxready', true)
-        .data('page', 1)
-        .data('nblus', 0);
 });
 document.addEventListener('DOMContentLoaded', function (event) {
     const firstSentinelEl = document.getElementsByClassName('js-article__header')[0];
