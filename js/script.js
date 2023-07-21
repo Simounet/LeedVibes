@@ -146,6 +146,14 @@ function _t (key, args) {
     addListeners();
 })();
 
+const shareButtonAction = async (title, url) => {
+    const shareData = {
+        title,
+        url
+    };
+    await navigator.share(shareData);
+};
+
 $(function () {
     'use strict';
 
@@ -470,12 +478,17 @@ function refreshEvents (syncCode) {
 function getBubblingTarget (current, targetClass) {
     const parentEl = current.parents('.' + targetClass);
     return parentEl.length === 1
-        ? parentEl : current;
+        ? parentEl
+        : current;
 }
 
 function EventObject (event) {
     'use strict';
     this.target = $(event.target);
+
+    if (typeof event.target.dataset.shareTitle === 'string' && event.target.dataset.shareTitle.length > 0) {
+        shareButtonAction(event.target.dataset.shareTitle, event.target.dataset.shareUrl);
+    }
 
     this.entry = $(event.currentTarget);
     this.content = this.entry.find('.' + this.contentClass);
