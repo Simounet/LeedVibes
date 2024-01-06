@@ -476,6 +476,7 @@ button {
 }
 
 .wrapper {
+  padding-bottom: 80px;
   -webkit-box-flex: 1;
   -ms-flex: 1 1 0px;
   flex: 1 1 0;
@@ -487,7 +488,7 @@ button {
 @media (max-width: 650px) {
   .wrapper {
     margin-bottom: 0px;
-    padding-bottom: 60px;
+    padding-bottom: 140px;
   }
 }
 
@@ -530,7 +531,6 @@ button {
   display: block;
   white-space: nowrap;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
 
@@ -704,7 +704,6 @@ button {
   background-image: url("../images/close.svg");
   -webkit-transition: -webkit-transform 0.3s;
   transition: -webkit-transform 0.3s;
-  -o-transition: transform 0.3s;
   transition: transform 0.3s;
   transition: transform 0.3s, -webkit-transform 0.3s;
 }
@@ -721,7 +720,6 @@ button {
   left: 0;
   -webkit-transition: -webkit-transform 0.3s;
   transition: -webkit-transform 0.3s;
-  -o-transition: transform 0.3s;
   transition: transform 0.3s;
   transition: transform 0.3s, -webkit-transform 0.3s;
 }
@@ -737,7 +735,6 @@ button {
     position: fixed;
     background-color: #424242;
     -webkit-transition: all 130ms ease-in;
-    -o-transition: all 130ms ease-in;
     transition: all 130ms ease-in;
     will-change: transform;
     overflow: auto;
@@ -875,7 +872,6 @@ html:not(.no-js) .feed--closed {
   color: #555;
   font-size: 0.9em;
   overflow-x: hidden;
-  -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   vertical-align: middle;
 }
@@ -958,14 +954,12 @@ html:not(.no-js) .feed--closed {
   bottom: 0;
   width: 16em;
   background-image: -webkit-gradient(linear, right top, left top, color-stop(48%, white), to(rgba(255, 255, 255, 0)));
-  background-image: -o-linear-gradient(right, white 48%, rgba(255, 255, 255, 0) 100%);
   background-image: linear-gradient(to left, white 48%, rgba(255, 255, 255, 0) 100%);
 }
 
 .event:hover .article__description:after,
 .event--focused .article__description:after {
   background-image: -webkit-gradient(linear, right top, left top, color-stop(6em, #DDD), to(rgba(221, 221, 221, 0)));
-  background-image: -o-linear-gradient(right, #DDD 6em, rgba(221, 221, 221, 0) 100%);
   background-image: linear-gradient(to left, #DDD 6em, rgba(221, 221, 221, 0) 100%);
 }
 
@@ -1180,7 +1174,6 @@ html:not(.no-js) .feed--closed {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   -webkit-transition: border 0.2s ease-in-out 0s;
-  -o-transition: border 0.2s ease-in-out 0s;
   transition: border 0.2s ease-in-out 0s;
 }
 
@@ -1435,7 +1428,6 @@ button.settings-item:focus {
 
 .dark-theme .article__description::after {
   background-image: -webkit-gradient(linear, right top, left top, color-stop(48%, black), to(rgba(0, 0, 0, 0)));
-  background-image: -o-linear-gradient(right, black 48%, rgba(0, 0, 0, 0) 100%);
   background-image: linear-gradient(to left, black 48%, rgba(0, 0, 0, 0) 100%);
 }
 
@@ -1457,7 +1449,6 @@ button.settings-item:focus {
 .dark-theme .event:hover .article__description::after,
 .dark-theme .event--focused .article__description::after {
   background-image: -webkit-gradient(linear, right top, left top, color-stop(6em, #333), to(rgba(51, 51, 51, 0)));
-  background-image: -o-linear-gradient(right, #333 6em, rgba(51, 51, 51, 0) 100%);
   background-image: linear-gradient(to left, #333 6em, rgba(51, 51, 51, 0) 100%);
 }
 

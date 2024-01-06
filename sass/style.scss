@@ -96,6 +96,7 @@ button {
 }
 
 .wrapper {
+    padding-bottom: 80px;
     flex: 1 1 0;
     min-width: 0;
     min-height: 100vh;
@@ -106,7 +107,7 @@ button {
         // the content is read and infinite-scroll-end
         // shows up
         margin-bottom: 0px;
-        padding-bottom: 60px;
+        padding-bottom: 140px;
     }
 }
 .selected a {
