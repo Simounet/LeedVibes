@@ -32,7 +32,8 @@
     "gulp-sourcemaps": "3.x",
     "normalize.css": "^8.0.1",
     "sass": "^1.69.7",
-    "stylelint": "^15.9.0"
+    "stylelint": "^16.1.0",
+    "stylelint-config-standard-scss": "^13.0.0"
   },
   "dependencies": {
     "jquery": "^3.7.0",
