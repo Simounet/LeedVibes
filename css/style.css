@@ -883,6 +883,24 @@ html:not(.no-js) .feed--closed {
   }
 }
 
+.ui-side-reverse .ui-side-button {
+  -webkit-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+@media (min-width: 650px) {
+  .ui-side-reverse .ui-side-button {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .ui-side-reverse .article__header {
+    grid-template-areas: "favicon site date" "mark title favorite";
+  }
+}
+
 .feed-icon {
   margin-right: 0.3em;
   vertical-align: middle;

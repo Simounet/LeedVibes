@@ -470,6 +470,20 @@ html:not(.no-js) .feed--closed {
     }
 }
 
+.ui-side-reverse .ui-side-button {
+    transform: scaleX(-1);
+
+    @media($breakpoint-min) {
+        display: none;
+    }
+}
+
+.ui-side-reverse .article__header {
+    @media($breakpoint-max) {
+        grid-template-areas: "favicon site date" "mark title favorite";
+    }
+}
+
 .feed-icon {
     margin-right: 0.3em;
     vertical-align: middle;

@@ -298,7 +298,24 @@ $(function () {
         markAsRead(button);
     });
 });
+
+const uiSideToggle = function () {
+    const uiSideCookieKey = 'ui-side';
+    const uiSide = {
+        LEFT: 'left',
+        RIGHT: 'right'
+    };
+
+    document.querySelector('[data-js="ui-side"]').addEventListener('click', () => {
+        const usedHand = document.querySelector('html').classList.toggle('ui-side-reverse')
+            ? uiSide.LEFT
+            : uiSide.RIGHT;
+        cookieHelper.set(uiSideCookieKey, usedHand);
+    });
+};
+
 document.addEventListener('DOMContentLoaded', function (event) {
+    uiSideToggle();
     const firstSentinelEl = document.getElementsByClassName('js-article__header')[0];
     const articlesPerPage = $('[data-articles-per-page]').data('articles-per-page');
     if (typeof (firstSentinelEl) !== 'object') {
