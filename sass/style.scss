@@ -923,7 +923,7 @@ $shortcut-key-space: 20px;
 
 .dark-theme {
     .wrapper {
-        background-color: black;
+        background-color: #202020;
     }
 
     .article__header .article__feed-title {
@@ -939,8 +939,16 @@ $shortcut-key-space: 20px;
         color: #bdbdbd;
     }
 
+    .article__title a {
+        color: white;
+    }
+
+    [class~="event--read"] .article__title a {
+        color: #bdbdbd;
+    }
+
     .article__description::after {
-        background-image: linear-gradient(to left, black 48%, rgba(0, 0, 0, 0) 100%)
+        background-image: linear-gradient(to left, #202020 48%, rgba(0, 0, 0, 0) 100%)
     }
 
     .article-favorite,

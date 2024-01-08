@@ -1410,7 +1410,7 @@ button.settings-item:focus {
 }
 
 .dark-theme .wrapper {
-  background-color: black;
+  background-color: #202020;
 }
 
 .dark-theme .article__header .article__feed-title {
@@ -1426,9 +1426,17 @@ button.settings-item:focus {
   color: #bdbdbd;
 }
 
+.dark-theme .article__title a {
+  color: white;
+}
+
+.dark-theme [class~="event--read"] .article__title a {
+  color: #bdbdbd;
+}
+
 .dark-theme .article__description::after {
-  background-image: -webkit-gradient(linear, right top, left top, color-stop(48%, black), to(rgba(0, 0, 0, 0)));
-  background-image: linear-gradient(to left, black 48%, rgba(0, 0, 0, 0) 100%);
+  background-image: -webkit-gradient(linear, right top, left top, color-stop(48%, #202020), to(rgba(0, 0, 0, 0)));
+  background-image: linear-gradient(to left, #202020 48%, rgba(0, 0, 0, 0) 100%);
 }
 
 .dark-theme .article-favorite,
