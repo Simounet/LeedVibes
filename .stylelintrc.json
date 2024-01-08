@@ -3,9 +3,11 @@
   "rules": {
     "block-no-empty": null,
     "color-no-invalid-hex": true,
-    "selector-class-pattern": null,
+    "declaration-empty-line-before": null,
     "indentation": 4,
-    "unit-no-unknown": true,
-    "property-no-vendor-prefix": true
+    "property-no-vendor-prefix": true,
+    "scss/dollar-variable-empty-line-before": null,
+    "selector-class-pattern": null,
+    "unit-no-unknown": true
   }
 }

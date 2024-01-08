@@ -27,10 +27,7 @@ html {
     font-size: 62.5%;
     scrollbar-color: grey $sidebar-color-bg-darken;
 }
-body {
-    font-size: 1.3rem;
-    background-color: $sidebar-color-bg;
-}
+
 h1 {
     margin: 0;
 
@@ -38,6 +35,7 @@ h1 {
         font-size: 1.3em;
     }
 }
+
 a {
     text-decoration: none;
 }
@@ -46,6 +44,10 @@ a,
 .feeds-list-toggle,
 .folder__button {
     touch-action: manipulation;
+}
+
+iframe {
+    width: auto;
 }
 
 img,
@@ -64,15 +66,11 @@ video {
 }
 
 button,
-html input[type="button"], /* 1 */
+html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-    -webkit-appearance: button;
+    -webkit-appearance: button; // stylelint-disable-line property-no-vendor-prefix
     cursor: pointer;
-}
-
-iframe {
-    width: auto;
 }
 
 /* GENERAL STYLE */
@@ -80,6 +78,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     width: 99vw;
+    font-size: 1.3rem;
+    background-color: $sidebar-color-bg;
 
     @media($breakpoint-max) {
         display: block;
@@ -107,10 +107,11 @@ button {
         // Avoid extra margin-bottom when all
         // the content is read and infinite-scroll-end
         // shows up
-        margin-bottom: 0px;
+        margin-bottom: 0;
         padding-bottom: 140px;
     }
 }
+
 .selected a {
     color: #FFF;
     font-weight: bold;
@@ -150,6 +151,7 @@ button {
 
 /* FEED */
 $entry-space: 0.5em;
+
 .event {
     position: relative;
     padding: 0 $entry-space;
@@ -193,9 +195,7 @@ $border-color-active: white;
 .feed__item {
     display: flex;
     position: relative;
-    $padding : 0.6em;
-    padding-bottom: $padding;
-    padding-top: $padding;
+    padding: 0.6rem 0.4em;
     border-left: $border-base;
 
     &,
@@ -302,7 +302,8 @@ $border-color-active: white;
     overflow: hidden;
 }
 $feeds-list-toggle-transition: transform 0.3s;
-.feeds-list-toggle:before {
+
+.feeds-list-toggle::before {
     position: absolute;
     width: 15px;
     height: 15px;
@@ -313,7 +314,7 @@ $feeds-list-toggle-transition: transform 0.3s;
     transition: $feeds-list-toggle-transition;
 }
 
-.is-opened.feeds-list-toggle:before {
+.is-opened.feeds-list-toggle::before {
     transform: translate3d(0, 180%, 0);
 }
 
@@ -362,7 +363,7 @@ $feeds-list-toggle-transition: transform 0.3s;
     padding: 2px;
     z-index: 100;
     right: 5px;
-    bottom: 0px;
+    bottom: 0;
 }
 
 .feeds-list {
@@ -386,13 +387,16 @@ $feeds-list-toggle-transition: transform 0.3s;
 
 .folder__item a {
     margin: 0 0.3em;
+
     @extend %overflow-sidebar;
 }
+
 .folder__button {
     float: left;
     margin-right: 5px;
     padding: 0;
     width: 10%;
+
     @extend %button-focused;
 }
 
@@ -400,11 +404,6 @@ $feeds-list-toggle-transition: transform 0.3s;
     transform: rotate(270deg);
 }
 
-.folder__item,
-.feed__item {
-    padding-left: 0.4rem;
-    padding-right: 0.8rem;
-}
 .feed {
     padding: 4px 0;
     background-color: #4b4b4b;
@@ -429,6 +428,7 @@ html:not(.no-js) .feed--closed {
     padding: 0 0.4rem;
     color: white;
     font-size: 0.8em;
+
     @extend %button-focused;
 
     @media($breakpoint-max) {
@@ -456,25 +456,25 @@ html:not(.no-js) .feed--closed {
         white-space: inherit;
         min-height: 4em;
     }
+}
 
-    .article__feed-title {
-        display: inline-block;
-        width: 10%;
-        color: #555;
-        font-size: 0.9em;
-        overflow-x: hidden;
-        text-overflow: ellipsis;
-        line-height: 1.4;
-        vertical-align: middle;
+.article__feed-title {
+    display: inline-block;
+    width: 10%;
+    color: #555;
+    font-size: 0.9em;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    vertical-align: middle;
 
-        @media($breakpoint-max) {
-            width: auto;
-            grid-area: site;
-        }
+    @media($breakpoint-max) {
+        width: auto;
+        grid-area: site;
     }
 }
 
-html:not(.ui-side-reverse) .ui-side-button {
+.ui-side-button {
     @media($breakpoint-min) {
         display: none;
     }
@@ -502,8 +502,17 @@ html:not(.ui-side-reverse) .ui-side-button {
 }
 
 .article__title {
+    display: inline;
+    font-size: 1em;
+
     @media($breakpoint-max) {
+        display: inline-block;
         margin-left: 14%;
+        grid-area: title;
+    }
+
+    [class~="event--read"] & a {
+        color: $feed-event-read-color;
     }
 }
 
@@ -514,19 +523,6 @@ html:not(.ui-side-reverse) .ui-side-button {
     }
 }
 
-.article__title {
-    display: inline;
-    font-size: 1em;
-
-    @media($breakpoint-max) {
-        display: inline-block;
-        grid-area: title;
-    }
-
-    [class~="event--read"] & a {
-        color: $feed-event-read-color;
-    }
-}
 .article__description {
     display: inline-block;
     margin-left: 0.4em;
@@ -544,7 +540,7 @@ html:not(.ui-side-reverse) .ui-side-button {
         display: none;
     }
 
-    &:after {
+    &::after {
         content: "";
         display: block;
         position: absolute;
@@ -552,11 +548,10 @@ html:not(.ui-side-reverse) .ui-side-button {
         top: 0;
         bottom: 0;
         width: 16em;
-        $support-for-original-webkit-gradients : false;
-        background-image: linear-gradient(to left, white 48%, rgba(255, 255, 255, 0) 100%);
+        background-image: linear-gradient(to left, white 48%, rgb(255 255 255 / 0%) 100%);
 
-        .event:hover &,
-        .event--focused & {
+        .event--focused &,
+        .event:hover & {
             background-image: linear-gradient(to left, $feed-bgc-used 6em, rgba($feed-bgc-used, 0) 100%);
 
             @media($breakpoint-max) {
@@ -570,6 +565,7 @@ html:not(.ui-side-reverse) .ui-side-button {
         }
     }
 }
+
 .article__date {
     position: absolute;
     right: $action-icon-width * 2 + 5px;
@@ -624,6 +620,7 @@ html:not(.ui-side-reverse) .ui-side-button {
     align-items: center;
     top: 0;
     bottom: 0;
+
     @extend %button-focused;
 
     &:hover,
@@ -716,6 +713,7 @@ html:not(.ui-side-reverse) .ui-side-button {
 
 .user-login {
     margin: 1em auto;
+    flex-direction: column;
 }
 
 .settings {
@@ -732,10 +730,6 @@ html:not(.ui-side-reverse) .ui-side-button {
         box-sizing: border-box;
         z-index: 1000;
     }
-}
-
-.user-login {
-    flex-direction: column;
 }
 
 .settings-item {
@@ -769,6 +763,7 @@ button.settings-item {
     min-width: 7em;
     width: 35%;
 }
+
 .settings__fields input[type='text'],
 .settings__fields input[type='password'],
 .settings__fields input[type='submit'] {
@@ -790,6 +785,7 @@ button.settings-item {
 .animation-spin {
     animation: spin 2s linear infinite;
 }
+
 @keyframes spin {
     100% { transform: rotate(360deg); }
 }
@@ -834,14 +830,15 @@ button.settings-item {
 }
 
 $shortcut-key-space: 20px;
+
 .shortcut-key {
     display: inline-block;
     margin-right: $shortcut-key-space;
-    padding: 5px 5px 10px 5px;
+    padding: 5px 5px 10px;
     min-width: 20px;
-    color: #777777;
+    color: #777;
     font-size: 12px;
-    background-color: #DDDDDD;
+    background-color: #DDD;
     border: 2px solid #F9F7F7;
     border-bottom: 4px solid #898989;
     border-right: 4px solid #898989;
@@ -976,7 +973,7 @@ $shortcut-key-space: 20px;
     }
 
     .article__description::after {
-        background-image: linear-gradient(to left, #202020 48%, rgba(0, 0, 0, 0) 100%)
+        background-image: linear-gradient(to left, #202020 48%, rgb(0 0 0 / 0%) 100%)
     }
 
     .article-favorite,
@@ -993,8 +990,8 @@ $shortcut-key-space: 20px;
         background-color: #333;
     }
 
-    .event:hover .article__description::after,
-    .event--focused .article__description::after {
-        background-image: linear-gradient(to left, #333 6em, rgba(51, 51, 51, 0) 100%);
+    .event--focused .article__description::after,
+    .event:hover .article__description::after {
+        background-image: linear-gradient(to left, #333 6em, rgb(51 51 51 / 0%) 100%);
     }
 }
