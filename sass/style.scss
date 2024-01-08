@@ -23,11 +23,6 @@ $settings-horizontal-padding: 13px;
 $settings-min-height: 34px;
 $settings-height: $settings-horizontal-padding * 2 + $settings-min-height;
 
-@import "normalize";
-
-/* MIXINS */
-@import "partials/mixins/_helpers.scss";
-
 /* RESET */
 html {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
@@ -68,6 +63,14 @@ video {
         display: block;
         margin: 0 auto;
     }
+}
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
 }
 
 iframe {
@@ -170,11 +173,11 @@ $entry-space: 0.5em;
 }
 
 /* SIDEBAR */
-$border-base: em( 5px ) solid transparent;
+$border-base: 5px solid transparent;
 $border-color-active: white;
 
 .sidebar {
-    flex: 0 0 em( 300px );
+    flex: 0 0 270px;
     font-size: 0.9em;
     overflow: hidden;
 
@@ -192,7 +195,7 @@ $border-color-active: white;
 .feed__item {
     display: flex;
     position: relative;
-    $padding : 0.5em;
+    $padding : 0.6em;
     padding-bottom: $padding;
     padding-top: $padding;
     border-left: $border-base;
@@ -354,6 +357,7 @@ $feeds-list-toggle-transition: transform 0.3s;
 }
 
 .unreads-badge {
+    color: white;
     background: #555;
     position: absolute;
     border-radius: 50%;
@@ -425,6 +429,7 @@ html:not(.no-js) .feed--closed {
 
 .mark-as-read {
     padding: 0 0.4rem;
+    color: white;
     font-size: 0.8em;
     @extend %button-focused;
 
@@ -461,6 +466,7 @@ html:not(.no-js) .feed--closed {
         font-size: 0.9em;
         overflow-x: hidden;
         text-overflow: ellipsis;
+        line-height: 1.4;
         vertical-align: middle;
 
         @media($breakpoint-max) {

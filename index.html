@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{$delimiter=' · '}{if="isset($currentFeed)"}{$currentFeed->getName()}{$delimiter}{/if}{if="isset($currentFolder)"}{$currentFolder->getName()}{$delimiter}{/if}LeedVibes</title>
+    <link rel="stylesheet" href="css/normalize.css?v=8.0.1" media="all">
     <link rel="stylesheet" href="css/style.css" media="all">
     <meta name="viewport" content="width=device-width">
     {function="Plugin::callLink()"}

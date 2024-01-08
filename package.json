@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "lint": "./node_modules/.bin/stylelint sass/style.scss && ./node_modules/.bin/eslint js/script.js && ./node_modules/.bin/eslint tests/index.js",
-    "deps:update": "cp node_modules/jquery/dist/jquery.min.js js/ && cp node_modules/mousetrap/mousetrap.min.js js/"
+    "deps:update": "cp node_modules/normalize.css/normalize.css css/normalize.css && cp node_modules/jquery/dist/jquery.min.js js/ && cp node_modules/mousetrap/mousetrap.min.js js/"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "gulp-autoprefixer": "^9.0.0",
     "gulp-sass": "5.x",
     "gulp-sourcemaps": "3.x",
+    "normalize.css": "^8.0.1",
     "sass": "^1.69.7",
     "stylelint": "^15.9.0"
   },
