@@ -279,6 +279,7 @@ button {
   background-image: url("../images/close.svg");
   transition: transform 0.3s;
 }
+
 .is-opened.feeds-list-toggle:before {
   transform: translate3d(0, 180%, 0);
 }

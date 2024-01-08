@@ -1,6 +1,4 @@
 // VARS
-$font-size-base: 13px;
-$sidebar-button-size: 10%;
 $settings-padding: 0.5em 1.5em;
 $sidebar-color: #fff;
 $sidebar-color-bg: #424242;
@@ -313,10 +311,10 @@ $feeds-list-toggle-transition: transform 0.3s;
     content: '';
     background-image: url( '../images/close.svg' );
     transition: $feeds-list-toggle-transition;
+}
 
-    @at-root .is-opened#{&} {
-        transform: translate3d(0, 180%, 0);
-    }
+.is-opened.feeds-list-toggle:before {
+    transform: translate3d(0, 180%, 0);
 }
 
 .feeds-list-toggle__label {
@@ -394,7 +392,7 @@ $feeds-list-toggle-transition: transform 0.3s;
     float: left;
     margin-right: 5px;
     padding: 0;
-    width: $sidebar-button-size;
+    width: 10%;
     @extend %button-focused;
 }
 
