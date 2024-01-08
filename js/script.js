@@ -56,6 +56,23 @@ function _t (key, args) {
     return value;
 }
 
+const cookieHelper = {
+    set: (name, value) => {
+        document.cookie = `${name}=${value};samesite=Lax;path=/;max-age=31536000`;
+    },
+
+    remove: (name) => {
+        document.cookie = `${name}=auto;samesite=Lax;path=/;max-age=0`;
+    },
+
+    exists: (name) => {
+        return document.cookie
+            .split(';')
+            .map((cookie) => cookie.split('='))
+            .filter((cookie) => cookie[0].trim() === name).length;
+    }
+};
+
 (function darkTheme () {
     const rootEl = document.querySelector('html');
     const themeDom = {
@@ -87,15 +104,15 @@ function _t (key, args) {
 
         setCookie (isDarkTheme) {
             const value = this.getValue(isDarkTheme);
-            document.cookie = `${this.name}=${value};samesite=Lax;path=/;max-age=31536000`;
+            cookieHelper.set(this.name, value);
         },
 
         removeCookie () {
-            document.cookie = `${this.name}=auto;samesite=Lax;path=/;max-age=0`;
+            cookieHelper.remove(this.name);
         },
 
         exists () {
-            return document.cookie.split(';').map((cookie) => cookie.split('=')).filter((cookie) => cookie[0].trim() === 'theme').length;
+            return cookieHelper.exists(this.name);
         }
     };
     const preferedColorScheme = {
