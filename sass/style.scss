@@ -470,12 +470,14 @@ html:not(.no-js) .feed--closed {
     }
 }
 
-.ui-side-reverse .ui-side-button {
-    transform: scaleX(-1);
-
+html:not(.ui-side-reverse) .ui-side-button {
     @media($breakpoint-min) {
         display: none;
     }
+}
+
+.ui-side-reverse .ui-side-button {
+    transform: scaleX(-1);
 }
 
 .ui-side-reverse .article__header {

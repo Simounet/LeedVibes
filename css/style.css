@@ -883,16 +883,16 @@ html:not(.no-js) .feed--closed {
   }
 }
 
+@media (min-width: 650px) {
+  html:not(.ui-side-reverse) .ui-side-button {
+    display: none;
+  }
+}
+
 .ui-side-reverse .ui-side-button {
   -webkit-transform: scaleX(-1);
   -ms-transform: scaleX(-1);
   transform: scaleX(-1);
-}
-
-@media (min-width: 650px) {
-  .ui-side-reverse .ui-side-button {
-    display: none;
-  }
 }
 
 @media (max-width: 650px) {

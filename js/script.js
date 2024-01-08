@@ -450,7 +450,7 @@ function markAsRead (button) {
     }
 
     $.ajax({
-        url: url
+        url
     })
         .done(function () {
             const isTotalCounterButton = button.hasClass('js-total-counter');
@@ -661,7 +661,8 @@ EventObject.prototype = {
             .toggleClass('js-favorite--favorited');
 
         const favDataFavorite = (this.entry.data('favorite') === 1)
-            ? 0 : 1;
+            ? 0
+            : 1;
         this.entry.data('favorite', favDataFavorite);
         $.ajax({
             url: './action.php?action=' + favAction + 'Favorite',
@@ -687,10 +688,12 @@ function toggleFolder (button) {
     const folderNameText = folderNameEl.text();
     const isAriaExpanded = button.attr('aria-expanded') === 'true';
     const newAriaExpanded = isAriaExpanded
-        ? 'false' : 'true';
+        ? 'false'
+        : 'true';
     button.attr('aria-expanded', newAriaExpanded);
     const buttonTitle = isAriaExpanded
-        ? 'LEEDVIBES_FOLDER_TOGGLE_OFF' : 'LEEDVIBES_FOLDER_TOGGLE_ON';
+        ? 'LEEDVIBES_FOLDER_TOGGLE_OFF'
+        : 'LEEDVIBES_FOLDER_TOGGLE_ON';
     button.prop('title', _t(buttonTitle, [folderNameText]));
 
     feedBloc.slideToggle(200, function () {
@@ -699,7 +702,8 @@ function toggleFolder (button) {
     button.toggleClass('folder-closed');
 
     const open = isAriaExpanded
-        ? 0 : 1;
+        ? 0
+        : 1;
     $.ajax({
         url: './action.php?action=changeFolderState',
         data: { id: folderBloc.data('id'), isopen: open }
@@ -776,7 +780,7 @@ function readThis (element, id, callback) {
         undoMarkAsRead.addId(id);
         $.ajax({
             url: './action.php?action=readContent',
-            data: { id: id },
+            data: { id },
             success: function (msg) {
                 if (!anonymousState && msg.status === 'noconnect') {
                     alert(msg.texte);
@@ -791,7 +795,7 @@ function readThis (element, id, callback) {
         readUnreadImage.prop('alt', _t('LEEDVIBES_MARK_AS_READ'));
         $.ajax({
             url: './action.php?action=unreadContent',
-            data: { id: id },
+            data: { id },
             success: function (msg) {
                 if (!anonymousState && msg.status === 'noconnect') {
                     alert(msg.texte);
