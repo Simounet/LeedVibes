@@ -27,7 +27,6 @@
     "eslint-plugin-standard": "^5.0.0",
     "gulp": "4.x",
     "gulp-autoprefixer": "^8.0.0",
-    "gulp-real-favicon": "0.x",
     "gulp-sass": "5.x",
     "gulp-sourcemaps": "3.x",
     "node-sass": "^9.0.0",
