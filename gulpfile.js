@@ -1,9 +1,13 @@
 'use strict';
 
-const gulp = require('gulp');
-const sass = require('gulp-sass')(require('node-sass'));
-const sourcemaps = require('gulp-sourcemaps');
-const autoprefixer = require('gulp-autoprefixer');
+import gulp from 'gulp';
+import autoprefixer from 'gulp-autoprefixer';
+
+import * as dartSass from 'sass';
+import gulpSass from 'gulp-sass';
+import sourcemaps from 'gulp-sourcemaps';
+
+const sass = gulpSass(dartSass);
 
 gulp.task('css', () => {
     return gulp.src('./sass/**/*.scss')

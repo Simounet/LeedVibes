@@ -1,6 +1,7 @@
 {
   "name": "leedvibes",
   "version": "1.0.0",
+  "type": "module",
   "browserslist": [
     "last 3 versions"
   ],
@@ -26,10 +27,10 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-standard": "^5.0.0",
     "gulp": "4.x",
-    "gulp-autoprefixer": "^8.0.0",
+    "gulp-autoprefixer": "^9.0.0",
     "gulp-sass": "5.x",
     "gulp-sourcemaps": "3.x",
-    "node-sass": "^9.0.0",
+    "sass": "^1.69.7",
     "stylelint": "^15.9.0"
   },
   "dependencies": {
