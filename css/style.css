@@ -675,16 +675,16 @@ button {
 }
 
 .sidebar > section button,
-.feed-add-button {
+.button {
   padding: 1em 2em;
   color: #fff;
   background-color: #484848;
 }
 
 .sidebar > section button:hover, .sidebar > section button:active, .sidebar > section button:focus,
-.feed-add-button:hover,
-.feed-add-button:active,
-.feed-add-button:focus {
+.button:hover,
+.button:active,
+.button:focus {
   color: #484848;
   background-color: #DDD;
 }
@@ -1115,6 +1115,20 @@ html:not(.no-js) .feed--closed {
 .leedvibes-article-content__infos a {
   font-size: 2.8rem;
   line-height: 1;
+}
+
+.leedvibes-article-content-top-options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .leedvibes-article-content__switch-view {

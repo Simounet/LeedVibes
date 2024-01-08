@@ -283,7 +283,7 @@ $border-color-active: white;
 }
 
 .sidebar > section button,
-.feed-add-button {
+.button {
     padding: 1em 2em;
     color: $sidebar-color;
     background-color: $folder-separator;
@@ -671,6 +671,14 @@ html:not(.ui-side-reverse) .ui-side-button {
         line-height: 1;
     }
 }
+
+.leedvibes-article-content-top-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 // [todo] - Do a better style
 .leedvibes-article-content__switch-view {
     display: none;
