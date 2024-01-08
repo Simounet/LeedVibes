@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "browserslist": [
-    "last 3 versions"
+    "defaults"
   ],
   "scripts": {
     "lint": "./node_modules/.bin/stylelint sass/style.scss && ./node_modules/.bin/eslint js/script.js && ./node_modules/.bin/eslint tests/index.js",
