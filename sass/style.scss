@@ -185,7 +185,7 @@ $border-color-active: white;
         color: $sidebar-color;
     }
 
-    .settings__fields {
+    .login-form {
         padding: 20%;
     }
 
@@ -713,6 +713,7 @@ html:not(.no-js) .feed--closed {
 
 .user-login {
     margin: 1em auto;
+    min-width: 250px;
     flex-direction: column;
 }
 
@@ -758,19 +759,51 @@ button.settings-item {
     }
 }
 
-.settings__fields input[type='text'],
-.settings__fields input[type='password'] {
-    min-width: 7em;
-    width: 35%;
+.login-form {
+    width: 100%;
 }
 
-.settings__fields input[type='text'],
-.settings__fields input[type='password'],
-.settings__fields input[type='submit'] {
+.login-title {
+    margin-bottom: 20px;
+    font-size: 2rem;
+
+    @media($breakpoint-max) {
+        margin-bottom: 10px;
+    }
+}
+
+.login-logo {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    width: 100px;
+    filter: invert(100%);
+
+    @media($breakpoint-max) {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        width: 50px;
+    }
+}
+
+.login-input {
+    width: 60%;
+}
+
+.login-input,
+.login-submit {
     display: block;
-    margin: 0.4em auto;
+    margin: 0.4em auto 10px;
     padding: 0.5em;
     color: $sidebar-color-bg-darken;
+}
+
+.login-submit {
+    margin-top: 40px;
+}
+
+.login-remember-me {
+    display: block;
+    margin: 20px 0;
 }
 
 .extra-settings {
