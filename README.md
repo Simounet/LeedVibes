@@ -49,4 +49,4 @@ LeedVibes loves friends. You can totally use it alone but adding this bunch of p
 
 ## Licence
 
-LeedVibes is under [MIT License](http://opensource.org/licenses/MIT).
+LeedVibes is under [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.html).
