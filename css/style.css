@@ -626,7 +626,7 @@ html:not(.no-js) .feed--closed {
   line-height: 1;
 }
 
-.leedvibes-article-content-top-options {
+.leedvibes-article-content-options {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
