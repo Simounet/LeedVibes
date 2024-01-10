@@ -47,6 +47,10 @@ video {
   margin: 0 auto;
 }
 
+pre {
+  white-space: pre-wrap;
+}
+
 button,
 html input[type=button],
 input[type=reset],
