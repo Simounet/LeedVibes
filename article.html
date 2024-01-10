@@ -46,10 +46,8 @@
                 <button class="leedvibes-article-content__switch-view js-switch-view" data-view="{$value->view}">{if="$value->view == 0"}{function="_t('SITE_VIEW')"}{else}{function="_t('RSS_VIEW')"}{/if}</button>
             {/if}
             {function="Plugin::callHook("event_post_title", array(&$value))"}
-            {function="Plugin::callHook("event_pre_content", array(&$value))"}
             {* [todo] - Find a better way to display content than an empty div *}
             <div class="leedvibes-article-content js-leedvibes-article-content" data-article-url="{$value->getLink()}"></div>
-            {function="Plugin::callHook("event_post_content", array(&$value))"}
         </article>
         {function="Plugin::callHook("event_post_section", array(&$value))"}
 {/loop}

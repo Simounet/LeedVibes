@@ -7,5 +7,7 @@
             <button class="button" data-share-title="{$value->getTitle()}" data-share-url="{$value->getLink()}">{function="_t('LEEDVIBES_SHARE')"}</button>
         </div>
     </header>
+    {function="Plugin::callHook("event_pre_content", array(&$value))"}
     {$value->getContent()}
+    {function="Plugin::callHook("event_post_content", array(&$value))"}
 </div>
