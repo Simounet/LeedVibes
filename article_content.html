@@ -8,8 +8,9 @@
     </header>
     {function="Plugin::callHook("event_pre_content", array(&$value))"}
     {$value->getContent()}
+    {function="Plugin::callHook("event_post_content", array(&$value))"}
     <div class="leedvibes-article-content-options">
-        {function="Plugin::callHook("event_post_content", array(&$value))"}
+        {function="Plugin::callHook("event_share_actions", array(&$value))"}
         <button class="button" data-share-title="{$value->getTitle()}" data-share-url="{$value->getLink()}">{function="_t('LEEDVIBES_SHARE')"}</button>
     </div>
 </div>
