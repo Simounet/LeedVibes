@@ -1,7 +1,6 @@
 {$last_event=count($events)-1}
 {loop="$events"}
         {function="Plugin::callHook("event_pre_section", array(&$value))"}
-        {* [fix] - undefined $value->view if LeedRSSOrSiteView plugin is not installed *}
         <article
             class="event js-event{if="$value->getUnread() == 0"} event--read js-event--read{/if}{if="$key == $last_event"} event--new-last{/if}"
             data-id="{$value->getId()}"
@@ -43,9 +42,6 @@
                     </svg>
                 </button>
             </header>
-            {if="isset($value->view)"}
-                <button class="leedvibes-article-content__switch-view js-switch-view" data-view="{$value->view}">{if="$value->view == 0"}{function="_t('SITE_VIEW')"}{else}{function="_t('RSS_VIEW')"}{/if}</button>
-            {/if}
             {function="Plugin::callHook("event_post_title", array(&$value))"}
             {* [todo] - Find a better way to display content than an empty div *}
             <div class="leedvibes-article-content js-leedvibes-article-content" data-article-url="{$value->getLink()}"></div>

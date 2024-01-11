@@ -288,7 +288,9 @@ $border-color-active: white;
 }
 
 .sidebar > section button,
-.button {
+.button,
+.leedvibes-article-meta button,
+.leedvibes-article-meta .button {
     padding: 1em 2em;
     color: $sidebar-color;
     background-color: $folder-separator;
@@ -684,24 +686,10 @@ html:not(.no-js) .feed--closed {
     align-items: center;
 }
 
-// [todo] - Do a better style
-.leedvibes-article-content__switch-view {
-    display: none;
-    position: absolute;
-    right: 8em;
-    top: 0.4em;
-    background: none;
-    border: 1px solid $feed-event-read-color;
-    z-index: 20;
-
-    @media($breakpoint-max) {
-        top: 2.4em;
-        right: 4em;
-    }
-
-    .event--focus & {
-        display: inherit;
-    }
+.leedvibes-article-meta button,
+.leedvibes-article-meta .button {
+    margin-left: 5px;
+    padding: 5px 10px;
 }
 
 /* USER SETTINGS */
