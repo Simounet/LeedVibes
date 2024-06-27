@@ -39,4 +39,13 @@ class Utils {
 
         return $date;
     }
+
+    public function getTitle(Event $event): string
+    {
+        $eventTitle = $event->getTitle();
+        return strlen($eventTitle) === 0 ?
+            _t('LEEDVIBES_NO_TITLE')
+            : strip_tags($eventTitle);
+
+    }
 }
