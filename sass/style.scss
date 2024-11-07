@@ -77,6 +77,11 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+:fullscreen {
+    background-color: white;
+    overflow-y: scroll;
+}
+
 /* GENERAL STYLE */
 body {
     display: flex;
@@ -973,6 +978,8 @@ $shortcut-key-space: 20px;
 }
 
 .dark-theme {
+
+    :fullscreen,
     .wrapper {
         background-color: #202020;
     }
@@ -1020,4 +1027,29 @@ $shortcut-key-space: 20px;
     .event:hover .article__description::after {
         background-image: linear-gradient(to left, #333 6em, rgb(51 51 51 / 0%) 100%);
     }
+}
+
+.leedvibes-article-content--rss:fullscreen :not(:has(figure, img)),
+.leedvibes-article-content--rss:fullscreen img {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.leedvibes-article-content--rss:fullscreen .leedvibes-article-content__infos {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.leedvibes-article-content--rss:fullscreen .article-fullscreen-button {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+}
+
+.leedvibes-article-content--rss:fullscreen img {
+    width: auto;
+    margin: 0 auto;
+    max-width: initial;
+    max-width: 90vw;
+    max-height: 90vh;
 }

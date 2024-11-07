@@ -4,6 +4,17 @@
         <div class="leedvibes-article-meta">
             {if="$creator"}<span class="article-author">{$creator}</span> - {/if}<span class="article-pubdate">{function="date('H:i Y-m-d', $value->getPubdate())"}</span>
             {function="Plugin::callHook("event_post_top_options", array(&$value))"}
+            <button class="article-fullscreen-button" data-js="article-fullscreen-button">Fullscreen</button>
+            <script>
+                document.querySelector('[data-js="article-fullscreen-button"]').addEventListener('click', function() {
+                    const articleContent = this.closest('.leedvibes-article-content--rss');
+                    if(document.fullscreenElement) {
+                        document.exitFullscreen();
+                    } else {
+                        articleContent.requestFullscreen();
+                    }
+                });
+            </script>
         </div>
     </header>
     {function="Plugin::callHook("event_pre_content", array(&$value))"}

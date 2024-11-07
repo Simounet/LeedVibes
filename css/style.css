@@ -59,6 +59,11 @@ input[type=submit] {
   cursor: pointer;
 }
 
+:fullscreen {
+  background-color: white;
+  overflow-y: scroll;
+}
+
 /* GENERAL STYLE */
 body {
   display: flex;
@@ -922,6 +927,7 @@ button.settings-item:focus {
   border: 0;
 }
 
+.dark-theme :fullscreen,
 .dark-theme .wrapper {
   background-color: #202020;
 }
@@ -958,5 +964,30 @@ button.settings-item:focus {
 .dark-theme .event--focused .article__description::after,
 .dark-theme .event:hover .article__description::after {
   background-image: linear-gradient(to left, #333 6em, rgba(51, 51, 51, 0) 100%);
+}
+
+.leedvibes-article-content--rss:fullscreen :not(:has(figure, img)),
+.leedvibes-article-content--rss:fullscreen img {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.leedvibes-article-content--rss:fullscreen .leedvibes-article-content__infos {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.leedvibes-article-content--rss:fullscreen .article-fullscreen-button {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+
+.leedvibes-article-content--rss:fullscreen img {
+  width: auto;
+  margin: 0 auto;
+  max-width: initial;
+  max-width: 90vw;
+  max-height: 90vh;
 }
 /*# sourceMappingURL=style.css.map */
