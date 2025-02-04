@@ -509,7 +509,7 @@ html:not(.no-js) .feed--closed {
   }
 }
 .event--focus .article__description {
-  display: none;
+  opacity: 0;
 }
 .article__description::after {
   content: "";

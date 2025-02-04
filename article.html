@@ -10,10 +10,10 @@
             {function="Plugin::callHook("event_pre_title", array(&$value))"}
             <header class="article__header js-article__header">
                 {if="isset($value->favicon)"}{$value->favicon}{/if}
-                <span class="article__feed-title">{$value->feedName}</span>
+                <a href="./?action=selectedFeed&amp;feed={$value->getFeed()}" class="article__feed-title" title="{function="_t('LEEDVIBES_FILTER_BY_FEED', array(htmlentities($value->feedName)))"}">{$value->feedName}</a>
                 <h1 class="article__title js-article__title" tabindex="0"><a href="{$value->getLink()}" target="_blank">{function="(new Utils())->getTitle($value)"}</a></h1>
                 {if="$value->getDescription()"}
-                    <span class="article__description">{function="Functions::truncate(strip_tags($value->getDescription()),300)"}</span>
+                    <span class="article__description js-article__description">{function="Functions::truncate(strip_tags($value->getDescription()),300)"}</span>
                 {/if}
                 {if="$articleDisplayDate"}
                     <time class="article__date" title="{$value->datetime}" datetime="{$value->datetime}"{if="$value->dateLessThanOneHour"} data-timestamp="{$value->getPubdate()}"{/if}>{$value->dateValue}</time>

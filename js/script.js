@@ -551,8 +551,10 @@ function EventObject (event) {
     // Or on the entry's header
     if (!this.target.hasClass(this.readButtonClass) &&
         (
-            this.target.parents('.' + this.headerClass).length ||
-            this.target.hasClass(this.headerClass)
+            this.target.parents('.' + this.titleClass).length ||
+            this.target.hasClass(this.titleClass) ||
+            this.target.parents('.' + this.articleClass).length ||
+            this.target.hasClass(this.articleClass)
         )
     ) {
         event.preventDefault();
@@ -561,7 +563,8 @@ function EventObject (event) {
 }
 
 EventObject.prototype = {
-    headerClass: 'js-article__header',
+    titleClass: 'js-article__title',
+    articleClass: 'js-article__description',
     contentClass: 'js-leedvibes-article-content',
     readButtonClass: 'js-read-unread',
     favoriteClass: 'js-favorite',

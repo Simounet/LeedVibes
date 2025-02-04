@@ -548,7 +548,7 @@ html:not(.no-js) .feed--closed {
     }
 
     .event--focus & {
-        display: none;
+        opacity: 0;
     }
 
     &::after {

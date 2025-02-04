@@ -4,6 +4,7 @@
   "LEEDVIBES_AUTHENTICATION": "Authentication",
   "LEEDVIBES_CONNECTION": "Connection",
   "LEEDVIBES_FEED_MARK_AS_READ": "Mark as read all the events from the $1's feed",
+  "LEEDVIBES_FILTER_BY_FEED": "Filter by $1 feed events",
   "LEEDVIBES_FOLDER_MARK_AS_READ": "Mark as read all the events from the $1's folder",
   "LEEDVIBES_FOLDER_TOGGLE_OFF": "Show the feed list of the $1 folder",
   "LEEDVIBES_FOLDER_TOGGLE_ON": "Hide the feed list of the $1 folder",
