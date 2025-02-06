@@ -1,0 +1,15 @@
+<div class="user-login">
+    {if="($configurationManager->get('articleDisplayAnonymous')=='0')"}
+        <img src="images/leed-logo.svg" alt="" class="login-logo">
+        <h1 class="login-title">{function="_t('LEEDVIBES_AUTHENTICATION')"}</h1>
+    {/if}
+    <form action="action.php?action=login" class="login-form" method="POST">
+        <input type="text" name="login" class="login-input" placeholder="{function="_t('LOGIN')"}" autocapitalize="none" autofocus/>
+        <input type="password" name="password" class="login-input" placeholder="{function="_t('PASSWORD')"}"/>
+        <label class="login-remember-me">
+            <input type="checkbox" name="rememberMe" />
+            <span>{function="_t('REMEMBER_ME')"}</span>
+        </label>
+        <input type="submit" class="login-submit" value="{function="_t('LEEDVIBES_CONNECTION')"}" />
+    </form>
+</div>

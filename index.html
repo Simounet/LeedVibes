@@ -27,34 +27,23 @@
     {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
         <aside id="sidebar" class="sidebar">
     {/if}
-    {if="!$myUser"}
-        <div class="user-login">
-            {if="($configurationManager->get('articleDisplayAnonymous')=='0')"}
-                <img src="images/leed-logo.svg" alt="" class="login-logo">
-                <h1 class="login-title">{function="_t('LEEDVIBES_AUTHENTICATION')"}</h1>
-            {/if}
-            <form action="action.php?action=login" class="login-form" method="POST">
-                <input type="text" name="login" class="login-input" placeholder="{function="_t('LOGIN')"}" autocapitalize="none" autofocus/>
-                <input type="password" name="password" class="login-input" placeholder="{function="_t('PASSWORD')"}"/>
-                <label class="login-remember-me">
-                    <input type="checkbox" name="rememberMe" />
-                    <span>{function="_t('REMEMBER_ME')"}</span>
-                </label>
-                <input type="submit" class="login-submit" value="{function="_t('LEEDVIBES_CONNECTION')"}" />
-            </form>
-        </div>
-    {else}
+    {if="!$myUser && ($configurationManager->get('articleDisplayAnonymous')=='0')"}
+        {include="login"}
+    {/if}
+    {if="($myUser) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
         <div class="settings">
-            <a href="settings.php" data-link="settings" class="settings-item">
-                <svg
-                    width="15"
-                    height="15"
-                    role="img"
-                >
-                    <title>{function="_t('MANAGE')"}</title>
-                    <use xlink:href="#svg-settings" />
-                </svg>
-            </a>
+            {if="$myUser"}
+                <a href="settings.php" data-link="settings" class="settings-item">
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{function="_t('MANAGE')"}</title>
+                        <use xlink:href="#svg-settings" />
+                    </svg>
+                </a>
+            {/if}
             <button class="settings-item js-brightness-toggle">
                 <img src="images/brightness.svg?#brightness_medium">
             </button>
@@ -81,27 +70,31 @@
                     <use xlink:href="#svg-undo" />
                 </svg>
             </button>
-            <a href="." class="settings-item new-events js-new-events" data-sync-code="{$synchronisationCode}">
-                <svg
-                    width="15"
-                    height="15"
-                    role="img"
-                >
-                    <title>{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}</title>
-                    <use xlink:href="#svg-reload" />
-                </svg>
-            </a>
-            <a href="settings.php" class="settings-item js-toggle-target" data-target=".feed-add">
-                <svg
-                    width="15"
-                    height="15"
-                    role="img"
-                >
-                    <title>{function="_t('ADD_FEED')"}</title>
-                    <use xlink:href="#svg-add" />
-                </svg>
-            </a>
+            {if="$myUser"}
+                <a href="." class="settings-item new-events js-new-events" data-sync-code="{$synchronisationCode}">
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{function="_t('LEEDVIBES_GET_NEW_EVENTS')"}</title>
+                        <use xlink:href="#svg-reload" />
+                    </svg>
+                </a>
+                <a href="settings.php" class="settings-item js-toggle-target" data-target=".feed-add">
+                    <svg
+                        width="15"
+                        height="15"
+                        role="img"
+                    >
+                        <title>{function="_t('ADD_FEED')"}</title>
+                        <use xlink:href="#svg-add" />
+                    </svg>
+                </a>
+            {/if}
         </div>
+    {/if}
+    {if="$myUser"}
         <form class="feed-add" data-is-opened="false" action="action.php?action=addFeed" method="POST">
             <h2 class="feed-add-title">{function="_t('ADD_FEED')"}</h2>
             <input type="url" name="newUrl" class="feed-add-url" placeholder="https://thebestblog.com/rss"/>
@@ -117,6 +110,9 @@
     {/if}
     {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
         <div class="mobile-toggle" data-is-opened="false">
+            {if="!$myUser && ($configurationManager->get('articleDisplayAnonymous')=='1')"}
+                {include="login"}
+            {/if}
             {$currentItemsCount=$unread['total']}
             <ul class="feeds-list">
                 <li class="folder">
