@@ -4,7 +4,7 @@
 @author Simounet <contact@simounet.net>
 @link http://www.simounet.net
 @licence AGPL-3.0
-@version 1.4.0
+@version 1.5.0
 @description A Leed interface close to the old good Netvibes
 */
 
