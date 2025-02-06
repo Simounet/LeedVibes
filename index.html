@@ -2,7 +2,7 @@
 <html lang="{$language}" class="{if="isset($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark'"}dark-theme {/if}{if="isset($_COOKIE['ui-side']) && $_COOKIE['ui-side'] === 'left'"}ui-side-reverse {/if}no-js">
 <head>
     <meta charset="UTF-8">
-    <title>{$delimiter=' · '}{if="isset($currentFeed)"}{$currentFeed->getName()}{$delimiter}{/if}{if="isset($currentFolder)"}{$currentFolder->getName()}{$delimiter}{/if}LeedVibes</title>
+    <title>{$delimiter=' · '}{if="isset($currentFeed)"}{$currentFeed->getName()}{$delimiter}{/if}{if="isset($currentFolder)"}{$currentFolder->getName()}{$delimiter}{/if}{function="Utils::displaySiteName()"}</title>
     <link rel="stylesheet" href="css/normalize.css?v=8.0.1" media="all">
     <link rel="stylesheet" href="css/style.css" media="all">
     <meta name="viewport" content="width=device-width">

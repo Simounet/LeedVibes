@@ -48,4 +48,9 @@ class Utils {
             : strip_tags($eventTitle);
 
     }
+
+    public static function displaySiteName(): string
+    {
+        return 'LeedVibes (' . $_SERVER['SERVER_NAME'] . ')';
+    }
 }
