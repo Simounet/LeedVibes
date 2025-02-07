@@ -148,6 +148,8 @@ button {
 }
 .event a {
   color: #424242;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .event--new-last {

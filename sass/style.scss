@@ -173,6 +173,8 @@ $entry-space: 0.5em;
 
     a {
         color: $feed-entry-color;
+        word-break: break-word;
+        overflow-wrap: break-word;
     }
 }
 
