@@ -608,6 +608,12 @@ html:not(.no-js) .feed--closed {
     }
 }
 
+.event:has(.article-favorite:hover),
+.event:has(.article-favorite:active),
+.event:has(.article-favorite:focus) {
+    background-color: rgba(249, 244, 175, 0.5);
+}
+
 .article__read-unread {
     width: 1.7em;
     right: 0;
@@ -620,6 +626,12 @@ html:not(.no-js) .feed--closed {
         grid-area: mark;
         justify-self: right;
     }
+}
+
+.event:has(.article__read-unread:hover),
+.event:has(.article__read-unread:active),
+.event:has(.article__read-unread:focus) {
+    background-color: rgba(175, 249, 184, 0.5);
 }
 
 .article-favorite,
