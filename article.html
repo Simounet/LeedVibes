@@ -11,7 +11,7 @@
             <header class="article__header js-article__header">
                 {if="isset($value->favicon)"}{$value->favicon}{/if}
                 <a href="./?action=selectedFeed&amp;feed={$value->getFeed()}" class="article__feed-title" title="{function="_t('LEEDVIBES_FILTER_BY_FEED', array(htmlentities($value->feedName)))"}">{$value->feedName}</a>
-                <h1 class="article__title js-article__title" tabindex="0"><a href="{$value->getLink()}" target="_blank">{function="(new Utils())->getTitle($value)"}</a></h1>
+                <h1 class="article__title"><a href="{$value->getLink()}" class="js-article-title" target="_blank">{function="(new Utils())->getTitle($value)"}</a></h1>
                 {if="$value->getDescription()"}
                     <span class="article__description js-article__description">{function="Functions::truncate(strip_tags($value->getDescription()),300)"}</span>
                 {/if}
