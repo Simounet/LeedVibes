@@ -140,7 +140,6 @@ button {
 /* FEED */
 .event {
   position: relative;
-  padding: 0 0.5em;
   border-bottom: 0.1em solid #D9D9D9;
 }
 .event:not(.event--focus):hover, .event--focused:not(.event--focus) {
@@ -411,13 +410,12 @@ html:not(.no-js) .feed--closed {
 /* ARTICLE */
 .article__header {
   position: relative;
-  padding: 0.5em 0;
   overflow: hidden;
   white-space: nowrap;
   cursor: pointer;
 }
 .event--focus .article__header {
-  padding-bottom: 0.6em;
+  margin-bottom: 0.6em;
 }
 @media (max-width: 650px) {
   .article__header {
@@ -445,6 +443,13 @@ html:not(.no-js) .feed--closed {
     width: auto;
     grid-area: site;
   }
+}
+
+.article__header > .article__feed-title,
+.article__header .article__link,
+.article__header > .article__description,
+.article__header > .article__date {
+  padding: 0.5em;
 }
 
 @media (min-width: 650px) {
@@ -488,6 +493,16 @@ html:not(.no-js) .feed--closed {
 }
 [class~=event--read] .article__title a {
   color: #BBB;
+}
+
+.article__header .article__link {
+  display: inline-block;
+  padding-left: 0;
+}
+@media (max-width: 650px) {
+  .article__header .article__link {
+    width: 100%;
+  }
 }
 
 @media (max-width: 650px) {
@@ -539,7 +554,7 @@ html:not(.no-js) .feed--closed {
 
 .article__date {
   position: absolute;
-  right: 65px;
+  right: 70px;
   color: #424242;
   font-size: 0.9em;
 }
@@ -553,7 +568,7 @@ html:not(.no-js) .feed--closed {
 }
 
 .article-favorite {
-  right: 30px;
+  right: 35px;
   opacity: 0.3;
 }
 .article-favorite--favorited {
@@ -567,15 +582,9 @@ html:not(.no-js) .feed--closed {
   }
 }
 
-.event:has(.article-favorite:hover),
-.event:has(.article-favorite:active),
-.event:has(.article-favorite:focus) {
-  background-color: rgba(249, 244, 175, 0.5);
-}
-
 .article__read-unread {
   width: 1.7em;
-  right: 0;
+  right: 5px;
   color: white;
   background-color: transparent;
   opacity: 0.3;
@@ -586,12 +595,6 @@ html:not(.no-js) .feed--closed {
     grid-area: mark;
     justify-self: right;
   }
-}
-
-.event:has(.article__read-unread:hover),
-.event:has(.article__read-unread:active),
-.event:has(.article__read-unread:focus) {
-  background-color: rgba(175, 249, 184, 0.5);
 }
 
 .article-favorite,
@@ -618,7 +621,7 @@ html:not(.no-js) .feed--closed {
     position: relative;
     padding: 0;
     width: 100%;
-    min-height: 50px;
+    min-height: 70px;
   }
 }
 
@@ -980,6 +983,14 @@ button.settings-item:focus {
   background-image: linear-gradient(to left, #333 6em, rgba(51, 51, 51, 0) 100%);
 }
 
+.article__header:has(.article-favorite:hover) {
+  background-color: rgba(249, 244, 175, 0.5);
+}
+
+.article__header:has(.article__read-unread:hover) {
+  background-color: rgba(175, 249, 184, 0.5);
+}
+
 .leedvibes-article-content--rss:fullscreen :not(:has(figure, img)),
 .leedvibes-article-content--rss:fullscreen img {
   max-width: 700px;
@@ -1003,5 +1014,12 @@ button.settings-item:focus {
   max-width: initial;
   max-width: 90vw;
   max-height: 90vh;
+}
+
+/*
+ * Fleedicon plugin
+ */
+.article__header > .feed-icon {
+  padding: 0.5em 0.3em 0.5em 0.5em;
 }
 /*# sourceMappingURL=style.css.map */

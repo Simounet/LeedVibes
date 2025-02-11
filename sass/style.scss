@@ -163,7 +163,6 @@ $entry-space: 0.5em;
 
 .event {
     position: relative;
-    padding: 0 $entry-space;
     border-bottom: 0.1em solid #D9D9D9;
 
     &:not(.event--focus):hover,
@@ -452,13 +451,12 @@ html:not(.no-js) .feed--closed {
 /* ARTICLE */
 .article__header {
     position: relative;
-    padding: $entry-space 0;
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
 
     .event--focus & {
-        padding-bottom: 0.6em;
+        margin-bottom: 0.6em;
     }
 
     @media($breakpoint-max) {
@@ -485,6 +483,13 @@ html:not(.no-js) .feed--closed {
         width: auto;
         grid-area: site;
     }
+}
+
+.article__header > .article__feed-title,
+.article__header .article__link,
+.article__header > .article__description,
+.article__header > .article__date {
+    padding: $entry-space;
 }
 
 .ui-side-button {
@@ -526,6 +531,15 @@ html:not(.no-js) .feed--closed {
 
     [class~="event--read"] & a {
         color: $feed-event-read-color;
+    }
+}
+
+.article__header .article__link {
+    display: inline-block;
+    padding-left: 0;
+
+    @media($breakpoint-max) {
+        width: 100%;
     }
 }
 
@@ -581,7 +595,7 @@ html:not(.no-js) .feed--closed {
 
 .article__date {
     position: absolute;
-    right: $action-icon-width * 2 + 5px;
+    right: $action-icon-width * 2 + 10px;
     color: $feed-entry-color;
     font-size: 0.9em;
 
@@ -594,7 +608,7 @@ html:not(.no-js) .feed--closed {
 }
 
 .article-favorite {
-    right: $action-icon-width;
+    right: $action-icon-width + 5px;
     opacity: $opacity-low;
 
     &--favorited {
@@ -608,15 +622,9 @@ html:not(.no-js) .feed--closed {
     }
 }
 
-.event:has(.article-favorite:hover),
-.event:has(.article-favorite:active),
-.event:has(.article-favorite:focus) {
-    background-color: rgba(249, 244, 175, 0.5);
-}
-
 .article__read-unread {
     width: 1.7em;
-    right: 0;
+    right: 5px;
     color: white;
     background-color: transparent;
     opacity: $opacity-low;
@@ -626,12 +634,6 @@ html:not(.no-js) .feed--closed {
         grid-area: mark;
         justify-self: right;
     }
-}
-
-.event:has(.article__read-unread:hover),
-.event:has(.article__read-unread:active),
-.event:has(.article__read-unread:focus) {
-    background-color: rgba(175, 249, 184, 0.5);
 }
 
 .article-favorite,
@@ -658,7 +660,7 @@ html:not(.no-js) .feed--closed {
         position: relative;
         padding: 0;
         width: 100%;
-        min-height: 50px;
+        min-height: 70px;
     }
 }
 
@@ -1043,6 +1045,14 @@ $shortcut-key-space: 20px;
     }
 }
 
+.article__header:has(.article-favorite:hover) {
+    background-color: rgba(249, 244, 175, 0.5);
+}
+
+.article__header:has(.article__read-unread:hover) {
+    background-color: rgba(175, 249, 184, 0.5);
+}
+
 .leedvibes-article-content--rss:fullscreen :not(:has(figure, img)),
 .leedvibes-article-content--rss:fullscreen img {
     max-width: 700px;
@@ -1066,4 +1076,13 @@ $shortcut-key-space: 20px;
     max-width: initial;
     max-width: 90vw;
     max-height: 90vh;
+}
+
+/*
+ * Fleedicon plugin
+ */
+
+.article__header > .feed-icon {
+    padding: $entry-space 0.3em $entry-space $entry-space;
+
 }

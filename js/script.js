@@ -563,7 +563,7 @@ function EventObject (event) {
 }
 
 EventObject.prototype = {
-    titleClass: 'js-article-title',
+    titleClass: 'js-article-link',
     articleClass: 'js-article__description',
     contentClass: 'js-leedvibes-article-content',
     readButtonClass: 'js-read-unread',
