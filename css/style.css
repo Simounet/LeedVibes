@@ -145,7 +145,7 @@ button {
 .event:not(.event--focus):hover, .event--focused:not(.event--focus) {
   background-color: #DDD;
 }
-.event a {
+.event a:not(.button) {
   color: #424242;
   word-break: break-word;
   overflow-wrap: break-word;

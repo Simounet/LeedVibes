@@ -170,7 +170,7 @@ $entry-space: 0.5em;
         background-color: $feed-bgc-used;
     }
 
-    a {
+    a:not(.button) {
         color: $feed-entry-color;
         word-break: break-word;
         overflow-wrap: break-word;
