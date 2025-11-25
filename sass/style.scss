@@ -165,9 +165,11 @@ $entry-space: 0.5em;
     position: relative;
     border-bottom: 0.1em solid #D9D9D9;
 
-    &:not(.event--focus):hover,
-    &--focused:not(.event--focus) {
-        background-color: $feed-bgc-used;
+    @media (pointer: fine) {
+        &:not(.event--focus):hover,
+        &--focused:not(.event--focus) {
+            background-color: $feed-bgc-used;
+        }
     }
 
     a:not(.button) {
@@ -1034,9 +1036,11 @@ $shortcut-key-space: 20px;
         color: white;
     }
 
-    .event:not(.event--focus):hover,
-    .event--focused:not(.event--focus) {
-        background-color: #333;
+    @media (pointer: fine) {
+        .event:not(.event--focus):hover,
+        .event--focused:not(.event--focus) {
+            background-color: #333;
+        }
     }
 
     .event--focused .article__description::after,
@@ -1045,12 +1049,14 @@ $shortcut-key-space: 20px;
     }
 }
 
-.article__header:has(.article-favorite:hover) {
-    background-color: rgba(249, 244, 175, 0.5);
-}
+@media (pointer: fine) {
+    .article__header:has(.article-favorite:hover) {
+        background-color: rgb(249, 244, 175, 50%);
+    }
 
-.article__header:has(.article__read-unread:hover) {
-    background-color: rgba(175, 249, 184, 0.5);
+    .article__header:has(.article__read-unread:hover) {
+        background-color: rgb(175, 249, 184, 50%);
+    }
 }
 
 .leedvibes-article-content--rss:fullscreen :not(:has(figure, img)),
