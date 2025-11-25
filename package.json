@@ -6,7 +6,7 @@
     "defaults"
   ],
   "scripts": {
-    "lint": "./node_modules/.bin/stylelint css/style.css && ./node_modules/.bin/eslint js/script.js && ./node_modules/.bin/eslint tests/index.js",
+    "lint": "./node_modules/.bin/stylelint css/style.css && ./node_modules/.bin/eslint js/script.js",
     "deps:update": "cp node_modules/normalize.css/normalize.css css/normalize.css && cp node_modules/jquery/dist/jquery.min.js js/ && cp node_modules/mousetrap/mousetrap.min.js js/"
   },
   "repository": {
@@ -20,11 +20,9 @@
   },
   "homepage": "https://github.com/Simounet/LeedVibes#readme",
   "devDependencies": {
-    "eslint": "^8.43.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-standard": "^5.0.0",
+    "@eslint/js": "^9.39.1",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
     "normalize.css": "^8.0.1",
     "stylelint": "^16.1.0",
     "stylelint-config-standard": "^39.0.1"
