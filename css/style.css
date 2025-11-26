@@ -591,7 +591,7 @@ html:not(.no-js) .feed--closed {
 }
 
 .event--focused .article__description::after, .event:hover .article__description::after {
-  background-image: linear-gradient(to left, var(--feed-bgc-used) 6em, rgb(var(--feed-bgc-used), 0) 100%);
+  background-image: linear-gradient(to left, var(--feed-bgc-used) 6em, transparent 100%);
 }
 
 @media (width <= 649px) {
@@ -1073,10 +1073,12 @@ button.settings-item:focus {
 
 @media (pointer: fine) {
   .article__header:has(.article-favorite:hover) {
+    --feed-bgc-used: #ebe8c6;
     background-color: rgb(249 244 175 / 50%);
   }
 
   .article__header:has(.article__read-unread:hover) {
+    --feed-bgc-used: #c6ebca;
     background-color: rgb(175 249 184 / 50%);
   }
 }
