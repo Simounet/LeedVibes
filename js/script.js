@@ -26,11 +26,11 @@ const undoMarkAsRead = {
 
     init: function () {
         $(this.class).click(() => {
-            this.undoMarkAsRead();
+            this.undo();
         });
     },
 
-    undoMarkAsRead: function () {
+    undo: function () {
         'use strict';
 
         if (this.ids.length === 0) {
@@ -287,6 +287,7 @@ $(function () {
     Mousetrap.bind('k', function () { userAction.moveBackward(); });
     Mousetrap.bind('f', function () { userAction.clickFocused('.js-favorite'); });
     Mousetrap.bind('x', function () { userAction.markAsReadFocused('.js-read-unread'); });
+    Mousetrap.bind('u', function () { undoMarkAsRead.undo(); });
     Mousetrap.bind('g h', function () { window.location.href = $('[data-link="home"]')[0].href; });
     Mousetrap.bind('g f', function () { window.location.href = $('[data-link="favorites"]')[0].href; });
     Mousetrap.bind('g s', function () { window.location.href = $('[data-link="settings"]')[0].href; });
