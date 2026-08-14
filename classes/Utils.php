@@ -53,4 +53,13 @@ class Utils {
     {
         return 'LeedVibes (' . $_SERVER['SERVER_NAME'] . ')';
     }
+
+    public function isFolderOpened(Folder $folder, ?Feed $currentFeed): bool
+    {
+        return !$folder->getIsopen()
+            && !(
+                $currentFeed instanceof Feed
+                && $currentFeed->getFolder() === $folder->getId()
+            );
+    }
 }

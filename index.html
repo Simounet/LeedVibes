@@ -135,6 +135,7 @@
                 {loop="folders"}
                     {$feeds=[]}
                     {$folderSelected=0}
+                    {$isFolderClosed=(new Utils())->isFolderOpened($value, $currentFeed)}
                     {if="isset($allFeedsPerFolder[$value->getId()])"}
                         {$feeds=$allFeedsPerFolder[$value->getId()]}
                     {/if}
@@ -146,7 +147,7 @@
                         {$currentItemsCount=$unreadEventsForFolder}
                     {/if}
                     <li class="folder js-folder" data-id="{$value->getId()}">
-                        <div class="folder__item js-folder__item{if="$folderSelected"} selected{/if}">
+                        <div class="folder__item js-folder__item{if="$folderSelected || !$isFolderClosed"} selected{/if}">
                             <button
                                 class="folder__button js-toggle-button{if="!$value->getIsopen()"} folder-closed{/if}"
                                 title="{function="_t($value->getIsopen() ? 'LEEDVIBES_FOLDER_TOGGLE_ON' : 'LEEDVIBES_FOLDER_TOGGLE_OFF', array($value->getName()))"}"
