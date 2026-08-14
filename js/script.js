@@ -140,23 +140,21 @@ const cookieHelper = {
         }
     };
     const addListeners = () => {
-        $(function () {
-            'use strict';
-            const themeButtonLow = document.querySelector('.js-theme-toggle-set[data-theme="light"]');
-            themeButtonLow.addEventListener('click', () => {
-                themeDom.removeClass(rootEl);
-                themeCookie.setCookie(false);
-            });
-            const themeButtonHigh = document.querySelector('.js-theme-toggle-set[data-theme="dark"]');
-            themeButtonHigh.addEventListener('click', () => {
-                themeDom.addClass(rootEl);
-                themeCookie.setCookie(true);
-            });
-            const themeButtonAuto = document.querySelector('.js-theme-toggle-set[data-theme="auto"]');
-            themeButtonAuto.addEventListener('click', () => {
-                themeCookie.removeCookie();
-                preferedColorScheme.choose();
-            });
+        'use strict';
+        const themeButtonLow = document.querySelector('.js-theme-toggle-set[data-theme="light"]');
+        themeButtonLow.addEventListener('click', () => {
+            themeDom.removeClass(rootEl);
+            themeCookie.setCookie(false);
+        });
+        const themeButtonHigh = document.querySelector('.js-theme-toggle-set[data-theme="dark"]');
+        themeButtonHigh.addEventListener('click', () => {
+            themeDom.addClass(rootEl);
+            themeCookie.setCookie(true);
+        });
+        const themeButtonAuto = document.querySelector('.js-theme-toggle-set[data-theme="auto"]');
+        themeButtonAuto.addEventListener('click', () => {
+            themeCookie.removeCookie();
+            preferedColorScheme.choose();
         });
     };
     preferedColorScheme.init();

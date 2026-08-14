@@ -17,11 +17,6 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-TileImage" content="images/favicons/mstile-144x144.png">
     <meta name="theme-color" content="#424242">
-    <script src="js/jquery.min.js"></script>
-    {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
-        <script src="js/script.js"></script>
-    {/if}
-    {function="Plugin::callJs()"}
 </head>
 <body data-anonymous-state="{$configurationManager->get('articleDisplayAnonymous')}">
     {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
@@ -290,9 +285,14 @@
             </ul>
         </section>
     {/if}
+    <script src="js/jquery.min.js"></script>
+    <script src="js/mousetrap.min.js"></script>
+    {if="($myUser!=false) || ($configurationManager->get('articleDisplayAnonymous')=='1')"}
+        <script src="js/script.js"></script>
+    {/if}
+    {function="Plugin::callJs()"}
     <script>
         var  i18n = {$i18n_js};
     </script>
-    <script src="js/mousetrap.min.js"></script>
 </body>
 </html>
