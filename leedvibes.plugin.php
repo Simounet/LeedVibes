@@ -40,6 +40,10 @@ function setLeedvibesNewEventsFilter( &$_, &$filter, &$article_conf ) {
     }
 }
 
+function isFavoritesPage(string $action): bool {
+    return $action === 'favorites';
+}
+
 Plugin::addHook("event_pre_title", "leedvibes");
 Plugin::addHook("index_pre_treatment", "setLeedvibesTemplate");
 Plugin::addHook("article_pre_action", "setLeedvibesNewEventsFilter");
